@@ -27,7 +27,7 @@ Consider a neural network with 3 neurons with no nonlinearity. Suppose we want t
 
 $$ w_b^{new} \leftarrow w_b^{old} - \alpha \frac{\delta L}{\delta w_b}$$
 
-Taking a look at the gradient term:
+**Taking a look at the gradient term:**
 $$ \frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} \frac{\delta z_b}{\delta w_b}$$
 
 Recall
