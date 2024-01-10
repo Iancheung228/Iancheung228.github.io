@@ -72,14 +72,27 @@ Definition : a function f is L-smooth if $$|\textcolor{red}{\nabla} f(x) - \text
 BN improves the Lipschitzness of the gradient
 
 
-![Book logo](docs/assets/Ps2 3.jpeg)
-![https://github.com/Iancheung228/Iancheung228.github.io/blob/main/docs/assets/Ps2%203.jpeg]
 
 
 ![Ps2 3](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/23cc5783-2f3a-4013-84b6-2b2cded5f519)
 
 
-![https://github.com/Iancheung228/Iancheung228.github.io/blob/main/image/Ps2%203.jpeg]
+Without batch norm, the convergence behavior is sensitive to the initialization. We see from the leftmost figure, we can not take a large stepsize (indicated by green arrow), otherwise, we will overshoot.
+
+On the rightmost figure, we got lucky in the sense that it only takes 2 steps to reach minima.
+
+
+![Ps2 2](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa)
+
+
+With BatchNorm, the gradient becomes more predictable regardless of the initialization point. This "gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." We see that the convergence is good, regardless of the initialization point. As a result, we can use larger learning rates with the benefit of faster and more stable convergence.
+
+
+
+### Not a simple rescale!
+<img width="994" alt="Screen Shot 2024-01-10 at 1 48 38 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c2186a71-c45f-451c-8c68-0d5ec9c861f6">
+
+
 
 <!-- MathJax -->
 
