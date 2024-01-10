@@ -73,6 +73,10 @@ BN improves the Lipschitzness of the gradient
 
 
 ![Book logo](docs/assets/Ps2 3.jpeg)
+![https://github.com/Iancheung228/Iancheung228.github.io/blob/main/docs/assets/Ps2%203.jpeg]
+
+
+![Ps2 3](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/23cc5783-2f3a-4013-84b6-2b2cded5f519)
 
 
 ![https://github.com/Iancheung228/Iancheung228.github.io/blob/main/image/Ps2%203.jpeg]
