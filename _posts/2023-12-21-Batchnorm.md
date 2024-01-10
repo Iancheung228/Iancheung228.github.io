@@ -56,7 +56,7 @@ The thesis of the paper is that BN's main benefit is that it reparametrizes the 
 " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
 
 
-Definition : a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\|$$
+Definition : a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
 rearranging, we get:
 
 $$\frac{|{f(x) - f(y)}|}{||x-y||} \leq L $$
