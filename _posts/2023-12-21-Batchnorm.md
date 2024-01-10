@@ -25,7 +25,7 @@ Taking a look at the gradient term:
 $$ \frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} \frac{\delta z_b}{\delta w_b}$$
 
 Recall
-$$z_b = w_b*z_a$$
+$z_b = w_b*z_a$
 hence 
 $$ \frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} z_a$$
 
