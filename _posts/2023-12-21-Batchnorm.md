@@ -71,7 +71,7 @@ Definition : a function f is L-smooth if $$|\textcolor{red}{\nabla} f(x) - \text
 
 BN improves the Lipschitzness of the gradient
 
-
+![https://github.com/Iancheung228/Iancheung228.github.io/blob/main/image/Ps2%203.jpeg]
 
 <!-- MathJax -->
 
