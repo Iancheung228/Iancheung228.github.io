@@ -25,11 +25,23 @@ Taking a look at the gradient term:
 $$ \frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} \frac{\delta z_b}{\delta w_b}$$
 
 Recall
-$z_b = w_b*z_a$
+$$z_b = w_b*z_a$$
 hence 
 $$ \frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} z_a$$
 
+We see importantly, the update of layer b depends on the output of layer a. 
 
+In neural networks, the output of the first layer feeds into the second layer, the output of the second layer feeds into the third, and so on. When the parameters of a layer change, so does the distribution of inputs to subsequent layers.
+
+Suppose we are at the end of training of iteration i-1 , which means we have completed the backpropagation procedure to find (in order)
+$$ \frac{\delta L}{\delta w_c},\frac{\delta L}{\delta w_b}, \frac{\delta L}{\delta w_a}$$
+
+and updated the weight using the derivative respectively. The loss in the derivative is with respect to training data at ${(i-1)}^{th}$ iteration (x_{i-1},y_{i-1})
+
+Now for this illustration, suppose we are in the back propagation procedure in the ith iteration, for layer b.
+In general, we know that within 1 training epoch of backpropagation, we have to first update the k+1 layer, before we can update the k layer (take it for granted if you are not familiar). 
+
+The subtle thing is, when we update the weight of layer b at iteration i using the equation: $\frac{\delta L}{\delta w_b} = \frac{\delta L}{\delta z_b} z_a$, the output for node a, $z_a$, actually still uses the learned weights from the previous iteration i-1 . (Recall $w_a$ is optimized for the data point at iteration i-1 $(x_{i-1},y_{i-1})$.) In other words, at iteration i, the input of layer b's optimization problem assumes the distribution of $x_i$ is similar to the distribution of $x_{i-1}$ as they share the weight $w_a$ at this point in the back propagation. Clearly, if $x_{i-1}$ is significantly different than $x_i$, then $w_a^{i-1}$ will not be good for minimizing the loss for the data point $x_i$.
 
 
 
