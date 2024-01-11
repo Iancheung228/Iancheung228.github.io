@@ -69,8 +69,8 @@ The benefit is that the gradient does not explode.
 
 ### Second manifestation: improves the smoothness of loss function
 The second manifestation is the stronger effect.
-
-Definition : a function f is L-smooth if $$|\textcolor{red}{\nabla} f(x) - \textcolor{red}{\nabla} f(y)| \leq L\|x - y\| \forall$$ x,y
+$${\color{red}Red}$$
+Definition : a function f is L-smooth if $$| $${\color{red}\nabla}$$ f(x) - \textcolor{red}{\nabla} f(y)| \leq L\|x - y\| \forall$$ x,y
 
 BN improves the Lipschitzness of the gradient
 
@@ -94,6 +94,9 @@ With BatchNorm, the gradient becomes more predictable regardless of the initiali
 
 ### Not a simple rescale!
 <img width="994" alt="Screen Shot 2024-01-10 at 1 48 38 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c2186a71-c45f-451c-8c68-0d5ec9c861f6">
+
+
+
 
 
 
