@@ -70,7 +70,7 @@ The benefit is that the gradient does not explode.
 ### Second manifestation: improves the smoothness of loss function
 The second manifestation is the stronger effect.
 $${\color{red}Red}$$
-Definition : a function f is L-smooth if $$| $${\color{red}\nabla}$$ f(x) - \textcolor{red}{\nabla} f(y)| \leq L\|x - y\| \forall$$ x,y
+Definition : a function f is L-smooth if |$${\color{red}\nabla}$$ f(x) - $$\textcolor{red}{\nabla} f(y)| \leq L\|x - y\| \forall$$ x,y
 
 BN improves the Lipschitzness of the gradient
 
