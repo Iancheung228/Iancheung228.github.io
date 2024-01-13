@@ -81,6 +81,7 @@ $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$|
 $$ \leq L\|x - y\| \forall$$
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$| \leq L\|x - y\| \forall$$ x,y
 
+$$ a <= b $$
 $$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
 
 
