@@ -81,15 +81,8 @@ a
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |$$ 
 $$ \leq L\|x - y\| \forall$$
 
-b
-$${|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |} \leq $$
-
-c
 $$ \leq L\|x - y\| \forall$$
 
-d
-
-$$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$| \leq L\|x - y\| \forall$$ x,y
 
 
 
