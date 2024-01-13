@@ -77,13 +77,19 @@ The benefit is that the gradient does not explode.
 The second manifestation is the stronger effect.
 
 Definition : a function f is L-smooth if 
+a
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) | \leq$$
+
+b
 $${|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |} \leq $$
+
+c
 $$ \leq L\|x - y\| \forall$$
+
+d
+
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$| \leq L\|x - y\| \forall$$ x,y
 
-$$ a <= b $$
-$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
 
 
 Takeaway: BN improves the Lipschitzness of the gradient
