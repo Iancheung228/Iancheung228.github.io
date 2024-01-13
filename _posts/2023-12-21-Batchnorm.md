@@ -81,6 +81,9 @@ $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$|
 $$ \leq L\|x - y\| \forall$$
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) $$| \leq L\|x - y\| \forall$$ x,y
 
+$$\left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+
+
 Takeaway: BN improves the Lipschitzness of the gradient
 
 ![Ps2 3](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/23cc5783-2f3a-4013-84b6-2b2cded5f519)
