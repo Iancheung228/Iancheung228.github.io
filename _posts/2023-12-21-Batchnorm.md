@@ -8,6 +8,30 @@ $$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^2 + \varepsilon}} 
 where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
 and $$\hat{\sigma}^2 = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^2 $$
 
+
+
+
+The batch normalization formula is given by:
+
+\[ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^2 + \varepsilon}} + \beta \]
+
+where:
+- \( \hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i \)
+- \( \hat{\sigma}^2 = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^2 \)
+
+Here:
+- \( B \) is the batch size
+- \( \gamma \) and \( \beta \) are learnable parameters
+- \( \varepsilon \) is a small constant to avoid division by zero
+
+This formula is commonly used in neural networks to normalize the inputs of each layer during training.
+
+For implementation details or code examples, please refer to the documentation or code repository.
+
+
+
+
+
 ## What is the problem: internal covariate shift (ICS)
 
 ICS is closely related to the concept of covariate shift, which refers to the problem where the input distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
