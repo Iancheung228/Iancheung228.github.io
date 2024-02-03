@@ -66,13 +66,15 @@ Hence, we see that at step 2a), the input to layer c  $$:= z_b$$ would have a co
 
 Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies 
 
-Aside when updating a neural network within one training iteration, we have to first update the ${k+1}^{th}$ layer, before we can update the $k^{th}$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
+Aside when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
 ## Empirically,does batch norm's main benefit come from internal covariate shift
-The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the benefit.
+The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). 
+
+The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the benefit.
 
 In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
@@ -83,7 +85,8 @@ The thesis of the paper is that BN's main benefit is that it reparametrizes the 
 " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
 
 Definition : a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
-rearranging, we get:
+
+Rearranging the definition, we get:
 
 $$\frac{|{f(x) - f(y)}|}{||x-y||} \leq L $$
 
@@ -94,7 +97,7 @@ Interpretation: the gradient of the function f at any point is bounded by consta
 The benefit is that the gradient does not explode.
 
 ### Second manifestation: improves the smoothness of loss function
-The second manifestation is arguably the stronger benefit.
+The second manifestation is arguably the stronger benefit and relies on the concept of smoothness.
 
 Definition : a function f is L-smooth if 
 
@@ -107,22 +110,19 @@ Takeaway: BN improves the Lipschitzness of the gradient
 
 ![Ps2 3](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/23cc5783-2f3a-4013-84b6-2b2cded5f519)
 
+The above figure shows the convergence behaviour for 3 different initialization points. 
 
-Without batch norm, the convergence behavior is sensitive to the initialization. We see from the leftmost figure, we can not take a large stepsize (indicated by green arrow), otherwise, we will overshoot the minimum.
+The key takeaway is that without batch norm, the convergence behavior is sensitive to the choice initialization. We see from the leftmost figure, we can not take a large stepsize (indicated by green arrow), otherwise, we will overshoot the minimum.
 
 On the rightmost figure, we got lucky by picking a rare initialization that takes 2 steps to reach minima.
 
 
 ![Ps2 2](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa)
-
-
-
-
 With BatchNorm, the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. This "gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." As a result, we can use a larger learning rate with faster convergence.
 
 ### Not a simple rescale!
 
-In fact, the author of
+In fact, the author of the 2019 paper noted that this is not a simple rescale.
 <img width="994" alt="Screen Shot 2024-01-10 at 1 48 38 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c2186a71-c45f-451c-8c68-0d5ec9c861f6">
 
 
