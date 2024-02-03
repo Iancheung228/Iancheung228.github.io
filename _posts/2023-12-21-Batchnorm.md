@@ -20,16 +20,21 @@ ICS is closely related to the concept of covariate shift, which refers to the pr
 
 Adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes from one training epoch to the next epoch.
 
-Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. 
-
-Namely, at each layer, we have a) the input (output of the previous layer), we are also given some b) target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
+Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have a) the input (output of the previous layer), we are also given some b) target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
+
+### Example
 Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch $$i-1$$ and epoch $$i$$.
-w_c denotes the weight of neuron c
-z_c denotes the output of neuron c
-L denotes the loss ($|y_hat - y|$)
+#### Notation
+$$w_c$$ denotes the weight of neuron c
+
+$$z_c$$ denotes the output of neuron c
+
+L denotes the loss (common choice is $${|\hat{y} - y|}^2$$)
+
+
 
 For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
@@ -45,7 +50,7 @@ $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
 Importantly, we see that the update of the layer c's weight depends on the output of layer b.
 
-You can go through the diagram below.
+You can go through the diagram below, where we go through in order of 1a), 1b), 1c), 2a)
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
 We see that in step 1a) the output of neuron b is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
@@ -56,6 +61,10 @@ We see that in step 2a) the output of neuron b is a function of $$w_b^{t-1}$$, $
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
+Hence, we see that at step 2a), the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step 1a).
+
+
+Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies 
 
 Aside when updating a neural network within one training iteration, we have to first update the ${k+1}^{th}$ layer, before we can update the $k^{th}$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
 
