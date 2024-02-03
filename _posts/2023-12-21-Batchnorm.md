@@ -28,11 +28,7 @@ The ICS occurs when the output of the previous layer (input for current layer) c
 
 In a neural network, the output of the first layer feeds into the second layer, the output of the second layer then feeds into the third, and so on. Simply put, when the weight parameters of the previous layer change, the output of the previous layer changes, even when you feed in identical input data.
 
-Consider a neural network with 3 neurons with no nonlinearity. Suppose we want to update the weight of layer c. The update rule with learning rate $$\alpha $$ is:
-![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
-
-
-
+Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch i-1 and epoch i. For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
 
 Taking a closer look at the gradient term, and refactoring it:
@@ -44,7 +40,16 @@ $$z_c = w_c*z_b$$
 and hence plugging that in 
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
-We see importantly, the update of the layer c's weight depends on the output of layer b. 
+We see importantly, the update of the layer c's weight depends on the output of layer b.
+
+
+![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
+
+We see that in step 1a) the output of neuron b is a function of $w_b^{t-2}$, $w_a^{t-2}$ and $x_{t-1}$
+
+We see that in step 2a) the output of neuron b is a function of $w_b^{t-1}$, $w_a^{t-1}$ and $x_{t}$
+
+where $w_b^{t-2} \neq w_b^{t-1}$ and $w_a^{t-2} \neq w_a^{t-1}$
 
 WLOG let's assume we train the network with n epochs, with each epoch sampling one datapoint from the dataset to train on. At each training iteration, we need to first update the weight of layer c, then layer b, and finally layer a (by finding $$ \frac{\delta L}{\delta w_c},\frac{\delta L}{\delta w_b}, \frac{\delta L}{\delta w_a}$$). 
 
