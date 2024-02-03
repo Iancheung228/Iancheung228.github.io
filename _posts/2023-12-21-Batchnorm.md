@@ -1,5 +1,7 @@
 ## Introduction
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Neural networks with BatchNorm tend to train faster and are less sensitive to the choice of hyperparameters initialization. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance one.
+Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. Batch norm has long been believed to be successful due to resolving the problem of internal covariate shift. The paper in 2019 argues otherwise and claims the main benefit of batch norm lies in making the optimization landscape more smooth.
+
+Empirically, neural networks with BatchNorm layers tend to train faster and are less sensitive to the choice of hyperparameters initialization. The theoretical benefit of batch norm
 
 
 ## Formal definition of batch normalization 
@@ -11,42 +13,25 @@ and $$\hat{\sigma}^2 = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^2 $$
 
 
 
-The batch normalization formula is given by:
-
-\[ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^2 + \varepsilon}} + \beta \]
-
-where:
-- \( \hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i \)
-- \( \hat{\sigma}^2 = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^2 \)
-
-Here:
-- \( B \) is the batch size
-- \( \gamma \) and \( \beta \) are learnable parameters
-- \( \varepsilon \) is a small constant to avoid division by zero
-
-This formula is commonly used in neural networks to normalize the inputs of each layer during training.
-
-For implementation details or code examples, please refer to the documentation or code repository.
-
-
-
-
 
 ## What is the problem: internal covariate shift (ICS)
 
 ICS is closely related to the concept of covariate shift, which refers to the problem where the input distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
 
-Adding the word "Internal" before "covariate shift", describes another phenomenon where the input data distribution of an individual layer, changes from one training epoch to the next epoch.
+Adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes from one training epoch to the next epoch.
 
-Before diving deeper, recall we can view the optimization of the deep neural network as solving a series of smaller optimization problems at each layer. Each of these smaller optimization problems is independent, IF we condition on the output of the previous layer. 
+Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. 
 
-Namely, we are given some input from the previous layer, we are also given some target output, and we wish to find the best set of learnable weights that transform the input to the desired output as closely as possible (desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
+Namely, at each layer, we have a) the input (output of the previous layer), we are also given some b) target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
 
-The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers. I know this sentence probably does not make sense so let's walk through an example.
+The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
-In a neural network, the output of the first layer feeds into the second layer, the output of the second layer then feeds into the third, and so on. Simply put, when the weight parameters of the previous layer change, the output of the previous layer changes, even when you feed in an identical input data.
+In a neural network, the output of the first layer feeds into the second layer, the output of the second layer then feeds into the third, and so on. Simply put, when the weight parameters of the previous layer change, the output of the previous layer changes, even when you feed in identical input data.
 
 Consider a neural network with 3 neurons with no nonlinearity. Suppose we want to update the weight of layer c. The update rule with learning rate $$\alpha $$ is:
+![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
+
+
 
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
 
