@@ -72,7 +72,7 @@ Aside when updating a neural network within one training iteration, we have to f
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
 ## Empirically,does batch norm's main benefit come from internal covariate shift
-The authors conducted a simple experiment where they intentionally added noise after the BN layer. The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the gains during validation.
+The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the benefit.
 
 In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
@@ -94,11 +94,11 @@ Interpretation: the gradient of the function f at any point is bounded by consta
 The benefit is that the gradient does not explode.
 
 ### Second manifestation: improves the smoothness of loss function
-The second manifestation is the stronger effect.
+The second manifestation is arguably the stronger benefit.
 
 Definition : a function f is L-smooth if 
-a
-$$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y\| \forall$$
+
+$$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y\| \forall$$ x,y
 
 
 
@@ -115,7 +115,7 @@ On the rightmost figure, we got lucky by picking a rare initialization that take
 
 ![Ps2 2](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa)
 
-<img src="[https://your-image-url.type](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa)" width="100" height="100">
+
 
 
 With BatchNorm, the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. This "gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." As a result, we can use a larger learning rate with faster convergence.
