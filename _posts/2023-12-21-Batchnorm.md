@@ -32,7 +32,7 @@ $$w_c$$ denotes the weight of neuron c
 
 $$z_c$$ denotes the output of neuron c
 
-L denotes the loss (common choice is $${|\hat{y} - y|}^2$$)
+L denotes the loss (common choice is $${\lvert\hat{y} - y \rvert}^2$$)
 
 
 
