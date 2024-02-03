@@ -45,15 +45,15 @@ We see importantly, the update of the layer c's weight depends on the output of 
 
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
-We see that in step 1a) the output of neuron b is a function of $w_b^{t-2}$, $w_a^{t-2}$ and $x_{t-1}$
+We see that in step 1a) the output of neuron b is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
-We see that in step 2a) the output of neuron b is a function of $w_b^{t-1}$, $w_a^{t-1}$ and $x_{t}$
+We see that in step 2a) the output of neuron b is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
-where $w_b^{t-2} \neq w_b^{t-1}$ and $w_a^{t-2} \neq w_a^{t-1}$
+where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
 WLOG let's assume we train the network with n epochs, with each epoch sampling one datapoint from the dataset to train on. At each training iteration, we need to first update the weight of layer c, then layer b, and finally layer a (by finding $$ \frac{\delta L}{\delta w_c},\frac{\delta L}{\delta w_b}, \frac{\delta L}{\delta w_a}$$). 
 
-Aside when upating a neural network within one training iteration, we have to first update the k+1 layer, before we can update the k layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
+Aside when updating a neural network within one training iteration, we have to first update the k+1 layer, before we can update the k layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
 
 
 Now suppose we are at the end of training iteration i-1 out of n, which means we have completed the backpropagation procedure to find (in order)
