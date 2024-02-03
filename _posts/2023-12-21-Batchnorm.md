@@ -5,10 +5,10 @@ Empirically, neural networks with BatchNorm layers tend to train faster and are 
 
 
 ## Formal definition of batch normalization 
-$$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^2 + \varepsilon}} + \beta $$
+$$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
 
 where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
-and $$\hat{\sigma}^2 = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^2 $$
+and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
 
 
 
@@ -26,12 +26,15 @@ Namely, at each layer, we have a) the input (output of the previous layer), we a
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
-In a neural network, the output of the first layer feeds into the second layer, the output of the second layer then feeds into the third, and so on. Simply put, when the weight parameters of the previous layer change, the output of the previous layer changes, even when you feed in identical input data.
+Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch $$i-1$$ and epoch $$i$$.
+w_c denotes the weight of neuron c
+z_c denotes the output of neuron c
+L denotes the loss ($|y_hat - y|$)
 
-Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch i-1 and epoch i. For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
+For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
 
-Taking a closer look at the gradient term, and refactoring it:
+Taking a closer look at the gradient term, we can rewrite it as:
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
 Recall
@@ -40,27 +43,21 @@ $$z_c = w_c*z_b$$
 and hence plugging that in 
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
-We see importantly, the update of the layer c's weight depends on the output of layer b.
+Importantly, we see that the update of the layer c's weight depends on the output of layer b.
 
-
+You can go through the diagram below.
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
 We see that in step 1a) the output of neuron b is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
+
+At the end of step 1), we have updated the weight of all 3 neurons.
 
 We see that in step 2a) the output of neuron b is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
-WLOG let's assume we train the network with n epochs, with each epoch sampling one datapoint from the dataset to train on. At each training iteration, we need to first update the weight of layer c, then layer b, and finally layer a (by finding $$ \frac{\delta L}{\delta w_c},\frac{\delta L}{\delta w_b}, \frac{\delta L}{\delta w_a}$$). 
 
-Aside when updating a neural network within one training iteration, we have to first update the k+1 layer, before we can update the k layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
-
-
-Now suppose we are at the end of training iteration i-1 out of n, which means we have completed the backpropagation procedure to find (in order)
-$$ \frac{\delta L}{\delta w_c},\frac{\delta L}{\delta w_b}, \frac{\delta L}{\delta w_a}$$ and updated the weight of layer c, b, and a using the derivatives respectively. 
-Aside, the loss in the derivative in our calculations is with respect to the training data at $${(i-1)}^{th}$$ iteration $$(x_{i-1},y_{i-1})$$
-
-At this point, we have formally completed the optimization procedure for the entire neural network for iteration i-1 and hence let's move on to iteration i.
+Aside when updating a neural network within one training iteration, we have to first update the ${k+1}^{th}$ layer, before we can update the $k^{th}$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
