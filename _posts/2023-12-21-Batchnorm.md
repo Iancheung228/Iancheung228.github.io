@@ -99,8 +99,8 @@ The benefit is that the gradient does not explode.
 ### Second manifestation: improves the smoothness of loss function
 The second manifestation is arguably the stronger benefit and relies on the concept of smoothness.
 
-Definition : a function f is L-smooth if 
-a
+Definition : a function f is L-smooth if :
+
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y\| \forall$$ x,y
 
 
