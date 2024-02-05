@@ -130,12 +130,11 @@ The key takeaway is that without batch norm, the convergence behavior is depende
 On the rightmost figure, we got lucky by picking a rare initialization that takes 2 steps to reach minima.
 
 ### Now with BN:
-![Ps2 2](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa)
-
-
 <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa" alt="Ps2 2" width="300"/>
 
-With BatchNorm, the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. This "gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." As a result, we can use a larger learning rate with faster convergence.
+With BatchNorm, the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. Quoting from the paper: 
+> "This gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step."
+As a result, we can use a larger learning rate with faster convergence.
 
 ### Not a simple rescale!
 
