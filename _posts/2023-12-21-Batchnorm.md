@@ -1,6 +1,6 @@
 ## Introduction
 
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a enw paper that argues, instead of ICS, it is the fact that batch norm lauyer makes the optimization landscape smoother.
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
 
@@ -20,7 +20,7 @@ ICS is closely related to the concept of covariate shift, which refers to the pr
 
 Adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes from one training epoch to the next epoch.
 
-Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10 layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have \textbf{a)} the input (output of the previous layer), we are also given some \textbf{b)} target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (the desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
+Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have **a)** the input (output of the previous layer), we are also given some **b)** target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (the desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
@@ -28,11 +28,11 @@ The ICS occurs when the output of the previous layer (input for current layer) c
 ### Example
 Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch $$i-1$$ and epoch $$i$$.
 #### Notation
-$$w_c$$ denotes the weight of neuron c
+* $$w_c$$ denotes the weight of neuron c
 
-$$z_c$$ denotes the output of neuron c
+* $$z_c$$ denotes the output of neuron c
 
-L denotes the loss (common choice is $${\lvert\hat{y} - y \rvert}^2$$)
+* L denotes the loss (common choice is $${\lvert\hat{y} - y \rvert}^2$$)
 
 
 
