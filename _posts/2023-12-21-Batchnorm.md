@@ -88,7 +88,7 @@ In the end, they found that the Batch norm plus noise model has largely similar 
 The thesis of the paper is that BN's main benefit is that it reparametrizes the underlying optimization problem and smoothens the loss landscape. This benefit comes largely in 2 manifestations and utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
-" the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
+> " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
 
 Definition : a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
 
@@ -98,7 +98,7 @@ $$\frac{|{f(x) - f(y)}|}{||x-y||} \leq L $$
 
 Interpretation: the gradient of the function f at any point is bounded by constant L.
 
-"Recall loss function tends to have a large number of kinks and sharp minima, this makes gradient descent-based training algorithms unstable due to exploding gradients, highly sensitive to learning rate and initialization"
+> "Recall loss function tends to have a large number of kinks and sharp minima, this makes gradient descent-based training algorithms unstable due to exploding gradients, highly sensitive to learning rate and initialization"
 
 The benefit is that the gradient does not explode.
 
