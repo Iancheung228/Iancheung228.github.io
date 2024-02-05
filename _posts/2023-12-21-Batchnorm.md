@@ -86,7 +86,7 @@ The rationale is: if the performance gain is indeed attributable to resolving th
 
 In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
-## Benefit of batch norm and the 2 manifestations
+## Argument 2: The benefit of batch norm improves the loss landscape and comes in 2 manifestations
 The thesis of the paper is that BN's main benefit is that it reparametrizes the underlying optimization problem and smoothens the loss landscape. This benefit comes largely in 2 manifestations and utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
