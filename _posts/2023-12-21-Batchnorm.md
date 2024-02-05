@@ -14,13 +14,13 @@ and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
 
 
 
-## What is the problem: internal covariate shift (ICS)
+## Argument 1: BN resolves internal covariate shift (ICS)
 
 ICS is closely related to the concept of covariate shift, which refers to the problem where the input distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
 
 Adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes from one training epoch to the next epoch.
 
-Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have a) the input (output of the previous layer), we are also given some b) target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
+Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10 layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have \textbf{a)} the input (output of the previous layer), we are also given some \textbf{b)} target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (the desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
