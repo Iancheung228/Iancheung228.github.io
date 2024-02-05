@@ -6,13 +6,15 @@ Batch norm is a mechanism that aims to stabilize the distribution of inputs to a
 
 In this blog, we hope to provide an intuitive understanding of the 2 respective arguments.
 
+<br/><br/>
+
 ## Formal definition of batch normalization 
 $$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
 
 where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
 and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
 
-
+<br/><br/>
 
 ## Argument 1: BN resolves internal covariate shift (ICS)
 
@@ -24,7 +26,7 @@ Before diving deeper, recall we can view the optimization of the entire deep neu
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
-
+<br/><br/>
 ### Example
 Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch $$i-1$$ and epoch $$i$$.
 #### Notation
@@ -35,7 +37,7 @@ Consider a neural network with 3 neurons with no nonlinearity. Let's walk throug
 * L denotes the loss (common choice is $${\lvert\hat{y} - y \rvert}^2$$)
 
 
-
+<br/><br/>
 For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
 
