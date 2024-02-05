@@ -1,16 +1,16 @@
 ## Introduction
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. Batch norm has long been believed to be successful due to resolving the problem of internal covariate shift. The paper in 2019 argues otherwise and claims the main benefit of batch norm lies in making the optimization landscape more smooth.
 
-Empirically, neural networks with BatchNorm layers tend to train faster and are less sensitive to the choice of hyperparameters initialization. The theoretical benefit of batch norm
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a enw paper that argues, instead of ICS, it is the fact that batch norm lauyer makes the optimization landscape smoother.
 
+Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
+
+In this blog, we hope to provide an intuitive understanding of the 2 respective arguments.
 
 ## Formal definition of batch normalization 
 $$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
 
 where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
 and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
-
-
 
 
 
