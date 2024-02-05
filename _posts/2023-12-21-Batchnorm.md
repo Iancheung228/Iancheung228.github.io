@@ -76,6 +76,8 @@ Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
+This ICS problem was believed to a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
+
 <br/><br/>
 ## Empirically,does batch norm's main benefit come from internal covariate shift
 The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). 
@@ -90,7 +92,10 @@ The thesis of the paper is that BN's main benefit is that it reparametrizes the 
 ### First manifestation: Improves Lipschitzness of loss function
 > " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
 
-Definition : a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
+
+
+Definition : 
+a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
 
 Rearranging the definition, we get:
 
