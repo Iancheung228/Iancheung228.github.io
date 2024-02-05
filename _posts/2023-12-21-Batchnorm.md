@@ -50,27 +50,31 @@ $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
 Importantly, we see that the update of the layer c's weight depends on the output of layer b.
 
-You can go through the diagram below, where we go through in order of 1a), 1b), 1c), 2a)
+
+
+
+You can go through the diagram below, where we go through in order of **1a), 1b), 1c), 2a)**
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
-We see that in step 1a) the output of neuron b is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
+We see that in step **1a**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
-At the end of step 1), we have updated the weight of all 3 neurons.
+At the end of step **1)**, we have updated the weight of all 3 neurons.
 
-We see that in step 2a) the output of neuron b is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
+We see that in step **2a)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
-Hence, we see that at step 2a), the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step 1a).
+Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**.
 
 
-Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies 
+*Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
 
-Aside when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm. 
+*Aside when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
+<br/><br/>
 ## Empirically,does batch norm's main benefit come from internal covariate shift
 The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). 
 
