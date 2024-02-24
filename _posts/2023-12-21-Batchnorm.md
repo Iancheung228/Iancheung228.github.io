@@ -2,14 +2,38 @@
 
 
 ```
-{
-  "firstName": "John",
-  "lastName": "Smith",
-  "age": 25
-}
+batch_size = 32
+
+# minibatch construct
+  ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
+  Xb, Yb = Xtr[ix], Ytr[ix] # batch X,Y
+
+   # Linear layer
+  hpreact = embcat @ W1 #+ b1 # hidden layer pre-activation
+
+##^ want hpreact to be gaussian, hpreact has shape (batch_size, 200) where 200 is the number of neurons, and we want to find the mean and std for each neuron, 
+  ## across all 32 examples. i.e take average of the 1st neuron's value (200 of those in total) for the 32 datapoints.
+
+  ## We also do not need the bias b1, because whatever bias we add here, we will apply the BN layer where we subtract the bnmeani. BN has its own bias and
+  ## there is no need for a bias term for the layer before BN
+  # BatchNorm layer
+  # -------------------------------------------------------------
+  bnmeani = hpreact.mean(0, keepdim=True)
+  bnstdi = hpreact.std(0, keepdim=True)
+  hpreact = bngain * (hpreact - bnmeani) / bnstdi + bnbias # each neuron will be unit gauusian for this batch of data
+  # running mean to use in validation, these running also get updated in trainning phase, but these do not require any gradient
+  with torch.no_grad():
+    bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
+    bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
+  # -------------------------------------------------------------
+  # Non-linearity
+  h = torch.tanh(hpreact) # hidden layer
+  logits = h @ W2 + b2 # output layer
+  loss = F.cross_entropy(logits, Yb) # loss function
+
 ```
 
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps come from the fact that NN have many moving part so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
 
