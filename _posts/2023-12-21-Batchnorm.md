@@ -105,7 +105,7 @@ Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearit
 
 <br/><br/>
 Recall, that the update rule for weight at layer c is:
-$$ w_c^{new} \leftarrow w_c^{old} - \alpha (\color{red}{\frac{\delta L}{\delta w_c}}\)$$
+$$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
 Taking a closer look at the gradient term, we can rewrite it as:
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
