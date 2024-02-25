@@ -132,7 +132,7 @@ We see that in step **2a)** the output of neuron b, $$z_b$$, is a function of $$
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
-== Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**, even if the input data $$x_t = x_{t-1}$$! ==
+**Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**, even if the input data $$x_t = x_{t-1}$$!**
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
