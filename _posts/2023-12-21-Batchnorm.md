@@ -1,21 +1,49 @@
 ## Introduction
 
 
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps come from the fact that NN have many moving part so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
+
+Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
+
+Let us walk through an example of 2 layered neuron net
 ```
+n_hidden = 100 # the number of neurons in the hidden layer of the MLP
+X_dim = 5
+g = torch.Generator().manual_seed(2147483647) # for reproducibility
+W1 = torch.randn((X_dim , n_hidden), generator=g) * (5/3)/((X_dim)**0.5) #* 0.2
+W2 = torch.randn((n_hidden, X_dim),          generator=g) * 0.01
+b2 = torch.randn(X_dim,                      generator=g) * 0   ### recall logits = h @ W2 + b2 # output layer
+
+
+In practice, the BN operation
+includes learnable parameters for
+the output mean and variance for
+each column. This is done in order
+that BN maintain the expressive
+power of the original network.
+
+# BatchNorm parameters
+bngain = torch.ones((1, n_hidden))
+bnbias = torch.zeros((1, n_hidden))
+bnmean_running = torch.zeros((1, n_hidden)) # not trained using back prop (used at inference)
+bnstd_running = torch.ones((1, n_hidden)) # not trained using back prop (used at inference)
+
+parameters = [W1, W2, b2, bngain, bnbias]
+for p in parameters:
+  p.requires_grad = True
+
 batch_size = 32
 
 # minibatch construct
   ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
-  Xb, Yb = Xtr[ix], Ytr[ix] # batch X,Y
+  Xb = Xtr[ix]
 
    # Linear layer
-  hpreact = embcat @ W1 #+ b1 # hidden layer pre-activation
+  hpreact = embcat @ W1 # we dont need bias term as the BN layer will get rid of the bias here
 
-##^ want hpreact to be gaussian, hpreact has shape (batch_size, 200) where 200 is the number of neurons, and we want to find the mean and std for each neuron, 
-  ## across all 32 examples. i.e take average of the 1st neuron's value (200 of those in total) for the 32 datapoints.
+##^ want hpreact to be gaussian, hpreact has shape (batch_size, 100) where 100 is the number of neurons, and we want to find the mean and std for each neuron, 
+  ## across all 32 examples. i.e take average of the 1st neuron's value (100 of those in total) for the 32 datapoints.
 
-  ## We also do not need the bias b1, because whatever bias we add here, we will apply the BN layer where we subtract the bnmeani. BN has its own bias and
-  ## there is no need for a bias term for the layer before BN
   # BatchNorm layer
   # -------------------------------------------------------------
   bnmeani = hpreact.mean(0, keepdim=True)
@@ -33,9 +61,11 @@ batch_size = 32
 
 ```
 
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps come from the fact that NN have many moving part so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
+preventing dead or saturated units
 
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
+Tanh is a squashing function, this means tanh will remove information from the given input. Specifically if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0 and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+
+
 
 In this blog, we hope to provide an intuitive understanding of the 2 respective arguments.
 
@@ -51,11 +81,13 @@ and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
 
 ## Argument 1: BN resolves internal covariate shift (ICS)
 
-ICS is closely related to the concept of covariate shift, which refers to the problem where the input distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
+ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
 
-Adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes from one training epoch to the next epoch.
+Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Before diving deeper, recall we can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is independent, GIVEN the output of the previous layer. Namely, at each layer, we have **a)** the input (output of the previous layer), we are also given some **b)** target output, and we wish to find the best set of weights that transform the input to the desired output as closely as possible (the desired output for the final layer will be the true label, the desired output for any layers before is less interpretable for us humans). 
+Let me introduce a useful framework to think about Neuron Nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems could be seen as separate, GIVEN the output of the previous layer and accumulation of the gradient w.r.t final loss of the next layer. 
+
+Namely, at each layer, the only 2 ingredients we need to solve the smaller optimization problem are **a)** the input (output of the previous layer), and **b)** the accumulated gradient.
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
