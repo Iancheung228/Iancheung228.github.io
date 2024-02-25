@@ -20,11 +20,11 @@ Batch norm is a mechanism that aims to stabilize the distribution of inputs to a
 
 <img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
 
-In practice, the BN operation includes learnable parameters for the output mean and variance for each column. This is done in order that BN to maintain the expressive power of the original network.
+In practice, the BN operation includes 2 learnable parameters (in green) for the output mean and variance for each column. This is done so that BN to maintain the expressive power of the original network.
 
 <br/><br/>
 
-Let us walk through an example of 2 layered neuron net
+Let us walk through an example of a 2 layered neuron net
 ```
 n_hidden = 100 # the number of neurons in the hidden layer of the MLP
 X_dim = 5 # dimension of a training data point
@@ -75,7 +75,9 @@ loss = F.cross_entropy(logits, Yb) # loss function
 
 ## First benefit: preventing dead or saturated units
 
-Tanh is a squashing function, this means Tanh will remove information from the given input. Specifically, if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Many activation functions, including Tanh are a squashing function, which means Tanh will remove information from the given input. Specifically, if the input value in absolute terms is too big, tanh will return 1/-1, which corresponds to the flat region in the tail end of the function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output in absolute terms is too big, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+
+By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which prevents the landing on flat regions and subsequently dead neurons.
 
 
 ## Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
@@ -90,7 +92,7 @@ The ICS occurs when the output of the previous layer (input for current layer) c
 
 <br/><br/>
 ### Example
-Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for epoch $$i-1$$ and epoch $$i$$.
+Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for epoch $$i-1$$ and $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -103,7 +105,7 @@ Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearit
 
 <br/><br/>
 Recall, that the update rule for weight at layer c is:
-$$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
+$$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}\frac{\delta L}{\delta w_c}$$
 
 Taking a closer look at the gradient term, we can rewrite it as:
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
@@ -140,11 +142,11 @@ Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
-This ICS problem was believed to a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
+This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
 
 <br/><br/>
-## Empirically,does batch norm's main benefit come from internal covariate shift
-The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it Batch norm plus noise model). 
+## Counter argument by the experiment in 2019
+The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it the Batch norm plus noise model). 
 
 The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the benefit.
 
