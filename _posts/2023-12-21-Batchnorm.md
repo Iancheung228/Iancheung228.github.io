@@ -1,10 +1,6 @@
 ## Introduction
 Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, and whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother that justifies BN's success.
 
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
-
-
-
 
 
 
@@ -20,13 +16,11 @@ In this blog, we will go through the list of items:
 <br/><br/>
 
 ## Formal definition of batch normalization 
+Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
+
 <img width="713" alt="Screenshot 2024-02-25 at 10 11 38 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7be768e8-a724-40ac-81ce-b5c4755fb21d">
 
-
-$$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
-
-where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
-and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
+In practice, the BN operation includes learnable parameters for the output mean and variance for each column. This is done in order that BN to maintain the expressive power of the original network.
 
 <br/><br/>
 
@@ -40,12 +34,7 @@ W2 = torch.randn((n_hidden, X_dim),          generator=g)
 b2 = torch.randn(X_dim,                      generator=g)
 
 
-In practice, the BN operation
-includes learnable parameters for
-the output mean and variance for
-each column. This is done in order
-that BN maintain the expressive
-power of the original network.
+
 
 # BatchNorm parameters
 bngain = torch.ones((1, n_hidden))
