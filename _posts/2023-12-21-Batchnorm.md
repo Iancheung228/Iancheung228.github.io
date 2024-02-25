@@ -1,7 +1,7 @@
 ## Introduction
 
 
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps come from the fact that NN have many moving part so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
 
@@ -63,7 +63,7 @@ batch_size = 32
 
 preventing dead or saturated units
 
-Tanh is a squashing function, this means tanh will remove information from the given input. Specifically if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0 and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Tanh is a squashing function, this means Tanh will remove information from the given input. Specifically, if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
 
 
@@ -85,15 +85,13 @@ ICS is closely related to the concept of covariate shift, which is when the inpu
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework to think about Neuron Nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems could be seen as separate, GIVEN the output of the previous layer and accumulation of the gradient w.r.t final loss of the next layer. 
-
-Namely, at each layer, the only 2 ingredients we need to solve the smaller optimization problem are **a)** the input (output of the previous layer), and **b)** the accumulated gradient.
+Let me introduce a useful framework to think about Neuron Nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, and the only 2 ingredients we need  **a)** the output of the previous layer and **b)** accumulation of the gradient w.r.t final loss of the next layer. 
 
 The ICS occurs when the output of the previous layer (input for current layer) changes drastically at each training step, due to the updates of weight in previous layers, stemming from the previous training iteration. Let's walk through an example.
 
 <br/><br/>
 ### Example
-Consider a neural network with 3 neurons with no nonlinearity. Let's walk through how backpropagation will update the weights for epoch $$i-1$$ and epoch $$i$$.
+Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for epoch $$i-1$$ and epoch $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -101,9 +99,11 @@ Consider a neural network with 3 neurons with no nonlinearity. Let's walk throug
 
 * L denotes the loss (common choice is $${\lvert\hat{y} - y \rvert}^2$$)
 
+* $$\alpha $$ is the learning rate
+
 
 <br/><br/>
-For instance, the update rule with learning rate $$\alpha $$ for weight at layer c is:
+Recall, that the update rule for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \frac{\delta L}{\delta w_c}$$
 
 Taking a closer look at the gradient term, we can rewrite it as:
