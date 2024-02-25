@@ -18,7 +18,7 @@ In this blog, we will go through the list of items:
 ## Formal definition of batch normalization 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
 
-<img width="713" alt="Screenshot 2024-02-25 at 10 11 38 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7be768e8-a724-40ac-81ce-b5c4755fb21d">
+<img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
 
 In practice, the BN operation includes learnable parameters for the output mean and variance for each column. This is done in order that BN to maintain the expressive power of the original network.
 
@@ -73,12 +73,12 @@ loss = F.cross_entropy(logits, Yb) # loss function
 
 ```
 
-preventing dead or saturated units
+## First benefit: preventing dead or saturated units
 
 Tanh is a squashing function, this means Tanh will remove information from the given input. Specifically, if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
 
-## Argument 1: BN resolves internal covariate shift (ICS)
+## Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
 
 ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID time, as the data distribution has changed substantially.
 
