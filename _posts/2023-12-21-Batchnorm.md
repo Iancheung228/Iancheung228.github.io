@@ -61,7 +61,7 @@ hpreact = embcat @ W1 # we don't need a bias term as the BN layer will get rid o
 bnmeani = hpreact.mean(0, keepdim=True)
 bnstdi = hpreact.std(0, keepdim=True)
 hpreact = bngain * (hpreact - bnmeani) / bnstdi + bnbias # each neuron will be unit gauusian for this batch of data
-# running mean to use in validation, these running also get updated in trainning phase, but these do not require any gradient
+# running mean to use in validation, these running also get updated in training phase, but these do not require any gradient
 with torch.no_grad():
   bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
   bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
@@ -104,24 +104,24 @@ Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearit
 
 
 <br/><br/>
-Recall, that the update rule for weight at layer c is:
+The update rule for weight at layer c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
 Taking a closer look at the gradient term, we can rewrite it as:
-$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
+$$ \color{red}{\frac{\delta L}{\delta w_c}} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
-Recall
+Recall, we also have that the output of layer c is simply the dot product of weight of layer c and output of layer b:
 $$z_c = w_c*z_b$$
 
-and hence plugging that in 
+and hence plugging that in, we arrive at
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
-Importantly, we see that the update of the layer c's weight depends on the output of layer b.
+Importantly, we see that the update of the layer c's weight depends on the output (hence the weight) of the previous layers.
 
 
 
 
-You can go through the diagram below, where we go through in order of **1a), 1b), 1c), 2a)**
+You can go through the diagram below, where the update is in order of **1a), 1b), 1c), 2a)**
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
 We see that in step **1a**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
@@ -132,7 +132,7 @@ We see that in step **2a)** the output of neuron b, $$z_b$$, is a function of $$
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
-Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**.
+== Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**, even if the input data $$x_t = x_{t-1}$$! ==
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
