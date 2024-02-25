@@ -1,6 +1,4 @@
 ## Introduction
-
-
 Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
@@ -8,11 +6,11 @@ Batch norm is a mechanism that aims to stabilize the distribution of inputs to a
 Let us walk through an example of 2 layered neuron net
 ```
 n_hidden = 100 # the number of neurons in the hidden layer of the MLP
-X_dim = 5
+X_dim = 5 # dimension of a training data point
 g = torch.Generator().manual_seed(2147483647) # for reproducibility
-W1 = torch.randn((X_dim , n_hidden), generator=g) * (5/3)/((X_dim)**0.5) #* 0.2
-W2 = torch.randn((n_hidden, X_dim),          generator=g) * 0.01
-b2 = torch.randn(X_dim,                      generator=g) * 0   ### recall logits = h @ W2 + b2 # output layer
+W1 = torch.randn((X_dim , n_hidden), generator=g)
+W2 = torch.randn((n_hidden, X_dim),          generator=g)
+b2 = torch.randn(X_dim,                      generator=g)
 
 
 In practice, the BN operation
@@ -33,31 +31,29 @@ for p in parameters:
   p.requires_grad = True
 
 batch_size = 32
-
 # minibatch construct
-  ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
-  Xb = Xtr[ix]
+ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
+Xb, Yb = Xtr[ix], Ytr[ix]
 
-   # Linear layer
-  hpreact = embcat @ W1 # we dont need bias term as the BN layer will get rid of the bias here
+# Linear layer
+hpreact = embcat @ W1 # we don't need a bias term as the BN layer will get rid of the bias here
 
 ##^ want hpreact to be gaussian, hpreact has shape (batch_size, 100) where 100 is the number of neurons, and we want to find the mean and std for each neuron, 
   ## across all 32 examples. i.e take average of the 1st neuron's value (100 of those in total) for the 32 datapoints.
 
-  # BatchNorm layer
-  # -------------------------------------------------------------
-  bnmeani = hpreact.mean(0, keepdim=True)
-  bnstdi = hpreact.std(0, keepdim=True)
-  hpreact = bngain * (hpreact - bnmeani) / bnstdi + bnbias # each neuron will be unit gauusian for this batch of data
-  # running mean to use in validation, these running also get updated in trainning phase, but these do not require any gradient
-  with torch.no_grad():
-    bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
-    bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
-  # -------------------------------------------------------------
-  # Non-linearity
-  h = torch.tanh(hpreact) # hidden layer
-  logits = h @ W2 + b2 # output layer
-  loss = F.cross_entropy(logits, Yb) # loss function
+# BatchNorm layer-------------------------------------------------------------
+bnmeani = hpreact.mean(0, keepdim=True)
+bnstdi = hpreact.std(0, keepdim=True)
+hpreact = bngain * (hpreact - bnmeani) / bnstdi + bnbias # each neuron will be unit gauusian for this batch of data
+# running mean to use in validation, these running also get updated in trainning phase, but these do not require any gradient
+with torch.no_grad():
+  bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
+  bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
+# -------------------------------------------------------------
+# Non-linearity
+h = torch.tanh(hpreact) # hidden layer
+logits = h @ W2 + b2 # output layer
+loss = F.cross_entropy(logits, Yb) # loss function
 
 ```
 
@@ -72,6 +68,9 @@ In this blog, we hope to provide an intuitive understanding of the 2 respective 
 <br/><br/>
 
 ## Formal definition of batch normalization 
+<img width="713" alt="Screenshot 2024-02-25 at 10 11 38 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7be768e8-a724-40ac-81ce-b5c4755fb21d">
+
+
 $$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
 
 where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
