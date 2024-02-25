@@ -132,7 +132,7 @@ We see that in step **2a)** the output of neuron b, $$z_b$$, is a function of $$
 
 where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
-**Hence, we see that in step **2a)**, the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step **1a)**, even if the input data $$x_t = x_{t-1}$$!**
+**Hence, we see that in step 2a), the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step 1a), even if the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
@@ -152,7 +152,7 @@ The rationale is: if the performance gain is indeed attributable to resolving th
 
 In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
-## Argument 2: The benefit of batch norm improves the loss landscape and comes in 2 manifestations
+## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
 The thesis of the paper is that BN's main benefit is that it reparametrizes the underlying optimization problem and smoothens the loss landscape. This benefit comes largely in 2 manifestations and utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
