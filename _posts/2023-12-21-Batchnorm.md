@@ -1,7 +1,34 @@
 ## Introduction
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). The exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem a BN layer solves, and whether BN is the unique mechanism that solves it. The original paper attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother.
+Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, and whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother that justifies BN's success.
 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the input to mean 0 and variance 1. 
+
+
+
+
+
+
+
+In this blog, we will go through the list of items:
+<ol>
+  <li>What is batch norm and implement a simple neuron net with batch norm layer</li>
+  <li>First benefit: preventing dead or saturated units</li>
+  <li>Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)</li>
+  <li>Third benefit: Smoothening the loss landscape (2019 paper)</li>
+</ol>
+
+<br/><br/>
+
+## Formal definition of batch normalization 
+<img width="713" alt="Screenshot 2024-02-25 at 10 11 38 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7be768e8-a724-40ac-81ce-b5c4755fb21d">
+
+
+$$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
+
+where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
+and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
+
+<br/><br/>
 
 Let us walk through an example of 2 layered neuron net
 ```
@@ -61,22 +88,6 @@ preventing dead or saturated units
 
 Tanh is a squashing function, this means Tanh will remove information from the given input. Specifically, if the input value is too big in absolute terms, tanh will return 1/-1, which corresponds to the flat region in the tail end of this function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron. In other words, if the neuron's output is too big in absolute terms, no matter how you perturb the value of the neuron, it will not have an impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
-
-
-In this blog, we hope to provide an intuitive understanding of the 2 respective arguments.
-
-<br/><br/>
-
-## Formal definition of batch normalization 
-<img width="713" alt="Screenshot 2024-02-25 at 10 11 38 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7be768e8-a724-40ac-81ce-b5c4755fb21d">
-
-
-$$ \hat{y} = \gamma \frac{(y - \hat{\mu})}{\sqrt{\hat{\sigma}^{2} + \varepsilon}} + \beta $$
-
-where $$\hat{\mu} = \frac{1}{B} \sum_{i=1}^{B} y_i $$
-and $$\hat{\sigma}^{2} = \frac{1}{B} \sum_{i=1}^{B} (y_i - \hat{\mu})^{2} $$
-
-<br/><br/>
 
 ## Argument 1: BN resolves internal covariate shift (ICS)
 
