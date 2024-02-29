@@ -84,7 +84,7 @@ ICS is closely related to the concept of covariate shift, which is when the inpu
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework to think about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **a)** the output of the previous layer and **b)** accumulation of the gradient w.r.t final loss of the next layer.
+Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **a)** the output of the previous layer and **b)** accumulation of the gradient w.r.t final loss of the next layer.
 
 The ICS occurs when the output of the previous layer (input for the current layer) changes (due to weight update in the previous iteration) at each training step. Let's walk through an example for more clarity.
 
@@ -102,24 +102,24 @@ Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearit
 
 
 <br/><br/>
-The update rule for weight at layer c is:
+The update rule for weight at neuron c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
 Taking a closer look at the gradient term, we can rewrite it as:
 $$ \color{red}{\frac{\delta L}{\delta w_c}} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
-Recall, we also have that the output of layer c is simply the dot product of weight of layer c and output of layer b:
+Recall, we also know that the output of neuron c is simply the dot product of the weight of neuron c and the output of neuron b:
 $$z_c = w_c*z_b$$
 
-and hence plugging that in, we arrive at
+Plugging that in, we arrive at
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
-Importantly, we see that the update of the layer c's weight depends on the output (hence the weight) of the previous layers.
+Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
 
 
 
 
-You can go through the diagram below, where the update is in order of **1a), 1b), 1c), 2a)**
+With the groundwork established, you can go through the diagram below, where the update is in order of **1a), 1b), 1c), 2a)**
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
 
 We see that in step **1a**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
