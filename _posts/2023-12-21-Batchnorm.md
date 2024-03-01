@@ -84,7 +84,7 @@ ICS is closely related to the concept of covariate shift, which is when the inpu
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **a)** the output from the previous layer and **b)** accumulation of the gradient w.r.t final loss from the next layer.
+Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **1)** the output from the previous layer and **2)** accumulation of the gradient w.r.t final loss from the next layer.
 
 The ICS occurs when the output of the previous layer (input for the current layer) changes (due to weight update in the previous iteration) at each training step.
 
@@ -122,8 +122,9 @@ Importantly, we see that the update of neuron c's weight depends on the output (
 
 #### stepping through an example
 
-With the groundwork established, you can go through the diagram below, where the update is in order of **1a), 1b), 1c), 2a)**
-![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
+
+With the groundwork established, you can go through the diagram below by yourself, where the back propagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
+![IMG_8E1C8D8069B8-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/249caf5a-a7bc-4594-b5ca-1a8976809f4d)
 
 We see that in step **1a**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
