@@ -84,9 +84,11 @@ ICS is closely related to the concept of covariate shift, which is when the inpu
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **a)** the output of the previous layer and **b)** accumulation of the gradient w.r.t final loss of the next layer.
+Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **a)** the output from the previous layer and **b)** accumulation of the gradient w.r.t final loss from the next layer.
 
-The ICS occurs when the output of the previous layer (input for the current layer) changes (due to weight update in the previous iteration) at each training step. Let's walk through an example for more clarity.
+The ICS occurs when the output of the previous layer (input for the current layer) changes (due to weight update in the previous iteration) at each training step.
+
+Let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example
@@ -102,6 +104,7 @@ Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearit
 
 
 <br/><br/>
+#### Groundwork
 The update rule for weight at neuron c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
