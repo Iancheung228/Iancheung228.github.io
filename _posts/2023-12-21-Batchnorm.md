@@ -92,7 +92,7 @@ Let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example
-Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for epoch $$i-1$$ and $$i$$.
+Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -120,7 +120,7 @@ $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
 
 
-
+#### stepping through an example
 
 With the groundwork established, you can go through the diagram below, where the update is in order of **1a), 1b), 1c), 2a)**
 ![IMG_40CEE668B383-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8257cd68-d16c-4d04-8a7e-dbe80649f3b9)
