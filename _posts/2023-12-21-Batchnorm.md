@@ -118,7 +118,7 @@ Recall, we also know that the output of neuron c is simply the dot product of th
 $$z_c = w_c*z_b$$. This means that taking the derivative of $$ w_c $$ w.r.t $$ z_c $$ is $$z_b$$.
 
 Incorporating what we discussed, we arrive at
-$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
+**$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$** which we will use to update the neuron's weight.
 
 Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
 
@@ -148,6 +148,12 @@ Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
 This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
 
 <br/><br/>
 ## Counter argument by the experiment in 2019
