@@ -149,10 +149,10 @@ The subtle thing is, when we update the weight of layer c at iteration i using t
 
 This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
 
-| Command | Description |  | 
+| Problem: | occurs at: | drastic change in: | 
 | --- | --- | --- |
-| git status | List all new or modified files | s |
-| git diff | Show file differences that haven't been staged |s |
+| **Covariate Shift** | train vs test time | input to model |
+| **Internal Covariate Shift** | epoch i-1 vs epoch i | input to layer |
 
 
 <br/><br/>
