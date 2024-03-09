@@ -112,9 +112,9 @@ Taking a closer look at the gradient term, we can rewrite it as:
 $$ \color{red}{\frac{\delta L}{\delta w_c}} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
 Recall, we also know that the output of neuron c is simply the dot product of the weight of neuron c and the output of neuron b:
-$$z_c = w_c*z_b$$
+$$z_c = w_c*z_b$$. This means that taking the derivative of $$ w_c $$ w.r.t $$ z_c $$ is $$z_b$$.
 
-Plugging that in, we arrive at
+Incorporating what we discussed, we arrive at
 $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 
 Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
