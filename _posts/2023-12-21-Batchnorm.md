@@ -82,11 +82,14 @@ By adding a batch norm layer before the activation layer, we would force the inp
 
 ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially, for obvious reasons.
 
-Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
+Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon that occurs in the training of a neural network, where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can view the optimization of the entire deep neural network as solving a series of smaller, sequential optimization problems at a layer level. A 10-layer NN could be seen as solving 10 smaller optimization problems. Each of these smaller optimization problems is separate, in the sense that the only 2 ingredients we need are  **1)** the output from the previous layer and **2)** accumulation of the gradient w.r.t final loss from the next layer.
+Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of Neural Nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label as closely as possible. In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. 
 
-The ICS occurs when the output of the previous layer (input for the current layer) changes (due to weight update in the previous iteration) at each training step.
+That is, each layer is also a function that takes in an input (received from the previous layer) and produces an ouput (feeds to the next layer). The layer wise optimization problem has similar flavor, where we try to find good weights that map the input to the desired output. Precisly speaking the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
+
+
+The ICS occurs when the input for the layer (output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.
 
 Let's walk through an example for more clarity.
 
@@ -120,19 +123,19 @@ $$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$
 Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
 
 
-#### stepping through an example
-
-
-With the groundwork established, you can go through the diagram below by yourself, where the back propagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
+#### Stepping through an example
+With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
 ![IMG_8E1C8D8069B8-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/249caf5a-a7bc-4594-b5ca-1a8976809f4d)
 
-We see that in step **1a**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
+##### Commentary:
+
+We see that in step **1c**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
 At the end of step **1)**, we have updated the weight of all 3 neurons.
 
-We see that in step **2a)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
+We see that in step **2c)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
-where $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
+Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
 
 **Hence, we see that in step 2a), the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step 1a), even if the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
 
