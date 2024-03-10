@@ -148,9 +148,8 @@ The subtle thing is, when we update the weight of layer c at iteration i using t
 
 This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
 
-### Summary of Internal Covariate Shift
 
-
+Summary of Internal Covariate Shift
 | Problem: | occurs at: | drastic change in: | 
 | --- | --- | --- |
 | **Covariate Shift** | train vs test time | input to model |
