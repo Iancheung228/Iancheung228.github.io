@@ -208,8 +208,7 @@ The key takeaway is that without batch norm, the convergence behavior is **i)** 
 On the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
 
 ### Now with BN:
-<img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa" alt="Ps2 2" width="300"/>
-![IMG_D1A9F57BD03B-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/18ad2903-c647-4a11-9eb2-7b2670e65908)
+
 <div style="text-align:center;">
   <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/18ad2903-c647-4a11-9eb2-7b2670e65908" style="max-width:50%;" alt="Description of the image">
 </div>
