@@ -125,7 +125,8 @@ Importantly, we see that the update of neuron c's weight depends on the output (
 
 #### Stepping through an example
 With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
-![IMG_8E1C8D8069B8-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/249caf5a-a7bc-4594-b5ca-1a8976809f4d)
+
+![IMG_3DD7559E808C-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/bc01ac8f-6688-4fbd-a6b3-4222c0e0f2b9)
 
 ##### Commentary:
 
@@ -135,20 +136,19 @@ At the end of step **1)**, we have updated the weight of all 3 neurons.
 
 We see that in step **2c)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
-Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$
-
-**Hence, we see that in step 2a), the input to layer c  $$:= z_b$$ would have a completely different distribution than the corresponding $$z_b$$ in step 1a), even if the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
+**Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$. Hence, we see that in step 2a), the input to layer c  $$:= z_b ^{(t)}$$ would have a completely different distribution than the corresponding $$z_b^{(t-1)}$$ in step 1a). Even in the extreme case where the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
 
-*Aside when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
+*Aside: when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
 
 
 The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
 This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
 
+### Summary of Internal Covariate Shift
 | Problem: | occurs at: | drastic change in: | 
 | --- | --- | --- |
 | **Covariate Shift** | train vs test time | input to model |
@@ -156,61 +156,63 @@ This ICS problem was believed to be a huge problem if left unaddressed and the a
 
 
 <br/><br/>
-## Counter argument by the experiment in 2019
+## Counter argument 1) 2019 Experiment shows contradictory results
 The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it the Batch norm plus noise model). 
 
-The rationale is: if the performance gain is indeed attributable to resolving the internal covariate shift, adding back noise will erase any of the benefit.
+The rationale is: If the performance gain of the neural net is indeed attributable to resolving the internal covariate shift, adding back noise after the BN layer will erase any of the benefit.
 
 In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
+## Counter argument 2) Actual placement of BN layer is before the activation layer
+Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. In practice, the BN is placed before the activation layer, which is then fed as input to the next layer. This means we are not guaranteed that the input distribution after the activation layer is actually still non-zero mean and unit variance.
+
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
-The thesis of the paper is that BN's main benefit is that it reparametrizes the underlying optimization problem and smoothens the loss landscape. This benefit comes largely in 2 manifestations and utilizes the concept of Liptschitzness.
+The 2019 paper argues BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
 > " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
 
-
-
-Definition : 
+**Def:** 
 a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
 
 Rearranging the definition, we get:
 
 $$\frac{|{f(x) - f(y)}|}{||x-y||} \leq L $$
 
-Interpretation: the gradient of the function f at any point is bounded by constant L.
+Interpretation: the gradient of the function f (L.H.S) at any point is always bounded by the constant L.
 
 > "Recall loss function tends to have a large number of kinks and sharp minima, this makes gradient descent-based training algorithms unstable due to exploding gradients, highly sensitive to learning rate and initialization"
 
-**The first manifestation reduces the problem of exploding gradients.**
+By applying BN layer, the authors found that the gradient of the loss landscape is bounded by a smaller constant L.
+**Importantly, the first manifestation reduces the problem of exploding gradients.**
 
 <br/><br/>
 ### Second manifestation: Improves the smoothness of loss function
-The second manifestation is arguably the stronger benefit and relies on the concept of smoothness. Smoothness has the exact same definition as Lipschitzness with the addition of the red gradient.
+The second manifestation is arguably the stronger benefit and relies on the concept of smoothness. Smoothness has pretty much the exact same definition as Lipschitzness with the addition of the gradient in its definition shown in the red color.
 
-Definition : a function f is L-smooth if 
+**Def:** a function f is L-smooth if 
 :
 $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y\| \forall$$ x,y
 
+Interpretation: BN improves the Lipschitzness of the gradient (achieves smaller L).
+
+We will try to build the intuition of what the benefit entails using a few examples.
+
+### Let's take a look at what the convergence behavior in the loss landscape looks like without BN for 3 different initialization points
+
+![IMG_B5CE78CEC40E-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/3c52d62d-b8b5-4ac6-9b6a-b675837e2bb6)
 
 
+The key takeaway is that without batch norm, the convergence behavior is **i)** dependent on the choice initialization and **ii)** requires a smaller learning rate or risk overshooting. We see from the leftmost figure, we can not take a large stepsize (indicated by the hypothetical green arrow), otherwise, we will overshoot the minimum.
 
-Interpretation: BN improves the Lipschitzness of the gradient.
-
-### Let's take a look at what the convergence behaviour looks like without BN for 3 different initialization points
-
-![Ps2 3](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/23cc5783-2f3a-4013-84b6-2b2cded5f519)
-
-
-The key takeaway is that without batch norm, the convergence behavior is dependent on the choice initialization. We see from the leftmost figure, we can not take a large stepsize (indicated by green arrow), otherwise, we will overshoot the minimum.
-
-On the rightmost figure, we got lucky by picking a rare initialization that takes 2 steps to reach minima.
+On the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
 
 ### Now with BN:
 <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa" alt="Ps2 2" width="300"/>
 
-With BatchNorm, the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. Quoting from the paper: 
-> "This gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step."
+Applying batch norm smoothens the loss landscape, and the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. Quoting from the paper: 
+> "This gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." (You can better understand this sentence with the diagram of initialization A) above.)
+
 As a result, we can use a larger learning rate with faster convergence.
 
 ### Not a simple rescale!
