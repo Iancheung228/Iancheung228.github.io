@@ -209,6 +209,10 @@ On the middle and rightmost figure, we got lucky by picking one of the better in
 
 ### Now with BN:
 <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a9256d60-6d7e-409c-ba75-4781d50677fa" alt="Ps2 2" width="300"/>
+![IMG_D1A9F57BD03B-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/18ad2903-c647-4a11-9eb2-7b2670e65908)
+<div style="text-align:center;">
+  <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/18ad2903-c647-4a11-9eb2-7b2670e65908" style="max-width:50%;" alt="Description of the image">
+</div>
 
 Applying batch norm smoothens the loss landscape, and the gradient of the loss surface becomes more predictable for all initialization points, leading to stable convergence. Quoting from the paper: 
 > "This gives us confidence that when we take a larger step in the direction of a computed gradient, this gradient direction remains a fairly accurate estimate of the actual gradient direction after taking that step." (You can better understand this sentence with the diagram of initialization A) above.)
