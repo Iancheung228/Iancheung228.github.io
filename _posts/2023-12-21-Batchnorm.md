@@ -150,6 +150,10 @@ This ICS problem was believed to be a huge problem if left unaddressed and the a
 
 
 Summary of Internal Covariate Shift
+
+
+
+
 | Problem: | occurs at: | drastic change in: | 
 | --- | --- | --- |
 | **Covariate Shift** | train vs test time | input to model |
