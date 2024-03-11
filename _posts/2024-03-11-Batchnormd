@@ -1,5 +1,5 @@
 ## Introduction
-Batchnorm has been empirically shown to allow deep neural nets to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, and whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift. In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother that justifies BN's success.
+Batch Normalization (BN) has been empirically shown to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, and whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift (ICS). In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother that justifies BN's success.
 
 
 
@@ -14,11 +14,11 @@ In this blog, we will go through the list of items:
 <br/><br/>
 
 ## Formal definition of batch normalization 
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to mean 0 and variance 1. The mean and standard deviation are calculated based on the current batch.
+Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
 
 <img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
 
-In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance for each column. This is done so that BN to maintain the expressive power of the original network, i.e. sometimes we do want the mean to not be zero, or the variance not be one.
+In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance for each column. This is done to give back expressive power to the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.
 
 <br/><br/>
 
@@ -73,7 +73,7 @@ loss = F.cross_entropy(logits, Yb) # loss function
 
 ## First benefit: preventing dead or saturated units
 
-Many activation functions, including Tanh are a squashing function, this means Tanh will remove information from the given input to the function. Specifically, if the input value (in absolute value) is too big, tanh will return 1/-1, which corresponds to the flat region in the tail end of the function. From a gradient pov, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when we try to update the neuron's weight. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Many activation functions, including Tanh are a squashing function, this means Tanh will remove information from the given input to the function. Specifically, if the input value (in absolute value) is too big, Tanh will return 1/-1, which corresponds to the flat region in the tail end of the function. From a gradient point of view, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when we try to update the neuron's weight. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
 By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which prevents the landing on flat regions and subsequently dead neurons.
 
@@ -126,7 +126,7 @@ Importantly, we see that the update of neuron c's weight depends on the output (
 #### Stepping through an example
 With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
 
-![IMG_3DD7559E808C-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/bc01ac8f-6688-4fbd-a6b3-4222c0e0f2b9)
+
 
 ##### Commentary:
 
