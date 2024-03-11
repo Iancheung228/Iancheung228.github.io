@@ -223,10 +223,6 @@ Applying batch norm smoothens the loss landscape, and the gradient of the loss s
 
 As a result, we can use a larger learning rate with faster convergence.
 
-### Not a simple rescale!
-
-In fact, the author of the 2019 paper noted that this is not a simple rescale.
-<img width="994" alt="Screen Shot 2024-01-10 at 1 48 38 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c2186a71-c45f-451c-8c68-0d5ec9c861f6">
 
 
 
