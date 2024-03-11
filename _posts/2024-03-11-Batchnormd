@@ -126,7 +126,7 @@ Importantly, we see that the update of neuron c's weight depends on the output (
 #### Stepping through an example
 With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
 
-
+![IMG_10186360727C-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e9991454-6224-4daf-8298-1740b1ebe9c9)
 
 ##### Commentary:
 
@@ -136,7 +136,7 @@ At the end of step **1)**, we have updated the weight of all 3 neurons.
 
 We see that in step **2c)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
-**Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$. Hence, we see that in step 2a), the input to layer c  $$:= z_b ^{(t)}$$ would have a completely different distribution than the corresponding $$z_b^{(t-1)}$$ in step 1a). Even in the extreme case where the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
+**Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$. Hence, we see that in step 2c), the input to layer c  $$:= z_b ^{(t)}$$ would have a completely different distribution than the corresponding $$z_b^{(t-1)}$$ in step 1a). Even in the extreme case where the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
