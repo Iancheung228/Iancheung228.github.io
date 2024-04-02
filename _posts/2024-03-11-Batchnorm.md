@@ -77,20 +77,20 @@ logits = h @ W2 + b2               # output layer
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
 
-## First benefit: preventing dead or saturated units
+## Discussion of first benefit: preventing dead or saturated units
 
-Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. Specifically, if the input value (in absolute value) is too big, Tanh will return  1/-1, which corresponds to the flat region in the tail end of the function. From a gradient point of view, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when we try to update the neuron's weight. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. Specifically, if the input value (in absolute value) is too big, Tanh will return approximatly 1 or -1, which corresponds to the flat region in the tail ends of the function. From a gradient point of view, if the neuron lands on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
-By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which prevents the landing on flat regions and subsequently dead neurons.
+By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents neurons landing on flat regions.
 
 
-## Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
+## Discussion of second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
 
-ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially, for obvious reasons.
+ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time and hence making a trained model obsolete. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially.
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon that occurs in the training of a neural network, where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of Neural Nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label as closely as possible. In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. 
+Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label as closely as possible. In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. 
 
 That is, each layer is also a function that takes in an input (received from the previous layer) and produces an ouput (feeds to the next layer). The layer wise optimization problem has similar flavor, where we try to find good weights that map the input to the desired output. Precisly speaking the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
 
