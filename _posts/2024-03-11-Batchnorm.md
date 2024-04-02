@@ -4,16 +4,16 @@ date: 2024-03-11
 ---
 
 ## Introduction
-Batch Normalization (BN) has been empirically shown to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, and whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift (ICS). In 2019, there is a new paper that argues, that instead of ICS, it is the fact that batch norm layer makes the optimization landscape smoother that justifies BN's success.
+Batch Normalization (BN) has been empirically shown to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that a NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, let alone whether BN is the unique mechanism that solves it. The original paper from 2015 attributes the success to resolving the problem of internal covariate shift (ICS). In 2019, there is a new paper that argues that instead of ICS, BN's true benefit  is in making the optimization landscape smoother.
 
 
 
 In this blog, we will go through the list of items:
 <ol>
   <li>What is batch norm and implement a simple neuron net with batch norm layer</li>
-  <li>First benefit: preventing dead or saturated units</li>
-  <li>Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)</li>
-  <li>Third benefit: Smoothening the loss landscape (2019 paper)</li>
+  <li> Discussion of first benefit: preventing dead or saturated units</li>
+  <li> Discussion of second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)</li>
+  <li> Discussion of third benefit: Smoothening the loss landscape (2019 paper)</li>
 </ol>
 
 <br/><br/>
@@ -23,44 +23,45 @@ Batch norm is a mechanism that aims to stabilize the distribution of inputs to a
 
 <img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
 
-In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance for each column. This is done to give back expressive power to the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.
+In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.
 
 <br/><br/>
 
-Example of PyTorch code for a 2-layered neuron net with batch norm
+Pseudocode of PyTorch code for a 2-layered neuron net with batch norm for binary classification task
 ```
-# defining our layers
-X_dim = 5                   # dimension of a training data point
-n_hidden = 100              # the number of neurons in the hidden layer of this NN
-
-g = torch.Generator().manual_seed(42) # for reproducibility
-W1 = torch.randn((X_dim , n_hidden), generator=g)
-W2 = torch.randn((n_hidden, X_dim),  generator=g)
-b2 = torch.randn(X_dim,              generator=g)
-
-
-# BatchNorm parameters
-bngain = torch.ones((1, n_hidden))          # in green in the diagram of BN def 
-bnbias = torch.zeros((1, n_hidden))         # in green in the diagram of BN def 
-bnmean_running = torch.zeros((1, n_hidden)) # not trained using back prop (used at inference)
-bnstd_running = torch.ones((1, n_hidden))   # not trained using back prop (used at inference)
-
-parameters = [W1, W2, b2, bngain, bnbias]
-for p in parameters:
-  p.requires_grad = True
-
+#Suppose we have 10000 training data points each with dim 5
+#i.e Xtr = (10000,5), Ytr(10000,1)
 batch_size = 32
 # minibatch construction
 ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
 Xb, Yb = Xtr[ix], Ytr[ix]
 
+# defining our layers of 100 neurons 
+X_dim = Xb.shape[1]                   
+n_hidden = 100              
+W1 = torch.randn((X_dim , n_hidden))
+W2 = torch.randn((n_hidden, 2))
+b2 = torch.randn(2)
+
+# BatchNorm parameters
+bngain = torch.ones((1, n_hidden))          # in green in the diagram of BN def 
+bnbias = torch.zeros((1, n_hidden))         # in green in the diagram of BN def 
+bnmean_running = torch.zeros((1, n_hidden)) # not trained during back prop (used at inference)
+bnstd_running = torch.ones((1, n_hidden))   # not trained during back prop (used at inference)
+
+parameters = [W1, W2, b2, bngain, bnbias]
+for p in parameters:
+  p.requires_grad = True
+
+
+Our Neural Network -------------------------------------------------------------
 # Linear layer
-pre_act = embcat @ W1
+pre_act = Xb @ W1
 ## We don't need a bias term as the BN layer will get rid of the bias here
 ## pre_act has shape (batch_size, 100) where 100 is the number of neurons.
 ## For each neuron, we want to find the mean and std across all 32 training examples.
 
-# BatchNorm layer-------------------------------------------------------------
+# BatchNorm layer
 bnmeani = pre_act.mean(0, keepdim=True)
 bnstdi = pre_act.std(0, keepdim=True)
 pre_act = bngain * (pre_act - bnmeani) / bnstdi + bnbias # each neuron will be unit gaussian for this batch of data
@@ -68,17 +69,17 @@ pre_act = bngain * (pre_act - bnmeani) / bnstdi + bnbias # each neuron will be u
 with torch.no_grad():
   bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
   bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
-# -------------------------------------------------------------
+
 # Non-linearity
 h = torch.tanh(pre_act)            # non linear layer
 logits = h @ W2 + b2               # output layer
+# -------------------------------------------------------------
 loss = F.cross_entropy(logits, Yb) # loss function
-
 ```
 
 ## First benefit: preventing dead or saturated units
 
-Many activation functions, including Tanh are a squashing function, this means Tanh will remove information from the given input to the function. Specifically, if the input value (in absolute value) is too big, Tanh will return 1/-1, which corresponds to the flat region in the tail end of the function. From a gradient point of view, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when we try to update the neuron's weight. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. Specifically, if the input value (in absolute value) is too big, Tanh will return  1/-1, which corresponds to the flat region in the tail end of the function. From a gradient point of view, if we land on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when we try to update the neuron's weight. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
 By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which prevents the landing on flat regions and subsequently dead neurons.
 
