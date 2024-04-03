@@ -101,7 +101,7 @@ Let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example
-Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how the backpropagation algorithm will update the weights of the 3 layers. We will do this for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
+Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how the backpropagation algorithm will update the weights of the 3 layers. We will do this for 2 epochs **a)** $i-1$ and **b)** $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
