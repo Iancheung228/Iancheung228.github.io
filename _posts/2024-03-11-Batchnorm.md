@@ -78,7 +78,7 @@ logits = h @ W2 + b2               # output layer
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
 
-## Discussion of first benefit: preventing dead or saturated units
+## Discussion of first benefit: Preventing dead or saturated units
 
 Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. Specifically, if the input value (in absolute value) is too big, Tanh will return approximatly 1 or -1, which corresponds to the flat region in the tail ends of the function. From a gradient point of view, if the neuron lands on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
 
@@ -91,9 +91,9 @@ ICS is closely related to the concept of covariate shift, which is when the inpu
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon that occurs in the training of a neural network, where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label as closely as possible. In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. 
+Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label, as closely as possible. 
 
-That is, each layer is also a function that takes in an input (received from the previous layer) and produces an ouput (feeds to the next layer). The layer wise optimization problem has similar flavor, where we try to find good weights that map the input to the desired output. Precisly speaking the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
+In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. That is, each layer is also a function that takes in an input (received from the previous layer) and produces an output (feeds to the next layer). The layer-wise optimization problem has a similar flavour, where we try to find good weights that map the input to the desired output. Precisely speaking, the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
 
 
 The ICS occurs when the input for the layer (output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.
@@ -102,7 +102,7 @@ Let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example
-Consider a neural network with 3 layers (each with 1 neuron) with no nonlinearity. Let's walk through how backpropagation will update the weights of the 3 layers, for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
+Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how the backpropagation algorithm will update the weights of the 3 layers. We will do this for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -143,7 +143,7 @@ At the end of step **1)**, we have updated the weight of all 3 neurons.
 
 We see that in step **2c)** the output of neuron b, $$z_b$$, is a function of $$w_b^{t-1}$$, $$w_a^{t-1}$$ and $$x_{t}$$
 
-**Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$. Hence, we see that in step 2c), the input to layer c  $$:= z_b ^{(t)}$$ would have a completely different distribution than the corresponding $$z_b^{(t-1)}$$ in step 1a). Even in the extreme case where the input data $$x_t = x_{t-1}$$! This is internal covariate shift.**
+**Importantly, $$w_b^{t-2} \neq w_b^{t-1}$$ and $$w_a^{t-2} \neq w_a^{t-1}$$. Hence, we see that in step 2c), the input to layer c  $$:= z_b ^{(t)}$$ would have a completely different distribution than the corresponding $$z_b^{(t-1)}$$ in step 1a). Even in the extreme case where the input data $$x_t = x_{t-1}$$! This is internal covariate shift.** [^3]
 
 
 *Here we make the simplifying assumption that at each iteration we only train on 1 data point, in practice, we train on a mini-batch and the idea of distribution applies* 
@@ -151,15 +151,12 @@ We see that in step **2c)** the output of neuron b, $$z_b$$, is a function of $$
 *Aside: when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
 
 
-The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
+[^3]: The subtle thing is, when we update the weight of layer c at iteration i using the equation: $$\frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$, the output for node b, $$z_b$$, actually still uses the learned weights from the previous iteration i-1 . (Recall $$w_b$$ is optimized for the data point at iteration i-1 $$(x_{i-1},y_{i-1})$$.) In other words, at iteration i, the input of layer c's optimization problem assumes the distribution of $$x_i$$ is the same as the distribution of $$x_{i-1}$$ by using a "stale" weight $$w_b$$ at this exact point in the backpropagation algorithm. If $$x_{i-1}$$ has a significantly different value than $$x_i$$, then $$w_b^{i-1}$$ will not be good for minimizing the loss for the data point $$x_i$$.
 
-This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested to add a BN layer after each layer of the original NN.
-
-
-Summary of Internal Covariate Shift
+This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested adding a BN layer after each layer of the original NN.
 
 
-
+### Summary of Internal Covariate Shift
 
 | Problem: | occurs at: | drastic change in: | 
 | --- | --- | --- |
@@ -171,14 +168,14 @@ Summary of Internal Covariate Shift
 ## Counter argument 1) 2019 Experiment shows contradictory results
 The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it the Batch norm plus noise model). 
 
-The rationale is: If the performance gain of the neural net is indeed attributable to resolving the internal covariate shift, adding back noise after the BN layer will erase any of the benefit.
+The rationale is: If the performance gain of the neural net is indeed attributable to resolving the internal covariate shift, adding back noise **after** the BN layer will erase any of the benefits.
 
-In the end, they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
+The result is that they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
 
 ## Counter argument 2) Actual placement of BN layer is before the activation layer
-Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. In practice, the BN is placed before the activation layer, which is then fed as input to the next layer. This means we are not guaranteed that the input distribution after the activation layer is actually still non-zero mean and unit variance.
+Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is not the case in practice, where the BN is placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
 
-## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
+## Discussion of third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
 The 2019 paper argues BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
