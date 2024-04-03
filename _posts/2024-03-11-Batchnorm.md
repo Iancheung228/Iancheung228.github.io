@@ -6,8 +6,8 @@ date: 2024-03-11
 ## Introduction
 Batch Normalization (BN) has been empirically shown to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that a NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, let alone whether BN is the unique mechanism that solves it. The original paper from 2015 [^1] attributes the success to resolving the problem of internal covariate shift (ICS). In 2019, there is a new paper [^2]that argues that instead of ICS, BN's true benefit  is in making the optimization landscape smoother.
 
-[^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.] (https://arxiv.org/abs/1502.03167)
-[^2]: [Shibani Santurkar, "How Does Batch Normalization Help Optimization", 2019.] (https://arxiv.org/pdf/1805.11604.pdf)
+[^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.](https://arxiv.org/abs/1502.03167)
+[^2]: [Shibani Santurkar, "How Does Batch Normalization Help Optimization", 2019.](https://arxiv.org/pdf/1805.11604.pdf)
 
 In this blog, we will go through the list of items:
 <ol>
@@ -236,10 +236,3 @@ As a result, we can use a larger learning rate with faster convergence.
 
 
 
-<!-- MathJax -->
-
-<script type="text/javascript"
-
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-
-</script>
