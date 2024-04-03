@@ -216,7 +216,7 @@ The key takeaway is that without batch norm, the convergence behavior is **i)** 
 
 On the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
 
-### Now with BN:
+### Now with BN, the loss landscape looks like:
 
 <div style="text-align:center;">
   <img src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/18ad2903-c647-4a11-9eb2-7b2670e65908" style="max-width:50%;" alt="Description of the image">
@@ -227,7 +227,7 @@ Applying batch norm smoothens the loss landscape, and the gradient of the loss s
 
 As a result, we can use a larger learning rate with faster convergence.
 
-
+### Reference/Appendix
 
 
 
