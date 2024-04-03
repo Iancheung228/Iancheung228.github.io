@@ -1,6 +1,6 @@
 ---
 title: BatchNorm
-date: 2024-03-11
+date: 2024-04-01
 ---
 
 ## Introduction
