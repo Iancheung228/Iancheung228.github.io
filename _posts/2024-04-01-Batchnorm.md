@@ -229,6 +229,13 @@ As a result, we can use a larger learning rate with faster convergence.
 ### Reference/Appendix
 
 
+<!-- MathJax -->
+
+<script type="text/javascript"
+
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+
+</script>
 
 
 
