@@ -12,7 +12,7 @@ Goal of post:
 
 Let's walk through what training one single piece of training data in a transformer looks like.
 
-In NLP a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, called the context_length. We also have access to a pretrained database of vocabulary. You can think of this vocab database as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English Dictionary, however, instead of defining a word by other words, we define a word by a vector of length embed_dim (non-contextual information). It is important to note that although this vector contains valuable information about the word when considered along, language is a very complex system where the meaning of a word in a sentence changes based on neighbouring words, or as we might call it, the context. Transformer aims to learn a richer vector representation, based on the context where this word appears in.
+In NLP a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, called the context_length. We also have access to a pretrained database of vocabulary. You can think of this vocab database as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English Dictionary, however, instead of defining a word by other words, we define a word by a vector of length embed_dim (non-contextual information). It is important to note that although this vector contains valuable information about the word when considered alone, language is a very complex system where the meaning of a word in a sentence changes based on neighbouring words, or as we might call it, the context. Transformer aims to learn a richer vector representation, based on the context where this word appears in.
 
 ## data manipulation
 The early bird eats the worm.
@@ -33,16 +33,34 @@ Embed_dim =
 Head_size =
 Num_head =
 
+X
+Wq
+Wk
+Wv
 
 
+
+Elementwise non-linearity
 ## Multiple attention heads
+Allows each head to learn different relationships between the sequence.
+Requires Embed_dim % Num_head = 0
 
-Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head.
+We split the 1)Query, 2)Key, and 3)Value matrices into num_head parts. The parameters in each of the multihead attentions are learned independently. Note the attention matrix from each multi-head attention is proportionally smaller. We would concatenate all these attention matrices at the end.
+
+Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
+
+The attention block has dimension (context_len, embed_dim)
 
 ## Self-projection layer
+(embed_dim, embed_dim)
 
+## residual layer
+x = x + (context_len, embed_dim)
 ## feedforward layer
+takes it from embed_dim to 4*embed_dim then back to embed_dim
 
+## logit layer
+takes (context_len, embed_dim) to (context_len, vocab_size)
 
 
 
