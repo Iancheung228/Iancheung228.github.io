@@ -8,9 +8,11 @@ Batch Normalization (BN) has been empirically shown to allow deep neural nets (N
 
 
 
-$$ vocab_10892$$ 
-$$ vocab_11257$$
-$$ vocab_8438$$
+$$ vocab_{10892}$$ 
+
+$$ vocab_{11257}$$
+
+$$ vocab_{8438}$$
 
 
 [^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.](https://arxiv.org/abs/1502.03167)
