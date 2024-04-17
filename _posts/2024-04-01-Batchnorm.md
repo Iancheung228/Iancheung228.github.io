@@ -8,11 +8,9 @@ Batch Normalization (BN) has been empirically shown to allow deep neural nets (N
 
 
 
-$$ pos_{1}$$ 
+$$ softmax(xW_qW_k^Tx^T)$$ 
 
-$$ pos_{2}$$ 
 
-$$ pos_{6}$$ 
 
 
 [^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.](https://arxiv.org/abs/1502.03167)
