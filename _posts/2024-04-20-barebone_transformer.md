@@ -29,6 +29,7 @@ These are the following steps:
 
 <img width="774" alt="Screenshot 2024-04-20 at 6 19 44 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8da61052-a4dc-42d0-85d6-dd9dc5e28417">
 
+<img width="781" alt="Screenshot 2024-04-20 at 6 34 22 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/585bdd51-167a-41a7-8c38-2a343cfd5e0c">
 
 ## Single attention head
 The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. This involves the matrix multiplication of the key, query and value matrices. Many intuitions are provided in the following sources.
