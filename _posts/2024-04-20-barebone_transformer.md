@@ -17,14 +17,14 @@ In NLP a single piece of training data is usually a sequence of words (tokens to
 
 We also have access to a pretrained database of vocabulary. You can think of this database of vocabulary as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English Dictionary, however, instead of defining a word with other English words, we define a word by a vector with dimension length embed_dim. Each one of these vectors contains valuable information about the word when considered alone, language is a very complex system where the meaning of a word in a sentence changes based on neighbouring words, or as we might call it, the context. Transformer aims to learn a richer vector representation, based on the context where this word appears in. That is the database of vocabulary contains non-contextual information while Transformer aims to learn contextual information.
 
-## data manipulation
-The early bird eats the worm.
-10892 11257 10202 4514 10892  8438
-These are the corresponding indexes in our vocabulary
+## Data preprocessing:
+Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
+These are the following steps:
+1) find index for each word
+2) retrieve the non contextual word embedding from our vocab
+3) incorporate positional information as we like to keep track of the order of words
+4) reshape
 
-We then literally look up the vector at that index. Again this vector has dimension embed_dim.
-
-We would also like to keep track of the order of the words in the sequence. We accomplish this by adding a positional encoding vector to each word.
 <img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
 <img width="774" alt="Screenshot 2024-04-20 at 6 19 44 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8da61052-a4dc-42d0-85d6-dd9dc5e28417">
@@ -61,7 +61,7 @@ The attention block has dimension (context_len, embed_dim)
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-<img width="997" alt="Screenshot 2024-04-20 at 6 23 23 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/0eed6ecf-a23c-4f7d-9107-c4abf85104c4">
+<img width="781" alt="Screenshot 2024-04-20 at 6 34 22 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/d2b4dd9a-6763-4b14-8555-0196e6a3561b">
 
 
 
