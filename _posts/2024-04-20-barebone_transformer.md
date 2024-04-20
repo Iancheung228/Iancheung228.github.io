@@ -61,7 +61,8 @@ The attention block has dimension (context_len, embed_dim)
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-![Uploading Screenshot 2024-04-20 at 6.23.23 PM.png…]()
+<img width="997" alt="Screenshot 2024-04-20 at 6 23 23 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/0eed6ecf-a23c-4f7d-9107-c4abf85104c4">
+
 
 
 ## Self-projection layer
