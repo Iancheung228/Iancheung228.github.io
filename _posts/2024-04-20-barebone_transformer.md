@@ -59,6 +59,11 @@ Note that in multiple attention heads, the model has the same number of paramete
 
 The attention block has dimension (context_len, embed_dim)
 
+<img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
+
+![Uploading Screenshot 2024-04-20 at 6.23.23 PM.png…]()
+
+
 ## Self-projection layer
 (embed_dim, embed_dim)
 
