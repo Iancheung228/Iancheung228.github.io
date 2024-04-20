@@ -1,6 +1,6 @@
 ---
 title: transformer
-date: 2024-04-01
+date: 2024-04-20
 ---
 
 ## Introduction
@@ -10,9 +10,11 @@ Goal of post:
 2) TBD
 
 
-Let's walk through what training one single piece of training data in a transformer looks like.
+Let's walk through what training 1 iteration on a single piece of data in a transformer looks like. In practice, we will of course train on a batch of data.
 
-In NLP a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, called the context_length. We also have access to a pretrained database of vocabulary. You can think of this vocab database as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English Dictionary, however, instead of defining a word by other words, we define a word by a vector of length embed_dim (non-contextual information). It is important to note that although this vector contains valuable information about the word when considered alone, language is a very complex system where the meaning of a word in a sentence changes based on neighbouring words, or as we might call it, the context. Transformer aims to learn a richer vector representation, based on the context where this word appears in.
+In NLP a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, called the context_length. A longer context_length means the model has a larger RAM.
+
+We also have access to a pretrained database of vocabulary. You can think of this database of vocabulary as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English Dictionary, however, instead of defining a word with other English words, we define a word by a vector with dimension length embed_dim. Each one of these vectors contains valuable information about the word when considered alone, language is a very complex system where the meaning of a word in a sentence changes based on neighbouring words, or as we might call it, the context. Transformer aims to learn a richer vector representation, based on the context where this word appears in. That is the database of vocabulary contains non-contextual information while Transformer aims to learn contextual information.
 
 ## data manipulation
 The early bird eats the worm.
@@ -37,7 +39,9 @@ X
 Wq
 Wk
 Wv
+<img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
+<img width="787" alt="Screenshot 2024-04-20 at 5 53 43 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e673c07c-5057-4c7d-a691-c40dbd855300">
 
 
 Elementwise non-linearity
