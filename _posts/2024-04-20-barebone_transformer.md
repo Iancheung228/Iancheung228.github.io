@@ -25,6 +25,10 @@ These are the corresponding indexes in our vocabulary
 We then literally look up the vector at that index. Again this vector has dimension embed_dim.
 
 We would also like to keep track of the order of the words in the sequence. We accomplish this by adding a positional encoding vector to each word.
+<img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
+
+<img width="774" alt="Screenshot 2024-04-20 at 6 19 44 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8da61052-a4dc-42d0-85d6-dd9dc5e28417">
+
 
 ## Single attention head
 The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. This involves the matrix multiplication of the key, query and value matrices. Many intuitions are provided in the following sources.
@@ -40,10 +44,8 @@ X
 Wq
 Wk
 Wv
-<img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
-<img width="800" alt="Screenshot 2024-04-20 at 6 14 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/bd01ea5f-0ba9-4717-9092-f7e97b8c89bb">
-
+<img width="854" alt="Screenshot 2024-04-20 at 6 15 05 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c8adc98c-7bc0-41ae-98f8-eaa2952c2c1f">
 
 
 Elementwise non-linearity
