@@ -27,12 +27,11 @@ These are the following steps:
 
 <img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
-<img width="774" alt="Screenshot 2024-04-20 at 6 19 44 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/8da61052-a4dc-42d0-85d6-dd9dc5e28417">
-
 <img width="781" alt="Screenshot 2024-04-20 at 6 34 22 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/585bdd51-167a-41a7-8c38-2a343cfd5e0c">
+Now the raw input is preprocessed and is ready to be fed into our transformer model.
 
-## Single attention head
-The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. This involves the matrix multiplication of the key, query and value matrices. Many intuitions are provided in the following sources.
+## Single attention head:
+The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves the matrix multiplication of the key, query and value matrices. Many intuitions are provided in the following sources for interested readers.
 
 definition
 Batch_size = 1
@@ -41,10 +40,10 @@ Embed_dim =
 Head_size =
 Num_head =
 
-X
-Wq
-Wk
-Wv
+X = 
+Wq = 
+Wk = 
+Wv = 
 
 <img width="854" alt="Screenshot 2024-04-20 at 6 15 05 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c8adc98c-7bc0-41ae-98f8-eaa2952c2c1f">
 
