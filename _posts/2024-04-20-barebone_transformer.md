@@ -42,7 +42,8 @@ Wk
 Wv
 <img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
-<img width="796" alt="Screenshot 2024-04-20 at 6 12 09 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/7eecc501-4c02-4817-8d29-3f764e82dfda">
+<img width="800" alt="Screenshot 2024-04-20 at 6 14 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/bd01ea5f-0ba9-4717-9092-f7e97b8c89bb">
+
 
 
 Elementwise non-linearity
