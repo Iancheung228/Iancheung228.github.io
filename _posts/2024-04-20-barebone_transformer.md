@@ -46,6 +46,16 @@ Embed_dim = 128
 Head_size = 64
 Num_head = 2
 
+
+| Variable | Description | In this post |
+| --- | --- | --- |
+| `Batch_size` |  | 1 |
+| `Context_len` |  | 6 |
+| `Embed_dim` |  | 128 |
+| `Head_size` |  | 64 |
+| `Num_head` |  | 2 |
+
+
 - X = post-processed data
 - Wq = Query matrix
 - Wk = Key matrix 
@@ -87,12 +97,18 @@ Note that in multiple attention heads, the model has the same number of paramete
 
 x = x + (context_len, embed_dim)
 
-We add
-## 2) feedforward layer
-takes it from embed_dim to 4*embed_dim then back to embed_dim
+Recall, that the final output of the Multihead attention head is an attention matrix that has undergone a linear transformation layer. We will take that and do matrix addition with the input matrix. Note both have the same dimensionality of (context_len, embed_dim).
 
-## logit layer
-takes (context_len, embed_dim) to (context_len, vocab_size)
+As a quick recap, we have the non-contextual vector embedding of each word, we are modifying our understanding of this word by adding contextual vector embedding, based on what the multi-attention head has learnt.
+
+## 2) feedforward layer
+We then take the output from the last step and pass it through a feedforward layer. The significance of this step is to introduce non-linearity to our transformer model.
+
+
+Specifically, takes it from embed_dim to 4*embed_dim then back to embed_dim
+
+## 3) logit layer
+Finally, this layer takes input of dimension (context_len, embed_dim) and applies a linear layer with softmax to output a matrix of dimension (context_len, vocab_size).
 
 
 
