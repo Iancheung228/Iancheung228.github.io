@@ -29,11 +29,6 @@ These are the following steps:
 </ol>
 
 
-1) find index for each word
-2) retrieve the non contextual word embedding from our vocab
-3) incorporate positional information as we like to keep track of the order of words
-4) reshape
-
 <img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
 
 <img width="781" alt="Screenshot 2024-04-20 at 6 34 22 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/585bdd51-167a-41a7-8c38-2a343cfd5e0c">
@@ -49,10 +44,10 @@ Embed_dim =
 Head_size =
 Num_head =
 
-X = 
-Wq = 
-Wk = 
-Wv = 
+- X = 1
+- Wq = 2
+- Wk =3 
+- Wv = 4 
 
 <img width="854" alt="Screenshot 2024-04-20 at 6 15 05 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c8adc98c-7bc0-41ae-98f8-eaa2952c2c1f">
 
