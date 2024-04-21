@@ -48,7 +48,7 @@ Num_head = 2
 - Wk = Key matrix 
 - Wv = Value matrix 
 
-<img width="854" alt="Screenshot 2024-04-20 at 6 15 05 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c8adc98c-7bc0-41ae-98f8-eaa2952c2c1f">
+<img width="816" alt="Screenshot 2024-04-21 at 10 43 21 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/d69b6cda-5cde-41f9-a6c7-844cd2eaf254">
 
 
 
@@ -57,21 +57,21 @@ Breakdown of the single-attention head
   <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
   <li> Apply softmax to get a probability distribution that sums to 1. From this matrix, we can read off how much weight is given to the other words in the context. </li>
   <li> Matrix multiply with value matrix to get attention vector which has size (context_len, embed_dim)</li>
-  <li> Vector addition this attention vector to our original non-contextual word embedding in residual</li>
+  <li> Matrix multiply with a linear layer </li>
 </ol>
 
-
+Vector addition this attention vector to our original non-contextual word embedding in residual
 
 Elementwise non-linearity
 
 ## 1a) Multiple attention heads
-In practice, we are motivated to learn many of these single-attention heads (parameterized by the Query, Key and Value matrices). Each head will learn a different aspect of the complex relationship in the original sequence. Obviously we now have an additional hyperparameter which is num_head, for this illustration purpose let's set it to 2.
+In practice, we are motivated to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices). Each head will learn a different aspect of the complex relationship in the original sequence. Obviously, we now have an additional hyperparameter which is **num_head**. For this post, let's set it to 2.
 
 **Requires Embed_dim % Num_head = 0**
 
-Now that we have one more head, contrary to the most naive idea of simply incorporating 1 more of Q,K,V matrices, we can leverage the idea of low rankedness.
+Now that we have one more head, contrary to the most naive idea of simply incorporating 1 more of Q,K,V matrices which involves 100% more parameters to learn, we leverage the idea of low rankedness.
 
-Specifically, we split the **1)Query**, **2)Key**, and **3)Value** matrices into num_head (2) parts. The parameters in each of the multihead attentions are learned independently. Note the attention matrix from each multi-head attention is proportionally smaller. We would have an extra step to concatenate all these attention matrices at the end.
+Specifically, we split the **1)Query**, **2)Key**, and **3)Value** matrices into num_head (2 in this post) parts. The parameters in each of the multihead attentions are learned independently. Note the attention matrix outputed from each single-head attention is proportionally smaller. We have an extra step to concatenate all these attention matrices at the end.
 
 Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
 
@@ -79,7 +79,7 @@ Note that in multiple attention heads, the model has the same number of paramete
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-<img width="781" alt="Screenshot 2024-04-20 at 6 34 22 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/d2b4dd9a-6763-4b14-8555-0196e6a3561b">
+<img width="996" alt="Screenshot 2024-04-21 at 10 43 40 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/75ea073b-99ed-49f7-988b-e53980f6cf33">
 
 
 
