@@ -34,7 +34,7 @@ These are the following steps to preprocess our data:
 Now the raw input is preprocessed and is ready to be fed into our transformer model.
 
 ## Single attention head:
-The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves the matrix multiplication of the key, query and value matrices. There are already many great resources on interpreting these mechanisms.
+The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves the matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like :.
 
 definition
 Batch_size = 1
@@ -50,14 +50,20 @@ Num_head = 2
 
 <img width="854" alt="Screenshot 2024-04-20 at 6 15 05 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/c8adc98c-7bc0-41ae-98f8-eaa2952c2c1f">
 
-- Matrix multiplication between query and key
-- output size is (context_len, context_len) and we apply softmax to get probability distribution. From this matrix, we can read off how much weight is given to the other words in the context.
-- matrix multiply with value matrix to get attention vector
-- added to original non-contextual word embedding in residual
+
+
+Breakdown of the single-attention head
+<ol>
+  <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
+  <li> Apply softmax to get a probability distribution that sums to 1. From this matrix, we can read off how much weight is given to the other words in the context. </li>
+  <li> Matrix multiply with value matrix to get attention vector which has size (context_len, embed_dim)</li>
+  <li> Vector addition this attention vector to our original non-contextual word embedding in residual</li>
+</ol>
+
+
 
 Elementwise non-linearity
 
-The attention block has dimension (context_len, embed_dim)
 ## 1a) Multiple attention heads
 In practice, we are motivated to learn many of these single-attention heads (parameterized by the Query, Key and Value matrices). Each head will learn a different aspect of the complex relationship in the original sequence. Obviously we now have an additional hyperparameter which is num_head, for this illustration purpose let's set it to 2.
 
