@@ -1,23 +1,27 @@
 ---
 layout: post
-title: transformer
+title: Introduction to coding up barebone transformer
 date: 2024-04-20
 ---
 
 ## Goal of this post:
 1) Visual walkthrough of coding up a barebone transformer
 
-The majority of this post will be dedicated to providing a gentle visual introduction to each core mechanism within a transformer model. To focus on the core aspect of the transformer, this post will go through what training 1 iteration on a single piece of data in a transformer looks like. In practice, we will of course train on a batch of data.
+The majority of this post will be dedicated to providing a gentle visual introduction to each core mechanism within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. In practice, we usually train on a batch of data.
 
 ## Introduction to the NLP problem
 A common problem a transformer model can solve is predicting the next word that appears given a sequence of input.
 
-In NLP a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, called the context_length. A longer context_length means the model is now able to leverage words from the distant past when predicting the next word.
+In Natural Language Processing (NLP) a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, denoted as the **context_length**. A longer context_length means the model can leverage words from the distant past when predicting the next word.
 
-We also have access to a pretrained database of vocabulary. You can think of this database of vocabulary as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English dictionary however, instead of defining a word with other English words, we 'define' a word by a vector with dimension **embed_dim**. Each vector contains valuable information about the word when considered alone. However, language is a very complex system where the meaning of a word changes based on how it is used in a sentence. Transformer aims to learn a richer vector representation of each word, based on the context where this word appears. That is the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.
+We also have access to a pretrained database of vocabulary. You can think of this database of vocabulary as a matrix that contains every word in the Oxford English dictionary. Unlike the Oxford English dictionary however, instead of defining a word with other English words, we 'define' a word by a vector with dimension **embed_dim**. That is, of course, how a machine understands a word. 
+
+Considered alone, each of these vectors contains valuable information about the word. However, language is a very complex system where the meaning of a word changes based on how it is used in a sentence. Transformer is designed to learn a richer vector representation of each word, based on the context where this word appears. That is the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.
 
 ## 0) Data preprocessing:
 Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
+
+
 These are the following steps to preprocess our data:
 
 <ol>
@@ -37,25 +41,18 @@ These are the following steps to preprocess our data:
 Now the raw input is preprocessed and is ready to be fed into our transformer model.
 
 ## Single attention head:
-The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves the matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like :.
-
-definition
-Batch_size = 1
-Context_len = 6
-Embed_dim = 128
-Head_size = 64
-Num_head = 2
+The attention head is where the magic happens. This is where the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like :.
 
 
 | Variable | Description | In this post |
 | --- | --- | --- |
-| `Batch_size` |  | 1 |
-| `Context_len` |  | 6 |
-| `Embed_dim` |  | 128 |
-| `Head_size` |  | 64 |
-| `Num_head` |  | 2 |
+| `Batch_size` | The number of training examples utilized in one iteration | 1 |
+| `Context_len` | The length of the input sequence to the model | 6 |
+| `Embed_dim` | Dimension of the word representation | 128 |
+| `Num_head` | Number of attention heads | 2 |
+| `Head_size` | dimension equals to (Embed_dim / Num_head) | 64 |
 
-
+### Notation:
 - X = post-processed data
 - Wq = Query matrix
 - Wk = Key matrix 
@@ -65,7 +62,7 @@ Num_head = 2
 
 
 
-Breakdown of the single-attention head
+### Breakdown of the single-attention head
 <ol>
   <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
   <li> Apply softmax to get a probability distribution that sums to 1. From this matrix, we can read off how much weight is given to the other words in the context. (we omit the scaled dot product attention in this post to keep it simple) </li>
@@ -74,8 +71,6 @@ Breakdown of the single-attention head
 </ol>
 
 Vector addition this attention vector to our original non-contextual word embedding in residual
-
-Elementwise non-linearity
 
 ## 1a) Multiple attention heads
 In practice, we are motivated to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices). Each head will learn a different aspect of the complex relationship in the original sequence. We now have an additional hyperparameter which is **num_head**. For this post, let's set it to 2.
