@@ -20,6 +20,15 @@ We also have access to a pretrained database of vocabulary. You can think of thi
 ## Data preprocessing:
 Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
 These are the following steps:
+
+<ol>
+  <li>find index for each word</li>
+  <li> retrieve the non contextual word embedding from our vocab</li>
+  <li> incorporate positional information as we like to keep track of the order of words</li>
+  <li> reshape</li>
+</ol>
+
+
 1) find index for each word
 2) retrieve the non contextual word embedding from our vocab
 3) incorporate positional information as we like to keep track of the order of words
