@@ -42,7 +42,7 @@ These are the following steps to preprocess our data:
 
 At this point, we have preprocessed the raw input and it is now ready to be fed into our transformer model.
 
-## Single attention head:
+## 1a) Single attention head:
 The attention head is where the model learns the richer contextual embedding for each word. Specifically, the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like :.
 
 
@@ -75,7 +75,7 @@ The attention head is where the model learns the richer contextual embedding for
 
 Vector addition this attention vector to our original non-contextual word embedding in residual
 
-## 1a) Multiple attention heads
+## 1b) Multiple attention heads
 In practice, there is a huge incentive to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices) such that each head will learn a different aspect of the complex relationship in the original sequence. With multiple heads, we now have an additional hyperparameter denoted: **num_head**. For this post, let's set it to 2 for simplicity.
 
 **Note: Requires Embed_dim % Num_head = 0**
@@ -85,7 +85,8 @@ The multiple attention heads operate largely similarly to the single head except
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-<img width="996" alt="Screenshot 2024-04-21 at 10 43 40 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/75ea073b-99ed-49f7-988b-e53980f6cf33">
+<img width="1004" alt="Screenshot 2024-04-28 at 12 46 29 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/07ccdefb-8666-4ca0-ada9-a3b84c605f7c">
+
 
 Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
 
