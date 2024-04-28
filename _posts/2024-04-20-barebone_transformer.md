@@ -19,6 +19,9 @@ In addition, we also have access to a pretrained database of vocabulary. You can
 
 Considered alone, each of these vectors already contains valuable information about the word. However, the meaning of a word changes based on the context. For example, the sample word "Harry" refers to different things if the broader passage is talking about the Pricne vs the fictional character. Transformer is designed to learn a richer vector representation of each word, based on the context where this word appears. **That is the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.**
 
+### Positional encoding vector
+The position in which the words appear in the sequence is also important. We usually add something called a positional encoding vector to each word in the sequence. We can take it for granted that this will give the model all information needed to figure out the position of the particular word within the sequence. For general purposes, we can assume the positional encoding vector is deterministic and could be retrieved from a position embedding table.
+
 ## 0) Data preprocessing:
 Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
 
@@ -87,7 +90,7 @@ The multiple attention heads operate largely similarly to the single head except
 Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
 
 
-## residual layer
+## Residual layer
 
 x = x + (context_len, embed_dim)
 
@@ -95,15 +98,28 @@ Recall, the final output of the Multihead attention head is an attention matrix 
 
 As a quick recap, we have the non-contextual vector embedding of each word, we are modifying our understanding of this word by adding contextual vector embedding, based on what the multi-attention head has learnt.
 
-## 2) feedforward layer
+## 2) Feedforward layer
 We then take the output from the last step and pass it through a feedforward layer. The significance of this step is to introduce non-linearity to our transformer model.
 
 
 Specifically, takes it from embed_dim to 4*embed_dim then back to embed_dim
 
-## 3) logit layer
-Finally, this layer takes input of dimension (context_len, embed_dim) and applies a linear layer with softmax to output a matrix of dimension (context_len, vocab_size).
+## 3) language_model_head_linear_layer + softmax
+Finally, recall that our goal has always been to predict the next word, given the sequence. Sensibly, we would want our final layer to output a matrix of size (context_len, vocab_size). The reason is, each row should be the probability distribution of the predicted next word after the current word. Of course, each word in our database of vocabulary has a non-negative probability as the next word.
 
+
+Specifically, this layer takes an input of dimension (context_len, embed_dim) and applies a linear layer and softmax to output a matrix of dimension (context_len, vocab_size).
+
+
+## Walk through of code
+token is character
+vocab size is 65
+
+lookup character to index using char2idx
+
+B is short hand for batch
+T is short hand for context_len
+C is short hand for embed_dim
 
 
 
