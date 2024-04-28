@@ -33,9 +33,9 @@ These are the following steps to preprocess our data:
 </ol>
 
 
-<img width="813" alt="Screenshot 2024-04-20 at 5 53 15 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2c4dab14-4d8e-414f-b024-dced839813f7">
+<img width="827" alt="Screenshot 2024-04-27 at 6 54 07 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/870b077e-d15d-465e-bd54-62ad0ab19326">
 
-<img width="791" alt="Screenshot 2024-04-21 at 11 23 48 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/704abffa-dde4-45fb-afa1-d55a29d57197">
+<img width="815" alt="Screenshot 2024-04-27 at 6 54 18 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/968d8d0a-c61e-4a47-b8c7-53ddf6c182a1">
 
 At this point, we have preprocessed the raw input and it is now ready to be fed into our transformer model.
 
@@ -57,7 +57,8 @@ The attention head is where the model learns the richer contextual embedding for
 - Wk = Key matrix 
 - Wv = Value matrix 
 
-<img width="816" alt="Screenshot 2024-04-21 at 10 43 21 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/d69b6cda-5cde-41f9-a6c7-844cd2eaf254">
+
+<img width="852" alt="Screenshot 2024-04-27 at 6 54 34 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/f682f05e-35a6-4b42-82bc-b8e52b1b5a71">
 
 
 
