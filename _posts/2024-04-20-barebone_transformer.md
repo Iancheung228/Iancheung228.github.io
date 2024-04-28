@@ -85,28 +85,29 @@ The multiple attention heads operate largely similarly to the single head except
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-<img width="1004" alt="Screenshot 2024-04-28 at 12 46 29 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/07ccdefb-8666-4ca0-ada9-a3b84c605f7c">
+<img width="1001" alt="Screenshot 2024-04-28 at 4 20 39 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/4b92d6bf-a869-4d08-9fda-05c0af7a80b7">
+
 
 
 Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
 
 
-## Residual layer
+## Residual connection
 
-x = x + (context_len, embed_dim)
+Recall, the final output of the multiple attention heads layer is an attention matrix that has undergone a linear transformation layer. We will take that and do matrix addition with our initial post-processed data (matrix X). Note both matrices have the same dimensionality of (context_len, embed_dim).
 
-Recall, the final output of the Multihead attention head is an attention matrix that has undergone a linear transformation layer. We will take that and do matrix addition with the post-processed data stored as the matrix X. Note both have the same dimensionality of (context_len, embed_dim).
-
-As a quick recap, we have the non-contextual vector embedding of each word, we are modifying our understanding of this word by adding contextual vector embedding, based on what the multi-attention head has learnt.
+As a quick recap, X contains the non-contextual vector embedding of each word, we are modifying our understanding of each word by adding our new contextual vector embedding, based on what the multi-attention head has learnt.
 
 ## 2) Feedforward layer
-We then take the output from the last step and pass it through a feedforward layer. The significance of this step is to introduce non-linearity to our transformer model.
+We then take the output from the last step and pass it through a feedforward layer. The importance of this step is to introduce **non-linearity** to our transformer model.
 
 
-Specifically, takes it from embed_dim to 4*embed_dim then back to embed_dim
+Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim then project back to embed_dim.
 
-## 3) language_model_head_linear_layer + softmax
-Finally, recall that our goal has always been to predict the next word, given the sequence. Sensibly, we would want our final layer to output a matrix of size (context_len, vocab_size). The reason is, each row should be the probability distribution of the predicted next word after the current word. Of course, each word in our database of vocabulary has a non-negative probability as the next word.
+## 3) Language_model_head_linear_layer + softmax
+Finally, recall that our goal has always been to predict the next word, given the entire sequence.  Sensibly, we would want our final layer to output a vector of size vocab_size. We will apply softmax to this vector so that we can interpret it as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
+
+Practically, instead of being a vector of size vocab_size, we actually work with a matrix of size (context_len, vocab_size). That is for each word in our sequence, we are predicting the next word that comes after. Additional information could be found if you search for causal attention head.
 
 
 Specifically, this layer takes an input of dimension (context_len, embed_dim) and applies a linear layer and softmax to output a matrix of dimension (context_len, vocab_size).
