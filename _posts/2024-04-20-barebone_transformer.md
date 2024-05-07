@@ -1,13 +1,11 @@
 ---
 layout: post
-title: Introduction to coding up barebone transformer
+title: Barebone transformer walkthrough
 date: 2024-04-20
 ---
 
 ## Goal of this post:
-1) Visual walkthrough of coding up a barebone transformer
-
-The majority of this post will be dedicated to providing a gentle visual introduction to each core mechanism within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. In practice, we usually train on a batch of data.
+The goal of this post is to provide a gentle visual introduction to each core mechanism within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. In practice, we usually train on a batch of data.
 
 ## Introduction to the NLP problem
 A common problem a transformer model can solve is predicting the next word that appears given a sequence of input.
