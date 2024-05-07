@@ -80,7 +80,7 @@ In practice however, we do not use a single attention head. There is a huge ince
 
 **Note: Requires Embed_dim % Num_head = 0**
 
-The multiple attention heads operate largely similarly to the single head except that the size of the Query, Key and Value Matrices have now shrunk. Specifically, we partition the **1)Query**, **2)Key**, and **3)Value** matrices into num_head parts. In the diagram, each of the 3, full-sized matrices is partitioned into **a) green boxed** and **b) pink boxed** portions. Virtually, we now have 2 single-head attention blocks, where the parameters in each single-head are learned independently. Note the attention matrix output from each single-head attention is proportionally smaller. We have an extra final step in between **step 3** and **step 4** to concatenate all these attention matrices into one of original size.
+The multiple attention heads operate largely similarly to the single head except that the size of the Query, Key and Value Matrices have now shrunk. Specifically, we partition the **1)Query**, **2)Key**, and **3)Value** matrices into num_head parts. In the diagram, each of the 3, full-sized matrices is partitioned into **a) green boxed** and **b) pink boxed** portions. Virtually, we now have 2 single-head attention blocks, where the parameters in each single-head are learned independently. Note the attention matrix output from each single-head attention is proportionally smaller. We have an extra final step in between **step 3** and **step 4** to concatenate all these attention matrices into one of the original size.
 
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
@@ -88,23 +88,22 @@ The multiple attention heads operate largely similarly to the single head except
 <img width="1016" alt="Screenshot 2024-05-06 at 8 43 17 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/ba46fe88-982c-4c03-854d-7217518604e9">
 
 
-Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
+Aside: Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to the low-rank property.
 
 
-## Residual connection
+## 2) Residual connection
 
-Recall, the final output of the multiple attention heads layer is an attention matrix that has undergone a linear transformation layer. We will take that and do matrix addition with our initial post-processed data (matrix X). Note both matrices have the same dimensionality of (context_len, embed_dim).
+Recall, the final output from the previous step is an attention matrix that has undergone a linear transformation. We will take that and add it to our initial post-processed data (output of step 0). Note both matrices have the same dimensionality of (context_len, embed_dim).
 
-As a quick recap, X contains the non-contextual vector embedding of each word, we are modifying our understanding of each word by adding our new contextual vector embedding, based on what the multi-attention head has learnt.
+As a quick recap, X contains the non-contextual information, and now we are adding contextual information on top of it.
 
-## 2) Feedforward layer
-We then take the output from the last step and pass it through a feedforward layer. The importance of this step is to introduce **non-linearity** to our transformer model.
+## 3) Feedforward layer
+We then take the output from step 2 and pass it through a feedforward layer. The importance of this step is to introduce **non-linearity** to our transformer model.
 
+Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim then projects it back to embed_dim.
 
-Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim then project back to embed_dim.
-
-## 3) Language_model_head_linear_layer + softmax
-Finally, recall that our goal has always been to predict the next word, given the entire sequence.  Sensibly, we would want our final layer to output a vector of size vocab_size. We will apply softmax to this vector so that we can interpret it as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
+## 4) Language_model_head_linear_layer + softmax
+Finally, recall that our goal has always been to predict the next word, given the entire sequence.  Sensibly, we would want our final layer to output a vector of probability for the next word to come. We will apply softmax to this vector so that we can interpret it as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
 
 Practically, instead of being a vector of size vocab_size, we actually work with a matrix of size (context_len, vocab_size). That is for each word in our sequence, we are predicting the next word that comes after. Additional information could be found if you search for causal attention head.
 
