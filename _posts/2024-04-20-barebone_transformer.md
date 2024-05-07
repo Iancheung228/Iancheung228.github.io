@@ -85,8 +85,7 @@ The multiple attention heads operate largely similarly to the single head except
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
 
-<img width="1001" alt="Screenshot 2024-04-28 at 4 20 39 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/4b92d6bf-a869-4d08-9fda-05c0af7a80b7">
-
+<img width="1016" alt="Screenshot 2024-05-06 at 8 43 17 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/ba46fe88-982c-4c03-854d-7217518604e9">
 
 
 Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to this low-rank property.
