@@ -18,7 +18,9 @@ In addition, we also have access to a pretrained database of vocabulary. You can
 Considered alone, each of these vectors already contains valuable information about the word. However, the meaning of a word changes based on the context. For example, the word "Harry" refers to different people when the article is about the Pricne vs the fictional character. Transformer is designed to learn a richer vector representation of each word, based on the context where this word appears. **That is, the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.**
 
 ### Positional encoding vector
-The position in which the words appear in the sequence is also important. We usually add something called a positional encoding vector to each word in the sequence. For the scope of this post, we can take it for granted that this positional encoding vector will give the model all the information it needs to figure out the position of each word within our sequence. For general purposes, we can assume the positional encoding vector is deterministic and could be retrieved from a position embedding table.
+The position in which the words appear in the sequence is also important. We usually add something called a positional encoding vector to each word in the sequence. For the scope of this post, we can take it for granted that this positional encoding vector will give the model all the information it needs to figure out the position of each word within our sequence. People use a deterministic sinusoidal function as the positional encoding vector.
+
+With this quick introduction, let's dive into an example by going through one training sequence.
 
 ## 0) Data preprocessing:
 Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
@@ -28,7 +30,7 @@ These are the following steps to preprocess our data:
 
 <ol>
   <li> Find the index for each word in our database of vocabulary</li>
-  <li> Retrieve the non-contextual word embedding </li>
+  <li> Retrieve the non-contextual word embedding vector</li>
   <li> Incorporate positional information by simple vector addition</li>
   <li> Reshape (optional)</li>
 </ol>
@@ -52,8 +54,8 @@ The attention head is where the model learns the richer contextual embedding for
 | `Num_head` | Number of attention heads  | 2 |
 | `Head_size` | dimension equals to (Embed_dim / Num_head) | 64 |
 
-### Shorthand notation:
-- X = post-processed data
+### Notation for our diagrams to come:
+- X = post-processed data (output of step 0)
 - Wq = Query matrix
 - Wk = Key matrix 
 - Wv = Value matrix 
@@ -66,19 +68,19 @@ The attention head is where the model learns the richer contextual embedding for
 ### Breakdown of the single-attention head
 <ol>
   <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
-  <li> Apply softmax to get a probability distribution that sums to 1. The way to interpret the matrix is that: each row corresponds to a word, and we can tell how much other words in the sequence modify the meaning of the current word based on the weights assigned. (For simplicity, we have omitted the scaled dot product attention version in this post) </li>
-  <li> Matrix multiply with the value matrix to get attention vector which has size (context_len, embed_dim)</li>
+  <li> Apply softmax to get a probability distribution that sums to 1. The way to interpret the matrix is that: each row corresponds to a word, and we can tell how much other words in the sequence influence the meaning of the current word based on the weights assigned. (We have omitted the scaled dot product attention version in this post) </li>
+  <li> Matrix multiply with the value matrix to get the attention vector, which has size (context_len, embed_dim)</li>
   <li> Matrix multiply with a linear layer </li>
 </ol>
 
-Vector addition this attention vector to our original non-contextual word embedding in residual
+(Jumping slightly ahead, as we will see, the output of this step is our contextual word embedding, and we will add it to our original non-contextual word embedding in the residual layer.)
 
 ## 1b) Multiple attention heads
-In practice, there is a huge incentive to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices) such that each head will learn a different aspect of the complex relationship in the original sequence. With multiple heads, we now have an additional hyperparameter denoted: **num_head**. For this post, let's set it to 2 for simplicity.
+In practice however, we do not use a single attention head. There is a huge incentive to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices) so that each head will learn a different aspect of the complex relationship in the original sequence. With multiple heads, we now have an additional hyperparameter denoted: **num_head**. For this post, let's set it to 2 for simplicity.
 
 **Note: Requires Embed_dim % Num_head = 0**
 
-The multiple attention heads operate largely similarly to the single head except that the size of the Query, Key and Value Matrices have now shrunk. Specifically, we partition the **1)Query**, **2)Key**, and **3)Value** matrices into num_head parts. In the diagram, each of the 3 full-sized matrices is partitioned into **a)** green and **b)** pink portions. The parameters in each of the single-head attention are learned independently. Note the attention matrix output from each single-head attention is proportionally smaller. We have an extra step in between step **3** and **4** to concatenate all these attention matrices at the end.
+The multiple attention heads operate largely similarly to the single head except that the size of the Query, Key and Value Matrices have now shrunk. Specifically, we partition the **1)Query**, **2)Key**, and **3)Value** matrices into num_head parts. In the diagram, each of the 3, full-sized matrices is partitioned into **a) green boxed** and **b) pink boxed** portions. Virtually, we now have 2 single-head attention blocks, where the parameters in each single-head are learned independently. Note the attention matrix output from each single-head attention is proportionally smaller. We have an extra final step in between **step 3** and **step 4** to concatenate all these attention matrices into one of original size.
 
 
 <img width="1010" alt="Screenshot 2024-04-20 at 6 21 30 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/5008eedb-f438-4e7c-a8dc-ac2dfe4d37ac">
