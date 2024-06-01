@@ -43,7 +43,7 @@ These are the following steps to preprocess our data:
 At this point, we have preprocessed the raw input, which is now ready to be fed into our transformer model.
 
 ## 1a) Single attention head:
-The attention head is where the model learns the richer contextual embedding for each word. Specifically, the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like the post by [Luis Serrano](https://cohere.com/blog/what-is-attention-in-language-models).
+The attention head is where the model learns the richer contextual embedding for each word. Specifically, the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like this post by [Luis Serrano](https://cohere.com/blog/what-is-attention-in-language-models).
 
 
 | Variable | Description | In this post |
@@ -52,7 +52,7 @@ The attention head is where the model learns the richer contextual embedding for
 | `Context_len` | The length of the input sequence to the model | 6 words |
 | `Embed_dim` | Dimension of the word representation in our database of vocab | 128 |
 | `Num_head` | Number of attention heads  | 2 |
-| `Head_size` | dimension equals to (Embed_dim / Num_head) | 64 |
+| `Head_size` | Dimension (equals to (Embed_dim / Num_head)) | 64 |
 
 ### Notation for our diagrams to come:
 - X = post-processed data (output of step 0)
@@ -65,18 +65,22 @@ The attention head is where the model learns the richer contextual embedding for
 
 
 
-### Breakdown of the single-attention head
+### Breakdown of the above single-attention head diagram
+
+I had always been confused about the dimensionality of these matrix operations. I have deliberately over-annotated as I believe its a key part to understanding the full picture, and that my future self might come back to thank me.
 <ol>
   <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
   <li> Apply softmax to get a probability distribution that sums to 1. The way to interpret the matrix is that: each row corresponds to a word, and we can tell how much other words in the sequence influence the meaning of the current word based on the weights assigned. (We have omitted the scaled dot product attention version in this post) </li>
-  <li> Matrix multiply with the value matrix to get the attention vector, which has size (context_len, embed_dim)</li>
+  <li> Matrix multiply with the value matrix to get what we call in this post as : the attention vector, which has dimension (context_len, embed_dim)</li>
   <li> Matrix multiply with a linear layer </li>
 </ol>
 
 (Jumping slightly ahead, as we will see, the output of this step is our contextual word embedding, and we will add it to our original non-contextual word embedding in the residual layer.)
 
 ## 1b) Multiple attention heads
-In practice however, we do not use a single attention head. There is a huge incentive to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices) so that each head will learn a different aspect of the complex relationship in the original sequence. With multiple heads, we now have an additional hyperparameter denoted: **num_head**. For this post, let's set it to 2 for simplicity.
+In practice, however, we do not use a single attention head. There is a huge incentive to learn many of such single-attention heads (parameterized by the Query, Key and Value matrices) so that each head will learn a different aspect of the complex relationship in the original sequence. With multiple heads, we now have an additional hyperparameter denoted: **num_head**. For this post, let's set it to 2 for simplicity.
+
+A shortcoming of the single-attention head is likely that it is not very expressive when we only learn one big comprehensive set of Query, Key and Value matrices, where you can think of it as a "generalist". With multiple heads, we are facilitating the environment for more "specialists". But again this is only intuition and speculation.
 
 **Note: Requires Embed_dim % Num_head = 0**
 
@@ -90,26 +94,32 @@ The multiple attention heads operate largely similarly to the single head except
 
 Aside: Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to the low-rank property.
 
+We have now fully explained the following diagram in the original paper.
+![Screenshot 2024-06-01 at 5 26 48 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a58abe97-f1ee-4461-80f1-41e55bbd6393)
+
 
 ## 2) Residual connection
 
-Recall, the final output from the previous step is an attention matrix that has undergone a linear transformation. We will take that and add it to our initial post-processed data (output of step 0). Note both matrices have the same dimensionality of (context_len, embed_dim).
+Recall, the final output from the previous step is the attention matrix that has undergone a linear transformation. Next, we will add our initial post-processed data, X (output of step 0). Note both matrices have the same dimensionality of (context_len, embed_dim).
 
-As a quick recap, X contains the non-contextual information, and now we are adding contextual information on top of it.
+Recall, X contains the non-contextual information, and now we are adding the contextual information on top. A question worth pondering is why we decided to add those 2 vectors together instead of concatenating so the signals of both vectors remain intact?
 
 ## 3) Feedforward layer
-We then take the output from step 2 and pass it through a feedforward layer. The importance of this step is to introduce **non-linearity** to our transformer model.
+We then take the output from step 2 and pass it through a feedforward layer. The significance of this step is to introduce **non-linearity** to our transformer model.
 
-Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim then projects it back to embed_dim.
+Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim and then projects it back to embed_dim. The output of this layer has dimension (context_length, embed_dim)
 
 ## 4) Language_model_head_linear_layer + softmax
-Finally, recall that our goal has always been to predict the next word, given the entire sequence.  Sensibly, we would want our final layer to output a vector of probability for the next word to come. We will apply softmax to this vector so that we can interpret it as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
+Finally, recall that our original goal has always been to predict the next word, given the input sequence.  Sensibly, we would want our final layer to output a vector of probability for the next word to come. To accomplish this, we:
+
+<ol>
+  <li> Pass it through a linear layer which takes an input of dimension (context_len, embed_dim) and returns a matrix of dimension (context_length, vocab_size)
+  <li> Apply softmax so that it is a probability distribution
+<ol>
+
+The output matrix could be interpreted as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
 
 Practically, instead of being a vector of size vocab_size, we actually work with a matrix of size (context_len, vocab_size). That is for each word in our sequence, we are predicting the next word that comes after. Additional information could be found if you search for causal attention head.
-
-
-Specifically, this layer takes an input of dimension (context_len, embed_dim) and applies a linear layer and softmax to output a matrix of dimension (context_len, vocab_size).
-
 
 ## Walk through of code
 token is character
