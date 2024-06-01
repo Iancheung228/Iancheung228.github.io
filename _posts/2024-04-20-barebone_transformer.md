@@ -5,25 +5,25 @@ date: 2024-04-20
 ---
 
 ## Goal of this post:
-The goal of this post is to provide a gentle visual introduction to each core mechanism within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. In practice, we usually train on a batch of data.
+The goal of this post is to provide a gentle, visual introduction to the core mechanisms within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. Of course, in practice, we usually train on a batch of data.
 
-## Introduction to the NLP problem
+## The problem
 A common problem a transformer model can solve is predicting the next word that appears given a sequence of input.
 
 In Natural Language Processing (NLP) a single piece of training data is usually a sequence of words (tokens to be exact). The length of this sequence is determined by a hyperparameter we choose, denoted as the **context_length**. A longer context_length means the model have access to words from further back in time when attempting to predict the next word.
 
 ### Data base of vocabulary
-In addition, we also have access to a pretrained database of vocabulary. You can think of this database of vocabulary as a matrix that contains every word in the Oxford English dictionary. However, unlike the Oxford English Dictionary, we 'define' each word by a vector of dimension **embed_dim**, instead of defining a word with other English words. 
+In addition, we also have access to a pretrained database of vocabulary. You can think of this database of vocabulary stored as a matrix that contains every word in the Oxford English dictionary. However, unlike the Oxford English Dictionary, the definition of a word is defined by a vector of dimension **embed_dim**, instead of defining a word with other English words. 
 
-Considered alone, each of these vectors already contains valuable information about the word. However, the meaning of a word changes based on the context. For example, the word "Harry" refers to different people when the article is about the Pricne vs the fictional character. Transformer is designed to learn a richer vector representation of each word, based on the context where this word appears. **That is, the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.**
+Considered alone, each of these vectors already contains valuable information about the word. However, the meaning of a word changes based on the context. For example, the word "Harry" refers to 2 completely different people when the article is about the Pricne versus the fictional character. The attention mechanism is designed to learn a richer vector representation of each word, based on the context where this word appears. **That is, the database of vocabulary contains non-contextual information while the transformer aims to learn contextual information.**
 
 ### Positional encoding vector
-The position in which the words appear in the sequence is also important. We usually add something called a positional encoding vector to each word in the sequence. For the scope of this post, we can take it for granted that this positional encoding vector will give the model all the information it needs to figure out the position of each word within our sequence. People use a deterministic sinusoidal function as the positional encoding vector.
+The position in which the words appear in the sequence is also important. We usually add a positional encoding vector to each word in the sequence. For the scope of this post, we can take it for granted that this positional encoding vector will give the model all the information it needs to figure out the position of each word within our sequence. The original transformer paper uses a deterministic sinusoidal function as the positional encoding vector.
 
-With this quick introduction, let's dive into an example by going through one training sequence.
+With these preliminaries in mind, let's dive into an example by going through one training sequence.
 
 ## 0) Data preprocessing:
-Suppose our raw input to our transformer model is the sequence: The early bird eats the worm.
+Suppose our raw input to our transformer model is the sequence: ** The early bird eats the worm. **
 
 
 These are the following steps to preprocess our data:
@@ -40,10 +40,10 @@ These are the following steps to preprocess our data:
 
 <img width="815" alt="Screenshot 2024-04-27 at 6 54 18 PM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/968d8d0a-c61e-4a47-b8c7-53ddf6c182a1">
 
-At this point, we have preprocessed the raw input and it is now ready to be fed into our transformer model.
+At this point, we have preprocessed the raw input, which is now ready to be fed into our transformer model.
 
 ## 1a) Single attention head:
-The attention head is where the model learns the richer contextual embedding for each word. Specifically, the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like :.
+The attention head is where the model learns the richer contextual embedding for each word. Specifically, the model learns how much, the other words in the sequence should influence the meaning of the current word. On a high level, this involves a matrix multiplication of the key, query and value matrices. There are many great resources on interpreting these mechanisms, like the post by [Luis Serrano](https://cohere.com/blog/what-is-attention-in-language-models).
 
 
 | Variable | Description | In this post |
