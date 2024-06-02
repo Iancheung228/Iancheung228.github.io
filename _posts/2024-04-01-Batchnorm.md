@@ -14,11 +14,11 @@ Batch Normalization (BN) has been empirically shown to allow deep neural nets (N
 [^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.](https://arxiv.org/abs/1502.03167)
 [^2]: [Shibani Santurkar, "How Does Batch Normalization Help Optimization", 2019.](https://arxiv.org/pdf/1805.11604.pdf)
 
-In this article, we will go through the list of items:
 1. What is batch norm and how to implement a simple neural net with a batch norm layer
 2. First benefit: preventing dead or saturated units
-3a. Second benefit: Resolving the Internal Covariate Shift problem (and why this is not entirely true) (2015 paper)
-    3b. Nested item
+3. Second benefit: Resolving the Internal Covariate Shift problem (and why this is not entirely true) (2015 paper)
+    a. 1st counter argument
+    b. 2nd counter argument
 4. Third benefit: Smoothening the loss landscape (2019 paper)
 <br/><br/>
 
