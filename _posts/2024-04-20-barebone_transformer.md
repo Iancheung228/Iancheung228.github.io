@@ -67,11 +67,11 @@ The attention head is where the model learns the richer contextual embedding for
 
 ### Breakdown of the above single-attention head diagram
 
-I had always been confused about the dimensionality of these matrix operations. I have deliberately over-annotated as I believe its a key part to understanding the full picture, and that my future self might come back to thank me.
+I had always been confused about the dimensionality of these matrix operations. I have deliberately over-annotated as it helped me better understand the full picture, and that my future self might come back to thank me.
 <ol>
   <li> Matrix multiplication between query and key matrices, the output size will be (context_len, context_len) </li>
   <li> Apply softmax to get a probability distribution that sums to 1. The way to interpret the matrix is that: each row corresponds to a word, and we can tell how much other words in the sequence influence the meaning of the current word based on the weights assigned. (We have omitted the scaled dot product attention version in this post) </li>
-  <li> Matrix multiply with the value matrix to get what we call in this post as : the attention vector, which has dimension (context_len, embed_dim)</li>
+  <li> Matrix multiply with the value matrix to get what we call in this post as: the attention vector, which has dimension (context_len, embed_dim)</li>
   <li> Matrix multiply with a linear layer </li>
 </ol>
 
@@ -94,7 +94,7 @@ The multiple attention heads operate largely similarly to the single head except
 
 Aside: Note that in multiple attention heads, the model has the same number of parameters to learn as in a single attention head. Multi-head self-attention is no more expensive than single-head due to the low-rank property.
 
-We have now fully explained the following diagram in the original paper.
+We have now fully explained the following diagram from the original paper.
 ![Screenshot 2024-06-01 at 5 26 48 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/a58abe97-f1ee-4461-80f1-41e55bbd6393)
 
 
@@ -115,24 +115,10 @@ Finally, recall that our original goal has always been to predict the next word,
 <ol>
   <li> Pass it through a linear layer which takes an input of dimension (context_len, embed_dim) and returns a matrix of dimension (context_length, vocab_size)
   <li> Apply softmax so that it is a probability distribution
-<ol>
-
-
-
+</ol>
 
 The output matrix could be interpreted as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
 
-Practically, instead of being a vector of size vocab_size, we actually work with a matrix of size (context_len, vocab_size). That is for each word in our sequence, we are predicting the next word that comes after. Additional information could be found if you search for causal attention head.
-
-## Walk through of code
-token is character
-vocab size is 65
-
-lookup character to index using char2idx
-
-B is short hand for batch
-T is short hand for context_len
-C is short hand for embed_dim
 
 
 
