@@ -27,23 +27,18 @@ In this article, we will go through the list of items:
 ## Formal definition of batch normalization 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
 
-<img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
-In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.
-
 [![Screenshot 2024-02-25 at 11 00 54 AM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998)](image-url)
 *In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.*
 
 
 <br/><br/>
 
-Pseudocode of PyTorch code for a 2-layered neuron net with batch norm for binary classification task
+Pseudocode of PyTorch code for a 2-layered neuron net with batch norm for binary classification task.
 ```
-#Suppose we have 10000 training data points each with dim 5
-#i.e Xtr = (10000,5), Ytr(10000,1)
+#Suppose we have 10k training data each with dim 500, i.e Xtr = (10000,500), Ytr(10000,1)
 batch_size = 32
-# minibatch construction
-ix = torch.randint(0, Xtr.shape[0], (batch_size,), generator=g)
-Xb, Yb = Xtr[ix], Ytr[ix]
+batch_ix = torch.randint(0, Xtr.shape[0], (batch_size,))
+Xb, Yb = Xtr[batch_ix], Ytr[batch_ix]
 
 # defining our layers of 100 neurons 
 X_dim = Xb.shape[1]                   
@@ -53,8 +48,8 @@ W2 = torch.randn((n_hidden, 2))
 b2 = torch.randn(2)
 
 # BatchNorm parameters
-bngain = torch.ones((1, n_hidden))          # in green in the diagram of BN def 
-bnbias = torch.zeros((1, n_hidden))         # in green in the diagram of BN def 
+bngain = torch.ones((1, n_hidden))          # learnable
+bnbias = torch.zeros((1, n_hidden))         # learnable
 bnmean_running = torch.zeros((1, n_hidden)) # not trained during back prop (used at inference)
 bnstd_running = torch.ones((1, n_hidden))   # not trained during back prop (used at inference)
 
@@ -86,11 +81,14 @@ logits = h @ W2 + b2               # output layer
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
 
-## Discussion of first benefit: Preventing dead or saturated units
+## First benefit: Preventing dead or saturated units
 
-Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. Specifically, if the input value (in absolute value) is too big, Tanh will return approximatly 1 or -1, which corresponds to the flat region in the tail ends of the function. From a gradient point of view, if the neuron lands on the flat region, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. In other words, if the neuron's output (in absolute value) is too big, no matter how you perturb the value of the neuron, it will not have any impact on the final loss, and hence the neuron will not get updated. We call this a dead neuron.
+Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. With Tanh, if the input value (in absolute value) is too big, Tanh will return approximately 1 or -1, which graphically lies on the flat region in the tail ends of the function. From a gradient point of view, if the neuron's output lands on the flat region of Tanh, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. We call this a dead neuron, and the interpretation is: no matter how you perturb the weight of the neuron, it will have no meaningful impact on our final train loss.
 
-By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents neurons landing on flat regions.
+![Screenshot 2024-06-02 at 3 16 45 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/708f7e1f-5c3c-40ca-b49c-5034b215709a)
+
+
+**By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the change of neurons landing on the flat regions.**
 
 
 ## Discussion of second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
