@@ -107,7 +107,7 @@ The ICS occurs when the input of the layer (or equivalently, the output of the p
 This definitely did not make sense for me when I was first introduced to this so let's walk through an example for more clarity.
 
 <br/><br/>
-### Example
+### Example to illustrate the problem of internal covariate shift
 Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how the backpropagation algorithm will update the weights of the 3 layers. We will do this for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
@@ -120,7 +120,7 @@ Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlin
 
 
 <br/><br/>
-#### Groundwork
+### Groundwork
 The update rule for weight at neuron c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
@@ -128,7 +128,7 @@ Taking a closer look at the gradient term, we can rewrite it as:
 $$ \color{red}{\frac{\delta L}{\delta w_c}} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
 Recall, we also know that the output of neuron c is simply the dot product of the weight of neuron c and the output of neuron b:
-$$z_c = w_c*z_b$$. This means that taking the derivative of $$ w_c $$ w.r.t $$ z_c $$ is $$z_b$$.
+$$z_c = w_c*z_b$$. This means that taking the derivative of $$ z_c $$ w.r.t $$ w_c $$ is $$z_b$$.
 
 Incorporating what we discussed, we arrive at
 **$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$** which we will use to update the neuron's weight.
@@ -141,7 +141,7 @@ With the groundwork established, you can go through the diagram below by yoursel
 
 ![IMG_10186360727C-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e9991454-6224-4daf-8298-1740b1ebe9c9)
 
-##### Commentary:
+### Commentary:
 
 We see that in step **1c**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
@@ -168,6 +168,13 @@ This ICS problem was believed to be a huge problem if left unaddressed and the a
 | --- | --- | --- |
 | **Covariate Shift** | train vs test time | input to model |
 | **Internal Covariate Shift** | epoch i-1 vs epoch i | input to layer |
+
+The root cause of ICS is ...
+
+why is ICS a problem in the setting of training?
+
+
+Now that we know what the Internal Covariate Shift problem is describing, the authors of the 2015 paper claim that Batch Normalization resolves this ICS problem...
 
 
 <br/><br/>
