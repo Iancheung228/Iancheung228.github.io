@@ -174,22 +174,22 @@ The root cause of ICS is ...
 why is ICS a problem in the setting of training?
 
 
-Now that we know what the Internal Covariate Shift problem is describing, the authors of the 2015 paper claim that Batch Normalization resolves this ICS problem...
+Now that we know what the Internal Covariate Shift problem is describing, does adding batchnorm really resolves the ICS problem when training our NN?
 
 
 <br/><br/>
 ## Counter argument 1) 2019 Experiment shows contradictory results
-The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer (we call it the Batch norm plus noise model). 
+The authors of the 2019 paper conducted a simple experiment where they intentionally added noise after the BN layer. 
 
-The rationale is: If the performance gain of the neural net is indeed attributable to resolving the internal covariate shift, adding back noise **after** the BN layer will erase any of the benefits.
+In theory, if the performance gain of the neural net is indeed attributable to resolving the ICS, deliberately adding back noise **after** the BN layer will erase any of the benefits.
 
-The result is that they found that the Batch norm plus noise model has largely similar performance compared with the Batch norm model. This suggests that BN's main benefit does not come from resolving the ICS.
+**Result:** They found that the Batchnorm-plus-noise model has largely similar performance compared with the Batchnorm model. This suggests that BN's main benefit is not in resolving the ICS.
 
 ## Counter argument 2) Actual placement of BN layer is before the activation layer
-Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is not the case in practice, where the BN is placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
+Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is **not** the case in practice, where the BN is actually placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
 
-## Discussion of third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
-The 2019 paper argues BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
+## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
+The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
 > " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
