@@ -16,10 +16,10 @@ Batch Normalization (BN) has been empirically shown to allow deep neural nets (N
 
 In this article, we will go through the list of items:
 <ol>
-  <li>What is batch norm and implement a simple neuron net with batch norm layer</li>
-  <li> Discussion of first benefit: preventing dead or saturated units</li>
-  <li> Discussion of second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)</li>
-  <li> Discussion of third benefit: Smoothening the loss landscape (2019 paper)</li>
+  <li>What is batch norm and how to implement a simple neural net with a batch norm layer</li>
+  <li> First benefit: preventing dead or saturated units</li>
+  <li> Second benefit: Resolving the Internal Covariate Shift problem (and why this is not entirely true) (2015 paper)</li>
+  <li> Third benefit: Smoothening the loss landscape (2019 paper)</li>
 </ol>
 
 <br/><br/>
@@ -28,8 +28,11 @@ In this article, we will go through the list of items:
 Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
 
 <img width="729" alt="Screenshot 2024-02-25 at 11 00 54 AM" src="https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998">
-
 In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.
+
+[![Screenshot 2024-02-25 at 11 00 54 AM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998)](image-url)
+*In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.*
+
 
 <br/><br/>
 
