@@ -91,20 +91,20 @@ Many activation functions used in a NN, including Tanh are a so-called squashing
 **By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the change of neurons landing on the flat regions.**
 
 
-## Discussion of second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
+## Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
 
-ICS is closely related to the concept of covariate shift, which is when the input-data distribution shifts over time and hence making a trained model obsolete. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially.
+ICS is closely related to the concept of covariate shift, which occurs when the input-data distribution shifts over time and as a result, leaves the trained model obsolete. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially.
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon that occurs in the training of a neural network, where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Let me introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for the function in order to map our datapoint to the true label, as closely as possible. 
+Allow me to introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for this gigantic function, in order to map our datapoint to the true label, as closely as possible. 
 
 In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. That is, each layer is also a function that takes in an input (received from the previous layer) and produces an output (feeds to the next layer). The layer-wise optimization problem has a similar flavour, where we try to find good weights that map the input to the desired output. Precisely speaking, the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
 
 
-The ICS occurs when the input for the layer (output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.
+The ICS occurs when the input of the layer (or equivalently, the output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.
 
-Let's walk through an example for more clarity.
+This definitely did not make sense for me when I was first introduced to this so let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example
