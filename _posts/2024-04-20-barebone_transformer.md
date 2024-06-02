@@ -5,7 +5,7 @@ date: 2024-04-20
 ---
 
 ## Goal of this post:
-The goal of this post is to provide a gentle, visual introduction to the core mechanisms within a transformer model. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. Of course, in practice, we usually train on a batch of data.
+This post documents my written notes that helped me better understand the core mechanism of the [transformer paper](https://proceedings.neurips.cc/paper_files/paper/2017/file/3f5ee243547dee91fbd053c1c4a845aa-Paper.pdf). I have benefited tremendously from [Andrej Karparthy's youtube tutorial](https://www.youtube.com/watch?v=kCc8FmEb1nY&t=3720s)  and his [code which could be found here](https://github.com/karpathy/ng-video-lecture). Here is the [notebook](https://colab.research.google.com/drive/1nlZDMEVV6mAGixBIm6t2ZDJMGpqvcWf5#scrollTo=PfTS95CgJsUs) with my own annotation for reference. To focus on the core aspect of the transformer, this post will go through one training iteration on a single piece of data. Of course, in practice, we usually train on a batch of data.
 
 ## The problem
 A common problem a transformer model can solve is predicting the next word that appears given a sequence of input.
@@ -116,6 +116,9 @@ Finally, recall that our original goal has always been to predict the next word,
   <li> Pass it through a linear layer which takes an input of dimension (context_len, embed_dim) and returns a matrix of dimension (context_length, vocab_size)
   <li> Apply softmax so that it is a probability distribution
 <ol>
+
+
+
 
 The output matrix could be interpreted as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
 
