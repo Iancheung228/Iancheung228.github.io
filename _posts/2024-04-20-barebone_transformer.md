@@ -113,8 +113,8 @@ Specifically, this layer takes the input which lives in embed_dim to 4*embed_dim
 Finally, recall that our original goal has always been to predict the next word, given the input sequence.  Sensibly, we would want our final layer to output a vector of probability for the next word to come. To accomplish this, we:
 
 <ol>
-  <li> Pass it through a linear layer which takes an input of dimension (context_len, embed_dim) and returns a matrix of dimension (context_length, vocab_size)
-  <li> Apply softmax so that it is a probability distribution
+  <li> Pass it through a linear layer which takes an input of dimension (context_len, embed_dim) and returns a matrix of dimension (context_length, vocab_size) </li>
+  <li> Apply softmax so that it is a probability distribution </li>
 </ol>
 
 The output matrix could be interpreted as a probability distribution that describes the probability of any words in our database of vocabulary being the next predicted word.
