@@ -4,7 +4,7 @@ date: 2024-04-01
 ---
 
 ## Introduction
-Batch Normalization (BN) has been empirically shown to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been a topic of debate. The main difficulty perhaps comes from the fact that a NN has many moving parts so it is hard to put your finger down on the exact root problem the BN layer solves, let alone whether BN is the unique mechanism that solves it. The original paper from 2015 [^1] attributes the success to resolving the problem of internal covariate shift (ICS). In 2019, there is a new paper [^2] that argues that instead of ICS, BN's true benefit  is in making the optimization landscape smoother.
+Batch Normalization (BN) has been empirically found to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been more blurry. The original paper from 2015 [^1] attributes the success to resolving the problem of internal covariate shift (ICS), but as we will see it fails to explain many important behaviours of the NN. Subsequently, in 2019, there is another paper [^2] that argues that instead of resolving the ICS, BN's true benefit is making the optimization landscape smoother.
 
 
 
@@ -14,24 +14,25 @@ Batch Normalization (BN) has been empirically shown to allow deep neural nets (N
 [^1]: [Sergey Ioffe, Christian Szegedy, "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift", 2015.](https://arxiv.org/abs/1502.03167)
 [^2]: [Shibani Santurkar, "How Does Batch Normalization Help Optimization", 2019.](https://arxiv.org/pdf/1805.11604.pdf)
 
+
+## In this post, we will go over:
 1. What is batch norm and how to implement a simple neural net with a batch norm layer
 2. First benefit: preventing dead or saturated units
-3. Second benefit: Resolving the Internal Covariate Shift problem (and why this is not entirely true) (2015 paper)
+3. Second benefit: Resolving the Internal Covariate Shift problem (and why it fails to explain the full picture) (2015 paper)
     a. 1st counter argument
     b. 2nd counter argument
 4. Third benefit: Smoothening the loss landscape (2019 paper)
 <br/><br/>
 
 ## Formal definition of batch normalization 
-Batch norm is a mechanism that aims to stabilize the distribution of inputs to a network layer during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
+Batch norm is a mechanism that aims to stabilize the distribution of inputs, to a network layer, during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
 
 [![Screenshot 2024-02-25 at 11 00 54 AM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998)](image-url)
 *In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.*
 
-
 <br/><br/>
 
-Pseudocode of PyTorch code for a 2-layered neuron net with batch norm for binary classification task.
+Pytorch pseudocode for a 2-layered neuron net with batch norm for binary classification task.
 ```
 #Suppose we have 10k training data each with dim 500, i.e Xtr = (10000,500), Ytr(10000,1)
 batch_size = 32
@@ -79,30 +80,32 @@ logits = h @ W2 + b2               # output layer
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
 
-## First benefit: Preventing dead or saturated units
+## First benefit of BN: Preventing dead or saturated units
+Before understanding the first benefit, we need to understand the nature of activation functions.
 
-Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh removes information from the original input. With Tanh, if the input value (in absolute value) is too big, Tanh will return approximately 1 or -1, which graphically lies on the flat region in the tail ends of the function. From a gradient point of view, if the neuron's output lands on the flat region of Tanh, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. We call this a dead neuron, and the interpretation is: no matter how you perturb the weight of the neuron, it will have no meaningful impact on our final train loss.
+Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh remove information from the original input. With Tanh, if the input value (in absolute value) is too big, Tanh will return approximately 1 or -1, which graphically lies on the flat region in the tail ends of the function. From a gradient point of view, if the neuron's output lands on the flat region of Tanh, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. We call this a dead neuron, and it means that no matter how you perturb the weight of the neuron, it will have no meaningful impact on our final train loss.
 
 ![Screenshot 2024-06-02 at 3 16 45 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/708f7e1f-5c3c-40ca-b49c-5034b215709a)
 
 
-**By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the change of neurons landing on the flat regions.**
+** First benefit of BN: By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the chance of neurons landing on the flat regions. You can read up on why [dying neurons](https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks) are sometimes undesirable**
 
 
-## Second benefit: Resolving the Internal Covariate Shift problem (and why it is not entirely true) (2015 paper)
+## Second benefit: Resolving the Internal Covariate Shift (ICS) problem (and why it is not entirely true) (2015 paper)
 
-ICS is closely related to the concept of covariate shift, which occurs when the input-data distribution shifts over time and as a result, leaves the trained model obsolete. For example, we could use pre-covid's stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-COVID era, as the data distribution has changed substantially.
+### What is ICS?
+ICS is closely related to the concept of covariate shift, which occurs when the input-data distribution shifts over time and as a result, leaves the trained model obsolete. For example, we could use pre-covid stock data to train a stock price prediction model, however, chances are the model will not be effective in predicting returns for post-covid era, as the data distribution has changed substantially.
 
 Now, adding the word "Internal" before "covariate shift", describes a closely related phenomenon that occurs in the training of a neural network, where the distribution of input for an individual layer, changes due to the update of the previous layers' weights.
 
-Allow me to introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given datapoint as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for this gigantic function, in order to map our datapoint to the true label, as closely as possible. 
+Let's introduce a useful framework for thinking about neuron nets. We can think of a neural net as a function parameterized by weights. This function takes a given data point as input and outputs a prediction. The training of neural nets can be seen as solving an optimization problem, where we attempt to learn the optimal weight for this gigantic function, with the goal of mapping our datapoint to the true label, as closely as possible. 
 
-In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. That is, each layer is also a function that takes in an input (received from the previous layer) and produces an output (feeds to the next layer). The layer-wise optimization problem has a similar flavour, where we try to find good weights that map the input to the desired output. Precisely speaking, the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
+In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. That is, each layer is also a function that takes in an input (received from the previous layer) and produces an output (feeds to the next layer). The layer-wise optimization problem has a similar goal, where we try to find good weights that map the input to the desired output. Where it slightly differs is that the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
 
 
-The ICS occurs when the input of the layer (or equivalently, the output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.
+** The ICS occurs when the input of the layer (or equivalently, the output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure. **
 
-This definitely did not make sense for me when I was first introduced to this so let's walk through an example for more clarity.
+This definition did not make sense for me when I first read it so let's walk through an example for clarity.
 
 <br/><br/>
 ### Example to illustrate the problem of internal covariate shift
