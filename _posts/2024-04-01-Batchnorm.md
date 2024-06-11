@@ -138,13 +138,9 @@ $$z_c = w_c*z_b$$. This means that taking the derivative of $$ z_c $$ w.r.t $$ w
 Incorporating what we discussed, we arrive at
 **$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$** which we will use to update the neuron's weight.
 
-Importantly, we see that the optimization problem for neuron c depends on the output and hence the weight of b and a. When the weight of b and a gets updated during each training epoch, the input that is fed into layer c changes as well. If left uncontrolled we could see why the input distribution to layer c could vary significantly, especially during early epochs.
+Importantly, we see that the optimization problem for neuron c depends on the output and hence the weight of b and a. When the weight of b and a gets updated during each training epoch, the input that is fed into layer c changes as well. If left untreated we could see why the input distribution to layer c could vary significantly, especially during early epochs when the model is "learning the ropes". Intuitively speaking, if the input distribution keeps on changing, it would be hard for layer c to learn any meaningful pattern.
 
 *Aside: when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
-
-
-This ICS problem was believed to be a huge problem if left unaddressed and the authors of the original paper hence suggested adding a BN layer after each layer of the original NN.
-
 
 ### Summary of Internal Covariate Shift
 
@@ -152,10 +148,6 @@ This ICS problem was believed to be a huge problem if left unaddressed and the a
 | --- | --- | --- |
 | **Covariate Shift** | train vs test time | input to model |
 | **Internal Covariate Shift** | epoch i-1 vs epoch i | input to layer |
-
-The root cause of ICS is ...
-
-why is ICS a problem in the setting of training?
 
 
 Now that we know what the Internal Covariate Shift problem is describing, does adding batchnorm really resolves the ICS problem when training our NN?
