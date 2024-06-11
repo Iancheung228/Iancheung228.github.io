@@ -109,7 +109,7 @@ This definition did not make sense for me when I first read it so let's walk thr
 
 <br/><br/>
 ### Example to illustrate the problem of internal covariate shift
-Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how the backpropagation algorithm will update the weights of the 3 layers. We will do this for 2 epochs **a)** $$i-1$$ and **b)** $$i$$.
+Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how ICS shows up in the backpropagation algorithm when we update the weights of neuron c.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -122,6 +122,10 @@ Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlin
 
 <br/><br/>
 ### Groundwork
+
+![IMG_47BCBFDF7301-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/51c21ba5-a8b5-4bf9-8ed8-57ba08d5f31e)
+
+### Commentary:
 The update rule for weight at neuron c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
 
@@ -137,13 +141,9 @@ Incorporating what we discussed, we arrive at
 Importantly, we see that the update of neuron c's weight depends on the output (hence the weight) of the previous neuron.
 
 
-#### Stepping through an example
-With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
-
-![IMG_BECF2CE1B0C8-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2941c810-834b-46e4-8fdb-bb2458fd70e9)
 
 
-### Commentary:
+
 
 We see that in step **1c**) the output of neuron b, $$z_b$$, is a function of $$w_b^{t-2}$$, $$w_a^{t-2}$$ and $$x_{t-1}$$
 
