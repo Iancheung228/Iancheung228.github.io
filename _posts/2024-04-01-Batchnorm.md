@@ -140,7 +140,8 @@ Importantly, we see that the update of neuron c's weight depends on the output (
 #### Stepping through an example
 With the groundwork established, you can go through the diagram below by yourself, where the backpropagation algorithm updates based on the order of  **1c), 1b), 1a), 2c)** 
 
-![IMG_10186360727C-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e9991454-6224-4daf-8298-1740b1ebe9c9)
+![IMG_BECF2CE1B0C8-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/2941c810-834b-46e4-8fdb-bb2458fd70e9)
+
 
 ### Commentary:
 
