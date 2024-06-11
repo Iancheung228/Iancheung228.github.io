@@ -88,7 +88,7 @@ Many activation functions used in a NN, including Tanh are a so-called squashing
 ![Screenshot 2024-06-02 at 3 16 45 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/708f7e1f-5c3c-40ca-b49c-5034b215709a)
 
 
-** First benefit of BN: By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the chance of neurons landing on the flat regions. You can read up on why [dying neurons](https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks) are sometimes undesirable**
+**First benefit of BN: By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the chance of neurons landing on the flat regions. You can read up on why [dying neurons](https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks) are sometimes undesirable**
 
 
 ## Second benefit: Resolving the Internal Covariate Shift (ICS) problem (and why it is not entirely true) (2015 paper)
@@ -103,13 +103,13 @@ Let's introduce a useful framework for thinking about neuron nets. We can think 
 In fact, we can break down the original optimization problem into solving a series of smaller, sequential optimization problems at a layer level. That is, each layer is also a function that takes in an input (received from the previous layer) and produces an output (feeds to the next layer). The layer-wise optimization problem has a similar goal, where we try to find good weights that map the input to the desired output. Where it slightly differs is that the input here refers to the output from the previous layer, and the desired output is related to the accumulation of the gradient w.r.t the final loss from the later layers.
 
 
-** The ICS occurs when the input of the layer (or equivalently, the output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure. **
+**The ICS occurs when the input of the layer (or equivalently, the output of the previous layer) changes drastically (due to weight update in the previous epoch) in every iteration of the training procedure.**
 
-This definition did not make sense for me when I first read it so let's walk through an example for clarity.
+This definition did not make sense for me when I first read it so let's walk through an example for more clarity.
 
 <br/><br/>
 ### Example to illustrate the problem of internal covariate shift
-Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how ICS shows up in the backpropagation algorithm when we update the weights of neuron c.
+Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlinearity. Let's walk through how ICS shows up in the backpropagation algorithm when we update the weight of neuron c.
 #### Notation
 * $$w_c$$ denotes the weight of neuron c
 
@@ -132,13 +132,13 @@ $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_
 Taking a closer look at the gradient term, we can rewrite it as:
 $$ \color{red}{\frac{\delta L}{\delta w_c}} = \frac{\delta L}{\delta z_c} \frac{\delta z_c}{\delta w_c}$$
 
-Recall, we also know that the output of neuron c is simply the dot product of the weight of neuron c and the output of neuron b:
+Recall, we also know that the output of neuron c is simply 
 $$z_c = w_c*z_b$$. This means that taking the derivative of $$ z_c $$ w.r.t $$ w_c $$ is $$z_b$$.
 
 Incorporating what we discussed, we arrive at
 **$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$** which we will use to update the neuron's weight.
 
-Importantly, we see that the optimization problem for neuron c depends on the output and hence the weight of b and a. When the weight of b and a gets updated during each training epoch, the input that is fed into layer c changes as well. If left untreated we could see why the input distribution to layer c could vary significantly, especially during early epochs when the model is "learning the ropes". Intuitively speaking, if the input distribution keeps on changing, it would be hard for layer c to learn any meaningful pattern.
+Importantly, we see that the weight update of neuron c depends on the output, and hence the weight of b and a. And since the weight of b and a gets updated during each training epoch, the input being fed into layer c changes as well. If left untreated we could see why the input distribution to layer c could vary significantly, especially during early epochs when the model is "learning the ropes". Intuitively, and plausibly speaking, if the input distribution keeps changing, it makes sense that it would be hard for layer c to learn any meaningful pattern.
 
 *Aside: when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
 
@@ -150,7 +150,7 @@ Importantly, we see that the optimization problem for neuron c depends on the ou
 | **Internal Covariate Shift** | epoch i-1 vs epoch i | input to layer |
 
 
-Now that we know what the Internal Covariate Shift problem is describing, does adding batchnorm really resolves the ICS problem when training our NN?
+## Now that we know what the Internal Covariate Shift problem is, does resolving it actually improve our NN training?
 
 
 <br/><br/>
@@ -159,7 +159,7 @@ The authors of the 2019 paper conducted a simple experiment where they intention
 
 In theory, if the performance gain of the neural net is indeed attributable to resolving the ICS, deliberately adding back noise **after** the BN layer will erase any of the benefits.
 
-**Result:** They found that the Batchnorm-plus-noise model has largely similar performance compared with the Batchnorm model. This suggests that BN's main benefit is not in resolving the ICS.
+**Result:** They found that the Batchnorm-plus-noise model has similar performance compared with the Batchnorm model. This suggests that BN's main benefit is not in resolving the ICS.
 
 ## Counter argument 2) Actual placement of BN layer is before the activation layer
 Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is **not** the case in practice, where the BN is actually placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
@@ -186,7 +186,7 @@ By applying BN layer, the authors found that the gradient of the loss landscape 
 
 <br/><br/>
 ### Second manifestation: Improves the smoothness of loss function
-The second manifestation is arguably the stronger benefit and relies on the concept of smoothness. Smoothness has pretty much the exact same definition as Lipschitzness with the addition of the gradient in its definition shown in the red color.
+The second manifestation is arguably the stronger benefit and it relies on the concept of smoothness. Smoothness has pretty much the exact same definition as Lipschitzness with the addition of the gradient in its definition shown in the red color.
 
 **Def:** a function f is L-smooth if 
 :
