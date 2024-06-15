@@ -172,7 +172,8 @@ Recall that ICS is the issue where the input distribution to a layer changes dra
 
 ---
 >
->
+
+
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
 The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
 
