@@ -170,12 +170,12 @@ In theory, if the performance gain of the neural net is indeed attributable to r
 ## Counter argument 2) Actual placement of BN layer is before the activation layer
 Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is **not** the case in practice, where the BN is actually placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
 
+\vspace{5cm}
+
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
 The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
 
 ### First manifestation: Improves Lipschitzness of loss function
-> " the loss changes at a smaller rate and the magnitudes of the gradients are smaller too"
-
 **Def:** 
 a function f is L-Lipschitz if $$|f(x) - f(y)| \leq L\|x - y\| \forall$$ x, y 
 
@@ -187,12 +187,12 @@ Interpretation: the gradient of the function f (L.H.S) at any point is always bo
 
 > "Recall loss function tends to have a large number of kinks and sharp minima, this makes gradient descent-based training algorithms unstable due to exploding gradients, highly sensitive to learning rate and initialization"
 
-By applying BN layer, the authors found that the gradient of the loss landscape is bounded by a smaller constant L.
+By applying BN layer, the authors found that the gradient of the loss landscape is bounded by a smaller constant L, meaning that the loss changes at a smaller rate and the magnitudes of the gradients are smaller too.
 **Importantly, the first manifestation reduces the problem of exploding gradients.**
 
 <br/><br/>
 ### Second manifestation: Improves the smoothness of loss function
-The second manifestation is arguably the stronger benefit and it relies on the concept of smoothness. Smoothness has pretty much the exact same definition as Lipschitzness with the addition of the gradient in its definition shown in the red color.
+The second manifestation is arguably the stronger benefit and it relies on the concept of smoothness. Smoothness has pretty much the exact same definition as Lipschitzness with the addition of the gradient in its definition shown in red.
 
 **Def:** a function f is L-smooth if 
 :
@@ -200,9 +200,9 @@ $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y
 
 Interpretation: BN improves the Lipschitzness of the gradient (achieves smaller L).
 
-We will try to build the intuition of what the benefit entails using a few examples.
+## We will try to build the intuition of what the benefit entails using a few examples.
 
-### Let's take a look at what the convergence behavior in the loss landscape looks like without BN for 3 different initialization points
+### Let's take a look at what the convergence behaviour in the loss landscape looks like without BN for 3 different initialization points
 
 ![IMG_B5CE78CEC40E-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/3c52d62d-b8b5-4ac6-9b6a-b675837e2bb6)
 
