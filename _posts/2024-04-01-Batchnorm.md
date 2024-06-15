@@ -4,7 +4,7 @@ date: 2024-04-01
 ---
 
 ## Introduction
-Batch Normalization (BN) has been empirically found to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact theoretical benefit of the batch norm layer has always been more blurry. The original paper from 2015 [^1] attributes the success to resolving the problem of internal covariate shift (ICS), but as we will see it fails to explain many important behaviours of the NN. Subsequently, in 2019, there is another paper [^2] that argues that instead of resolving the ICS, BN's true benefit is making the optimization landscape smoother.
+Batch Normalization (BN) has been empirically found to allow deep neural nets (NN) to train faster and more stably (less sensitive to the choice of initialization). However, the exact benefit of the batch norm layer has always been more blurry. The original paper from 2015 [^1] attributes the success to resolving the problem of internal covariate shift (ICS), but as we will see it fails to explain the full picture. Subsequently, in 2019, there is another paper [^2] that argues instead of resolving the ICS, BN's true benefit is making the optimization landscape smoother.
 
 
 
@@ -22,7 +22,7 @@ Batch Normalization (BN) has been empirically found to allow deep neural nets (N
     a. 1st counter argument
     b. 2nd counter argument
 4. Third benefit: Smoothening the loss landscape (2019 paper)
-<br/><br/>
+
 
 ## Formal definition of batch normalization 
 Batch norm is a mechanism that aims to stabilize the distribution of inputs, to a network layer, during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
@@ -30,7 +30,7 @@ Batch norm is a mechanism that aims to stabilize the distribution of inputs, to 
 [![Screenshot 2024-02-25 at 11 00 54 AM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998)](image-url)
 *In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.*
 
-<br/><br/>
+
 
 Pytorch pseudocode for a 2-layered neuron net with batch norm for binary classification task.
 ```
