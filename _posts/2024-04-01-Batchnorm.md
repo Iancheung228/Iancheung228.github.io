@@ -170,7 +170,7 @@ In theory, if the performance gain of the neural net is indeed attributable to r
 ## Counter argument 2) Actual placement of BN layer is before the activation layer
 Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is **not** the case in practice, where the BN is actually placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
 
-\vspace{5cm}
+---
 
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
 The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
@@ -207,9 +207,13 @@ Interpretation: BN improves the Lipschitzness of the gradient (achieves smaller 
 ![IMG_B5CE78CEC40E-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/3c52d62d-b8b5-4ac6-9b6a-b675837e2bb6)
 
 
-The key takeaway is that without batch norm, the convergence behavior is **i)** dependent on the choice initialization and **ii)** requires a smaller learning rate or risk overshooting. We see from the leftmost figure, we can not take a large stepsize (indicated by the hypothetical green arrow), otherwise, we will overshoot the minimum.
+The key takeaway is that without batch norm, the convergence behaviour is **i)** dependent on the choice initialization and **ii)** we are forced to use a smaller learning rate or risk overshooting the minima. 
 
-On the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
+Recall what we have shown here is a level curve and at each step, we will make a step in the perpendicular direction of the level set.
+
+In the leftmost figure, we can not take a large stepsize (indicated by the hypothetical green arrow), otherwise, we will overshoot the minimum.
+
+In the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
 
 ### Now with BN, the loss landscape looks like:
 
