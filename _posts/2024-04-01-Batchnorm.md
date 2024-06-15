@@ -25,16 +25,17 @@ Batch Normalization (BN) has been empirically found to allow deep neural nets (N
 
 
 ## Formal definition of batch normalization 
-Batch norm is a mechanism that aims to stabilize the distribution of inputs, to a network layer, during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
+Batch norm is a mechanism that aims to stabilize the distribution of inputs, to a network layer, during the training phase. Specifically, the batch norm layer converts the first two moments of the neuron's input (here denoted as y) to 0 mean and unit variance. The mean and standard deviation are calculated based on the current batch.
 
 [![Screenshot 2024-02-25 at 11 00 54 AM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/312f5c2e-0dad-49fd-8882-384737fdc998)](image-url)
 *In practice, a BN layer includes 2 learnable parameters (in green) for the output mean and variance. This is done to give back the expressive power of the original network. i.e. the NN is free to choose whether a non-zero mean is better suited for each layer.*
 
 
 
-Pytorch pseudocode for a 2-layered neuron net with batch norm for binary classification task.
+## Pytorch pseudocode for a 2-layered neuron net with batch norm for a binary classification task.
+Suppose we have 10k training data each with dim 500, batch size of 32 and hidden layer of 100 neurons
 ```
-#Suppose we have 10k training data each with dim 500, i.e Xtr = (10000,500), Ytr(10000,1)
+Setup -------------------------------------------------------------
 batch_size = 32
 batch_ix = torch.randint(0, Xtr.shape[0], (batch_size,))
 Xb, Yb = Xtr[batch_ix], Ytr[batch_ix]
@@ -62,13 +63,17 @@ Our Neural Network -------------------------------------------------------------
 pre_act = Xb @ W1
 ## We don't need a bias term as the BN layer will get rid of the bias here
 ## pre_act has shape (batch_size, 100) where 100 is the number of neurons.
-## For each neuron, we want to find the mean and std across all 32 training examples.
+## For each neuron, find the mean and std across all 32 training examples.
 
 # BatchNorm layer
 bnmeani = pre_act.mean(0, keepdim=True)
 bnstdi = pre_act.std(0, keepdim=True)
-pre_act = bngain * (pre_act - bnmeani) / bnstdi + bnbias # each neuron will be unit gaussian for this batch of data
-# running mean to use in validation, these running also get updated in the training phase, but these do not require any gradient
+
+# each neuron will be unit gaussian for this batch of data
+pre_act = bngain * (pre_act - bnmeani) / bnstdi + bnbias
+
+# running mean to use in validation, these running also get updated
+## in the training phase, but these do not require any gradient
 with torch.no_grad():
   bnmean_running = 0.999 * bnmean_running + 0.001 * bnmeani
   bnstd_running = 0.999 * bnstd_running + 0.001 * bnstdi
@@ -76,14 +81,15 @@ with torch.no_grad():
 # Non-linearity
 h = torch.tanh(pre_act)            # non linear layer
 logits = h @ W2 + b2               # output layer
-# -------------------------------------------------------------
+
+Evaluation -------------------------------------------------------------
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
 
 ## First benefit of BN: Preventing dead or saturated units
-Before understanding the first benefit, we need to understand the nature of activation functions.
+Before going over the first benefit, we need to understand some properties of activation functions.
 
-Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh remove information from the original input. With Tanh, if the input value (in absolute value) is too big, Tanh will return approximately 1 or -1, which graphically lies on the flat region in the tail ends of the function. From a gradient point of view, if the neuron's output lands on the flat region of Tanh, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. We call this a dead neuron, and it means that no matter how you perturb the weight of the neuron, it will have no meaningful impact on our final train loss.
+Many activation functions used in a NN, including Tanh are a so-called squashing function. Squashing functions like Tanh remove information from the original input. With Tanh, if the input value (in absolute value) is too big, Tanh will return approximately 1 or -1, which graphically lies on the flat region in the tail ends of the function. From a gradient point of view, if the neuron's output lands on the flat region of Tanh, the gradient would be 0, and virtually this will stop any gradient flowing through this neuron when updating the neuron's weight parameter. We call this a **dead neuron**, and it means that no matter how you perturb the weight of the neuron, it will have no meaningful impact on our final train loss.
 
 ![Screenshot 2024-06-02 at 3 16 45 PM](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/708f7e1f-5c3c-40ca-b49c-5034b215709a)
 
@@ -138,7 +144,7 @@ $$z_c = w_c*z_b$$. This means that taking the derivative of $$ z_c $$ w.r.t $$ w
 Incorporating what we discussed, we arrive at
 **$$ \frac{\delta L}{\delta w_c} = \frac{\delta L}{\delta z_c} z_b$$** which we will use to update the neuron's weight.
 
-Importantly, we see that the weight update of neuron c depends on the output, and hence the weight of b and a. And since the weight of b and a gets updated during each training epoch, the input being fed into layer c changes as well. If left untreated we could see why the input distribution to layer c could vary significantly, especially during early epochs when the model is "learning the ropes". Intuitively, and plausibly speaking, if the input distribution keeps changing, it makes sense that it would be hard for layer c to learn any meaningful pattern.
+Importantly, we see that the weight update of neuron c depends on the output, and hence the weight of neuron b and a. And since the weight of neuron b and a gets updated during each training epoch, the input being fed into layer c changes as well. From the diagram, the weights of a and b in the previous step **(Green)**, could be significantly different from the weights of the same neurons in the current step **(Blue)**. If left untreated we could see why the input distribution to layer c could vary significantly, especially during early epochs when the model is "learning the ropes". Intuitively, and plausibly speaking, if the input distribution keeps changing, it makes sense that it would be hard for layer c to learn any meaningful pattern.
 
 *Aside: when updating a neural network within one training iteration, we have to first update the $${k+1}^{th}$$ layer, before we can update the $$k^{th}$$ layer (take it for granted if you are not familiar), this reverse order of update is dictated by the backpropagation algorithm.* 
 
