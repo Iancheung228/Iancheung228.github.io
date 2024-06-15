@@ -18,7 +18,7 @@ Batch Normalization (BN) has been empirically found to allow deep neural nets (N
 ## In this post, we will go over:
 1. What is batch norm and how to implement a simple neural net with a batch norm layer
 2. First benefit: preventing dead or saturated units
-3. Second benefit: Resolving the Internal Covariate Shift problem (and why it fails to explain the full picture) (2015 paper)
+3. Second benefit: ICS removal hypothesis (and why it fails to explain the full picture) (2015 paper)
     1. 1st counter argument
     2. 2nd counter argument
 4. Third benefit: Smoothening the loss landscape (2019 paper)
@@ -85,7 +85,7 @@ logits = h @ W2 + b2               # output layer
 Evaluation -------------------------------------------------------------
 loss = F.cross_entropy(logits, Yb) # loss function
 ```
-
+---
 ## First benefit of BN: Preventing dead or saturated units
 Before going over the first benefit, we need to understand some properties of activation functions.
 
@@ -96,7 +96,7 @@ Many activation functions used in a NN, including Tanh are a so-called squashing
 
 **First benefit of BN: By adding a batch norm layer before the activation layer, we would force the input to take on a zero mean and unit variance distribution which greatly prevents the chance of neurons landing on the flat regions. You can read up on why [dying neurons](https://datascience.stackexchange.com/questions/5706/what-is-the-dying-relu-problem-in-neural-networks) are sometimes undesirable**
 
-
+---
 ## Second benefit: Resolving the Internal Covariate Shift (ICS) problem (and why it is not entirely true) (2015 paper)
 
 ### What is ICS?
@@ -171,11 +171,11 @@ In theory, if the performance gain of the neural net is indeed attributable to r
 Recall that ICS is the issue where the input distribution to a layer changes drastically between consecutive epochs. In theory, to resolve ICS, we would apply BN layer **right before** feeding the input to the next layer. This is **not** the case in practice, where the BN is actually placed before the activation layer, which is then fed as input to the next layer. This means we are **not guaranteed** that the input distribution after the activation layer is still non-zero mean and unit variance.
 
 ---
->
+
 
 
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
-The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness.
+The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness. In this post, I will only give the definition and the visual intuition as I also did not have the patience to understand the proofs in the paper.
 
 ### First manifestation: Improves Lipschitzness of loss function
 **Def:** 
