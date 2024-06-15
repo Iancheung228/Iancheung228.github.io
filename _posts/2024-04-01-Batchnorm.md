@@ -19,8 +19,8 @@ Batch Normalization (BN) has been empirically found to allow deep neural nets (N
 1. What is batch norm and how to implement a simple neural net with a batch norm layer
 2. First benefit: preventing dead or saturated units
 3. Second benefit: Resolving the Internal Covariate Shift problem (and why it fails to explain the full picture) (2015 paper)
-    a. 1st counter argument
-    b. 2nd counter argument
+    1. 1st counter argument
+    2. 2nd counter argument
 4. Third benefit: Smoothening the loss landscape (2019 paper)
 
 
