@@ -131,6 +131,8 @@ Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlin
 
 ![IMG_47BCBFDF7301-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/51c21ba5-a8b5-4bf9-8ed8-57ba08d5f31e)
 
+![IMG_6E5E0C290475-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e0361fcc-cbc0-4c4e-ae31-98bcf04cc10b)
+
 ### Commentary:
 The update rule for weight at neuron c is:
 $$ w_c^{new} \leftarrow w_c^{old} - \alpha \color{red}{\frac{\delta L}{\delta w_c}}$$
@@ -175,7 +177,7 @@ Recall that ICS is the issue where the input distribution to a layer changes dra
 
 
 ## Third benefit: Smoothening the loss landscape in 2 manifestations (2019 paper) 
-The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness. In this post, I will only give the definition and the visual intuition as I also did not have the patience to understand the proofs in the paper.
+The 2019 paper proposes a new perspective and argues that BN's main benefit is in reparameterizing the underlying optimization problem and smoothening the loss landscape. This benefit comes largely in 2 manifestations and heavily utilizes the concept of Liptschitzness. In this post, I will only give the background and a visual intuition.
 
 ### First manifestation: Improves Lipschitzness of loss function
 **Def:** 
@@ -202,20 +204,16 @@ $$|{\color{red}\nabla}$$ f(x) - $${\color{red}\nabla}$$ f(y) |  $$ \leq L\|x - y
 
 Interpretation: BN improves the Lipschitzness of the gradient (achieves smaller L).
 
-## We will try to build the intuition of what the benefit entails using a few examples.
-
-### Let's take a look at what the convergence behaviour in the loss landscape looks like without BN for 3 different initialization points
+### We will try to build the intuition of what the benefit entails using a few examples. Let's take a look at what the convergence behaviour in the loss landscape looks like without BN for 3 different initialization points
 
 ![IMG_B5CE78CEC40E-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/3c52d62d-b8b5-4ac6-9b6a-b675837e2bb6)
 
 
 The key takeaway is that without batch norm, the convergence behaviour is **i)** dependent on the choice initialization and **ii)** we are forced to use a smaller learning rate or risk overshooting the minima. 
 
-Recall what we have shown here is a level curve and at each step, we will make a step in the perpendicular direction of the level set.
+Recall what we have shown here is a level curve of the loss surface and the minimum loss is achieved at the center of the ellipse. At each iteration, we will make a step in the orthogonal direction of the level set.
 
-In the leftmost figure, we can not take a large stepsize (indicated by the hypothetical green arrow), otherwise, we will overshoot the minimum.
-
-In the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
+In the leftmost figure, we could not take a large stepsize (indicated by the hypothetical green arrow), otherwise, we will overshoot the minimum. In the middle and rightmost figure, we got lucky by picking one of the better initializations and we only took 2 steps to reach minima.
 
 ### Now with BN, the loss landscape looks like:
 
