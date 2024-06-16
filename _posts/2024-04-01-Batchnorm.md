@@ -129,7 +129,6 @@ Consider a neural network with 3 layers (each layer has 1 neuron) with no nonlin
 <br/><br/>
 ### Groundwork
 
-![IMG_47BCBFDF7301-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/51c21ba5-a8b5-4bf9-8ed8-57ba08d5f31e)
 
 ![IMG_6E5E0C290475-1](https://github.com/Iancheung228/Iancheung228.github.io/assets/37007362/e0361fcc-cbc0-4c4e-ae31-98bcf04cc10b)
 
