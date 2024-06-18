@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Barebone transformer walkthrough
-date: 2024-04-20
+date: 2024-06-17
 ---
 
 ## Goal of this post:
