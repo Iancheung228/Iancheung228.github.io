@@ -1,5 +1,5 @@
 ---
-title: BatchNorm
+title: The story of BatchNorm
 date: 2024-04-01
 ---
 
