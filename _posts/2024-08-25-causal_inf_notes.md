@@ -7,7 +7,7 @@ date: 2024-08-25
 
 Consistency:
 for each individual, one of the counterfactual outcomes is actually factual (one that corresponds to the treatment value the indiv received)
-The counterfactual outcome is equal to his observed outcome and can be expressed as $Y =Y^A$ where $Y^A$ denotes the counterfactual $Y^a$ evaluated at the observed treatment value a.
+The counterfactual outcome is equal to his observed outcome and can be expressed as $$Y =Y^A$$ where $$Y^A$$ denotes the counterfactual $$Y^a$$ evaluated at the observed treatment value a.
 
 Problem with I.C.E
 ICE is defined as a contrast of the values of counterfactual outcomes, but only one of those outcomes is observed for each individual. All counterfactual outcomes other than the one 
@@ -15,11 +15,11 @@ corresponding to the treatment value actually experienced remain unobserved. Hen
 
 We go to 1.2 average causal effects
 Average Causal Effect in the population: An ACE of treatment A on outcome Y is present if 
-$$ Pr[Y^{a=1} =1] \ineq Pr[Y^{a=0} = 1] $$ in the population of interest (this is only for binary outcomes)
+$$ Pr[Y^{a=1} =1] \neg Pr[Y^{a=0} = 1] $$ in the population of interest (this is only for binary outcomes)
 
-the more general one is $$ E[y^{a=1}] \ineq E[y^{a=0}] $$
+the more general one is $$ E[y^{a=1}] \neg E[y^{a=0}] $$
 
-Aside: absence of ACE does not imply absence of ICE
+Aside: The absence of ACE does not imply the absence of ICE
 
 1.4 Random variability (havnt read)
 
@@ -48,5 +48,4 @@ Latter is defined after treatment assignment,  and the average among those who r
 
 
 
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 
