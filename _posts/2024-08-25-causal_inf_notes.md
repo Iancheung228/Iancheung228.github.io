@@ -15,9 +15,9 @@ corresponding to the treatment value actually experienced remain unobserved. Hen
 
 We go to 1.2 average causal effects
 Average Causal Effect in the population: An ACE of treatment A on outcome Y is present if 
-$$ Pr[Y^{a=1} =1] \neg Pr[Y^{a=0} = 1] $$ in the population of interest (this is only for binary outcomes)
+$$ Pr[Y^{a=1} =1] \neq Pr[Y^{a=0} = 1] $$ in the population of interest (this is only for binary outcomes)
 
-the more general one is $$ E[y^{a=1}] \neg E[y^{a=0}] $$
+the more general one is $$ E[y^{a=1}] \neq E[y^{a=0}] $$
 
 Aside: The absence of ACE does not imply the absence of ICE
 
