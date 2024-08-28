@@ -52,7 +52,19 @@ by the individuals’ actual treatment value (A = 1 or A = 0), whereas causation
 
 
 
-Bottom line is, causal inference requires unattainable counterfactual data, but all we can ever expect is real world data. The question then becomes under what conditions can real world data be used for causal inference?
+The bottom line is, that causal inference requires unattainable counterfactual data, but all we can ever expect is real world data. The question then becomes under what conditions can real-world data be used for causal inference?
+
+
+Section 2: Randomization
+again irl, we dont know both potential outcomes under treatment or lack of. we only know the observed outcome Y under the treatment value A that the individual happened to receive. Only one of the 2 counterfactual outcomes is known for each individual: the one corresponding to the treatment level that he actually received. The data are missing for the other counterfactual outcomes.
+
+radomized experiments, still generates data with missing values of the counterfactual outcomes, however randomization ensures that those missing values occur only by chance and hence causal questions could be consistently estimated.
+
+Suppose we assign an individual to white group if its a tail, and to grey group if its a heads. Then we ask our research assitant to administer the treatment, to give white group the treatment and grey group placebo. We then collect the data. It wasn't until the next day where you found out they had misinterpreted our instructions and gave treatment the grey group instead. This reversal of treatment DOES NOT affect our conclusions! When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1] or Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
+
+Exchangability: $$Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ Because the counterfactual risk under treatment value a is the same in both groups A = 1 and A = 0, we say that the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a.
+
+section 2.2 conditional randomization 
 
 <!-- MathJax -->
 
