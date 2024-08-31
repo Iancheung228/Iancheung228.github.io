@@ -66,15 +66,17 @@ Again irl, we don't know both potential outcomes, we only know the observed outc
 
 Randomized experiments, still generate data with missing values of the counterfactual outcomes, however, randomization ensures that those missing values occur only by chance and hence causal questions could be consistently estimated.
 
-Suppose we assign an individual to the white group if it is a tail, and to the grey group if it's a head. Then we ask our research assistant to administer the treatment, to give the white group the treatment and the grey group a placebo; we then proceed to collect the data. It wasn't until the next day that you found out they had misinterpreted your instructions and gave treatment to the grey group instead. This reversal of treatment DOES NOT affect our conclusions! When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1] or Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
+Suppose we assign an individual to the white group if it is a tail, and to the grey group if it's a head. Then we ask our research assistant to administer the treatment, to give the white group the treatment and the grey group a placebo; we then proceed to collect the data. It wasn't until the next day that you found out they had misinterpreted your instructions and gave treatment to the grey group instead. This reversal of treatment DOES NOT affect our conclusions! When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
 
 \newcommand{\indep}{\perp \!\!\! \perp}
 
 Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \indep A$$
 
-In the precence of exchangeability, the observed risk in treated within the white group would equal the counterfactual risk under treatment in the entire population!
+In the presence of exchangeability, the observed risk in treated within the white group would equal the counterfactual risk under treatment in the entire population!
 
-Another attempt to explain exchangeability $$ Y^a \indep A$$
+Another attempt to explain exchangeability $$ Y^a \indep A$$. The counterfactual outcome $$Y^a$$ is like your genetics, it encodes deterministically how you will react if you took the treatment, before treatment A was randomly assigned. Another point is that we only learn about the value of the counteractual/genetic makeup $$Y^a$$ only after the treatment A is given and only if A=a.
+
+Difference between $$ Y^a \indep A $$ and $$ Y \indep A$$
 
 section 2.2 conditional randomization 
 
