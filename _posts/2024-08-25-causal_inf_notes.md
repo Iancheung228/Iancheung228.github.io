@@ -105,7 +105,7 @@ $$
 
 2.4 Identification under conditional randomization: Inverse Probability Weighting
 
-$$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y} $$
+$$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
 
 
 
