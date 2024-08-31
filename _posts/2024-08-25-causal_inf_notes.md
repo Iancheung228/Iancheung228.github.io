@@ -78,6 +78,8 @@ Another attempt to explain exchangeability $$ Y^a \indep A$$. The counterfactual
 
 Difference between $$ Y^a \indep A $$ and $$ Y \indep A$$
 
+$$ A \( \perp \) B$$
+
 section 2.2 conditional randomization 
 
 
