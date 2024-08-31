@@ -103,6 +103,10 @@ E[Y^1] &= \sum_{l} E[Y^1 \mid L=l] \cdot P(L=l) \\
 \end{aligned}
 $$
 
+2.4 Identification under conditional randomization: Inverse Probability Weighting
+
+$$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y} $$
+
 
 
 
