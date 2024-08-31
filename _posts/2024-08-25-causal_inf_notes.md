@@ -6,12 +6,12 @@ date: 2024-08-25
 
 
 Consistency:
-for each individual, one of the counterfactual outcomes is actually factual (one that corresponds to the treatment value the indiv received)
-The counterfactual outcome is equal to his observed outcome and can be expressed as $$Y =Y^A$$ where $$Y^A$$ denotes the counterfactual $$Y^a$$ evaluated at the observed treatment value a.
+For each individual, one of their counterfactual outcomes is actually factual (one that corresponds to the treatment value that the individual received).
+The counterfactual outcome equals the observed outcome and can be expressed as $$Y^A=Y$$ where $$Y^A$$ denotes the counterfactual $$Y^a$$ evaluated at the observed treatment value a.
 
 Problem with I.C.E
-ICE is defined as a contrast of the values of counterfactual outcomes, but only one of those outcomes is observed for each individual. All counterfactual outcomes other than the one 
-corresponding to the treatment value actually experienced remain unobserved. Hence individual effects cant be identified
+ICE is defined as a contrast of the values of counterfactual outcomes, but only one of those outcomes is ever observed for each individual. All other counterfactual outcomes apart from the one 
+corresponding to the actual treatment value remain unobserved. Hence individual effects cant be identified
 
 We go to 1.2 average causal effects
 Average Causal Effect in the population: An ACE of treatment A on outcome Y is present if 
@@ -23,15 +23,15 @@ Aside: The absence of ACE does not imply the absence of ICE
 
 1.4 Random variability 
 There are 2 main sources of imperfect irl
-1) Sampling variability: In practice, we collect info on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact proportion of individuals in the population. That is we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We say its consitent estimator because as number of indiv in sample grows, we expect diff to grow smaller as the error due to sampling variability obies law of large number. Since the super population prob cant be computer but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
+1) Sampling variability: In practice, we collect data on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact risk proportion for the superpopulation. That is: we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We call it a consitent estimator because as number of indiv in sample grows, we expect estimate and true value to grow smaller as the error due to sampling variability obeys the law of large number. Since the super population prob cant be computed but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
 
-2) The value of an individual's counterfactual outcomes are not fixed either. For example, Zeus would have a 100% chance dying if treated and would have 0% chance dying if untreated. The value of the counterfactual outcomes is deterministic for each individual. In real life counterfactual outcomes are often stochastic.
+2) The value of an individual's counterfactual outcomes is not fixed either. In previous examples, Zeus would have a 100% chance of dying if treated and would have 0% chance dying if untreated. The value of the counterfactual outcomes is deterministic for each individual. In real life, counterfactual outcomes are often stochastic.
 
    
 
-1.5 Association vs causation
+1.5 Association vs Causation
 
-Association: 2 variables are associated if information about one tells you something about the value of other
+Association: 2 variables are associated if information about one tells you something about the value of the other
 Causation: 2 variables are causally related if manipulating the level of one has the potential to change the level of others (holding all else fixed)
 
 causal effect for an individual: The treatment A has a causal effect on an individual's outcome Y if $$Y^{a=1} \neq Y^{a=0}$$ for the individual
