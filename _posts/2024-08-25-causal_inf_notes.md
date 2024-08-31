@@ -21,14 +21,20 @@ the more general one is $$ E[y^{a=1}] \neq E[y^{a=0}] $$
 
 Aside: The absence of ACE does not imply the absence of ICE
 
-1.4 Random variability (havnt read)
+1.4 Random variability 
+There are 2 main sources of imperfect irl
+1) Sampling variability: In practice, we collect info on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact proportion of individuals in the population. That is we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We say its consitent estimator because as number of indiv in sample grows, we expect diff to grow smaller as the error due to sampling variability obies law of large number. Since the super population prob cant be computer but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
+
+2) The value of an individual's counterfactual outcomes are not fixed either. For example, Zeus would have a 100% chance dying if treated and would have 0% chance dying if untreated. The value of the counterfactual outcomes is deterministic for each individual. In real life counterfactual outcomes are often stochastic.
+
+   
 
 1.5 Association vs causation
 
 Association: 2 variables are associated if information about one tells you something about the value of other
 Causation: 2 variables are causally related if manipulating the level of one has the potential to change the level of others (holding all else fixed)
 
-causal effect for an individual: The treatment A has a causal effect on an individual's outcome Y if $$Y^{a=1} \ineq Y^{a=0}$$ for the individual
+causal effect for an individual: The treatment A has a causal effect on an individual's outcome Y if $$Y^{a=1} \neq Y^{a=0}$$ for the individual
 
 $$ E[Y^{1}_{i}]$$ is generally distinct from $$ E[Y_i|A_i =1] $$
 former is defined as a prior and averaged across the entire population (only god knows)
