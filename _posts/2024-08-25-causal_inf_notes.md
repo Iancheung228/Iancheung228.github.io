@@ -70,17 +70,36 @@ Suppose we assign an individual to the white group if it is a tail, and to the g
 
 \newcommand{\indep}{\perp \!\!\! \perp}
 
-Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \indep A$$
+Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \perp A$$
 
 In the presence of exchangeability, the observed risk in treated within the white group would equal the counterfactual risk under treatment in the entire population!
 
-Another attempt to explain exchangeability $$ Y^a \indep A$$. The counterfactual outcome $$Y^a$$ is like your genetics, it encodes deterministically how you will react if you took the treatment, before treatment A was randomly assigned. Another point is that we only learn about the value of the counteractual/genetic makeup $$Y^a$$ only after the treatment A is given and only if A=a.
+Another attempt to explain exchangeability $$ Y^a \perp A$$. The counterfactual outcome $$Y^a$$ is like your genetics, it encodes deterministically how you will react if you took the treatment, before treatment A was randomly assigned. Another point is that we only learn about the value of the counteractual/genetic makeup $$Y^a$$ only after the treatment A is given and only if A=a.
 
-Difference between $$ Y^a \indep A $$ and $$ Y \indep A$$
+Difference between $$ Y^a \perp A $$ and $$ Y \perp A$$
+In a randomized experiment in which exchangeability holds and we find the treatment has a causal effect on the outcome, then 
+$$ Y \perp A$$ does not hold.
 
-$$ A \( \perp \) B$$
 
 section 2.2 conditional randomization 
+In the example in Hernan's book, if you are in critical condition, you will
+
+conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
+
+Conditional exchangeability: $$Y^a \perp A|L$$ for all a.
+or equivanetly $$ Pr[Y^a = 1 |A=1,L=1] = Pr[Y^a = 1 |A=0,L=1]$$
+
+conditional randomization does not guarantee unconditional (marginal) exchangeability, it does guarantee conditional exchangeability within levels of the variable L.
+
+2.3 Identification under conditional randomization: Standardization
+The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
+
+$$
+\begin{aligned}
+E[Y^1] &= E[Y^1|L=l] P(L=l) 
+  &= E[Y^1|A=1,L=1
+\end{aligned}
+$$
 
 
 
