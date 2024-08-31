@@ -28,9 +28,9 @@ Aside: The absence of ACE does not imply the absence of ICE
 Association: 2 variables are associated if information about one tells you something about the value of other
 Causation: 2 variables are causally related if manipulating the level of one has the potential to change the level of others (holding all else fixed)
 
-causal effect for an individual: The treatment A has a causal effect on an individual's outcome Y if $Y^{a=1} \ineq Y^{a=0}$ for the individual
+causal effect for an individual: The treatment A has a causal effect on an individual's outcome Y if $$Y^{a=1} \ineq Y^{a=0}$$ for the individual
 
-$ E[Y^{1}_{i}]$ is generally distinct from $ E[Y_i|A_i =1] $
+$$ E[Y^{1}_{i}]$$ is generally distinct from $$ E[Y_i|A_i =1] $$
 former is defined as a prior and averaged across the entire population (only god knows)
 Latter is defined after treatment assignment,  and the average among those who receive treatment A_i = 1
 
