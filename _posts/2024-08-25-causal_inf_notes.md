@@ -94,10 +94,11 @@ conditional randomization does not guarantee unconditional (marginal) exchangeab
 2.3 Identification under conditional randomization: Standardization
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
+
 $$
 \begin{aligned}
-E[Y^1] &= E[Y^1|L=l] P(L=l) 
-  &= E[Y^1|A=1,L=1
+E[Y^1] &= E[Y^1 \mid L=l] \cdot P(L=l) \\
+       &= E[Y^1 \mid A=1, L=1]
 \end{aligned}
 $$
 
