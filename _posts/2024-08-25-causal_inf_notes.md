@@ -97,8 +97,9 @@ The question is can we write the counterfactual in terms of observed data? (whet
 
 $$
 \begin{aligned}
-E[Y^1] &= E[Y^1 \mid L=l] \cdot P(L=l) \\
-       &= E[Y^1 \mid A=1, L=1]
+E[Y^1] &= \sum_{l} E[Y^1 \mid L=l] \cdot P(L=l) \\
+       &= \sum_{l} E[Y^1 \mid A=1, L=1] \cdot P(L=l) \\
+       &= \sum_{l} E[Y \mid A=1, L=1] \cdot P(L=l) \\
 \end{aligned}
 $$
 
