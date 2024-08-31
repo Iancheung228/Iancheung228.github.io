@@ -66,9 +66,14 @@ Again irl, we don't know both potential outcomes, we only know the observed outc
 
 Randomized experiments, still generate data with missing values of the counterfactual outcomes, however, randomization ensures that those missing values occur only by chance and hence causal questions could be consistently estimated.
 
-Suppose we assign an individual to the white group if it is a tail, and to the grey group if it's a head. Then we ask our research assistant to administer the treatment, to give the white group the treatment and the grey group a placebo; we then proceed to collect the data. It wasn't until the next day that you found out they had misinterpreted your instructions and gave treatment to the grey group instead. This reversal of treatment DOES NOT affect our conclusions! When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
+Suppose we assign an individual to the white group if it is a tail, and to the grey group if it's a head. Then we ask our research assistant to administer the treatment, to give the white group the treatment and the grey group a placebo; we then proceed to collect the data. 
 
-\newcommand{\indep}{\perp \!\!\! \perp}
+
+It wasn't until the next day that you found out they had misinterpreted your instructions and gave treatment to the grey group instead. This reversal of treatment DOES NOT affect our conclusions! 
+
+
+When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
+
 
 Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \perp A$$
 
