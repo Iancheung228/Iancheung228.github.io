@@ -72,7 +72,9 @@ Suppose we assign an individual to the white group if it is a tail, and to the g
 It wasn't until the next day that you found out they had misinterpreted your instructions and gave treatment to the grey group instead. This reversal of treatment DOES NOT affect our conclusions! 
 
 
-When group membership is randomized, which particular group received the treatment is irrelevant for the value of $$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
+When group membership is randomized, which particular group received the treatment is irrelevant for the value of 
+
+$$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
 
 
 Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \perp A$$
@@ -84,7 +86,6 @@ Another attempt to explain exchangeability $$ Y^a \perp A$$. The counterfactual 
 Difference between $$ Y^a \perp A $$ and $$ Y \perp A$$
 In a randomized experiment in which exchangeability holds and we find the treatment has a causal effect on the outcome, then 
 $$ Y \perp A$$ does not hold.
-
 
 section 2.2 conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will
