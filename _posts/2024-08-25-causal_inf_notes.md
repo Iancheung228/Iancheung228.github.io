@@ -131,9 +131,16 @@ For a given sample size and clinically important treatment effect, what is the p
 Example
 Suppose we want to test $$H_0 : \pi_1 = \pi_0 $$ against $$H_A: \pi_1 \neq \pi_0$$ using risk difference. The score test for risk difference would be 
 
-$$ Z = \frac{\hat{\pi_1} - \hat{\pi_0} }{\sqrt{\hat{\pi}(1-\hat{\pi})( \frac{1}{n} + \frac{1}{n})}} $$
+$$ Z = \frac{\hat{\pi_1} - \hat{\pi_0} }{\sqrt{\hat{\pi}(1-\hat{\pi})( \frac{1}{n} + \frac{1}{n})}}  ~ N(0,1)$$
 
-$$ \[ Z = \frac{\hat{\pi_1} - \hat{\pi_0}}{\sqrt{\hat{\pi}(1 - \hat{\pi}) \left(\frac{1}{n} + \frac{1}{n}\right)}} \] $$
+Under a one-sided test, we reject the Null hypothesis when $$ Z < z^* $$ and we want an alpha of $$\alpha$$ means
+
+$$ P_0(Z-z^*) = \alpha $$
+
+
+To obtain a desired power of 1- $$\beta$$ we want to reject Null 1- $$\beta$$% of the time given Non null is indeed True. That is we want
+
+1- $$\beta$$ $$ \leq P_A (Z<z)$$
 
 
 
