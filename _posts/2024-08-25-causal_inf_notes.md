@@ -73,11 +73,13 @@ It wasn't until the next day that you found out they had misinterpreted your ins
 
 
 When group membership is randomized, which particular group received the treatment is irrelevant for the value of 
+$$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ 
+Formally we say the groups are exchangeable.
 
-$$ Pr[Y=1 |A=1]$$ or $$Pr[Y=1 |A=0]$$ Formally we say the groups are exchangeable.
 
-
-Exchangeability: $$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \perp A$$
+Exchangeability: 
+$$ Pr[Y^a = 1  | A=1] = Pr[Y^a = 1  | A=0] = Pr[Y^a =1]$$ 
+We say  the counterfactual risk under treatment value a (both when a=1 and a =0) is the same in both groups A = 1 and A = 0. Phrasing differently, the actual treatment A does not predict the counterfactual outcome, and the actual treatment are independent for all values a. $$ Y^a \perp A$$
 
 In the presence of exchangeability, the observed risk in treated within the white group would equal the counterfactual risk under treatment in the entire population!
 
@@ -93,7 +95,8 @@ In the example in Hernan's book, if you are in critical condition, you will
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
 
 Conditional exchangeability: $$Y^a \perp A|L$$ for all a.
-or equivanetly $$ Pr[Y^a = 1 |A=1,L=1] = Pr[Y^a = 1 |A=0,L=1]$$
+Or Equivanetly: 
+$$ Pr[Y^a = 1 |A=1,L=1] = Pr[Y^a = 1 |A=0,L=1]$$
 
 conditional randomization does not guarantee unconditional (marginal) exchangeability, it does guarantee conditional exchangeability within levels of the variable L.
 
