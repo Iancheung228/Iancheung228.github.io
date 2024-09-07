@@ -133,6 +133,7 @@ Suppose we want to test $$H_0 : \pi_1 = \pi_0 $$ against $$H_A: \pi_1 \neq \pi_0
 
 $$ Z = \frac{\hat{\pi_1} - \hat{\pi_0} }{\sqrt{\hat{\pi}(1-\hat{\pi})( \frac{1}{n} + \frac{1}{n})}} $$
 
+$$ \[ Z = \frac{\hat{\pi_1} - \hat{\pi_0}}{\sqrt{\hat{\pi}(1 - \hat{\pi}) \left(\frac{1}{n} + \frac{1}{n}\right)}} \] $$
 
 
 
