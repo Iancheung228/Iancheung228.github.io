@@ -115,6 +115,26 @@ $$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
 
 
 
+Power Analysis:
+definition: Power (1- $$\beta$$) = The probability of rejecting the Null hypothesis when $$H_A$$ is in fact true.
+The higher the power, the less likely you will make a false negative error. (type ii error, incorrectly failing to reject null)
+
+definition: Alpha = The probability of rejecting the Null hypothesis when &&H_o$$ is in fact true. (type 1 error, incorrectly rejecting null)
+
+Relationship between $$ /alpha$$, $$/beta$$ and sample size.
+Sample size calculation:
+For a fixed level of alpha, what sample size would be needed to guarantee a power of P?
+
+Power calculation:
+For a given sample size and clinically important treatment effect, what is the power of the study?
+
+Example
+Suppose we want to test $$H_0 : \pi_1 = \pi_0 $$ against $$H_A: \pi_1 \neq \pi_0$$ using risk difference. The score test for risk difference would be 
+
+$$ Z = \frac{\hat{\pi_1} - \hat{\pi_0} }{\sqrt{\hat{\pi}(1-\hat{\pi})( \frac{1}{n} + \frac{1}{n})}} $$
+
+
+
 
 <!-- MathJax -->
 
