@@ -21,7 +21,7 @@ the more general one is $$ E[y^{a=1}] \neq E[y^{a=0}] $$
 
 Aside: The absence of ACE does not imply the absence of ICE
 
-1.4 Random variability 
+## 1.4 Random variability 
 There are 2 main sources of imperfect irl
 1) Sampling variability: In practice, we collect data on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact risk proportion for the superpopulation. That is: we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We call it a consitent estimator because as number of indiv in sample grows, we expect estimate and true value to grow smaller as the error due to sampling variability obeys the law of large number. Since the super population prob cant be computed but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
 
@@ -29,7 +29,7 @@ There are 2 main sources of imperfect irl
 
    
 
-1.5 Association vs Causation
+## 1.5 Association vs Causation
 
 Association: 2 variables are associated if information about one tells you something about the value of the other
 Causation: 2 variables are causally related if manipulating the level of one has the potential to change the level of others (holding all else fixed)
@@ -90,7 +90,7 @@ In a randomized experiment in which exchangeability holds and we find the treatm
 $$ Y \perp A$$ does not hold.
 
 ## section 2.2 Conditional randomization 
-In the example in Hernan's book, if you are in critical condition, you will
+In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangibility. However we can acheive cond exch if we focus on the critical group.
 
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
 
@@ -103,7 +103,7 @@ conditional randomization does not guarantee unconditional (marginal) exchangeab
 ## 2.3 Identification under conditional randomization: Standardization testing
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
-
+Recall in conditional exchangeability
 $$
 \begin{aligned}
 E[Y^1] &= \mathop{{}\mathbb{E}}  (by total expectation) \\
