@@ -89,7 +89,7 @@ Difference between $$ Y^a \perp A $$ and $$ Y \perp A$$
 In a randomized experiment in which exchangeability holds and we find the treatment has a causal effect on the outcome, then 
 $$ Y \perp A$$ does not hold.
 
-## section 2.2 conditional randomization 
+## section 2.2 Conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will
 
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
@@ -106,9 +106,9 @@ The question is can we write the counterfactual in terms of observed data? (whet
 
 $$
 \begin{aligned}
-E[Y^1] &= \sum_{l} E[Y^1 \mid L=l] \cdot P(L=l) \\
-       &= \sum_{l} E[Y^1 \mid A=1, L=1] \cdot P(L=l) \\
-       &= \sum_{l} E[Y \mid A=1, L=1] \cdot P(L=l) \\
+E[Y^1] &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell) \\
+       &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell)    \\
+       &= \sum_{\ell} E[Y \mid A=1, L=\ell] \cdot P(L=\ell) \\
 \end{aligned}
 $$
 
