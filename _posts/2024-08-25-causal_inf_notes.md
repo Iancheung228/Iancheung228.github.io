@@ -61,7 +61,7 @@ by the individuals’ actual treatment value (A = 1 or A = 0), whereas causation
 The bottom line is, that causal inference requires unattainable counterfactual data, but all we can ever expect is real world data. The question then becomes under what conditions can real-world data be used for causal inference?
 
 
-Section 2: Randomization
+# Section 2: Randomization
 Again irl, we don't know both potential outcomes, we only know the observed outcome Y under the treatment value A that the individual happened to receive. Only one of the 2 counterfactual outcomes is known for each individual: the one corresponding to the treatment level that he actually received. The data are missing for the other counterfactual outcomes.
 
 Randomized experiments, still generate data with missing values of the counterfactual outcomes, however, randomization ensures that those missing values occur only by chance and hence causal questions could be consistently estimated.
@@ -89,7 +89,7 @@ Difference between $$ Y^a \perp A $$ and $$ Y \perp A$$
 In a randomized experiment in which exchangeability holds and we find the treatment has a causal effect on the outcome, then 
 $$ Y \perp A$$ does not hold.
 
-section 2.2 conditional randomization 
+## section 2.2 conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will
 
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
@@ -100,7 +100,7 @@ $$ Pr[Y^a = 1 |A=1,L=1] = Pr[Y^a = 1 |A=0,L=1]$$
 
 conditional randomization does not guarantee unconditional (marginal) exchangeability, it does guarantee conditional exchangeability within levels of the variable L.
 
-2.3 Identification under conditional randomization: Standardization
+## 2.3 Identification under conditional randomization: Standardization
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
 
@@ -112,13 +112,13 @@ E[Y^1] &= \sum_{l} E[Y^1 \mid L=l] \cdot P(L=l) \\
 \end{aligned}
 $$
 
-2.4 Identification under conditional randomization: Inverse Probability Weighting
+## 2.4 Identification under conditional randomization: Inverse Probability Weighting
 
 $$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
 
 
 
-Power Analysis:
+## Power Analysis:
 definition: Power (1- $$\beta$$) = The probability of rejecting the Null hypothesis when $$H_A$$ is in fact true.
 The higher the power, the less likely you will make a false negative error. (type ii error, incorrectly failing to reject null)
 
@@ -144,6 +144,30 @@ $$ P_0(Z-z^*) = \alpha $$
 To obtain a desired power of 1- $$\beta$$ we want to reject Null 1- $$\beta$$% of the time given Non null is indeed True. That is we want
 
 1- $$\beta$$ $$ \leq P_A (Z<z)$$
+
+
+
+
+## Chapter 11:
+What is the difference between the nonparametric estimator in Part I vs the parametric (model-based) estimators in Part II?
+
+We want to consistently estimate the mean of Y among individuals with treatment level A=a in the population, from which we have data on a subset of the population. That is we use $$ \hat{E}[Y|A=a]$$ to estimate $$ \hat{E}[Y|A=a]$$. 
+
+But its possible that A could take on a near continuous range of values, in which case we can't allocate our finite sample across the continuum. In fact if there is no data in a category, the sample average is undefined for that category. We have to make an additional assumption / constraint on the form of data. Let's go over the thought experiment, suppose we have 16 individuals in our sample and they could take on A = {0,1}, or A = {0,1,2,3} . Clearly the number of individuals per category decreases as the number of categories increase. The sample average in each categoy is still an unbiased estimator of the corresponding population mean. But... the probability that the sample average is close to the corresponding population mean decreeases as the number of individuals in each category decreases. That is the distribution of sample averages has a much larger variance.
+
+We need to add restrictions. For example: the outcome of A=1 must be in between that of A=0 and A=2 and linearly proportional.
+
+$$ E[Y|A] = \theta_0 + \theta_1A$$
+The above equation is known as the functional form of the conditional mean. This model specifies that all conditional mean functions are straight lines, though their intercepts and slopes may vary.
+
+An exactly unbiased estimator of the parameters can be obtained by ordinary least squares.
+
+This is not a free lunch though, when using a parametric model, we are assuming there is no model misspecification, i.e. the functional form has to be somewhat close to the unknown reality.
+
+### saturated models 11.3
+if there are 2 parameters and only 2 treatment levels, we call it  a saturated model, which essentially means the model doesn't impose restrictions on the distribution of the data. generally model is saturated whenever # of parameters in a conditional mean model equals the number of unknown conditional means in the population
+
+
 
 
 
