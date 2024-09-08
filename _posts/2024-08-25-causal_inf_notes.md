@@ -100,7 +100,7 @@ $$ Pr[Y^a = 1 |A=1,L=1] = Pr[Y^a = 1 |A=0,L=1]$$
 
 conditional randomization does not guarantee unconditional (marginal) exchangeability, it does guarantee conditional exchangeability within levels of the variable L.
 
-## 2.3 Identification under conditional randomization: Standardization
+## 2.3 Identification under conditional randomization: Standardization testing
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
 
@@ -116,7 +116,7 @@ $$
 $$
 \begin{aligned}
 E[Y^1] &= \mathbb{E}[Y^1] \quad (\text{by total expectation}) \\
-       &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell) \quad (\text{by total expectation}) \\
+       &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell) \quad  \\
        &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by conditional exchangeability}) \\
        &= \sum_{\ell} E[Y \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by consistency}) \\
 \end{aligned}
