@@ -113,6 +113,15 @@ E[Y^1] &= \mathop{{}\mathbb{E}}  (by total expectation) \\
 \end{aligned}
 $$
 
+$$
+\begin{aligned}
+E[Y^1] &= \mathbb{E}[Y^1] \quad (\text{by total expectation}) \\
+       &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell) \quad (\text{by total expectation}) \\
+       &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by conditional exchangeability}) \\
+       &= \sum_{\ell} E[Y \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by consistency}) \\
+\end{aligned}
+$$
+
 ## 2.4 Identification under conditional randomization: Inverse Probability Weighting
 
 $$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
