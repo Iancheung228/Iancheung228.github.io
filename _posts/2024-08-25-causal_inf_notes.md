@@ -91,11 +91,11 @@ $$ Y \perp A$$ does not hold.
 
 ## section 2.2 Conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangeability. However we can conclude the observed risks equal the counterfactual risks in the group of all critical conditions.
-$$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
-$$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
+1) $$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
+2) $$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
 
-$$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
-$$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
+3) $$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
+4) $$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
 
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
 
@@ -108,10 +108,22 @@ conditional randomization does not guarantee unconditional (marginal) exchangeab
 ## 2.3 Identification under conditional randomization: Standardization
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
+By cond exch:
+1) $$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
+2) $$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
+
+3) $$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
+4) $$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
+
+Now suppose we want to calculate the causal risk ratio
+$$ \frac{Pr[Y^{a=1} = 1]} {Pr[Y^{a=0} = 1]} $$
+
+The numerator is the risk if all individuals in the population had been treated, we can find this with the weighted average of risk of each group, where weight is proportional to its size L.
+
 Recall in conditional exchangeability
 $$
 \begin{aligned}
-E[Y^1] &= \mathbb{E}_L(\mathbb{E} [Y^1]) \quad (\text{by total expectation}) \\
+E[Y^1] &= \mathbb{E}_L(\mathbb{E}_{Y|L} [Y^1|L]) \quad (\text{by total expectation}) \\
        &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell) \quad  \\
        &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by conditional exchangeability}) \\
        &= \sum_{\ell} E[Y \mid A=1, L=\ell] \cdot P(L=\ell) \quad (\text{by consistency}) \\
@@ -122,7 +134,15 @@ $$
 
 $$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
 
+We create 2 simulations (2 trees) of what would have happened had all individual in pop been treated , and untreated respectively. These simulations are correct under cond exchange. Then we POOL the 2 trees, to create a hypothestical population of size 2n in which every individual appears as treated AND untreated. This 2n population is called the pseudo population.
 
+Given C.E in origianl population, the treated and untreated are MARGINALLY exchangeable in the pseudo pop because L is independent of A. That is, associational risk ratio in pseudo population equals the causal risk ratio in BOTH the pseudo pop and org pop.
+
+
+Both standardization and IPW can be viewed as procedures to build a new tree in which all individuals receive treatment a.
+They differ by suing different set of the probabilities to build the counterfactual tree; IPW uses conditional prob of treatment A given covariate L, while standarization uses prob of covariate L and the conditional probability of outcome Y given A and L
+
+Both simulate what would have been observed if L had not been used to decide the probability of treatment
 
 ## Power Analysis:
 definition: Power (1- $$\beta$$) = The probability of rejecting the Null hypothesis when $$H_A$$ is in fact true.
