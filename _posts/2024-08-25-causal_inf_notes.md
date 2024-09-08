@@ -90,7 +90,12 @@ In a randomized experiment in which exchangeability holds and we find the treatm
 $$ Y \perp A$$ does not hold.
 
 ## section 2.2 Conditional randomization 
-In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangibility. However we can acheive cond exch if we focus on the critical group.
+In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangeability. However we can conclude the observed risks equal the counterfactual risks in the group of all critical conditions.
+$$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
+$$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
+
+$$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
+$$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
 
 conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
 
