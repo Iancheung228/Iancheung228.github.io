@@ -106,9 +106,9 @@ The question is can we write the counterfactual in terms of observed data? (whet
 
 $$
 \begin{aligned}
-E[Y^1] &= \mathop{{}\mathbb{E}}  [by total expectation] \\
-       &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell)  [by total expectation] \\
-       &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell)   [by cond exch] \\
+E[Y^1] &= \mathop{{}\mathbb{E}}  (by total expectation) \\
+       &= \sum_{\ell} E[Y^1 \mid L=\ell] \cdot P(L=\ell)  (by total expectation) \\
+       &= \sum_{\ell} E[Y^1 \mid A=1, L=\ell] \cdot P(L=\ell)   (by cond exch) \\
        &= \sum_{\ell} E[Y \mid A=1, L=\ell] \cdot P(L=\ell) [by consistency] \\
 \end{aligned}
 $$
