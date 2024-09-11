@@ -38,11 +38,15 @@ causal effect for an individual: The treatment A has a causal effect on an indiv
 
 $$ E[Y^{1}_{i}]$$ is generally distinct from $$ E[Y_i|A_i =1] $$
 former is defined as a prior and averaged across the entire population (only god knows)
-Latter is defined after treatment assignment,  and the average among those who receive treatment A_i = 1
+Latter is defined after treatment assignment,  and the average among those who receive treatment $$A_i$$ = 1
 
-The conditional probability $$ Pr[Y=1 | A=1] $$ is defined as the proportion of individuals that developed the outcome Y among those individuals in the population of interest that happened to receive treatment value a. 
+The conditional probability 
+$$ Pr[Y=1 | A=1] $$
+is defined as the proportion of individuals that developed the outcome Y among those individuals in the population of interest that happened to receive treatment value a. 
 
-We say treatment A and outcome Y are independent if $$ Pr[Y=1 | A=1] = Pr[Y=1 | A=0] $$, that A is not associated with Y, or that A does not predict Y. Conversely we say that treatment A and outcome Y are dependent or associated
+We say treatment A and outcome Y are independent if 
+$$ Pr[Y=1 | A=1] = Pr[Y=1 | A=0] $$,
+that A is not associated with Y, or that A does not predict Y. Conversely we say that treatment A and outcome Y are dependent or associated
 
 ![Screenshot 2024-08-27 at 9 39 23 PM](https://github.com/user-attachments/assets/8700f062-3563-48e1-96c2-81e6c50fc510)
 
