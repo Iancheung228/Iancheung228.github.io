@@ -109,9 +109,9 @@ conditional randomization does not guarantee unconditional (marginal) exchangeab
 The question is can we write the counterfactual in terms of observed data? (whether it's identifiable)
 
 By cond exch:
+
 1) $$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
 2) $$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
-
 3) $$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
 4) $$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
 
