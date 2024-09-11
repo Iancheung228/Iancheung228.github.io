@@ -48,10 +48,10 @@ We say treatment A and outcome Y are independent if $$ Pr[Y=1 | A=1] = Pr[Y=1 | 
 
 The definition of causation implies a contrast between all individuals treated vs all individuals untreated. Association implies a contrast between the treated and the untreated of the original diamond.
 
-Put another way, inference about causation is concerned with the counterfactual worlds, like "what would be the risk if everybody been treated/untreated?" Inference for association is concerned with questions in the actual world, like "what is the risk in the treated/untreated?"
+Put another way, inference about causation is concerned with the counterfactual worlds, like "What would be the risk if everybody been treated/untreated?" Inference for association is concerned with questions in the actual world, like "What is the risk in the treated/untreated?"
 
 Association uses a conditional probability, namely being conditioned on having actually received treatment value a (A=a)
-causation is unconditional , or marginal probability, the risk of $$Y^a$$ in the entire population.
+causation is unconditional, or marginal probability, the risk of $$Y^a$$ in the entire population.
 
 Therefore, association is defined by a different risk in two disjoint subsets of the population determined
 by the individuals’ actual treatment value (A = 1 or A = 0), whereas causation is defined by a different risk in the same population under two different treatment values (a = 1 or a = 0). 
@@ -83,7 +83,7 @@ We say  the counterfactual risk under treatment value a (both when a=1 and a =0)
 
 In the presence of exchangeability, the observed risk in treated within the white group would equal the counterfactual risk under treatment in the entire population!
 
-Another attempt to explain exchangeability $$ Y^a \perp A$$. The counterfactual outcome $$Y^a$$ is like your genetics, it encodes deterministically how you will react if you took the treatment, before treatment A was randomly assigned. Another point is that we only learn about the value of the counteractual/genetic makeup $$Y^a$$ only after the treatment A is given and only if A=a.
+Another attempt to explain exchangeability $$ Y^a \perp A$$. The counterfactual outcome $$Y^a$$ is like your genetics, it encodes deterministically how you will react if you took the treatment, before treatment A was randomly assigned. Another point is that we only learn about the value of the counterfactual/genetic makeup $$Y^a$$ only after the treatment A is given and only if A=a.
 
 Difference between $$ Y^a \perp A $$ and $$ Y \perp A$$
 In a randomized experiment in which exchangeability holds and we find the treatment has a causal effect on the outcome, then 
@@ -91,13 +91,13 @@ $$ Y \perp A$$ does not hold.
 
 ## section 2.2 Conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangeability. However we can conclude the observed risks equal the counterfactual risks in the group of all critical conditions.
+
 1) $$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
 2) $$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
-
 3) $$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
 4) $$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
 
-conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the other  in the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
+conditionally randomized experiment is simply a combination of 2 separate marginally randomized experiments: one conducted in the subset of individuals in critical condition, the otherin the subset of individuals in critical condition. Within each subset, the treated and the untreated are exchangeable.
 
 Conditional exchangeability: $$Y^a \perp A|L$$ for all a.
 Or Equivanetly: 
@@ -134,13 +134,13 @@ $$
 
 $$ E[Y^a] = E[\frac{I(A=a)}{f(A|L)} Y] $$
 
-We create 2 simulations (2 trees) of what would have happened had all individual in pop been treated , and untreated respectively. These simulations are correct under cond exchange. Then we POOL the 2 trees, to create a hypothestical population of size 2n in which every individual appears as treated AND untreated. This 2n population is called the pseudo population.
+We create 2 simulations (2 trees) of what would have happened had all individuals in pop been treated, and untreated respectively. These simulations are correct under cond exchange. Then we POOL the 2 trees, to create a hypothetical population of size 2n in which every individual appears as treated AND untreated. This 2n population is called the pseudo population.
 
-Given C.E in origianl population, the treated and untreated are MARGINALLY exchangeable in the pseudo pop because L is independent of A. That is, associational risk ratio in pseudo population equals the causal risk ratio in BOTH the pseudo pop and org pop.
+Given C.E in original population, the treated and untreated are MARGINALLY exchangeable in the pseudo pop because L is independent of A. That is, the associational risk ratio in the pseudo population equals the causal risk ratio in BOTH the pseudo pop and org pop.
 
 
 Both standardization and IPW can be viewed as procedures to build a new tree in which all individuals receive treatment a.
-They differ by suing different set of the probabilities to build the counterfactual tree; IPW uses conditional prob of treatment A given covariate L, while standarization uses prob of covariate L and the conditional probability of outcome Y given A and L
+They differ by using different set of probabilities to build the counterfactual tree; IPW uses the conditional prob of treatment A given covariate L, while standarization uses prob of covariate L and the conditional probability of outcome Y given A and L
 
 Both simulate what would have been observed if L had not been used to decide the probability of treatment
 
@@ -177,9 +177,10 @@ To obtain a desired power of 1- $$\beta$$ we want to reject Null 1- $$\beta$$% o
 ## Chapter 11:
 What is the difference between the nonparametric estimator in Part I vs the parametric (model-based) estimators in Part II?
 
-We want to consistently estimate the mean of Y among individuals with treatment level A=a in the population, from which we have data on a subset of the population. That is we use $$ \hat{E}[Y|A=a]$$ to estimate $$ \hat{E}[Y|A=a]$$. 
+We want to consistently estimate the mean of Y among individuals with treatment level A=a in the population, from which we have data on a subset of the population. That is we use 
+$$ \hat{E}[Y|A=a]$$ to estimate $$ \hat{E}[Y|A=a]$$. 
 
-But its possible that A could take on a near continuous range of values, in which case we can't allocate our finite sample across the continuum. In fact if there is no data in a category, the sample average is undefined for that category. We have to make an additional assumption / constraint on the form of data. Let's go over the thought experiment, suppose we have 16 individuals in our sample and they could take on A = {0,1}, or A = {0,1,2,3} . Clearly the number of individuals per category decreases as the number of categories increase. The sample average in each categoy is still an unbiased estimator of the corresponding population mean. But... the probability that the sample average is close to the corresponding population mean decreeases as the number of individuals in each category decreases. That is the distribution of sample averages has a much larger variance.
+But it's possible that A could take on a nearly continuous range of values, in which case we can't allocate our finite sample across the continuum. In fact, if there is no data in a category, the sample average is undefined for that category. We have to make an additional assumption/constraint on the form of data. Let's go over the thought experiment, suppose we have 16 individuals in our sample and they could take on A = {0,1}, or A = {0,1,2,3}. Clearly the number of individuals per category decreases as the number of categories increases. The sample average in each category is still an unbiased estimator of the corresponding population mean. But... the probability that the sample average is close to the corresponding population mean decreases as the number of individuals in each category decreases. That is the distribution of sample averages has a much larger variance.
 
 We need to add restrictions. For example: the outcome of A=1 must be in between that of A=0 and A=2 and linearly proportional.
 
@@ -190,7 +191,7 @@ An exactly unbiased estimator of the parameters can be obtained by ordinary leas
 
 This is not a free lunch though, when using a parametric model, we are assuming there is no model misspecification, i.e. the functional form has to be somewhat close to the unknown reality.
 
-### saturated models 11.3
+### Saturated models 11.3
 if there are 2 parameters and only 2 treatment levels, we call it  a saturated model, which essentially means the model doesn't impose restrictions on the distribution of the data. generally model is saturated whenever # of parameters in a conditional mean model equals the number of unknown conditional means in the population
 
 
