@@ -96,8 +96,8 @@ $$ Y \perp A$$ does not hold.
 ## section 2.2 Conditional randomization 
 In the example in Hernan's book, if you are in critical condition, you will be more likely to be assigned treatment than not. We no longer have marginal exchangeability. However we can conclude the observed risks equal the counterfactual risks in the group of all critical conditions.
 
-1) $$ Pr[Y^{a=1} = 1 |L =1] = Pr[Y=1 |L=1,A=1] $$ 
-2) $$ Pr[Y^{a=0} = 1 |L =1] = Pr[Y=1 |L=1,A=0] $$
+1) $$ Pr[Y^{a=1} = 1 |L =1]=Pr[Y=1 |L=1,A=1] $$ 
+2) $$ Pr[Y^{a=0} = 1 |L =1]=Pr[Y=1 |L=1,A=0] $$
 3) $$ Pr[Y^{a=1} = 1 |L =0] = Pr[Y=1 |L=0,A=1] $$ 
 4) $$ Pr[Y^{a=0} = 1 |L =0] = Pr[Y=1 |L=0,A=0] $$
 
