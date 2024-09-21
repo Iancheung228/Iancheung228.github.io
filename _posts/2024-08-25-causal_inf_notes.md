@@ -217,6 +217,18 @@ goal of matching is to construct a subset of the population which the variables 
 ## 4.6 effect modification and adjustment methods
 standardization, IPW, stratification and matching are all ways to estimate average causal effect, but they estimate different types of causal effects. The first 2 are capable of measuring both marginal and conditional effect, while the latter 2 can only measure conditional effect within a certain subset of the population 
 
+
+
+## Notes on collabsibility
+background: OR is designed for homogeneous patient population, and not when there is substantial outcome heterogeneity even for patients receiving the same treatment. But if a strong risk factor exist (patient comes from a mixture of distribution). It is a good idea to pre-specify important covariates for the primary analysis, otherwise there might be loss in power
+
+Non-collapsibility means the conditional ratio is different from marginal (unadjusted) ratio even in the complete absence of confounding. It might also mean the marginal ratio is not a weighted average of the conditional ratio.
+The marginal ratio is difficult to interpret and do not generalize to other population with a different covariate distribution than our sample.
+in other words, the marginal OR depends on the distribution of the covariate in the sample, and doesnt transport to population with a different cov dist.
+
+there is a change in estimate approach to identify if V is a confounder, but this is flawed if the effect measure is non collapsible
+
+
 ## 5.1 Interaction
 There is interaction between 2 treatments A and E if the causal effect of A on Y differs if we SET Eto 0 vs E = 1.
 When the causal effect is measured on the risk difference scale:
