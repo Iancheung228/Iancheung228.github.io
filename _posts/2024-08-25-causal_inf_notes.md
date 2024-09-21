@@ -190,9 +190,8 @@ how EM could exist in one scale but not other
 when talking about Effect modification, dependent on effect measure
 
 
-Stratified analysis is the natural way to identify effect modification. To see if V is a modifier, we compute the average causal effect of A on Y, for each stratum of V. Again, we can do this in both marginally exchangible studies or conditionally exchangible study.
 
-one thing to note is even if we found V (nationality) modifies effect of heart transplant A on risk of death Y, we DO NOT know the causal mechanism involved in the effect modification. Thus the term effect modification by V doesnt necessarily imply V plays a causal role in the modification of the effect.
+one thing to note is even if we found V (nationality) modifies effect of heart transplant A on risk of death Y, we DO NOT know the causal mechanism involved in the effect modification. Thus the term effect modification by V doesnt necessarily imply V plays a causal role in the modification of the effect. In our example, it is possible that nationality is simply a marker for the causal factor that is truly responsible for the modification of effect.
 
 This contrasts with interaction, which DOES attribute a causal role to the variables involved.
 
@@ -205,8 +204,18 @@ In fact we are making a huge assumption that there all effect modifiers (includi
 fine points:
 - additive, but not multiplicative, effect modification is the appropriate scale to identify the groups that will benefit most from intervention. in the absence of additive effect modification, learning that there is multiplicative effect modification may not be very helpful for decision making.
 
+
+## 4.4 stratification as a form of adjustment
+
+Stratified analysis is the natural way to identify effect modification. To see if V is a modifier, we compute the average causal effect of A on Y, for each stratum of V. Again, we can do this in both marginally exchangible studies or conditionally exchangible study. 
+in marginally exchangible you 1) stratify on V 2) calculate sample proportion
+In conditionally exchangible you 1) stratify on V 2) use Standarization or IPW on L. That is we need to stratify on V to identify effect modification in addition to adjusting for L. But in practice stratification is often used to adjust for L as well, they measure conditional effect measure, instead of IPW which measures marginal effect measure (stratification necessarily results in multiple stratum specific effect measures
+
 ## 4.5 Matching as another form of adjustment
 goal of matching is to construct a subset of the population which the variables L have the same distribution in both the treated and untreated.
+
+## 4.6 effect modification and adjustment methods
+standardization, IPW, stratification and matching are all ways to estimate average causal effect, but they estimate different types of causal effects. The first 2 are capable of measuring both marginal and conditional effect, while the latter 2 can only measure conditional effect within a certain subset of the population 
 
 ## 5.1 Interaction
 There is interaction between 2 treatments A and E if the causal effect of A on Y differs if we SET Eto 0 vs E = 1.
