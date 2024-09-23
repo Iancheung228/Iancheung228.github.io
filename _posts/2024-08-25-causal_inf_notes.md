@@ -239,20 +239,21 @@ $$ Pr[Y^{a=1,e=1}=1] - Pr[Y^{a=1,e=0}=1]  \neq  Pr[Y^{a=0,e=1}=1] - Pr[Y^{a=0,e=
 effect modification vs interaction
 in effect modification, we do not consider V and A as variables of equal status, because we can only hypothetically intervene on the variable of A, not V. That is the definition of effect modification involves the counterfactual outcomes $$Y^a$$, not the counterfactual outcome $$Y^{a,v}$$
 
+
 ## 5.2 identifying interaction
-Interaction is simply concerned with the join effect of 2 (or more) treatments, to identify we need exchangeability, positivity and consistency for both (or more) treatments.
+Interaction is concerned with the join effect of 2 (or more) treatments, to identify we need exchangeability, positivity and consistency for both (or more) treatments.
 
 Case when E is randomly and unconditionally assigned by investigators. Then the treated E = 1 and untreated E = 0 are expected to be exchangeable.
 That is:
 $$ Pr[Y^{a=1,e=1}=1] = Pr[Y^{a=1} =1 | E=1]$$ As a result we can rewrite the definition of interaction between A and E with something we can observe.
 
-interaction is 
+interaction in this case is 
 $$ Pr[Y^{a=1}=1 | E = 1] - Pr[Y^{a=0}=1 | E=1] \neq Pr[Y^{a=1}=1 | E = 0] - Pr[Y^{a=0}=1 | E=0]$$
-which is the same as the definition of effect modification! When treatment E is randomly assigned, then the concepts of interaction and effect modification coincide.
+which is the **exactly** the same as the definition of effect modification! When treatment E is randomly assigned, then the concepts of interaction and effect modification coincide.
 
-Case when E is not assigned by investigators. To assess the presence of interaction between A and E, we still need to compute the same 4 marginal risks. Without marginal randomization, we can use standardization or IPW. We can view A and E as a comibned treatment with 4 levels, instead of A and E as separate treatments with 2 levels each.
+Case when E is **not** assigned by investigators. To assess the presence of interaction between A and E, we still need to compute the same 4 marginal risks. Without marginal randomization, we can use standardization or IPW. We can view A and E as a combined treatment with 4 levels, instead of A and E as separate treatments with 2 levels each.
 
-When there is conditional exchangeability for treatment A but not for treatment E. Then we cant generally assess the presence of interaction between A and E, but can still assess the presence of effect modification by E. This is because we use notation V (or E here) for variable for which we are not willing to make assumptions about exchangeability, positivity, and consistency. i.e we concluded that effect of transplant A was modified by nationality V, but we never required any identifying assumptions for the effect of V since we are not interested in using our data to compute the causal effect of V on Y.
+When there is conditional exchangeability for treatment A but not for treatment E. Then we can't generally assess the presence of interaction between A and E, but can still assess the presence of effect modification by E. This is because we use notation V (or E here) for variable for which we are not willing to make assumptions about exchangeability, positivity, and consistency. i.e we concluded that effect of transplant A was modified by nationality V, but we never required any identifying assumptions for the effect of V since we are not interested in using our data to compute the causal effect of V on Y.
 
 In section 4.2 we found V is surrogate effect modifier; that is V does not act on the outcome and therefore does not interact with A (no action, no interaction), but V is a modifier of the effect of A on Y because V is correlated with an unidentified variable that actually has an effect on Y and interacts with A.
 
