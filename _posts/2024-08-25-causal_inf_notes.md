@@ -175,20 +175,21 @@ To obtain a desired power of 1- $$\beta$$ we want to reject Null 1- $$\beta$$% o
 
 
 ## Chapter 4:
-def effect modifier: We say V is a modifer of the effect of A on Y when the average causal effect of A on Y varies across levels of V.
+**def** effect modifier: We say V is a modifier of the effect of A on Y when the average causal effect of A on Y varies across levels of V.
 
+Additive effect modification:
+$$ E[Y^{a=1} -Y^{a=0} | V= 1] \neq E[Y^{a=1} -Y^{a=0} | V= 0] $$
 Note the presence of effect modification depends on the effect measure being used.
 We also only consider variables V that are NOT affected by treatment A as effect modifiers.
 
-def qualitative effect modification: when the average causal effect in the subsets are in opposite direction.
+**def** qualitative effect modification: when the average causal effect in the subsets are in the opposite direction.
 
 properties: with QEM, additive effect modification IFF multiplicative effect modification.
 in the absence of QEM, you can find effect modification on one scale but not on the other.
 
 how EM could exist in one scale but not other
 
-when talking about Effect modification, dependent on effect measure
-
+We do not need conditional exchangeability to identify effect modification.
 
 
 one thing to note is even if we found V (nationality) modifies effect of heart transplant A on risk of death Y, we DO NOT know the causal mechanism involved in the effect modification. Thus the term effect modification by V doesnt necessarily imply V plays a causal role in the modification of the effect. In our example, it is possible that nationality is simply a marker for the causal factor that is truly responsible for the modification of effect.
@@ -196,8 +197,8 @@ one thing to note is even if we found V (nationality) modifies effect of heart t
 This contrasts with interaction, which DOES attribute a causal role to the variables involved.
 
 ## 4.3 Why should we care about effect modification:
-1) if we find V is an effect modifier within the sample, we need to know the make up of V in the population for it to be useful. For example, the average causal effect in the population was harmful in women but beneficial in men (and the proportion of women and men were the same such that they cancel out) This would be different had we conducted our study where theres more women. That is the average causal effect in the population depends on the distribution of individual causal effects in the population. In reality, its really the average causal effect of treatment A on outcome Y in a population with a particualr mix of causal effect modifiers.
-2) the extrapoliation of causal effects computed in one population to a second population is referred to as transportability of causal inferences across population. Again the finding from one population might not translate to another population with a different distribution of effect modifiers.
+1) If we found V is indeed an effect modifier from our study, we need to know the make up of V in the population for the findings of the study to be useful. For example, the average causal effect in the population was harmful in women but beneficial in men (and the proportion of women and men were the same such that they cancel out). Our conclusion would be different had we conducted our study where theres more women. That is the average causal effect in the population depends on the distribution of other effect modifiers in the population. In reality, our discussion thus far is really: the average causal effect of treatment A on outcome Y in a population **with a particular mix** of causal effect modifiers.
+2) The extrapolation of causal effects computed in one population to a second population is referred to as transportability of causal inferences across population. Again the finding from one population might not translate to another population with a different distribution of effect modifiers.
 
 In fact we are making a huge assumption that there all effect modifiers (including those unknown or unmeasured) are the same between the 2 populations. these unmeasured effect modifiers are not variables needed to achieve exchangeability, but just risk factors for the outcome. in general the transportabiltiy of effects across population is a more difficult problem than the identification of causal effects in a single population. It is an unverifiable assumption.
 
@@ -205,39 +206,42 @@ fine points:
 - additive, but not multiplicative, effect modification is the appropriate scale to identify the groups that will benefit most from intervention. in the absence of additive effect modification, learning that there is multiplicative effect modification may not be very helpful for decision making.
 
 
-## 4.4 stratification as a form of adjustment
+## 4.4 Stratification as a form of adjustment
 
 Stratified analysis is the natural way to identify effect modification. To see if V is a modifier, we compute the average causal effect of A on Y, for each stratum of V. Again, we can do this in both marginally exchangible studies or conditionally exchangible study. 
-in marginally exchangible you 1) stratify on V 2) calculate sample proportion
-In conditionally exchangible you 1) stratify on V 2) use Standarization or IPW on L. That is we need to stratify on V to identify effect modification in addition to adjusting for L. But in practice stratification is often used to adjust for L as well, they measure conditional effect measure, instead of IPW which measures marginal effect measure (stratification necessarily results in multiple stratum specific effect measures
+a) In marginally exchangible you 1) stratify on V 2) calculate sample proportion
+b) In conditionally exchangible you 1) stratify on V 2) use Standarization or IPW on L. That is we need to stratify on V to identify effect modification in addition to adjusting for L. But in practice stratification is often used to adjust for L as well, but they only achieve conditional effect measure, instead of IPW which measures marginal effect measure (stratification necessarily results in multiple stratum specific effect measures
 
 ## 4.5 Matching as another form of adjustment
 goal of matching is to construct a subset of the population which the variables L have the same distribution in both the treated and untreated.
 
-## 4.6 effect modification and adjustment methods
-standardization, IPW, stratification and matching are all ways to estimate average causal effect, but they estimate different types of causal effects. The first 2 are capable of measuring both marginal and conditional effect, while the latter 2 can only measure conditional effect within a certain subset of the population 
+## 4.6 Effect modification and adjustment methods
+Standardization, IPW, stratification and matching are all ways to estimate the average causal effect, but they estimate different types of causal effects. The first 2 are capable of measuring both marginal and conditional effects, while the latter 2 can only measure conditional effects within a certain subset of the population. 
 
 
 
-## Notes on collabsibility
+## Notes on collapsibility
 background: OR is designed for homogeneous patient population, and not when there is substantial outcome heterogeneity even for patients receiving the same treatment. But if a strong risk factor exist (patient comes from a mixture of distribution). It is a good idea to pre-specify important covariates for the primary analysis, otherwise there might be loss in power
 
-Non-collapsibility means the conditional ratio is different from marginal (unadjusted) ratio even in the complete absence of confounding. It might also mean the marginal ratio is not a weighted average of the conditional ratio.
-The marginal ratio is difficult to interpret and do not generalize to other population with a different covariate distribution than our sample.
-in other words, the marginal OR depends on the distribution of the covariate in the sample, and doesnt transport to population with a different cov dist.
+Non-collapsibility means the conditional ratio is different from the marginal (unadjusted) ratio even in the complete absence of confounding. It might also mean the marginal ratio is not a weighted average of the conditional ratio.
+The marginal ratio is difficult to interpret and does not generalize to other populations with a different covariate distribution than our sample.
+in other words, the marginal OR depends on the distribution of the covariate in the sample and doesn't transport to population with a different cov dist.
 
-there is a change in estimate approach to identify if V is a confounder, but this is flawed if the effect measure is non collapsible
+there is a change in estimate approach to identify if V is a confounder, but this is flawed if the effect measure is non-collapsible
 
 
 ## 5.1 Interaction
-There is interaction between 2 treatments A and E if the causal effect of A on Y differs if we SET Eto 0 vs E = 1.
-When the causal effect is measured on the risk difference scale:
+There is interaction between 2 treatments A and E if the causal effect of A on Y differs if we SET E = 0 vs E = 1.
+
+When the causal effect is measured on the risk difference scale, the definition of interaction is:
 $$ Pr[Y^{a=1,e=1}=1] - Pr[Y^{a=0,e=1}=1] \neq  Pr[Y^{a=1,e=0}=1] - Pr[Y^{a=0,e=0}=1] $$
-we can simply rearrange above to show that this inequality the causal risk diff for E when everyone receives a transplant is also less than the causal risk difference for E when nobody receives a transplant. That is we can equivalently define interaction between A and E on the additive scale. and the 2 inequalities show that treatments A and E have equal status in the definition of interaction.
+
+We can simply rearrange above to show that this inequality the causal risk diff for E when everyone receives a transplant is also less than the causal risk difference for E when nobody receives a transplant. That is we can equivalently define interaction between A and E on the additive scale. and the 2 inequalities show that treatments A and E have equal status in the definition of interaction.
+
 $$ Pr[Y^{a=1,e=1}=1] - Pr[Y^{a=1,e=0}=1]  \neq  Pr[Y^{a=0,e=1}=1] - Pr[Y^{a=0,e=0}=1] $$
 
-effect modification vs interaction
-in effect modification, we do not consider V and A as variables of equal status, because we can only hypothetically intervene on the variable of A, not V. That is the definition of effect modification involves the counterfactual outcomes $$Y^a$$, not the counterfactual outcome $$Y^{a,v}$$
+**Effect modification vs Interaction**
+In effect modification, we do not consider V and A as variables of equal status, because we can only hypothetically intervene on the variable of A, not V. That is the definition of effect modification involves the counterfactual outcomes $$Y^a$$, not the counterfactual outcome $$Y^{a,v}$$
 
 
 ## 5.2 identifying interaction
