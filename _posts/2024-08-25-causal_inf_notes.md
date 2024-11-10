@@ -293,14 +293,18 @@ if there are 2 parameters and only 2 treatment levels, we call it  a saturated m
 
 ### Propensity score
 
+
+
 Let L be a vector of baseline covariates and A be the treatment indicator
 A balancing score b(L) is any function of the covariates L s.t. $$ A \perp L \mid b(L) $$
 
-b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
+**Def Balancing score:** b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = fb(L) for some function f.
 
-if b(L) is balancing score, we have $$ A \perp L \mid b(L) $$ , and we want to show that $$ \exists f s.t. ps(L)  =fb(L) $$
+This implies that the balancing function b contains more information than the propensity score. 
 
-#### Proof 1
+Claim: If b(L) is a balancing score (i.e. $$ A \perp L \mid b(L) $$) ,  $$ \exists f s.t. ps(L)  =fb(L) $$
+
+#### Proof (Approach 1)
 $$
 \begin{aligned}
 ps(L) &= P(A=1 \mid L) \\
@@ -309,9 +313,10 @@ ps(L) &= P(A=1 \mid L) \\
 \end{aligned}
 $$
 
+Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of the balancing score.
 
-#### Proof 2
-Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l1,l2$$ where
+#### Proof (Approach 2)
+Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l_1,l_2$$ where
 
 $$ b(l_1) = b(l_2)  \text{but} ps(l_1) \neq ps(l_2) $$
 
