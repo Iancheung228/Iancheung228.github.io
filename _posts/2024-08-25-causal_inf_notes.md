@@ -296,17 +296,64 @@ if there are 2 parameters and only 2 treatment levels, we call it  a saturated m
 Let L be a vector of basline covariates and A be the treatment indicator
 A balancing score b(L) is any function of the covarite L s.t. $$ A \perp L |b(L) $$
 
-b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f
+b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
 
-if b(L) is balancing score, we have $$A \perp L |b(L), and we want to show that there exist f s.t. ps(L)  =fb(L)
+if b(L) is balancing score, we have $$ A \perp L |b(L)$$ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L)$$
 
+proof 1
 $$
 \begin{aligned}
 ps(L) &= P(A=1 |L) = \sum_{\ell} P(A=1|L,b(L))P(b(L)|L) \\
-&= \sum_{\ell} P(A=1|b(L))
+&= \sum_{\ell} P(A=1|b(L)) as b(L) is a balancing score for first term and p(b(:)|L) =1
 
 \end{aligned}
 $$
+
+proof 2
+Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exist l1,l2$$ where
+
+$$ b(l1) = b(l2)$$  but $$ ps(l1) \neq ps(l2) $$
+
+$$ P(A|b(l1)) = P(A|b(l2)) $$
+
+while $$ P(A|l1) = P(A|l2) $$
+$$  P(A|l1, b(l1)) = P(A|l2, b(l2)) $$
+
+this contradicts b(l) is a balancing score.
+
+
+
+
+
+
+
+Now if $$ \exist f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L |b(L) $$
+$$ P(A =1 | b(L),L) =  P(A =1 | b(L))
+
+We start from RHS
+$$
+\begin{aligned}
+P(A = 1 | b(L),L) &=  \mathbb{E}[A|b(L)]    \\
+&= \mathbb{E}[  \mathbb{E}[A|b(L),L] |b(L)] \\
+&= \mathbb{E}[  \mathbb{E}[A|L] |b(L)] \\
+&= \mathbb{E}[  \mathbb{E}[fb(L)] |b(L)] \\
+&= fb(L) \\
+&= ps(L) \\
+&= P(A=1|L) \\ 
+&= P(A=1 |L,b(L)) \\ 
+
+\end{aligned}
+$$
+
+The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
+
+Next we will prove that if treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L)
+
+strongly ignorable means $$ P(Y^{A} |A,L)
+
+if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
+a balancing score is an unbiased estimate of the treatment effect at that value  
+
 
 
 
