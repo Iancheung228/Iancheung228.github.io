@@ -298,26 +298,26 @@ A balancing score b(L) is any function of the covariates L s.t. $$ A \perp L \mi
 
 b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
 
-if b(L) is balancing score, we have $ A \perp L \mid b(L) $ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
+if b(L) is balancing score, we have $$ A \perp L \mid b(L) $$ , and we want to show that $$ \exists f s.t. ps(L)  =fb(L) $$
 
 Proof 1
 $$
 \begin{aligned}
-ps(L) &= P(A=1 |L) = \sum_{\ell} P(A=1|L,b(L))P(b(L)|L) \\
-&= \sum_{\ell} P(A=1|b(L)) as b(L) is a balancing score for first term and p(b(:)|L) =1
+ps(L) &= P(A=1 \mid L) = \sum_{\ell} P(A=1 \mid L,b(L))P(b(L) \mid L) \\
+&= \sum_{\ell} P(A=1 \mid b(L)) as b(L) is a balancing score for first term and p(b(:) \mid L) =1
 
 \end{aligned}
 $$
 
 proof 2
-Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exist l1,l2$$ where
+Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l1,l2$$ where
 
 $$ b(l1) = b(l2)$$  but $$ ps(l1) \neq ps(l2) $$
 
-$$ P(A|b(l1)) = P(A|b(l2)) $$
+$$ P(A \mid b(l1)) = P(A \mid b(l2)) $$
 
-while $$ P(A|l1) = P(A|l2) $$
-$$  P(A|l1, b(l1)) = P(A|l2, b(l2)) $$
+while $$ P(A \mid l1) = P(A \mid l2) $$
+$$  P(A \mid l1, b(l1)) = P(A \mid l2, b(l2)) $$
 
 this contradicts b(l) is a balancing score.
 
@@ -327,7 +327,7 @@ this contradicts b(l) is a balancing score.
 
 
 
-Now if $$ \exist f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
+Now if $$ \exists f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
 $$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L))
 
 We start from RHS
