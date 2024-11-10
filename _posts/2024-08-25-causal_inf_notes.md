@@ -294,11 +294,11 @@ if there are 2 parameters and only 2 treatment levels, we call it  a saturated m
 ### Propensity score
 
 Let L be a vector of baseline covariates and A be the treatment indicator
-A balancing score b(L) is any function of the covariates L s.t. $$ A \perp L |b(L) $$
+A balancing score b(L) is any function of the covariates L s.t. $$ A \perp L \mid b(L) $$
 
 b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
 
-if b(L) is balancing score, we have $ A \perp L |b(L) $ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
+if b(L) is balancing score, we have $ A \perp L \mid b(L) $ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
 
 Proof 1
 $$
@@ -327,23 +327,10 @@ this contradicts b(l) is a balancing score.
 
 
 
-Now if $$ \exist f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L |b(L) $$
-$$ P(A =1 | b(L),L) =  P(A =1 | b(L))
+Now if $$ \exist f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
+$$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L))
 
 We start from RHS
-$$
-\begin{aligned}
-P(A = 1 | b(L),L) &=  \mathbb{E}[A|b(L)]    \\
-&= \mathbb{E}[  \mathbb{E}[A|b(L),L] |b(L)] \\
-&= \mathbb{E}[  \mathbb{E}[A|L] |b(L)] \\
-&= \mathbb{E}[  \mathbb{E}[fb(L)] |b(L)] \\
-&= fb(L) \\
-&= ps(L) \\
-&= P(A=1|L) \\ 
-&= P(A=1 |L,b(L)) \\ 
-
-\end{aligned}
-$$
 
 $$
 \begin{aligned}
@@ -363,20 +350,31 @@ The result we have shown implies the propensity score is the coarsest balancing 
 
 Next we will prove that if treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L)
 
-strongly ignorable means $$ P(Y^{A} |A,L)
+strongly ignorable means $$ P(Y^{A} \mid A,L)
 
 if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
 a balancing score is an unbiased estimate of the treatment effect at that value  
 
 
-We want to show $$ (Y^0,Y^1) \perp A|b(L) $$
+We want to show $$ (Y^0,Y^1) \perp A \mid b(L) $$
 it is sufficient to show that 
 
-$$ P(A=1|Y^0,Y^1,b(l)) = P(A=1|b(l)) $$
+$$ P(A=1 \mid Y^0,Y^1,b(l)) = P(A=1 \mid b(l)) $$
 which by theorem 2 is equivalent to showing that
-$$ P(A=1|Y^0,Y^1,b(l)) = ps(l) $$
+$$ P(A=1 \mid Y^0,Y^1,b(l)) = ps(l) $$
 
-$$ P(A=1|Y^0,Y^1,b(l)) = E[A | (Y^0,Y^1),b(l)] $$
+
+$$
+\begin{aligned}
+P(A=1 \mid Y^0,Y^1,b(l)) &= E[A \mid (Y^0,Y^1),b(l)] \\
+&= E[E[A \mid (Y^0,Y^1),l] \mid (Y^0,Y^1),b(l)] \\
+&= E[E[A|l] | (Y^0,Y^1),b(l)] \\ 
+&= E[ps(l) \mid (Y^0,Y^1),b(l)] \\
+&= E[FB(l) \mid (Y^0,Y^1),b(l)] \\
+&= fb(l) \\
+&= ps(l) \\
+\end{aligned}
+$$
 
 
 
