@@ -23,7 +23,7 @@ Aside: The absence of ACE does not imply the absence of ICE
 
 ## 1.4 Random variability 
 There are 2 main sources of imperfect irl
-1) Sampling variability: In practice, we collect data on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact risk proportion for the superpopulation. That is: we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We call it a consitent estimator because as number of indiv in sample grows, we expect estimate and true value to grow smaller as the error due to sampling variability obeys the law of large number. Since the super population prob cant be computed but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
+1) Sampling variability: In practice, we collect data on a sample of the population of interest. Even if we know the counterfactual outcomes in this sample population, we still do not have the exact risk proportion for the superpopulation. That is: we use (consistent estimator) sample proportion $$\hat{Pr}[Y^{a=0} = 1]$$ to estimate the super-population probability $$ Pr[Y^a =1] $$under treatment value a. We call it a consistent estimator because as number of indiv in sample grows, we expect estimate and true value to grow smaller as the error due to sampling variability obeys the law of large number. Since the super population prob cant be computed but only consistently estimated, we need to have a statistical procedure to evaluate the empirical evidence of the causal null hypothesis.
 
 2) The value of an individual's counterfactual outcomes is not fixed either. In previous examples, Zeus would have a 100% chance of dying if treated and would have 0% chance dying if untreated. The value of the counterfactual outcomes is deterministic for each individual. In real life, counterfactual outcomes are often stochastic.
 
@@ -300,19 +300,20 @@ b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) =
 
 if b(L) is balancing score, we have $$ A \perp L \mid b(L) $$ , and we want to show that $$ \exists f s.t. ps(L)  =fb(L) $$
 
-Proof 1
+#### Proof 1
 $$
 \begin{aligned}
-ps(L) &= P(A=1 \mid L) = \sum_{\ell} P(A=1 \mid L, b(L)) P(b(L) \mid L) \\
+ps(L) &= P(A=1 \mid L) \\
+&= \sum_{\ell} P(A=1 \mid L, b(L)) P(b(L) \mid L) \\
 &= \sum_{\ell} P(A=1 \mid b(L)) \quad \text{as } b(L) \text{ is a balancing score for the first term and } P(b(L) \mid L) = 1
 \end{aligned}
 $$
 
 
-proof 2
+#### Proof 2
 Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l1,l2$$ where
 
-$$ b(l1) = b(l2)$$  but $$ ps(l1) \neq ps(l2) $$
+$$ b(l_1) = b(l_2)  \text{but} ps(l_1) \neq ps(l_2) $$
 
 $$ P(A \mid b(l1)) = P(A \mid b(l2)) $$
 
@@ -328,7 +329,8 @@ this contradicts b(l) is a balancing score.
 
 
 Now if $$ \exists f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
-$$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L))
+
+$$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L)) $$
 
 We start from RHS
 
