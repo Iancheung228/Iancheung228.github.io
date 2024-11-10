@@ -298,7 +298,7 @@ A balancing score b(L) is any function of the covariates L s.t. $$ A \perp L |b(
 
 b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
 
-if b(L) is balancing score, we have $$ A \perp L |b(L) $$ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
+if b(L) is balancing score, we have $ A \perp L |b(L) $ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
 
 Proof 1
 $$
@@ -363,94 +363,8 @@ a balancing score is an unbiased estimate of the treatment effect at that value
 
 
 
-Let \( L \) be a vector of baseline covariates and \( A \) be the treatment indicator. A balancing score \( b(L) \) is any function of the covariates \( L \) such that:
 
-\[
-A \perp L \mid b(L)
-\]
 
-\( b(L) \) is a balancing score **if and only if** \( b(L) \) is finer than \( ps(L) \) in the sense that \( ps(L) = f(b(L)) \) for some function \( f \).
-
-If \( b(L) \) is a balancing score, we have:
-
-\[
-A \perp L \mid b(L)
-\]
-
-and we want to show that:
-
-\[
-\exists f \text{ such that } ps(L) = f(b(L))
-\]
-
-### Proof 1
-
-\[
-\begin{aligned}
-ps(L) &= P(A = 1 \mid L) \\
-&= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \\
-&= \sum_{\ell} P(A = 1 \mid b(L)) \quad \text{(since \( b(L) \) is a balancing score for the first term and \( P(b(L) \mid L) = 1 \))}
-\end{aligned}
-\]
-
-### Proof 2
-
-Suppose \( b(L) \) is a balancing score but assume for contradiction that \( b(L) \) is not finer than \( ps(L) \). This implies:
-
-\[
-\exists l_1, l_2 \quad \text{such that} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2)
-\]
-
-Then:
-
-\[
-P(A \mid b(l_1)) = P(A \mid b(l_2))
-\]
-
-while:
-
-\[
-P(A \mid l_1) = P(A \mid l_2)
-\]
-
-\[
-P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2))
-\]
-
-This contradicts the assumption that \( b(L) \) is a balancing score.
-
----
-
-Now, if \( \exists f \) such that \( ps(L) = f(b(L)) \), we want to show that \( b(L) \) is a balancing score, i.e., \( A \perp L \mid b(L) \).
-
-We start from the right-hand side:
-
-\[
-\begin{aligned}
-P(A = 1 \mid b(L), L) &= \mathbb{E}[A \mid b(L)] \\
-&= \mathbb{E}\left[ \mathbb{E}[A \mid b(L), L] \mid b(L) \right] \\
-&= \mathbb{E}\left[ \mathbb{E}[A \mid L] \mid b(L) \right] \\
-&= \mathbb{E}\left[ \mathbb{E}[f(b(L))] \mid b(L) \right] \\
-&= f(b(L)) \\
-&= ps(L) \\
-&= P(A = 1 \mid L) \\
-&= P(A = 1 \mid L, b(L))
-\end{aligned}
-\]
-
-The result we have shown implies that the propensity score is the coarsest balancing score, and the finest balancing score would be the identity.
-
----
-
-Next, we will prove that if treatment assignment is strongly ignorable given \( L \), then it is strongly ignorable given any balancing score \( b(L) \).
-
-Strongly ignorable means:
-
-\[
-P(Y^A \mid A, L)
-\]
-
-If treatment assignment is strongly ignorable given \( X \), then the difference between treatment and control means at each value of a balancing score is an unbiased estimate of the treatment effect at that value.
 
 
 
