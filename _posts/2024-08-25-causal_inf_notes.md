@@ -303,11 +303,11 @@ if b(L) is balancing score, we have $$ A \perp L \mid b(L) $$ , and we want to s
 Proof 1
 $$
 \begin{aligned}
-ps(L) &= P(A=1 \mid L) = \sum_{\ell} P(A=1 \mid L,b(L))P(b(L) \mid L) \\
-&= \sum_{\ell} P(A=1 \mid b(L)) as b(L) is a balancing score for first term and p(b(:) \mid L) =1
-
+ps(L) &= P(A=1 \mid L) = \sum_{\ell} P(A=1 \mid L, b(L)) P(b(L) \mid L) \\
+&= \sum_{\ell} P(A=1 \mid b(L)) \quad \text{as } b(L) \text{ is a balancing score for the first term and } P(b(L) \mid L) = 1
 \end{aligned}
 $$
+
 
 proof 2
 Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l1,l2$$ where
