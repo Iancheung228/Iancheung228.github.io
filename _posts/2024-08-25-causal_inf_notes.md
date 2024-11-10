@@ -305,13 +305,15 @@ This implies that the balancing function b contains more information than the pr
 Claim: If b(L) is a balancing score (i.e. $$ A \perp L \mid b(L) $$) ,  $$ \exists f s.t. ps(L)  =fb(L) $$
 
 #### Proof (Approach 1)
+
 $$
 \begin{aligned}
-ps(L) &= P(A=1 \mid L) \\
-&= \sum_{\ell} P(A=1 \mid L, b(L)) P(b(L) \mid L) \\
-&= \sum_{\ell} P(A=1 \mid b(L)) \quad \text{as } b(L) \text{ is a balancing score for the first term and } P(b(L) \mid L) = 1
+ps(L) &= P(A = 1 \mid L) \\
+&= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \\
+&= \sum_{\ell} P(A = 1 \mid b(L)) \quad \text{(since \( b(L) \) is a balancing score, \( P(b(L) \mid L) = 1 \))}
 \end{aligned}
 $$
+
 
 Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of the balancing score.
 
