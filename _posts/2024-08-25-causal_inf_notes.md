@@ -318,23 +318,6 @@ $$
 Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of the balancing score.
 
 #### Proof (Approach 2)
-Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l_1,l_2$$ where
-
-
-$$ b(l_1) = b(l_2)  \text{  but  } ps(l_1) \neq ps(l_2) $$
-
-$$ \text{Since } b(l_1) = b(l_2) \text{  } P(A \mid b(l1)) = P(A \mid b(l2)) $$
-
-$$ \text{while as } ps(l_1) \neq ps(l_2) \text{  } P(A \mid l1) \neq P(A \mid l2) $$
-$$  P(A \mid l1, b(l1)) = P(A \mid l2, b(l2)) $$
-
-
-Clearly, $$ P(A \mid L, b(L)) \neq P(A \mid b(L)) $$ which contradicts b(l) is a balancing score.
-
-
-
-
-
 Suppose \( b(L) \) is a balancing score, but assume for contradiction that \( b(L) \) is not finer than \( ps(L) \). This implies:
 
 $$ \exists l_1, l_2 \quad \text{such that} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2) $$
@@ -351,7 +334,7 @@ Thus, we also have:
 
 $$ P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)) $$
 
-Clearly, this leads to a contradiction, because:
+This leads to a contradiction, because:
 
 $$ P(A \mid L, b(L)) \neq P(A \mid b(L)) $$
 
@@ -361,7 +344,7 @@ This contradicts the assumption that \( b(L) \) is a balancing score.
 
 
 
-
+#### Converse:
 Now if $$ \exists f s.t. ps(L)  =fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
 
 $$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L)) $$
@@ -373,7 +356,8 @@ $$
 P(A = 1 \mid b(L), L) &= \mathbb{E}[A \mid b(L)] \\
 &= \mathbb{E}[ \mathbb{E}[A \mid b(L), L] \mid b(L)] \\
 &= \mathbb{E}[ \mathbb{E}[A \mid L] \mid b(L)] \\
-&= \mathbb{E}[ \mathbb{E}[f b(L)] \mid b(L)] \\
+&= \mathbb{E}[ P(A=1 \mid L) \mid b(L)] \\
+&= \mathbb{E}[ fb(L) \mid b(L)] \\
 &= f b(L) \\
 &= ps(L) \\
 &= P(A = 1 \mid L) \\
@@ -384,9 +368,9 @@ $$
 
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
-Next we will prove that if treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L)
+Next, we will prove that if the treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L)
 
-strongly ignorable means $$ P(Y^{A} \mid A,L)
+strongly ignorable means $$ P(Y^{A} \mid A,L) $$
 
 if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
 a balancing score is an unbiased estimate of the treatment effect at that value  
