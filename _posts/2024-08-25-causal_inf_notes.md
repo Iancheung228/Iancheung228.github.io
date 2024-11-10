@@ -320,6 +320,10 @@ Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y an
 #### Proof (Approach 2)
 Suppose b(L) is a balancing score but assume for contradiction that b(L) is not finer than ps(L). This implies $$ \exists l_1,l_2$$ where
 
+\[ 
+\text{$b(l_1) = b(l_2)$ or $ps(l_1) \neq ps(l_2)$} 
+\]
+
 $$ b(l_1) = b(l_2)  \text{but} ps(l_1) \neq ps(l_2) $$
 
 $$ P(A \mid b(l1)) = P(A \mid b(l2)) $$
