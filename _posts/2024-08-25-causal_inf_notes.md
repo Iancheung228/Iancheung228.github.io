@@ -345,6 +345,20 @@ P(A = 1 | b(L),L) &=  \mathbb{E}[A|b(L)]    \\
 \end{aligned}
 $$
 
+$$
+\begin{aligned}
+P(A = 1 \mid b(L), L) &= \mathbb{E}[A \mid b(L)] \\
+&= \mathbb{E}[ \mathbb{E}[A \mid b(L), L] \mid b(L)] \\
+&= \mathbb{E}[ \mathbb{E}[A \mid L] \mid b(L)] \\
+&= \mathbb{E}[ \mathbb{E}[f b(L)] \mid b(L)] \\
+&= f b(L) \\
+&= ps(L) \\
+&= P(A = 1 \mid L) \\
+&= P(A = 1 \mid L, b(L))
+\end{aligned}
+$$
+
+
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
 Next we will prove that if treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L)
@@ -355,6 +369,18 @@ if treatment assignment is strongly ignorable given X, then the difference betwe
 a balancing score is an unbiased estimate of the treatment effect at that value  
 
 
+We want to show $$ (Y^0,Y^1) \perp A|b(L) $$
+it is sufficient to show that 
+
+$$ P(A=1|Y^0,Y^1,b(l)) = P(A=1|b(l)) $$
+which by theorem 2 is equivalent to showing that
+$$ P(A=1|Y^0,Y^1,b(l)) = ps(l) $$
+
+$$ P(A=1|Y^0,Y^1,b(l)) = E[A | (Y^0,Y^1),b(l)] $$
+
+
+
+Theorem 4) Suppose the treatment assignment is strongly ignorable and b(l) is a balancing score. Then the expected difference in observed responses to the 2 treatments at b(l) is equal to the average treatment effect at b(l)
 
 
 
