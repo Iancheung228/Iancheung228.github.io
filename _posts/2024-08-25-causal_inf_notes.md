@@ -323,13 +323,39 @@ Suppose b(L) is a balancing score but assume for contradiction that b(L) is not 
 
 $$ b(l_1) = b(l_2)  \text{  but  } ps(l_1) \neq ps(l_2) $$
 
-$$ \text{Since} b(l_1) = b(l_2) \text{  } P(A \mid b(l1)) = P(A \mid b(l2)) $$
+$$ \text{Since } b(l_1) = b(l_2) \text{  } P(A \mid b(l1)) = P(A \mid b(l2)) $$
 
-$$ \text{while as } ps(l_1) \neq ps(l_2) \text{  } P(A \mid l1) = P(A \mid l2) $$
+$$ \text{while as } ps(l_1) \neq ps(l_2) \text{  } P(A \mid l1) \neq P(A \mid l2) $$
 $$  P(A \mid l1, b(l1)) = P(A \mid l2, b(l2)) $$
 
-this contradicts b(l) is a balancing score.
 
+Clearly, $$ P(A \mid L, b(L)) \neq P(A \mid b(L)) $$ which contradicts b(l) is a balancing score.
+
+
+
+
+
+Suppose \( b(L) \) is a balancing score, but assume for contradiction that \( b(L) \) is not finer than \( ps(L) \). This implies:
+
+$$ \exists l_1, l_2 \quad \text{such that} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2) $$
+
+Since \( b(l_1) = b(l_2) \), we have:
+
+$$ P(A \mid b(l_1)) = P(A \mid b(l_2)) $$
+
+However, since \( ps(l_1) \neq ps(l_2) \), it follows that:
+
+$$ P(A \mid l_1) \neq P(A \mid l_2) $$
+
+Thus, we also have:
+
+$$ P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)) $$
+
+Clearly, this leads to a contradiction, because:
+
+$$ P(A \mid L, b(L)) \neq P(A \mid b(L)) $$
+
+This contradicts the assumption that \( b(L) \) is a balancing score.
 
 
 
