@@ -298,7 +298,7 @@ A balancing score b(L) is any function of the covarite L s.t. $$ A \perp L |b(L)
 
 b(L) is a balancing score IFF b(L) is finer than ps(L) in the sense that ps(L) = FB(L) for some function f.
 
-if b(L) is balancing score, we have $$ A \perp L |b(L)$$ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L)$$
+if b(L) is balancing score, we have $$ A \perp L |b(L) $$ , and we want to show that $$ \exist f s.t. ps(L)  =fb(L) $$
 
 proof 1
 $$
