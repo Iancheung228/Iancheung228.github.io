@@ -389,7 +389,7 @@ $$
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
 
-### Claim 2: If the treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L). Where strongly ignorable means $$ P(Y^{A} \mid A,L) $$
+### Claim 2: If the treatment assignment is strongly ignorable given L i.e. $$ (Y^0,Y^1) \perp A \mid X $$ , then it is strongly ignorable given any balancing score b(L).
 
 if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
 a balancing score is an unbiased estimate of the treatment effect at that value  
@@ -399,17 +399,19 @@ We want to show $$ (Y^0,Y^1) \perp A \mid b(L) $$
 it is sufficient to show that 
 
 $$ P(A=1 \mid Y^0,Y^1,b(l)) = P(A=1 \mid b(l)) $$
-which by theorem 2 is equivalent to showing that
+Recall from claim 1 we have shown that propensity score is equivalent to $${(A=1 \mid b(L)$$.
+
+Hence we just need to show:
 $$ P(A=1 \mid Y^0,Y^1,b(l)) = ps(l) $$
 
 
 $$
 \begin{aligned}
 P(A = 1 \mid Y^0, Y^1, b(l)) &= \mathbb{E}[A \mid (Y^0, Y^1), b(l)] \\
-&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \\
-&= \mathbb{E}[\mathbb{E}[A \mid l] \mid (Y^0, Y^1), b(l)] \\
+&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)} \\
+&= \mathbb{E}[\mathbb{E}[A \mid l] \mid (Y^0, Y^1), b(l)] \quad \text{By assumption of strong ignorablilty} \\
 &= \mathbb{E}[\text{ps}(l) \mid (Y^0, Y^1), b(l)] \\
-&= \mathbb{E}[\text{FB}(l) \mid (Y^0, Y^1), b(l)] \\
+&= \mathbb{E}[fb(l) \mid (Y^0, Y^1), b(l)] \\
 &= f b(l) \\
 &= \text{ps}(l)
 \end{aligned}
