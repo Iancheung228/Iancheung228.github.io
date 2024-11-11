@@ -318,27 +318,38 @@ $$
 Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of the balancing score.
 
 #### Proof (Approach 2)
-Suppose \( b(L) \) is a balancing score, but assume for contradiction that \( b(L) \) is not finer than \( ps(L) \). This implies:
+Suppose \( b(L) \) is a balancing score. For contradiction, assume that \( b(L) \) is not finer than \( ps(L) \). This implies the existence of two points \( l_1 \) and \( l_2 \) such that:
 
-$$ \exists l_1, l_2 \quad \text{such that} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2) $$
+$$ 
+\exists l_1, l_2 \quad \text{with} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2).
+$$
 
 Since \( b(l_1) = b(l_2) \), we have:
 
-$$ P(A \mid b(l_1)) = P(A \mid b(l_2)) $$
+$$ 
+P(A \mid b(l_1)) = P(A \mid b(l_2)).
+$$
 
-However, since \( ps(l_1) \neq ps(l_2) \), it follows that:
+However, because \( ps(l_1) \neq ps(l_2) \), we also have:
 
-$$ P(A \mid l_1) \neq P(A \mid l_2) $$
+$$ 
+P(A \mid l_1) \neq P(A \mid l_2).
+$$
 
-Thus, we also have:
+Next, we obtain:
 
-$$ P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)) $$
+$$ 
+P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)).
+$$
 
-This leads to a contradiction, because:
+This leads to a contradiction, since:
 
-$$ P(A \mid L, b(L)) \neq P(A \mid b(L)) $$
+$$ 
+P(A \mid L, b(L)) \neq P(A \mid b(L)).
+$$
 
-This contradicts the assumption that \( b(L) \) is a balancing score.
+Thus, we have a contradiction, which implies that \( b(L) \) must be finer than \( ps(L) \), as required for \( b(L) \) to be a balancing score.
+
 
 
 
