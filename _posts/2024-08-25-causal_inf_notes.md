@@ -317,7 +317,7 @@ $$
 ps(L) &= P(A = 1 \mid L) \\
 &= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \\
 &= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( b(L) \) is a balancing score} \\
-&= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( P(b(L) \mid L) = 1 \)}
+&= \sum_{\ell} P(A = 1 \mid b(L))  \quad \text{since \( P(b(L) \mid L) = 1 \)}
 
 \end{aligned}
 $$
@@ -343,7 +343,9 @@ However, because $$ ps(l_1) \neq ps(l_2) $$, we also have:
 $$ 
 P(A \mid l_1) \neq P(A \mid l_2).
 $$
-We can add the condition on $$b(l) $$ for free inside the probability
+
+We can add the condition on $$b(l) $$ for free inside the probability and get
+
 $$ 
 P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)).
 $$
@@ -362,7 +364,7 @@ Thus, we have a contradiction, which implies that $$ b(L) $$ must be finer than 
 
 
 #### Converse:
-Now if $$ \exists f s.t. ps(L)  = fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$
+Now if $$ \exists f s.t. ps(L)  = fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$ or mathematically
 
 $$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L)) $$
 
@@ -370,11 +372,11 @@ We start from RHS
 
 $$
 \begin{aligned}
-P(A = 1 \mid b(L), L) &= \mathbb{E}[A \mid b(L)] \\
-&= \mathbb{E}[ \mathbb{E}[A \mid b(L), L] \mid b(L)] \\
+P(A = 1 \mid b(L)) &= \mathbb{E}[A \mid b(L)] \\
+&= \mathbb{E}[ \mathbb{E}[A \mid b(L), L] \mid b(L)]  \quad \text{By law of total expectation} \\
 &= \mathbb{E}[ \mathbb{E}[A \mid L] \mid b(L)] \\
 &= \mathbb{E}[ P(A = 1 \mid L) \mid b(L)] \\
-&= \mathbb{E}[ f b(L) \mid b(L)] \\
+&= \mathbb{E}[ f b(L) \mid b(L)]  \quad \text{As by assumption there exist such f}\\
 &= f b(L) \\
 &= ps(L) \\
 &= P(A = 1 \mid L) \\
@@ -387,7 +389,7 @@ $$
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
 
-Next, we will prove that if the treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L). Where strongly ignorable means $$ P(Y^{A} \mid A,L) $$
+### Claim 2: If the treatment assignment is strongly ignorable given L, then it is strongly ignorable given any balancing score b(L). Where strongly ignorable means $$ P(Y^{A} \mid A,L) $$
 
 if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
 a balancing score is an unbiased estimate of the treatment effect at that value  
