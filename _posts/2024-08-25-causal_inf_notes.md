@@ -308,7 +308,7 @@ g(1) = 4, g(2) = 5, g(3) = 4 . The number of elements in domain is greater than 
 Given this background, if we can apply a function to b(l) and still recover all of ps(l), it tells us that b(l) contains more information (larger unique values) than ps(l).
 
 
-### Claim 1: If b(L) is a balancing score (i.e. $$ A \perp L \mid b(L) $$) ,  $$ \exists f s.t. ps(L)  =fb(L) $$
+### Claim 1: If b(L) is a balancing score (i.e. $$ A \perp L \mid b(L) $$) , then  $$ \exists f s.t. ps(L)  =fb(L) $$
 
 #### Proof (Approach 1)
 
@@ -316,7 +316,9 @@ $$
 \begin{aligned}
 ps(L) &= P(A = 1 \mid L) \\
 &= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \\
-&= \sum_{\ell} P(A = 1 \mid b(L)) \quad \text{(since \( b(L) \) is a balancing score, and \( P(b(L) \mid L) = 1 \))}
+&= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( b(L) \) is a balancing score}
+&= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( P(b(L) \mid L) = 1 \)}
+
 \end{aligned}
 $$
 
