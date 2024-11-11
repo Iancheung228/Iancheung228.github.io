@@ -316,47 +316,45 @@ $$
 \begin{aligned}
 ps(L) &= P(A = 1 \mid L) \\
 &= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \\
-&= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( b(L) \) is a balancing score}
+&= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( b(L) \) is a balancing score} \\
 &= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( P(b(L) \mid L) = 1 \)}
 
 \end{aligned}
 $$
 
 
-Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of the balancing score, and that is exactly what we set out to prove.
+Aside: $$ P(X \mid Y)$$ is a random variable with randomness inherited from Y and not X. Hence the expression at the last step is a function of $$b(L)$$, the balancing score, and that is exactly what we set out to prove.
 
 #### Proof (Approach 2)
 Suppose $$ b(L) $$ is a balancing score. For contradiction, assume that $$ b(L) $$ is not finer than $$ ps(L) $$. This implies the existence of two points $$l_1$$  and $$l_2$$ such that:
 
 $$ 
-\exists l_1, l_2 \quad \text{with} \quad b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2).
+b(l_1) = b(l_2) \quad \text{but} \quad ps(l_1) \neq ps(l_2).
 $$
 
-Since \( b(l_1) = b(l_2) \), we have:
+Since $$ b(l_1) = b(l_2) $$ , we have:
 
 $$ 
 P(A \mid b(l_1)) = P(A \mid b(l_2)).
 $$
 
-However, because \( ps(l_1) \neq ps(l_2) \), we also have:
+However, because $$ ps(l_1) \neq ps(l_2) $$, we also have:
 
 $$ 
 P(A \mid l_1) \neq P(A \mid l_2).
 $$
-
-Next, we obtain:
-
+We can add the condition on $$b(l) $$ for free inside the probability
 $$ 
 P(A \mid l_1, b(l_1)) = P(A \mid l_2, b(l_2)).
 $$
 
-This leads to a contradiction, since:
+This leads to a contradiction that $$b(L)$$ is a balancing score, since:
 
 $$ 
 P(A \mid L, b(L)) \neq P(A \mid b(L)).
 $$
 
-Thus, we have a contradiction, which implies that \( b(L) \) must be finer than \( ps(L) \), as required for \( b(L) \) to be a balancing score.
+Thus, we have a contradiction, which implies that $$ b(L) $$ must be finer than $$ ps(L) $$.
 
 
 
