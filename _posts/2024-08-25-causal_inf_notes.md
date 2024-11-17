@@ -322,9 +322,9 @@ $$
 ps(L) &= P(A = 1 \mid L) \\
 &= \sum_{\ell} P(A = 1 \mid L, b(L)) P(b(L) \mid L) \quad \text{why?} \\
 &= \sum_{\ell} P(A = 1 \mid b(L)) P(b(L) \mid L) \quad \text{since \( b(L) \) is a balancing score} \\
-&= \sum_{\ell} P(A = 1 \mid b(L))  \quad \text{since \( P(b(L) \mid L) = 1 \)}
+&= \sum_{\ell} P(A = 1 \mid b(L))  \quad \text{since \( P(b(L) \mid L) = 1 \)} \\
 &= \sum_{\ell} E[A|b(L)] \\
-&= \text{A function of L}
+&= \text{A function of L} \\
 
 \end{aligned}
 $$
@@ -370,8 +370,8 @@ Thus, we have a contradiction, which implies that $$ b(L) $$ must be finer than 
 
 
 
-#### Converse:
-Now if $$ \exists f s.t. ps(L)  = fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$ or mathematically
+#### Now we prove the converse direction:
+Now if $$ \exists f s.t. ps(L)  = fb(L)$$, we want to show b(L) is a balancing score, i.e. $$ A \perp L \mid b(L) $$ or equivalently
 
 $$ P(A =1 \mid b(L),L) =  P(A =1 \mid b(L)) $$
 
@@ -383,7 +383,7 @@ P(A = 1 \mid b(L)) &= \mathbb{E}[A \mid b(L)] \\
 &= \mathbb{E}[ \mathbb{E}[A \mid b(L), L] \mid b(L)]  \quad \text{By law of total expectation} \\
 &= \mathbb{E}[ \mathbb{E}[A \mid L] \mid b(L)] \\
 &= \mathbb{E}[ P(A = 1 \mid L) \mid b(L)] \\
-&= \mathbb{E}[ f b(L) \mid b(L)]  \quad \text{As by assumption there exist such f}\\
+&= \mathbb{E}[ f b(L) \mid b(L)]  \quad \text{By assumption there exist such f}\\
 &= f b(L) \\
 &= ps(L) \\
 &= P(A = 1 \mid L) \\
