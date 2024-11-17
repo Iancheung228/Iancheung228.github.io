@@ -414,12 +414,7 @@ $$ P(A=1 \mid Y^0,Y^1,b(l)) = {\color{orange} {ps(l)}} $$
 $$
 \begin{aligned}
 P(A = 1 \mid Y^0, Y^1, b(l)) &= \mathbb{E}[A \mid (Y^0, Y^1), b(l)] \\
-&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)
-} \\
-
-&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)} \\
-
-
+&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional expectation *} \\
 &= \mathbb{E}[\mathbb{E}[A \mid l] \mid (Y^0, Y^1), b(l)] \quad \text{By assumption of strong ignorablilty} \\
 &= \mathbb{E}[\text{ps}(l) \mid (Y^0, Y^1), b(l)] \\
 &= \mathbb{E}[fb(l) \mid (Y^0, Y^1), b(l)] \\
@@ -428,11 +423,7 @@ P(A = 1 \mid Y^0, Y^1, b(l)) &= \mathbb{E}[A \mid (Y^0, Y^1), b(l)] \\
 \end{aligned}
 $$
 
-By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)
-
-
-Theorem 4) Suppose the treatment assignment is strongly ignorable and b(l) is a balancing score. Then the expected difference in observed responses to the 2 treatments at b(l) is equal to the average treatment effect at b(l)
-
+* By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)
 
 
 
