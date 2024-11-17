@@ -399,6 +399,8 @@ The result we have shown implies the propensity score is the coarsest balancing 
 $${\color{black}Orange}$$
 $${\color{orange}Black}$$
 
+$${\color{red}Red}$$
+
 In the next section, we will explore why a balancing score is useful in the domain of causal inference.
 ### Claim 2: If the treatment assignment is strongly ignorable given L i.e. $$ (Y^0,Y^1) \perp A \mid L $$ , then it is strongly ignorable given any balancing score b(L).
 
