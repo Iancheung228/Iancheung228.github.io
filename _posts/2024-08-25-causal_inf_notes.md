@@ -332,7 +332,10 @@ $$
 
 Aside: The conditional expectation $ \mathbb{E}[X|Y] $ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $ b(L) $, the balancing score, and that is exactly what we set out to prove.
 
-Aside: The conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, 
+Note, the conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, 
+
+
+$$ \mathbb{E}[X|Y] $$
 
 
 it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$, the balancing score, and that is exactly what we set out to prove.
