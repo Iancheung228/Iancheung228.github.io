@@ -330,7 +330,7 @@ ps(L) &= P(A = 1 \mid L) \\
 $$
 
 
-Aside: The conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $$b(L)$$, the balancing score, and that is exactly what we set out to prove.
+Aside: The conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$ , the balancing score, and that is exactly what we set out to prove.
 
 #### Proof (Approach 2)
 Suppose $$ b(L) $$ is a balancing score. Assume for contradiction that $$ b(L) $$ is not finer than $$ ps(L) $$. This implies there exists at least one value of ps(L) that could not be mapped using values from b(L). Mathematically, there are two points $$l_1$$  and $$l_2$$ such that:
@@ -396,17 +396,15 @@ $$
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
 
-### Claim 2: If the treatment assignment is strongly ignorable given L i.e. $$ (Y^0,Y^1) \perp A \mid X $$ , then it is strongly ignorable given any balancing score b(L).
 
-if treatment assignment is strongly ignorable given X, then the difference between treatment and control means at each value of
-a balancing score is an unbiased estimate of the treatment effect at that value  
+In the next section, we will explore why a balancing score is useful in the domain of causal inference.
+### Claim 2: If the treatment assignment is strongly ignorable given L i.e. $$ (Y^0,Y^1) \perp A \mid L $$ , then it is strongly ignorable given any balancing score b(L).
 
 
-We want to show $$ (Y^0,Y^1) \perp A \mid b(L) $$
-it is sufficient to show that 
+Plan of attack: We want to show $$ (Y^0,Y^1) \perp A \mid b(L) $$, it is sufficient to show that 
 
-$$ P(A=1 \mid Y^0,Y^1,b(l)) = P(A=1 \mid b(l)) $$
-Recall from claim 1 we have shown that propensity score is equivalent to $${(A=1 \mid b(L)$$.
+$$ P(A=1 \mid Y^0,Y^1,b(l)) = \color{P(A=1 \mid b(l))}Orange} $$
+Recall we have proved in claim 1 that propensity score is equivalent to the probability of treatment given the balancing score $$ ps(L) = {P(A=1 \mid b(L))} $$.
 
 Hence we just need to show:
 $$ P(A=1 \mid Y^0,Y^1,b(l)) = ps(l) $$
