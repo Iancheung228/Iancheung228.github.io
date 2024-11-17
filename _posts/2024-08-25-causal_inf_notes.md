@@ -396,7 +396,7 @@ $$
 The result we have shown implies the propensity score is the coarsest balancing score, the finest balancing score would be the identity.
 
 
-$$ {\color{orange} P(A=1 \mid b(l))} $$
+$$ {\color{orange} {P(A=1 \mid b(l))}} $$
 
 In the next section, we will explore why a balancing score is useful in the domain of causal inference.
 ### Claim 2: If the treatment assignment is strongly ignorable given L i.e. $$ (Y^0,Y^1) \perp A \mid L $$ , then it is strongly ignorable given any balancing score b(L).
@@ -414,7 +414,10 @@ $$ P(A=1 \mid Y^0,Y^1,b(l)) = ps(l) $$
 $$
 \begin{aligned}
 P(A = 1 \mid Y^0, Y^1, b(l)) &= \mathbb{E}[A \mid (Y^0, Y^1), b(l)] \\
-&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)} \\
+&= \mathbb{E}[\mathbb{E}[A \mid (Y^0, Y^1), l] \mid (Y^0, Y^1), b(l)] \quad \text{By tower property of conditional [expectation](https://math.stackexchange.com/questions/2610172/prove-tower-property-of-conditional-expectation-mathbbe-mathbbexy-w-y)
+} \\
+
+
 &= \mathbb{E}[\mathbb{E}[A \mid l] \mid (Y^0, Y^1), b(l)] \quad \text{By assumption of strong ignorablilty} \\
 &= \mathbb{E}[\text{ps}(l) \mid (Y^0, Y^1), b(l)] \\
 &= \mathbb{E}[fb(l) \mid (Y^0, Y^1), b(l)] \\
