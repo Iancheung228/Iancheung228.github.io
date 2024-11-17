@@ -292,7 +292,7 @@ if there are 2 parameters and only 2 treatment levels, we call it  a saturated m
 
 
 ### Propensity score
-Propensity score is the probability of the average individual receiving treatment given a set of fixed covariates. In this blog post we will discuss the underlying concept of balancing score.
+A propensity score is the probability of the average individual receiving treatment given a set of fixed covariates. In this blog post we will discuss the underlying concept of balancing score.
 
 
 
@@ -330,15 +330,8 @@ ps(L) &= P(A = 1 \mid L) \\
 $$
 
 
-Aside: The conditional expectation $ \mathbb{E}[X|Y] $ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $ b(L) $, the balancing score, and that is exactly what we set out to prove.
+Aside: The conditional expectation $$ \mathbb{E}[X \mid Y] $$ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$, the balancing score, and that is exactly what we set out to prove.
 
-Note, the conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, 
-
-
-$$ \mathbb{E}[X|Y] $$
-
-
-it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$, the balancing score, and that is exactly what we set out to prove.
 
 #### Proof (Approach 2)
 Suppose $$ b(L) $$ is a balancing score. Assume for contradiction that $$ b(L) $$ is not finer than $$ ps(L) $$. This implies there exists at least one value of ps(L) that could not be mapped using values from b(L). Mathematically, there are two points $$l_1$$  and $$l_2$$ such that:
