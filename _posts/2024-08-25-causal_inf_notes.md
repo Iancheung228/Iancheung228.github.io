@@ -330,7 +330,12 @@ ps(L) &= P(A = 1 \mid L) \\
 $$
 
 
-Aside: The conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$ , the balancing score, and that is exactly what we set out to prove.
+Aside: The conditional expectation $ \mathbb{E}[X|Y] $ is a number that depends on y, since the value of this expectation depends on y, it is a function based on y. Hence the expression at the last step is a function of $ b(L) $, the balancing score, and that is exactly what we set out to prove.
+
+Aside: The conditional expectation $$ \mathbb{E}[X|Y] $$ is a number that depends on y, since the value of this expectation depends on y, 
+
+
+it is a function based on y. Hence the expression at the last step is a function of $$ b(L) $$, the balancing score, and that is exactly what we set out to prove.
 
 #### Proof (Approach 2)
 Suppose $$ b(L) $$ is a balancing score. Assume for contradiction that $$ b(L) $$ is not finer than $$ ps(L) $$. This implies there exists at least one value of ps(L) that could not be mapped using values from b(L). Mathematically, there are two points $$l_1$$  and $$l_2$$ such that:
