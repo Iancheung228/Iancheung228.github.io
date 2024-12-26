@@ -36,18 +36,18 @@ To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$
 $$ 1 - \beta \leq P(Z < z_{\alpha} | alternative) = P(\frac{ \hat{\pi_1} - \hat{\pi_0} }{ \sqrt{\pi(1-\pi)( \frac{1}{n} +\frac{1}{n} )   }} <z_\alpha |alternative)$$
 
 But $$ Z \tilda N(0,1) $$ is only true when we condition on Null, but not under the alternative. We have to rearrange to obtain something normally distributed.
-Also note that under alternative $$ Var(\hat{\pi_1} -  \hat{\pi_0}) = \frac{\pi_1(1-pi_1)}{n} +  \frac{\pi_0(1-pi_0)}{n} $$
+Also note that under alternative $$ Var(\widehat{\pi_1} -  \widehat{\pi_0}) = \frac{\pi_1(1- \pi_1)}{n} +  \frac{\pi_0(1-\pi_0)}{n} $$
 
 
-
-
-$$ 
-1 - \beta \leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi)\left( \frac{1}{n} + \frac{1}{n} \right)} \, \Big| \, \text{alternative} \right)
-$$
 
 $$ 
 1 - \beta \leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right)
 $$
+
+$$ 
+P\left( \frac{(\widehat{\pi}_1 - \widehat{\pi}_0) - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \Big| \, \text{alternative} \right)
+$$
+
 
 
 
