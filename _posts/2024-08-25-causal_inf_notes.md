@@ -10,7 +10,7 @@ date: 2024-08-25
 
 $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $$\Delta = \overline{Y^t} - \overline{Y^c} $$
 
-we compute p-values with the assumption that the t stat follows a normal distribution , further under the null hyp it has mean 0 and variance 1. Note the normality assumption is not on the sample distribution of Y
+we compute p-values with the assumption that the t stat follows a normal distribution, further under the null hyp it has mean 0 and variance 1. Note the normality assumption is not on the sample distribution of Y
 
 type 1 error: concluding there is a significant difference when there is no real differ.
 A common choice is 5%
@@ -22,8 +22,8 @@ type 2 error: concluding there is no significant difference when there really is
 
 power (1-beta) is the probability of rejecting Null when Null is indeed false. equivalently, it is the prob of not making a type II error.
 
-suppose we have Null hypothesis \miu = 0.
-Suppose our null hypothesis is true, what would be our sampling distribution. Recall, we only sample from the population then calculate the sample metric, which has variability, if we repeat this sampling process many times we can create a distribution. But in reality, we only conduct this experiment once. Our hypothesis is making a certain statement about the population. The alrger the sample size, the narrower the sampling distribution 
+suppose we have Null hypothesis $ \miu $ = 0.
+Suppose our null hypothesis is true, what would be our sampling distribution? Recall, we only sample from the population then calculate the sample metric, which has variability, if we repeat this sampling process many times we can create a distribution. But in reality, we only conduct this experiment once. Our hypothesis is making a certain statement about the population. The alrger the sample size, the narrower the sampling distribution 
 
 The sig level is the prob of rejecting the null hypothesis even though it is true.
 power is conditioning on when alternative hyp is true
