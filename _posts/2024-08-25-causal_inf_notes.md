@@ -30,9 +30,18 @@ Suppose our null hypothesis is true, what would be our sampling distribution? Re
 The sig level is the prob of rejecting the null hypothesis even though it is true.
 power is conditioning on when alternative hyp is true
 
+How to calculate the sample size needed for a desired power, given alpha level and true alternative hypothesis
 To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time when the alternative hyp is true.
 
-$$ 1 - \beta \leq P(Z < z_{\alpha} | alternative) = P(\frac{ \hat{\pi_1} - \hat{\pi_0} }{ \sqrt{\pi(1-\pi)(2/n)   }} <z_\alpha)$$
+$$ 1 - \beta \leq P(Z < z_{\alpha} | alternative) = P(\frac{ \hat{\pi_1} - \hat{\pi_0} }{ \sqrt{\pi(1-\pi)( \frac{1}{n} +\frac{1}{n} )   }} <z_\alpha |alternative)$$
+
+But $$ Z \tilda N(0,1) $$ is only true when we condition on Null, but not under the alternative. We have to rearrange to obtain something normally distributed.
+Also note that under alternative $$ Var(\hat{\pi_1} -  \hat{\pi_0}) = \frac{\pi_1(1-pi_1)}{n} +  \frac{\pi_0(1-pi_0)}{n} $$
+
+$$ 1 - \beta \leq P(\frac{ \hat{\pi_1} - \hat{\pi_0} } < z_alpha \sqrt{\pi(1-\pi)( \frac{1}{n} +\frac{1}{n} )   } ) $$
+
+
+
 
 what levers affect power
 to increase power, we can increase our alpha, but this is a trade off between making a type 1 error vs type 2 error.
