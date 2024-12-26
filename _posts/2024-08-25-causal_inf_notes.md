@@ -14,6 +14,8 @@ we compute p-values with the assumption that the t stat follows a normal distrib
 
 type 1 error: concluding there is a significant difference when there is no real differ.
 A common choice is 5%
+
+$$ P( |Z| \geq z_{\alpha/2} |H_0) $$
 <img width="366" alt="Screenshot 2024-12-25 at 9 07 27 PM" src="https://github.com/user-attachments/assets/fc47b6e2-774b-4f21-8ac4-004d3d8365b9" />
 
 
