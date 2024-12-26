@@ -8,7 +8,7 @@ date: 2024-08-25
 
 2 sample t test is a very common test to determine whether the difference we observe is real or just due to noise. it is based on a t-statistic (insert formula)
 
-$$ \frac{\Delta}{\sqrt{var()}}$$ 
+$$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $\Delta = \overline{Y^t} - \overline{Y^c}
 
 we compute p-values with the assumption that the t stat follows a normal distribution , further under the null hyp it has mean 0 and variance 1. Note the normality assumption is not on the sample distribution of Y
 
