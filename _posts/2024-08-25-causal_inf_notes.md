@@ -38,11 +38,15 @@ $$ 1 - \beta \leq P(Z < z_{\alpha} | alternative) = P(\frac{ \hat{\pi_1} - \hat{
 But $$ Z \tilda N(0,1) $$ is only true when we condition on Null, but not under the alternative. We have to rearrange to obtain something normally distributed.
 Also note that under alternative $$ Var(\hat{\pi_1} -  \hat{\pi_0}) = \frac{\pi_1(1-pi_1)}{n} +  \frac{\pi_0(1-pi_0)}{n} $$
 
-$$ 1 - \beta \leq P(\frac{ \hat{\pi_1} - \hat{\pi_0} } \leq z_{alpha} \sqrt{\pi(1-\pi)( \frac{1}{n} +\frac{1}{n} )   } | alternative) $$
+
 
 
 $$ 
-1 - \beta \leq P\left( \widehat{\pi}_1 - \hat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi)\left( \frac{1}{n} + \frac{1}{n} \right)} \, \Big| \, \text{alternative} \right)
+1 - \beta \leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi)\left( \frac{1}{n} + \frac{1}{n} \right)} \, \Big| \, \text{alternative} \right)
+$$
+
+$$ 
+1 - \beta \leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right)
 $$
 
 
