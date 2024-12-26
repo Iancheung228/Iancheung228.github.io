@@ -42,7 +42,7 @@ $$ 1 - \beta \leq P(\frac{ \hat{\pi_1} - \hat{\pi_0} } \leq z_{alpha} \sqrt{\pi(
 
 
 $$ 
-1 - \beta \leq P\left( \hat{   \pi}_1 - \hat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi)\left( \frac{1}{n} + \frac{1}{n} \right)} \, \Big| \, \text{alternative} \right)
+1 - \beta \leq P\left( \widehat{\pi}_1 - \hat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1-\pi)\left( \frac{1}{n} + \frac{1}{n} \right)} \, \Big| \, \text{alternative} \right)
 $$
 
 
