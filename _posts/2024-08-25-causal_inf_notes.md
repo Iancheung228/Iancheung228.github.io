@@ -70,13 +70,7 @@ But $$ Z \sim \mathcal{N}(0, 1) $$ is only true when we condition on Null, but n
 Also note that under alternative $$ Var(\widehat{\pi_1} -  \widehat{\pi_0}) = \frac{\pi_1(1- \pi_1)}{n} +  \frac{\pi_0(1-\pi_0)}{n} $$
 
 
-$$
-\begin{aligned}
-1 - \beta &\leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
-          &= P\left( \frac{(\widehat{\pi}_1 - \widehat{\pi}_0) - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \Big| \, \text{alternative} \right) \\
-          &= P( Z^* \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \Big| \, \text{alternative} \right) \\ 
-\end{aligned}
-$$
+
 
 
 $$
