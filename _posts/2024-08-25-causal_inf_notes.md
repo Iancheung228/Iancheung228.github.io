@@ -84,7 +84,16 @@ $$
 
 now the quantity on the left of the inequality is now N(0,1) under a true effect of $$ \delta_{\alpha}$$
 
+$$ z_{1- \beta} \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } 
+since Z ~ N(0,1) $$
 
+$$
+z_{1 - \beta} \leq \frac{
+    z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
+}{ 
+    \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} 
+} \quad \text{since} \quad Z \sim \mathcal{N}(0, 1)
+$$
 
 
 
