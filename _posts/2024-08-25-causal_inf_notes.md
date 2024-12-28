@@ -51,8 +51,8 @@ Type 2 error: concluding there is no significant difference when there really is
 
 |                       | Center Align                      | Right Align                   |
 |:-----------           |:------------:                     |------------:                  |
-| Don't reject Null     | :white_check_mark: (1-$$\alpha$$)            | Type II error 100$$\beta$$    |
-| Reject Null           | Type I error $$\alpha$$           | :white_check_mark: (1-$$\beta$$)         |
+| Don't reject Null     | ✅  (1-$$\alpha$$)            | Type II error 100$$\beta$$    |
+| Reject Null           | Type I error $$\alpha$$           | ✅  (1-$$\beta$$)         |
 
 
 
