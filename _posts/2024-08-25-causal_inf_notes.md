@@ -84,29 +84,30 @@ $$
 
 now the quantity on the left of the inequality is now N(0,1) under a true effect of $$ \delta_{\alpha}$$
 
-$$ z_{1- \beta} \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } 
-since Z ~ N(0,1) $$
+
 
 $$
 z_{1 - \beta} \leq \frac{
     z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
 }{ 
     \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} 
-} \quad \text{since} \quad Z \sim \mathcal{N}(0, 1)
+} \quad \text{since} \quad Z \sim N(0, 1)
 $$
 
-
-
+Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 
 ***what levers affect power***
-to increase power, we can increase our alpha, but this is a trade off between making a type 1 error vs type 2 error.
-alternatively you can increase the sample size, where both distribution will be narrower. less overlap and more power
-alternatively if the true parameter is further away than what null hyp is.
+From the above calculation of power, we see there are 3 levers that affect power.
+1) $$\alpha$$ To increase power, we can increase our alpha, but this is a trade-off between making a type 1 error vs a type 2 error.
+2) $$n$$ You can increase the sample size, where both distributions will be narrower. less overlap and more power
+3) $$\delta$$ If the true parameter is further away than what null hyp is.
 
-Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. What alternative hypothesis should we use? we never know the true effect.
-however, we know the size of delta that would matter in practice or that is of practical sig. common practice is to use the smallest delta that is practically sig also called the minimum detectable effect.
+Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. However a seemingly arbitrary choice of alternative hypothesis remains? Indeed we don't know the true effect $$\deta$$ under the alternative hypothesis.
+
+
+However, we do know the size of $$\delta$$ that would matter under business context or that is of practical significance. The common practice is to use the smallest $$\delta$$ that is practically significant (also called the minimum detectable effect).
 
 
 
