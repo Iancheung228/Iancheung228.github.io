@@ -118,7 +118,9 @@ Given a alpha level, we are usually interested in finding the sample size needed
 However, we do know the size of $$\delta$$ that would matter under business context or that is of practical significance. The common practice is to use the smallest $$\delta$$ that is practically significant (also called the minimum detectable effect).
 
 
+what is so bad about low power, does it matter as long as p value is low?
 
+However, the significance calculation makes a critical assumption that you have probably violated without even realizing it: that the sample size was fixed in advance. If instead of deciding ahead of time, “this experiment will collect exactly 1,000 observations,” you say, “we’ll run it until we see a significant difference,” all the reported significance levels become meaningless. 
 
 
 
