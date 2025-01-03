@@ -112,13 +112,26 @@ From the above calculation of power, we see there are 3 levers that affect power
 2) $$n$$ You can increase the sample size, where both distributions will be narrower. less overlap and more power
 3) $$\delta$$ If the true parameter is further away than what null hyp is.
 
-Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. However a seemingly arbitrary choice of alternative hypothesis remains? Indeed we don't know the true effect $$\deta$$ under the alternative hypothesis.
+Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. However a seemingly arbitrary choice of alternative hypothesis remains? Indeed we don't know the true effect $$\delta$$ under the alternative hypothesis.
 
 
 However, we do know the size of $$\delta$$ that would matter under business context or that is of practical significance. The common practice is to use the smallest $$\delta$$ that is practically significant (also called the minimum detectable effect).
 
 
-what is so bad about low power, does it matter as long as p value is low?
+### What is so bad about low power, does it matter as long as p value is low? ###
+
+misunderstanding of value: A statistically significant result with p-value of 0.05 means that the null hypothesis has a 5% chance of being true.
+equivalently its the same as saying : a p-value of 0.05 has a 5% chance of being a false positive
+This is wrong because p-value doesnt tell us the probability of Null being true.
+
+
+In reality, pvalue is the probability of observing a result as or more extreme than what was observed, under the assumption that the null hypothesis is true.
+
+$$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
+
+p-value = $$ P( \delta \text{observed or more extreme} |H_0 \text{is true}) $$
+
+False positive risk (FPR) is the probability that the statistically sig result is a false positive $$ P(Null is True | p value <0.05) $$
 
 However, the significance calculation makes a critical assumption that you have probably violated without even realizing it: that the sample size was fixed in advance. If instead of deciding ahead of time, “this experiment will collect exactly 1,000 observations,” you say, “we’ll run it until we see a significant difference,” all the reported significance levels become meaningless. 
 
