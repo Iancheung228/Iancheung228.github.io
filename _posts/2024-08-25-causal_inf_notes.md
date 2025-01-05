@@ -146,9 +146,14 @@ However, we do know the size of $$\delta$$ that would matter under business cont
 
 ### What is so bad about low power, does it matter as long as p value is low? ###
 
-Common misunderstanding of pvalue: 
-a) A statistically significant result with p-value of 0.05 means that the null hypothesis has a 5% chance of being true.
-b) equivalently it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive
+Common misunderstandings of p-value:
+
+a) A statistically significant result with a p-value of 0.05 means that the null hypothesis has a 5% chance of being true.
+
+b) Equivalently, it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive.
+
+**Note**: The p-value is not the probability that the null hypothesis is true, nor is it the probability of a false positive. It is the probability of observing the data (or something more extreme) under the assumption that the null hypothesis is true.
+
 This is wrong because the p-value doesn't tell us the probability of the Null being true.
 
 
@@ -159,10 +164,19 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is true}) $$
 
 
-False positive risk (FPR) is the probability that the statistically sig result is a false positive 
+***False positive risk (FPR)*** is the probability that the statistically sig result is a false positive 
 $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
 
 $$ P(Null is True | p value <0.05) $$
+
+
+
+
+
+
+
+
+
 
 However, the significance calculation makes a critical assumption that you have probably violated without even realizing it: that the sample size was fixed in advance. If instead of deciding ahead of time, “this experiment will collect exactly 1,000 observations,” you say, “we’ll run it until we see a significant difference,” all the reported significance levels become meaningless. 
 
