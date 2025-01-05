@@ -27,10 +27,14 @@ what is the null distribution? It is a hypothetical distribution assuming the tr
 A common misconception is the p-value captures the probability the Null hypothesis is true given the data observed. 
 $$ P(H_0 | data) $$
 
-$$ P(H_0 | data) = \frac{P(data|H_0) P(H_0) }{P(data)} $$
+$$
+\begin{aligned}
+P(H_0 \mid \text{data}) &= \frac{P(\text{data} \mid H_0) P(H_0)}{P(\text{data})} \\
+&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
+\end{aligned}
+$$
 
-$$ = \text{p value} \frac{P(H_0)}{P(data)} $$
-we do see however, generally speaking the lower the p value the smaller the chance H_0 is true.
+we do see, however, generally speaking the lower the p value the smaller the chance H_0 is true.
 
 
 We do $$ \frac{MLE - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
