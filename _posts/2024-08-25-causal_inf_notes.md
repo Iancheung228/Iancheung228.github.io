@@ -48,6 +48,13 @@ It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where
 
 ***P-value and type 1 error***
 
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="https://github.com/user-attachments/assets/e5d0ca28-7e1a-42f4-b1e0-4294d8f3b367" alt="IMG_E39688680BFC-1" width="45%" />
+  <img src="https://github.com/user-attachments/assets/cbf6e3fc-a4c1-4e5c-acd1-a39ae1cfc9ee" alt="IMG_5665639446F5-1" width="45%" />
+</div>
+
+
 Type 1 error: concluding there is a significant difference when there is no real difference.A common choice is 5%
 Under null Z, the observed test statistic comes from a standard normal distribution is simply a realization of the squiggle Z which is the standard normal random variable
 
@@ -97,7 +104,7 @@ $$
 $$
 
 
-now the quantity on the left of the inequality is now N(0,1) under a true effect of $$ \delta_{\alpha}$$
+now the quantity on the left of the inequality is now $$ \sim N(0, 1)$$ under a true effect of $$ \delta_{\alpha}$$
 
 
 
