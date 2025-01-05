@@ -128,11 +128,14 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 ***What levers affect power***
+From the above calculation of power, we see there are 3 levers that affect power:
 
-From the above calculation of power, we see there are 3 levers that affect power.
-1) $$\alpha$$ To increase power, we can increase our alpha, but this is a trade-off between making a type 1 error vs a type 2 error.
-2) $$n$$ You can increase the sample size, where both distributions will be narrower. less overlap and more power
-3) $$\delta$$ If the true parameter is further away than what null hyp is.
+1) $$ \alpha $$: To increase power, we can increase our alpha, but this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
+
+2) $$ n $$: You can increase the sample size. Both distributions will become narrower, leading to less overlap and more power.
+
+3) $$ \delta $$: If the true parameter is further away from the null hypothesis value, the power increases.
+
 
 Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. However, a seemingly arbitrary choice of alternative hypothesis remains? Indeed we don't know the true effect $$\delta$$ under the alternative hypothesis.
 
