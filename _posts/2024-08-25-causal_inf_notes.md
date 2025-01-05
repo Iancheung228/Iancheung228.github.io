@@ -50,9 +50,16 @@ It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where
 
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="https://github.com/user-attachments/assets/e5d0ca28-7e1a-42f4-b1e0-4294d8f3b367" alt="IMG_E39688680BFC-1" width="45%" />
-  <img src="https://github.com/user-attachments/assets/cbf6e3fc-a4c1-4e5c-acd1-a39ae1cfc9ee" alt="IMG_5665639446F5-1" width="45%" />
+  <figure style="text-align: center; width: 45%;">
+    <img src="https://github.com/user-attachments/assets/e5d0ca28-7e1a-42f4-b1e0-4294d8f3b367" alt="IMG_E39688680BFC-1" width="100%" />
+    <figcaption>Subtitle for Image 1</figcaption>
+  </figure>
+  <figure style="text-align: center; width: 45%;">
+    <img src="https://github.com/user-attachments/assets/cbf6e3fc-a4c1-4e5c-acd1-a39ae1cfc9ee" alt="IMG_5665639446F5-1" width="100%" />
+    <figcaption>Subtitle for Image 2</figcaption>
+  </figure>
 </div>
+
 
 
 Type 1 error: concluding there is a significant difference when there is no real difference.A common choice is 5%
