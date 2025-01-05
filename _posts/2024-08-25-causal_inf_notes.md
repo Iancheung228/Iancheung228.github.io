@@ -148,16 +148,16 @@ However, we do know the size of $$\delta$$ that would matter under business cont
 
 Common misunderstandings of p-value:
 
-a) A statistically significant result with a p-value of 0.05 means that the null hypothesis has a 5% chance of being true.
+a) A statistically significant result with a p-value of 0.05 means that the null hypothesis has a 5% chance of being true. $$ P( H_0|p-value =0.05) =0.05 $$
 
-b) Equivalently, it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive.
+b) Equivalently, it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive. $$ P( H_0|p-value =0.05) =0.05 $$
 
 **Note**: The p-value is not the probability that the null hypothesis is true, nor is it the probability of a false positive. It is the probability of observing the data (or something more extreme) under the assumption that the null hypothesis is true.
 
 This is wrong because the p-value doesn't tell us the probability of the Null being true.
 
 
-In reality, pvalue is the probability of observing a result as or more extreme than what was observed, under the assumption that the null hypothesis is true.
+In reality, the p-value is the probability of observing a result as or more extreme than what was observed, under the assumption that the null hypothesis is true.
 
 $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
 
@@ -167,7 +167,13 @@ $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is
 ***False positive risk (FPR)*** is the probability that the statistically sig result is a false positive 
 $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
 
-$$ P(Null is True | p value <0.05) $$
+$$
+\begin{aligned}
+&= P(\text{p-value} < 0.05 \mid H_0) \cdot \frac{P(H_0)}{P(\text{p-value} < 0.05)} \\
+P(H_0 \mid \text{Data}) &= \frac{ P(\text{Data} \mid H_0) P(H_0)}{P(\text{Data} \mid H_0) P(H_0) + P(\text{Data} \mid H_1) P(H_1)} \\
+&= \frac{\alpha \cdot \pi}{\alpha \cdot \pi + (1-\beta)(1-\pi)}
+\end{aligned}
+$$
 
 
 
