@@ -172,12 +172,9 @@ $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is
 Let:
 
 <div style="text-align: left;">
-$$ SS \quad \text{is a statistically significant result.} $$
-
-$$ \alpha \quad \text{is the threshold to declare statistical significance.} $$
-
+$$SS \quad \text{is a statistically significant result.}$$
+$$\alpha \quad \text{is the threshold to declare statistical significance.}$$
 $$ \beta \quad \text{is the Type II error rate.} $$
-
 $$ \pi \quad \text{is the prior probability of the null hypothesis.} $$
 </div>
 
