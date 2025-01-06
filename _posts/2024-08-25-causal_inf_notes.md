@@ -10,7 +10,7 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 
 *** High level steps of ab testing***
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
+2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = Y^T - Y^C $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Use that to calculate our test statistics and eventually the p-value.
 
