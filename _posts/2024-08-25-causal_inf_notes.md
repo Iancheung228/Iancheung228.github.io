@@ -164,13 +164,18 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is true}) $$
 
 
-***False positive risk (FPR)*** is the probability that the statistically sig result is a false positive 
-$$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
+**False positive risk (FPR)** is the probability that the Null hypothesis is true while we make the decision to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
+
+Let SS be a statistically significant result
+$$\alpha$$ be the threshold to declare statistical significance
+let $$\beta$$ be type 2 error
+Let $$\pi$$ be the prior of $$H_0$$
+
 
 $$
 \begin{aligned}
-&= P(\text{p-value} < 0.05 \mid H_0) \cdot \frac{P(H_0)}{P(\text{p-value} < 0.05)} \\
-P(H_0 \mid \text{Data}) &= \frac{ P(\text{Data} \mid H_0) P(H_0)}{P(\text{Data} \mid H_0) P(H_0) + P(\text{Data} \mid H_1) P(H_1)} \\
+P(H_0 \mid SS) &= P(SS \mid H_0) \cdot \frac{P(H_0)}{P(SS)} \\
+&= \frac{ P(SS \mid H_0) P(H_0)}{P(SS \mid H_0) P(H_0) + P(SS \mid H_1) P(H_1)} \\
 &= \frac{\alpha \cdot \pi}{\alpha \cdot \pi + (1-\beta)(1-\pi)}
 \end{aligned}
 $$
