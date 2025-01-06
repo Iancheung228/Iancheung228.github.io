@@ -4,13 +4,13 @@ title: Causal Inference Notes
 date: 2024-08-25
 ---
 
-Intuition of ab testing
 
-In ab tests, we have 2 versions of a product. One is currently in production (control) and the other is the contender (treatment). We wish to determine whether there is a difference between the control vs treatment for a metric that we care about. In an ideal world, we would perform the experiment on the entire population and the result would be deterministic, however in reality we could only perform the experiment over a sample of the population. We need statistical testing techniques to quantify this variability.
+
+In ab tests, we are dealing with 2 versions of a product. One version is currently in production (control) and the other is the contender (treatment). We often wish to determine whether there is a difference between the control vs treatment for a metric we care about. In an ideal world, we would perform the experiment on the entire population and the result would be deterministic, however in reality we could only perform the experiment over a sample of the population. We need statistical testing techniques to quantify this variability.
 
 *** High level steps of ab testing***
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the mean under treatment $$Y^T$$ and the mean under control $$Y^C$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be a normal distribution thanks to the central limit theorem. 
+2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = Y^T - Y^C $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Use that to calculate our test statistics and eventually the p-value.
 
@@ -38,7 +38,7 @@ P(H_0 \mid \text{data}) &= \frac{P(\text{data} \mid H_0) P(H_0)}{P(\text{data})}
 \end{aligned}
 $$
 
-We do see that however, generally speaking the lower the p-value the smaller the chance H_0 is true.
+We do see that however, generally speaking, the lower the p-value the smaller the chance H_0 is true.
 
 
 We do $$ \frac{MLE - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
