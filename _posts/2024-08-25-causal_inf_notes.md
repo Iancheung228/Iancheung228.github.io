@@ -148,9 +148,12 @@ However, we do know the size of $$\delta$$ that would matter under business cont
 
 Common misunderstandings of p-value:
 
-a) A statistically significant result with a p-value of 0.05 means that the null hypothesis has a 5% chance of being true. $$P( H_0|p-value =0.05) =0.05$$
+a) A statistically significant result with a p-value of 0.05 means that the null hypothesis has a 5% chance of being true. 
+$$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$
 
-b) Equivalently, it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive. $$P( H_0|p-value =0.05) =0.05$$
+b) Equivalently, it's the same as saying: a p-value of 0.05 has a 5% chance of being a false positive. 
+$$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$
+
 
 **Note**: The p-value is not the probability that the null hypothesis is true, nor is it the probability of a false positive. It is the probability of observing the data (or something more extreme) under the assumption that the null hypothesis is true.
 
