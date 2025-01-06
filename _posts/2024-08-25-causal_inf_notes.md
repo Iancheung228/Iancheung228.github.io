@@ -8,7 +8,7 @@ date: 2024-08-25
 
 In ab tests, we are dealing with 2 versions of a product. One version is currently in production (control) and the other is the contender (treatment). We often wish to determine whether there is a difference between the control vs treatment for a metric we care about. In an ideal world, we would perform the experiment on the entire population and the result would be deterministic, however in reality we could only perform the experiment over a sample of the population. We need statistical testing techniques to quantify this variability.
 
-*** High level steps of ab testing***
+##High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
 2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = Y^T - Y^C $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
@@ -16,16 +16,16 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 
 We will expand on step 4. 
 
-P-value is the probability of observing a more extreme test statistic, under the assumption that the null hypothesis is true. 
-$$ P(data | H_0) $$
+**P-value** is the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
+$$ \text{P-value} =  P(data | H_0) $$
 
-The Null hypothesis: the null distribution is normally distributed with mean around 0. This distribution is for the r.v $$ \Delta$$, it is a random variable because we run the ab test on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
+The **Null hypothesis** asserts that the null distribution is normally distributed with mean around 0. This distribution is for the r.v $$ \Delta$$ and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
 
 what is the null distribution? It is a hypothetical distribution assuming the treatment mean is no different from the control mean. If we have access to the entire population, this belief won't be represented by a distribution but instead by the number 0. But since we can only sample a subset of the population, if we repeat the same experiment many times, we would expect some deviation in the observed outcome. We say our observed statistic is just one realization of the Null distribution. 
 
 
 A common misconception is the p-value captures the probability the Null hypothesis is true given the data observed. 
-$$ P(H_0 | data) $$
+$$ \text{P-value} \neq P(H_0 | data) $$
 
 
 
