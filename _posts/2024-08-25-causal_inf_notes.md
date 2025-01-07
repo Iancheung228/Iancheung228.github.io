@@ -188,26 +188,15 @@ $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is
 
 **False positive risk (FPR)** is the probability that the Null hypothesis is true while we make the decision to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
 
-Let:
+<div style="color: lightgray; font-style: italic;">
+  $$ SS \quad \text{is a statistically significant result.} $$
 
-$$
-\begin{flalign*}
-SS & \quad \text{is a statistically significant result.} \\
-\alpha & \quad \text{is the threshold to declare statistical significance.} \\
-\beta & \quad \text{is the Type II error rate.} \\
-\pi & \quad \text{is the prior probability of the null hypothesis.}
-\end{flalign*}
-$$
+  $$ \alpha \quad \text{is the threshold to declare statistical significance.} $$
 
+  $$ \beta \quad \text{is the Type II error rate.} $$
 
-Let:
-$$ SS \quad \text{is a statistically significant result.} $$
-
-$$ \alpha \quad \text{is the threshold to declare statistical significance.} $$
-
-$$ \beta \quad \text{is the Type II error rate.} $$
-
-$$ \pi \quad \text{is the prior probability of the null hypothesis.} $$
+  $$ \pi \quad \text{is the prior probability of the null hypothesis.} $$
+</div>
 
 
 $$
