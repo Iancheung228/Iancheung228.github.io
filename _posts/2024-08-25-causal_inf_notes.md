@@ -195,6 +195,11 @@ $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is
   $$ \pi $$ is the prior probability of the null hypothesis.
 </div>
 
+Let
+- SS be a statistically significant result.
+- alpha be the threshold to declare statistical significance.
+- beta be the Type II error rate.
+- pi be the prior probability of the null hypothesis.
 
 
 $$
