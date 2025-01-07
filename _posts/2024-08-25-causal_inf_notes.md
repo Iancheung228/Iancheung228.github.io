@@ -30,6 +30,8 @@ A common misconception is the p-value captures the probability that the Null hyp
 $$ \text{P-value} \neq P(H_0 | data) $$
 
 These 2 concepts are related by the Bayes theorem:
+
+
 $$
 \begin{aligned}
 P(H_0 \mid \text{data}) &= \frac{P(\text{data} \mid H_0) P(H_0)}{P(\text{data})} \\
