@@ -190,11 +190,8 @@ $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is
 
 <div style="color: lightgray; font-style: italic;">
   $$ SS  $$ is a statistically significant result.
-
   $$ \alpha $$ is the threshold to declare statistical significance.
-
   $$ \beta $$ is the Type II error rate.
-
   $$ \pi $$ is the prior probability of the null hypothesis.
 </div>
 
