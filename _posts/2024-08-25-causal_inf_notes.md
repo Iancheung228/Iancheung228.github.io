@@ -87,7 +87,7 @@ In the figure on the left, an error is made if we decide to reject the Null, whi
 
 
 ***What levers affect power***
-From the above calculation of power, we see there are 3 levers that affect power:
+From the above calculation of power, there are 3 levers that affect power:
 
 1) $$ \alpha $$: To increase power, we can increase our alpha, but this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
@@ -104,9 +104,9 @@ However, we do know the size of $$\delta$$ that would matter under business cont
 
 
 |                       | $$H_0$$ is true                   | $$H_A$$ is true                   |
-|:-----------           |:------------:                     |------------:                  |
+|:-----------           |:------------:                     |:------------:                  |
 | Don't reject Null     | ✅  (1-$$\alpha$$)                | Type II error 100$$\beta$$    |
-| Reject Null           | Type I error $$\alpha$$           | ✅  (1-$$\beta$$)         |
+| Reject Null           | Type I error $$\alpha$$           | ✅  Power (1-$$\beta$$)         |
 
 
 
