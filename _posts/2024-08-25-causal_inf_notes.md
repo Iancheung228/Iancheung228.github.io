@@ -73,13 +73,15 @@ $$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
 
 Type 2 error: concluding there is no significant difference when there is one.
 
-In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of $$\alpha$$. While in the right figure an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$\alpha$$
+In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of $$\alpha$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$\alpha$$. Observe that we could decrease type 2 error if we shift our decision boundary ($$\alpha$$) to the right, however, that would at the same time increase type 1 error.
+
 [Go to Power Graph](#null-graph)
 
 
-|                       | Center Align                      | Right Align                   |
+
+|                       | $$H_0$$ is true                   | $$H_A$$ is true                   |
 |:-----------           |:------------:                     |------------:                  |
-| Don't reject Null     | ✅  (1-$$\alpha$$)            | Type II error 100$$\beta$$    |
+| Don't reject Null     | ✅  (1-$$\alpha$$)                | Type II error 100$$\beta$$    |
 | Reject Null           | Type I error $$\alpha$$           | ✅  (1-$$\beta$$)         |
 
 
