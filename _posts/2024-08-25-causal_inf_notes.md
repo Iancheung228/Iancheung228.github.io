@@ -89,7 +89,7 @@ In the figure on the left, an error is made if we decide to reject the Null, whi
 
 
 ***What levers affect power***
-From the above calculation of power, there are 3 levers that affect power:
+From the above calculation of power, 3 levers affect power:
 
 1) $$ \alpha $$: To increase power, we can increase our alpha, but this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
@@ -206,7 +206,7 @@ P(H_0 \mid SS) &= P(SS \mid H_0) \cdot \frac{P(H_0)}{P(SS)} \\
 $$
 
 
-
+If the power $$1- \beta$$ is low the denominator will be small and the entire fraction (FPR) will be high. This means when power is low the probability that the Null hypothesis is true is small (even when p-value is statistically significant)
 
 
 
