@@ -16,7 +16,7 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
 2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
-4. Use that to calculate our test statistics and eventually the p-value.
+4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
 
 We will expand on step 4. 
 
@@ -36,15 +36,12 @@ P(H_0 \mid \text{data}) &= \frac{\textcolor{red}{P(\text{data} \mid H_0)} \times
 \end{aligned}
 $$
 
-We do see that however, generally speaking, the lower the p-value the smaller the chance H_0 is true.
-
-
-We do $$ \frac{MLE - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
-It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $$\Delta = \overline{Y^t} - \overline{Y^c} $$ The T statistic is just the normalized version of $$\delta$$ We compute p-values with the assumption that the t stat follows a normal distribution, further under the null hypothesis it has a mean of 0 and variance 1. 
+However, we see that this formula confirms our intuition that a lower p-value implies that H_0 is less likely to be true.
 
 
 
-***P-value and type 1 error***
+
+## P-value and type 1 error
 
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
@@ -67,9 +64,18 @@ It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where
 
 ***Type 1 error:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
 
+We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
+
+Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$
+Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - \textcolour{red}{0}}{appropriate s.d.} $$ is a standard normal.
+
+It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $$\Delta = \overline{Y^t} - \overline{Y^c} $$ The T statistic is just the normalized version of $$\delta$$ We compute p-values with the assumption that the t stat follows a normal distribution, further under the null hypothesis it has a mean of 0 and variance 1. 
+
+
+
 Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
 
-$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(|Z| \geq z_{\alpha/2}) = \alpha = 5\% $$
+$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(|*Z*| \geq z_{\alpha/2}) = \alpha = 5\% $$
 
 ***Power (1-beta):*** The probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
