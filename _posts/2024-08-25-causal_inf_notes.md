@@ -32,7 +32,7 @@ These 2 concepts are related by the Bayes theorem:
 $$
 \begin{aligned}
 P(H_0 \mid \text{data}) &= \frac{ {\color{red}P(\text{data} \mid H_0)} \times P(H_0)}  {P(\text{data})} \\
-&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
+&= {\color{red}\text{p-value}} \times \frac{P(H_0)}{P(\text{data})}
 \end{aligned}
 $$
 
@@ -67,7 +67,7 @@ However, we see that this formula confirms our intuition that a lower p-value im
 We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
 
 Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$
-Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - \textcolour{red}{0}}{appropriate s.d.} $$ is a standard normal.
+Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\colour{red}0}}{appropriate s.d.} $$ is a standard normal.
 
 It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $$\Delta = \overline{Y^t} - \overline{Y^c} $$ The T statistic is just the normalized version of $$\delta$$ We compute p-values with the assumption that the t stat follows a normal distribution, further under the null hypothesis it has a mean of 0 and variance 1. 
 
