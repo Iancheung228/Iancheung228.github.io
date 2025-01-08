@@ -66,16 +66,13 @@ However, we see that this formula confirms our intuition that a lower p-value im
 
 We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
 
-Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$
+Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
 Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\colour{red}0}}{appropriate s.d.} $$ is a standard normal.
-
-It is also called the t-statistics  $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ where $$\Delta = \overline{Y^t} - \overline{Y^c} $$ The T statistic is just the normalized version of $$\delta$$ We compute p-values with the assumption that the t stat follows a normal distribution, further under the null hypothesis it has a mean of 0 and variance 1. 
-
 
 
 Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
 
-$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(|*Z*| \geq z_{\alpha/2}) = \alpha = 5\% $$
+$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| $$*Z*$$ | \geq z_{\alpha/2}) = \alpha = 5\% $$
 
 ***Power (1-beta):*** The probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
