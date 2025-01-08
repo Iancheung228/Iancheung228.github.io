@@ -59,6 +59,15 @@ P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}  {P(\te
 \end{aligned}
 $$
 
+
+$$
+\begin{aligned}
+P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}  {P(\text{data})} \\
+&= <span style="color:red;">p-value</span> \times \frac{P(H_0)}{P(\text{data})}
+\end{aligned}
+$$
+
+
 However, we see that this formula confirms our intuition that a lower p-value implies that H_0 is less likely to be true.
 
 
