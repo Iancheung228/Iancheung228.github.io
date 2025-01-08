@@ -73,7 +73,7 @@ Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \fra
 
 Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
 
-$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| $$*Z*$$ | \geq z_{\alpha/2}) = \alpha = 5\% $$
+$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| *Z* | \geq z_{\alpha/2}) = \alpha = 5\% $$
 
 ***Power (1-beta):*** The probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
