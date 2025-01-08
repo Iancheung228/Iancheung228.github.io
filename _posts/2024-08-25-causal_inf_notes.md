@@ -12,7 +12,7 @@ power
 
 In ab tests, we are dealing with 2 versions of a product. One version is currently in production (control) and the other is the contender (treatment). We often wish to determine whether there is a difference between the control vs treatment for a metric we care about. In an ideal world, we would perform the experiment on the entire population and the result would be deterministic, however in reality we could only perform the experiment over a sample of the population. We need statistical testing techniques to quantify this variability.
 
-##High level steps of ab testing
+## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
 2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
@@ -25,16 +25,13 @@ $$ \text{P-value} =  P(data | H_0) $$
 
 The **Null hypothesis** asserts that the null distribution (for the r.v $$ \Delta$$) is normally distributed with mean around 0 (assuming the treatment mean is no different from the control mean). This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
 
-### Aside
-A common misconception is the p-value captures the probability that the Null hypothesis is true given the data observed. 
-$$ \text{P-value} \neq P(H_0 | data) $$
+### Aside $$ \text{P-value} \neq P(H_0 | data) $$
+A common misconception is the p-value captures the probability that the Null hypothesis is true given the data observed. Although this is something of huge interest, we see we can't obtain this expression between knowing the prior probability of $$H_0$$.
 
 These 2 concepts are related by the Bayes theorem:
-
-
 $$
 \begin{aligned}
-P(H_0 \mid \text{data}) &= \frac{P(\text{data} \mid H_0) P(H_0)}{P(\text{data})} \\
+P(H_0 \mid \text{data}) &= \frac{\textcolor{red}{P(\text{data} \mid H_0)} \times P(H_0)}{P(\text{data})} \\
 &= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
 \end{aligned}
 $$
