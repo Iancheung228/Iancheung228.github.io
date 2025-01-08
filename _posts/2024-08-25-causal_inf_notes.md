@@ -54,7 +54,7 @@ A common misconception is the p-value captures the probability that the Null hyp
 These 2 concepts are related by the Bayes theorem:
 $$
 \begin{aligned}
-P(H_0 \mid \text{data}) &= \frac{ {\color{red}P(\text{data} \mid H_0)} \times P(H_0)}  {P(\text{data})} \\
+P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}  {P(\text{data})} \\
 &= {\color{red}\text{p-value}} \times \frac{P(H_0)}{P(\text{data})}
 \end{aligned}
 $$
