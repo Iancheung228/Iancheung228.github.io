@@ -18,7 +18,7 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
 
-The **Null hypothesis** asserts that the null distribution (for the r.v $$ \Delta$$) is normally distributed with mean around 0 (assuming the treatment mean is no different from the control mean). This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
+Null assumes treatment and control are the same . The **Null hypothesis** asserts that the null distribution (for the r.v $$ \Delta$$) is normally distributed with mean around 0 (assuming the treatment mean is no different from the control mean). This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
 
 
 
@@ -46,23 +46,6 @@ The **Null hypothesis** asserts that the null distribution (for the r.v $$ \Delt
 
 **P-value** is the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
 $$ \text{P-value} =  P(data | H_0) $$
-
-
-### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is the p-value captures the probability that the Null hypothesis is true given the data observed. Although this is something of huge interest, we see we can't obtain this expression between knowing the prior probability of $$H_0$$.
-
-These 2 concepts are related by the Bayes theorem:
-$$
-\begin{aligned}
-P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text{data})} \\
-&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
-\end{aligned}
-$$
-
-
-However, we see that this formula confirms our intuition that a lower p-value implies that H_0 is less likely to be true.
-
-
 
 ***Type 1 error:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
 
@@ -163,6 +146,19 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 
+### Aside $$ \text{P-value} \neq P(H_0 | data) $$
+A common misconception is the p-value captures the probability that the Null hypothesis is true given the data observed. Although this is something of huge interest, we see we can't obtain this expression between knowing the prior probability of $$H_0$$.
+
+These 2 concepts are related by the Bayes theorem:
+$$
+\begin{aligned}
+P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text{data})} \\
+&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
+\end{aligned}
+$$
+
+
+However, we see that this formula confirms our intuition that a lower p-value implies that H_0 is less likely to be true.
 
 
 ### What is so bad about low power, does it matter as long as p-value is low? ###
