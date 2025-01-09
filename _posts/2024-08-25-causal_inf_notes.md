@@ -19,10 +19,12 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
 
 ## 3)
-$$\Delta$$ is a random variable that is normally distributed
+$$\Delta$$ is a random variable that is normally distributed.
 We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
 
-Under the Null hypothesis, we assert that the treatment mean equals control mean and $$\Delta$$ is generated from the null distribution. This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
+Under the Null hypothesis, we assert that the treatment mean equals the control mean and our observation of the realization of the random variable $$\Delta$$ (after standardization) is generated from the null distribution where the null distribution is a N(0,1). If we perform ab test many times, the random variable would take on a different value each time.
+
+Under the alternative hypothesis, we assert that treatment mean - control mean = $$\delta$$, and our observation of the realization of the random variable $$\Delta$$ is generated from the alternative distribution where alternative distribution is a N($$\delta$$,1)
 
 ## 4)
 Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
