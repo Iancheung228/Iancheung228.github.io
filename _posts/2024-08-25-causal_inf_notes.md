@@ -18,11 +18,24 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
 
-Null assumes treatment and control are the same . The **Null hypothesis** asserts that the null distribution (for the r.v $$ \Delta$$) is normally distributed with mean around 0 (assuming the treatment mean is no different from the control mean). This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
+## 3)
+$$\Delta$$ is a random variable that is normally distributed
+We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
 
+Under the Null hypothesis, we assert that the treatment mean equals control mean and $$\Delta$$ is generated from the null distribution. This distribution is for  and it is a random variable due to the limitation that we run the ab test only on a sample of the population. If we perform ab test many times, the random variable would take on a different value each time, and it follows this null distribution. each observation is one realization.
 
+## 4)
+Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
+Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ is a standard normal.
 
+Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
 
+$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| *Z* | \geq z_{\alpha/2}) = \alpha = 5\% $$
+
+**P-value** is the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
+$$ \text{P-value} =  P(data | H_0) $$
+
+***Type 1 error:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
 
 ## P-value and type 1 error
 
@@ -44,20 +57,6 @@ Null assumes treatment and control are the same . The **Null hypothesis** assert
 
 </div>
 
-**P-value** is the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
-$$ \text{P-value} =  P(data | H_0) $$
-
-***Type 1 error:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
-
-We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
-
-Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
-Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ is a standard normal.
-
-
-Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
-
-$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| *Z* | \geq z_{\alpha/2}) = \alpha = 5\% $$
 
 ***Power (1-beta):*** The probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
