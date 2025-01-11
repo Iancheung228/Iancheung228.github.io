@@ -112,13 +112,13 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 
-## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$\Alpha = \delta_A >0 $$
+## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$ \alpha = \delta_A >0 $$
 
-
+Assuming the metric of interest is conversion, the sample deviation would be $$ \mu (1-\mu) $$
 In an A/B test, we have two normal distributions:
 
-$$N(\mu_A, \sigma_A^2)$$ and $$N(\mu_B, \sigma_B^2)$$ with sample sizes \(N_A\) and \(N_B\). The test statistic is: 
-$$N(\mu_A, \sigma_A^2) - N(\mu_B, \sigma_B^2) = N\left(\mu = \mu_B - \mu_A, \sigma^2 = \sigma_A^2 + \sigma_B^2 \right)$$
+$$N(\mu_A, \sigma_A^2)$$ and $$N(\mu_B, \sigma_B^2)$$ with sample sizes $$(N_A)$$ and $$(N_B)$$. 
+The test statistic is:  $$N(\mu_A, \sigma_A^2) - N(\mu_B, \sigma_B^2) = N\left(\mu = \mu_B - \mu_A, \sigma^2 = \sigma_A^2 + \sigma_B^2 \right)$$
 
 
 To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
@@ -129,19 +129,19 @@ To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$
 
 $$
 1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
-= P\left( \frac{ \widehat{\pi_1} - \widehat{\pi_0} }{ \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right) } } > z_{\alpha} \, \Big| \, \text{alternative} \right)
+= P\left( \frac{ \widehat{\mu_1} - \widehat{\mu_0} }{ \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right) } } > z_{\alpha} \, \Big| \, \text{alternative} \right)
 $$
 
 
 Note the z score $$ Z \sim N(0, 1) $$ is only true when we are under the Null hypothesis, and not under the alternative. We have to rearrange to obtain something normally distributed.
-Also note that under alternative $$ Var(\widehat{\pi_1} -  \widehat{\pi_0}) = \frac{\pi_1(1- \pi_1)}{n} +  \frac{\pi_0(1-\pi_0)}{n} $$
+Also note that under alternative $$ Var(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 
 $$
 \begin{aligned}
-1 - \beta &\leq P\left( \widehat{\pi}_1 - \widehat{\pi}_0 \leq z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
-          &= P\left( \frac{(\widehat{\pi}_1 - \widehat{\pi}_0) - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \Big| \, \text{alternative} \right) \\
-          &= P\left( Z^* \leq \frac{z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} } \Big| \, \text{alternative} \right) \\
+1 - \beta &\leq P\left( \widehat{\mu}_1 - \widehat{\mu}_0 \leq z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
+          &= P\left( \frac{(\widehat{\mu}_1 - \widehat{\mu}_0) - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } \leq \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } \Big| \, \text{alternative} \right) \\
+          &= P\left( Z^* \leq \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } \Big| \, \text{alternative} \right) \\
 \end{aligned}
 $$
 
@@ -152,9 +152,9 @@ now the quantity on the left of the inequality is now $$ \sim N(0, 1)$$ under a 
 
 $$
 z_{1 - \beta} \leq \frac{
-    z_{\alpha} \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
+    z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
 }{ 
-    \frac{\pi_1(1 - \pi_1)}{n} + \frac{\pi_0(1 - \pi_0)}{n} 
+    \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} 
 } \quad \text{since} \quad Z \sim N(0, 1)
 $$
 
