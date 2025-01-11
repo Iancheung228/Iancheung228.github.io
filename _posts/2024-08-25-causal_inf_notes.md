@@ -20,7 +20,7 @@ Ideally, we would test both versions on the entire population, and the results w
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
 2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
-4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
+4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
 ## 3)
 
@@ -34,7 +34,7 @@ Finally, to transform the distribution to have a variance of 1, we do $$ \frac{ 
 
 ## 4)
 Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
-Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ is a standard normal.
+Under the further assumption that Null is true i.e. mean = 0, the z-score follows a standard normal distribution := $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
 
 Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the $$ \zeta$$ which is the standard normal random variable
 
@@ -43,6 +43,12 @@ $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/
 **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
 
 ***Type 1 error $$\alpha$$:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
+
+***Power (1-beta):*** is defined as the probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
+
+$$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
+
+**Type 2 error:** concluding there is no significant difference when there is one.
 
 ## P-value/type 1 error vs Power/type 2 error
 
@@ -65,11 +71,7 @@ $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/
 </div>
 
 
-***Power (1-beta):*** is defined as the probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
-$$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
-
-**Type 2 error:** concluding there is no significant difference when there is one.
 
 In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of $$\alpha$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$\alpha$$. 
 
@@ -81,12 +83,13 @@ It's important to note that we can reduce the probability of a Type II error by 
 [Go to Power Graph](#null-graph)
 
 
-***What levers affect power***
-From the above calculation of power, 3 levers affect power:
+## What levers affect power
+
+From the above diagram there are 3 levers that affect power:
 
 1) $$ \alpha $$: To increase power, we can increase our alpha, but this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
-2) $$ n $$: You can increase the sample size. Both distributions will become narrower, leading to less overlap and more power.
+2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions will become narrower, leading to less overlap between the 2 distributions.
 
 3) $$ \delta $$: If the true parameter is further away from the null hypothesis value, the power increases.
 
