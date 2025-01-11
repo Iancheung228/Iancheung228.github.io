@@ -114,7 +114,7 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 ## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$ \alpha = \delta_A >0 $$
 
-Assuming the metric of interest is conversion, the sample deviation would be $$ \mu (1-\mu) $$
+Assuming the metric of interest is conversion, the sample variance would be $$ \sigma = \frac{ \mu (1-\mu)} {N} $$
 In an A/B test, we have two normal distributions:
 
 $$N(\mu_A, \sigma_A^2)$$ and $$N(\mu_B, \sigma_B^2)$$ with sample sizes $$(N_A)$$ and $$(N_B)$$. 
