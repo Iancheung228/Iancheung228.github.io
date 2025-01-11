@@ -149,16 +149,16 @@ $$
 $$
 
 
-now the quantity on the left of the inequality is now $$ \sim N(0, 1)$$ under a true effect of $$ \delta_{\alpha}$$
+now the quantity on the left of the inequality, $$Z^* \sim N(0, 1)$$ under the alternative hypothesis
 
 
 
 $$
-z_{1 - \beta} > \frac{
+z_{1 - \beta} \leq \frac{
     z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
 }{ 
     \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} 
-} \quad \text{since} \quad Z \sim N(0, 1)
+} \quad \text{since} \quad Z^* \sim N(0, 1)
 $$
 
 Then, you can simply continue the algebraic manipulation and isolate for n.
@@ -167,9 +167,10 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 ### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is the p-value captures the probability that the Null hypothesis is true given the data observed. Although this is something of huge interest, we see we can't obtain this expression between knowing the prior probability of $$H_0$$.
+A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
 
-These 2 concepts are related by the Bayes theorem:
+These 2 concepts are related by the Bayes' theorem:
+
 $$
 \begin{aligned}
 P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text{data})} \\
@@ -177,8 +178,7 @@ P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text
 \end{aligned}
 $$
 
-
-However, we see that this formula confirms our intuition that a lower p-value implies that H_0 is less likely to be true.
+It does align with our intuition: a lower p-value suggests that the null hypothesis is less likely to be true, assuming we have some prior probability of
 
 
 ### What is so bad about low power, does it matter as long as p-value is low? ###
