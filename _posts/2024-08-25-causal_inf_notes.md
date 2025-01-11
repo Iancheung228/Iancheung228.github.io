@@ -89,18 +89,18 @@ From the above diagram there are 3 levers that affect power:
 
 1) $$ \alpha $$: To increase power, we can increase our alpha, but this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
-2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions will become narrower, leading to less overlap between the 2 distributions.
+2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions will become narrower, leading to less overlap between the 2 distributions. 
 
 3) $$ \delta $$: If the true parameter is further away from the null hypothesis value, the power increases.
 
+### Practically how do we pick what value of $$\delta$$ to use for the alternative hypothesis?
+Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the choice of the alternative hypothesis still presents a challenge, as we don't know the true effect size δ under the alternative hypothesis.
 
-Given a alpha level, we are usually interested in finding the sample size needed to reach a certain power. However, a seemingly arbitrary choice of alternative hypothesis remains? Indeed we don't know the true effect $$\delta$$ under the alternative hypothesis.
-
-
-However, we do know the size of $$\delta$$ that would matter under business context or that is of practical significance. The common practice is to use the smallest $$\delta$$ that is practically significant (also called the minimum detectable effect).
-
+What we do know, however, is the minimum effect size 𝛿 that would be considered meaningful in the context of the business or the specific problem at hand—often referred to as the minimum detectable effect (MDE). This is the smallest effect size that is practically significant, and it is commonly used as a baseline when calculating the required sample size.
 
 
+
+### Hypothesis Testing Error Matrix
 |                       | $$H_0$$ is true                   | $$H_A$$ is true                   |
 |:-----------           |:------------:                     |:------------:                  |
 | Don't reject Null     | ✅  (1-$$\alpha$$)                | Type II error 100$$\beta$$    |
