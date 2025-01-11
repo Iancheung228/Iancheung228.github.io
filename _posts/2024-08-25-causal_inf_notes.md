@@ -112,18 +112,28 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 
-## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis
+## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$\Alpha = \delta_A >0 $$
+
+
+In an A/B test, we have two normal distributions:
+
+$$N(\mu_A, \sigma_A^2)$$ and $$N(\mu_B, \sigma_B^2)$$ with sample sizes \(N_A\) and \(N_B\). The test statistic is: 
+$$N(\mu_A, \sigma_A^2) - N(\mu_B, \sigma_B^2) = N\left(\mu = \mu_B - \mu_A, \sigma^2 = \sigma_A^2 + \sigma_B^2 \right)$$
+
 
 To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
 
 
+
+
+
 $$
-1 - \beta \leq P\left( Z < z_{\alpha} \, \Big| \, \text{alternative} \right) 
-= P\left( \frac{ \widehat{\pi_1} - \widehat{\pi_0} }{ \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right) } } < z_{\alpha} \, \Big| \, \text{alternative} \right)
+1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
+= P\left( \frac{ \widehat{\pi_1} - \widehat{\pi_0} }{ \sqrt{\pi(1 - \pi) \left( \frac{1}{n} + \frac{1}{n} \right) } } > z_{\alpha} \, \Big| \, \text{alternative} \right)
 $$
 
 
-But $$ Z \sim N(0, 1) $$ is only true when we condition on Null, but not under the alternative. We have to rearrange to obtain something normally distributed.
+Note the z score $$ Z \sim N(0, 1) $$ is only true when we are under the Null hypothesis, and not under the alternative. We have to rearrange to obtain something normally distributed.
 Also note that under alternative $$ Var(\widehat{\pi_1} -  \widehat{\pi_0}) = \frac{\pi_1(1- \pi_1)}{n} +  \frac{\pi_0(1-\pi_0)}{n} $$
 
 
