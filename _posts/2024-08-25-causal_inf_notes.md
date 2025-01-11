@@ -30,22 +30,21 @@ Under the Null hypothesis, we assert that the treatment mean equals the control 
 
 Under the alternative hypothesis, we assert that treatment mean - control mean = $$\delta$$, and our observation of the realization of the random variable $$\Delta$$ is generated from the alternative distribution where alternative distribution is a N($$\delta$$,1)
 
-Finally to transform the distribution to have variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.
+Finally, to transform the distribution to have a variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.
 
 ## 4)
 Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
 Under the further assumption that Null is true i.e. mean = 0 we have Z = $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ is a standard normal.
 
-Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the squiggle Z which is the standard normal random variable
+Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the $$ \zeta$$ which is the standard normal random variable
 
-$$ P( |Z| \geq z_{\alpha/2} |H_0) = P(| *Z* | \geq z_{\alpha/2}) = \alpha = 5\% $$
+$$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/2}) = \alpha = 5\% $$
 
-**P-value** is the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
-$$ \text{P-value} =  P(data | H_0) $$
+**P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
 
-***Type 1 error:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
+***Type 1 error $$\alpha$$:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
 
-## P-value and type 1 error
+## P-value/type 1 error vs Power/type 2 error
 
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
@@ -66,13 +65,15 @@ $$ \text{P-value} =  P(data | H_0) $$
 </div>
 
 
-***Power (1-beta):*** The probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
+***Power (1-beta):*** is defined as the probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
 
 $$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
 
-Type 2 error: concluding there is no significant difference when there is one.
+**Type 2 error:** concluding there is no significant difference when there is one.
 
-In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of $$\alpha$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$\alpha$$. Observe that we could decrease type 2 error if we shift our decision boundary ($$\alpha$$) to the right, however, that would at the same time increase type 1 error.
+In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of $$\alpha$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$\alpha$$. 
+
+It's important to note that we can reduce the probability of a Type II error by shifting the decision boundary (i.e., the value of $$\alpha$$ to the right. However, doing so would increase the probability of a Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
 
 
