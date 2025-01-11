@@ -10,7 +10,11 @@ p value
 misconception of p value
 power
 
-In ab tests, we are dealing with 2 versions of a product. One version is currently in production (control) and the other is the contender (treatment). We often wish to determine whether there is a difference between the control vs treatment for a metric we care about. In an ideal world, we would perform the experiment on the entire population and the result would be deterministic, however in reality we could only perform the experiment over a sample of the population. We need statistical testing techniques to quantify this variability.
+In A/B testing, we compare two versions of a product: the control (the current version in production) and the treatment (the new version or variation being tested). The goal is to determine if there is a difference between the two versions with respect to a specific metric that matters to us.
+
+Ideally, we would test both versions on the entire population, and the results would be definitive. However, in practice, testing on the entire population is not feasible so we instead test on a sample of the population. This introduces variability, and to account for this, we rely on statistical methods to assess whether any observed differences are meaningful or simply due to random chance.
+
+
 
 ## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
@@ -19,12 +23,14 @@ In ab tests, we are dealing with 2 versions of a product. One version is current
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value.
 
 ## 3)
-$$\Delta$$ is a random variable that is normally distributed.
-We do $$ \frac{ \Delta - truth}{appropriate s.d.} $$ to transform into a standard normal distribution. 
+
+Following the fact that the sample mean has randomness associated with it due to sampling, $$\Delta$$ is also a random variable normally distributed. It turns out that the mean of this distribution depends on our belief of the true difference. Namely our belief of Null hypothesis and alternative hypothesis.
 
 Under the Null hypothesis, we assert that the treatment mean equals the control mean and our observation of the realization of the random variable $$\Delta$$ (after standardization) is generated from the null distribution where the null distribution is a N(0,1). If we perform ab test many times, the random variable would take on a different value each time.
 
 Under the alternative hypothesis, we assert that treatment mean - control mean = $$\delta$$, and our observation of the realization of the random variable $$\Delta$$ is generated from the alternative distribution where alternative distribution is a N($$\delta$$,1)
+
+Finally to transform the distribution to have variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.
 
 ## 4)
 Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
