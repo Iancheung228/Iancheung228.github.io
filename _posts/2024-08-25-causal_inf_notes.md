@@ -101,6 +101,7 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 ### Hypothesis Testing Error Matrix
+
 |                       | $$H_0$$ is true                   | $$H_A$$ is true                   |
 |:-----------           |:------------:                     |:------------:                  |
 | Don't reject Null     | ✅  (1-$$\alpha$$)                | Type II error 100$$\beta$$    |
@@ -111,9 +112,7 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 
-
-
-***How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis***
+## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis
 
 To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
 
@@ -126,9 +125,6 @@ $$
 
 But $$ Z \sim N(0, 1) $$ is only true when we condition on Null, but not under the alternative. We have to rearrange to obtain something normally distributed.
 Also note that under alternative $$ Var(\widehat{\pi_1} -  \widehat{\pi_0}) = \frac{\pi_1(1- \pi_1)}{n} +  \frac{\pi_0(1-\pi_0)}{n} $$
-
-
-
 
 
 $$
