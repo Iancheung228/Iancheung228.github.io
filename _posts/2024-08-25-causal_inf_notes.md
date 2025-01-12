@@ -130,8 +130,9 @@ $$
 $$
 
 
-Note the z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
-Also note that under alternative $$ Var(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+### Note:
+1) The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
+2) Under alternative $$ Var(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 
 $$
@@ -143,7 +144,7 @@ $$
 $$
 
 
-now the quantity on the left of the inequality, $$Z^* \sim N(0, 1)$$ under the alternative hypothesis
+Now the quantity on the left of the inequality, $$Z^* \sim N(0, 1)$$ under the alternative hypothesis
 
 
 
