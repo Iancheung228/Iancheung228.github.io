@@ -114,21 +114,15 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 ## How to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$ \alpha = \delta_A >0 $$
 
-Assuming the metric of interest is conversion, the sample variance would be $$ \sigma^2 = \frac{ \mu (1-\mu)} {N} $$
-
-In an A/B test, we have two normal distributions:
-
-$$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$(N_1)$$ and $$(N_2)$$. 
-
-
-The test statistic is:  $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu = \mu_2 - \mu_1, \sigma^2 = \sigma_1^2 + \sigma_2^2 \right)$$
+Consider the following setup:
+- The metric of interest is conversion, either successfully converted or failed to convert
+- The sample variance for a Bernoulli variable would be $$ \sigma^2 = \frac{ \mu (1-\mu)} {N} $$
+- The true $$\Delta$$ under the alternative hypothesis is $$\delta_A$$ which is greater than 0
+- The Null and alternative distributions are parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$(N_1)$$ and $$(N_2)$$. 
+- The test statistic is:  $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu = \mu_2 - \mu_1, \sigma^2 = \sigma_1^2 + \sigma_2^2 \right)$$
 
 
 To obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
-
-
-
-
 
 $$
 1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
