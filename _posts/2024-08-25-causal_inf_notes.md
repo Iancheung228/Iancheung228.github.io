@@ -162,7 +162,7 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 ### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. I.e. a p-value of $$5/%$$ means the null hypothesis has $$5/%$$ chance of being true. While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
+A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. I.e. a p-value of $$5\%$$ means the null hypothesis has $$5\%$$ chance of being true. While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
 
 $$P(H_0 | data) $$ and the p-value are related by the Bayes' theorem:
 
