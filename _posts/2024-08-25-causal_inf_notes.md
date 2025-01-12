@@ -199,10 +199,10 @@ Even if the p-value is statistically significant, if the experiment is low-power
 
 
 Let
-- SS be a statistically significant result.
-- alpha be the threshold to declare statistical significance.
-- beta be the Type II error rate.
-- pi be the prior probability of the null hypothesis.
+- SS be a statistically significant result i.e. p-value < 0.05
+- $$\alpha$$ be the threshold to declare statistical significance.
+- $$\beta$$ be the Type II error rate.
+- $$\pi$$ be the prior probability of the null hypothesis.
 
 
 $$
