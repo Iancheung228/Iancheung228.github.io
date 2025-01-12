@@ -162,9 +162,9 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 ### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
+A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. I.e. a p-value of $$5/%$$ means the null hypothesis has $$5/%$$ chance of being true. While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
 
-These 2 concepts are related by the Bayes' theorem:
+$$P(H_0 | data) $$ and the p-value are related by the Bayes' theorem:
 
 $$
 \begin{aligned}
@@ -173,10 +173,9 @@ P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text
 \end{aligned}
 $$
 
-It does align with our intuition: a lower p-value suggests that the null hypothesis is less likely to be true, assuming we have some prior probability of
+It does align with our intuition: a lower p-value suggests that the null hypothesis is less likely to be true.
 
 
-### What is so bad about low power, does it matter as long as p-value is low? ###
 
 Common misunderstandings of p-value:
 
@@ -199,7 +198,9 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is true}) $$
 
 
-**False positive risk (FPR)** is the probability that the Null hypothesis is true while we make the decision to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
+### What is so bad about low power, does it matter as long as the p-value is low? ###
+
+**False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
 
 
 Let
