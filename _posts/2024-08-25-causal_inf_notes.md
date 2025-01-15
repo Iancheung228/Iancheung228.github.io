@@ -20,7 +20,7 @@ Ideally, we would test both versions on the entire population, and the results w
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
 We go in-depth on step 3 and 4
-### 3)
+### 3) title
 Again, since the sample mean has inherent randomness due to sampling the difference in means, denoted as $$\Delta$$ is also a random variable and follows a normal distribution. 
 We have yet to determine the **mean** and **variance** of this normal distribution.It turns out that the mean of this distribution depends on our belief of the true difference. More specifically our belief of Null hypothesis and alternative hypothesis.
 
@@ -28,11 +28,13 @@ Under the **Null hypothesis**, we assert that the treatment mean equals the cont
 
 Under the **Alternative hypothesis**, we assert that the difference in treatment mean and control mean is $$\delta$$, and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the alternative distribution following N($$\delta$$,1)
 
-Finally, to transform the distribution to have a variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.
+***Note to standardize a normal distribution to have a variance of 1, we do $$ \frac{ \Delta - {\color{red}truth}}{appropriate s.d.} $$.***
 
-## 4)
-Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4)
-Under the further assumption that Null is true i.e. mean = 0, the z-score follows a standard normal distribution := $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
+### 4) title
+Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4).
+
+
+Under the further assumption that the Null is true (i.e. mean = 0), the z-score follows a standard normal distribution := $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
 
 Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the $$ \zeta$$ which is the standard normal random variable
 
