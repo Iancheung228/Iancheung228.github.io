@@ -16,16 +16,17 @@ Ideally, we would test both versions on the entire population, and the results w
 
 ***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
 
-3. Calculate the difference in the sample mean $$ \Delta = \overline{Y^T} - \overline{Y^C} $$ where $$ \Delta $$ follows a normal distribution by property of adding 2 normally distributed r.v.
+3. Calculate the difference in the sample mean $$ \Delta = \overline{Y^T} - \overline{Y^C} $$ where $$ \Delta $$ follows a normal distribution by property of adding 2 normally distributed random variable (r.v).
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
-## 3)
+We go in-depth on step 3 and 4
+### 3)
+Again, since the sample mean has inherent randomness due to sampling the difference in means, denoted as $$\Delta$$ is also a random variable and follows a normal distribution. 
+We have yet to determine the **mean** and **variance** of this normal distribution.It turns out that the mean of this distribution depends on our belief of the true difference. More specifically our belief of Null hypothesis and alternative hypothesis.
 
-Following the fact that the sample mean has randomness associated with it due to sampling, $$\Delta$$ is also a random variable normally distributed. It turns out that the mean of this distribution depends on our belief of the true difference. Namely our belief of Null hypothesis and alternative hypothesis.
+Under the **Null hypothesis**, we assert that the treatment mean equals the control mean and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the null distribution following N(0,1).
 
-Under the Null hypothesis, we assert that the treatment mean equals the control mean and our observation of the realization of the random variable $$\Delta$$ (after standardization) is generated from the null distribution where the null distribution is a N(0,1). If we perform ab test many times, the random variable would take on a different value each time.
-
-Under the alternative hypothesis, we assert that treatment mean - control mean = $$\delta$$, and our observation of the realization of the random variable $$\Delta$$ is generated from the alternative distribution where alternative distribution is a N($$\delta$$,1)
+Under the **Alternative hypothesis**, we assert that the difference in treatment mean and control mean is $$\delta$$, and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the alternative distribution following N($$\delta$$,1)
 
 Finally, to transform the distribution to have a variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.
 
