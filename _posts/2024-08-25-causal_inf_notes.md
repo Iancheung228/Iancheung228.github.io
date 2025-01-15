@@ -12,10 +12,7 @@ Ideally, we would test both versions on the entire population, and the results w
 
 ## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$.
-
-***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
-
+2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$.***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
 3. Calculate the difference in the sample mean $$ \Delta = \overline{Y^T} - \overline{Y^C} $$ where $$ \Delta $$ follows a normal distribution by property of adding 2 normally distributed random variable (r.v).
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
@@ -31,20 +28,20 @@ Under the **Alternative hypothesis**, we assert that the difference in treatment
 ***Note to standardize a normal distribution to have a variance of 1, we do $$ \frac{ \Delta - {\color{red}truth}}{appropriate s.d.} $$.***
 
 ### 4) title
-Recall we can calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4).
+We then calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4).
 
 
-Under the further assumption that the Null is true (i.e. mean = 0), the z-score follows a standard normal distribution := $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
+Under the further assumption that the Null is true (i.e. mean = 0), the z-score now follows a standard normal distribution since we can rewrite it as $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
 
-Under null Z, the observed test statistic comes from a standard normal distribution and is simply a realization of the $$ \zeta$$ which is the standard normal random variable
+We now say that the Z score is a realization of the standard normal r.b. $$\zeta$$.
 
 $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/2}) = \alpha = 5\% $$
 
 **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
 
-***Type 1 error $$\alpha$$:*** concluding there is a significant difference when there is no real difference. A common choice is 5%.
+***Type 1 error ($$alpha$$):*** concluding there is a significant difference when there is no real difference. A common choice of $$\alpha$$ is 5%.
 
-***Power (1-beta):*** is defined as the probability of rejecting the null when the null is indeed false. Equivalently, it is the prob of not making a type II error.
+***Power (1-beta):*** is defined as the probability of rejecting the null when the null is in fact false (WHYWHYWHYWHYWHWYHWYHWYH and the alternative is true). Equivalently, it is the prob of not making a type II error.
 
 $$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
 
