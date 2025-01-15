@@ -4,13 +4,7 @@ title: Causal Inference Notes
 date: 2024-08-25
 ---
 
-
-intro to ab testing
-p value
-misconception of p value
-power
-
-In A/B testing, we compare two versions of a product: the control (the current version in production) and the treatment (the new version or variation being tested). The goal is to determine if there is a difference between the two versions with respect to a specific metric that matters to us.
+In A/B testing, we compare two versions of a product: the control (the current version in production) and the treatment (the new version or variation being tested). The goal is to determine if there is a difference between the two versions with respect to a specific metric that matters to the business.
 
 Ideally, we would test both versions on the entire population, and the results would be definitive. However, in practice, testing on the entire population is not feasible so we instead test on a sample of the population. This introduces variability, and to account for this, we rely on statistical methods to assess whether any observed differences are meaningful or simply due to random chance.
 
@@ -18,7 +12,7 @@ Ideally, we would test both versions on the entire population, and the results w
 
 ## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
+2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y}^C$$. They will be the unbiased estimate of the population treatment mean and population control mean. Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem. 
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
