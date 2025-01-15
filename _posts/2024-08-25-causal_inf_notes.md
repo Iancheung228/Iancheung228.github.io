@@ -12,11 +12,11 @@ Ideally, we would test both versions on the entire population, and the results w
 
 ## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y}^C$$.
+2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$.
 
 ***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
 
-3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
+3. Calculate the difference in the sample mean $$ \Delta = \overline{Y^T} - \overline{Y^C} $$ where $$ \Delta $$ follows a normal distribution by property of adding 2 normally distributed r.v.
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
 ## 3)
