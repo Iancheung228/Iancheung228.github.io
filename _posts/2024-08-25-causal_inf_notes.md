@@ -212,16 +212,6 @@ $$
 
 If the power $$1- \beta$$ is low the denominator will be small and the entire fraction (FPR) will be high. This means when power is low the probability that the Null hypothesis is true is small (even when p-value is statistically significant)
 
-
-
-
-
-
-
-However, the significance calculation makes a critical assumption that you have probably violated without even realizing it: that the sample size was fixed in advance. If instead of deciding ahead of time, “this experiment will collect exactly 1,000 observations,” you say, “we’ll run it until we see a significant difference,” all the reported significance levels become meaningless. 
-
-
-
 punch line: with low power even if you have very small p value the FPR is very high.
 
 
