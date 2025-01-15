@@ -15,6 +15,7 @@ Ideally, we would test both versions on the entire population, and the results w
 2. Calculate the metric mean under treatment  $$\bar{Y^T}$$ and the metric mean under control $$ \overline{Y}^C$$.
 
 ***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
+
 3. Calculate the difference in sample mean $$ \Delta = \bar{Y^T} - \bar{Y^C} $$ note $$ \Delta $$ follows a normal distribution as adding 2 normally distributed r.v will result in another normally distributed r.v.
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
