@@ -12,30 +12,35 @@ Ideally, we would test both versions on the entire population, and the results w
 
 ## High level steps of ab testing
 1. Sample a subset of the population and randomly assign treatment and control to the randomization unit
-2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and the metric mean under control $$ \overline{Y^C}$$.***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
+2. Calculate the metric mean under treatment  $$\overline{Y^T}$$ and under control $$ \overline{Y^C}$$.***Note, even if the metric Y does not follow a normal distribution, if the sample size is large enough, the mean of the metric will be normally distributed thanks to the central limit theorem.*** 
 3. Calculate the difference in the sample mean $$ \Delta = \overline{Y^T} - \overline{Y^C} $$ where $$ \Delta $$ follows a normal distribution by property of adding 2 normally distributed random variable (r.v).
 4. Calculate the observed z-score $$Z = \frac{\Delta}{\sqrt{Var}} $$ and eventually the p-value. The z-score is a standardized number that tells you how far away your observed data is from the mean.
 
-We go in-depth on step 3 and 4
-### 3) title
-Again, since the sample mean has inherent randomness due to sampling the difference in means, denoted as $$\Delta$$ is also a random variable and follows a normal distribution. 
-We have yet to determine the **mean** and **variance** of this normal distribution.It turns out that the mean of this distribution depends on our belief of the true difference. More specifically our belief of Null hypothesis and alternative hypothesis.
+In the next section, we will expand on step 3 and 4.
+
+### 3) $$\Delta$$ is a random variable from Null or Alternative distribution
+Again, since the sample mean has inherent randomness due to sampling, the difference in mean - denoted as $$\Delta$$ is also a random variable and follows a normal distribution. 
+We have yet to determine the **mean** and **variance** of this normal distribution.
+
+It turns out that the mean of this distribution depends on our "belief" of the true difference - more commonly known as the Null hypothesis and Alternative hypothesis.
 
 Under the **Null hypothesis**, we assert that the treatment mean equals the control mean and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the null distribution following N(0,1).
 
-Under the **Alternative hypothesis**, we assert that the difference in treatment mean and control mean is $$\delta$$, and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the alternative distribution following N($$\delta$$,1)
+Under the **Alternative hypothesis**, we assert that the difference in treatment mean and control mean is $$\delta_A$$, and our observation of the r.v $$\Delta$$ (and after standardization) is generated from the alternative distribution following N($$\delta_A$$,1)
 
-***Note to standardize a normal distribution to have a variance of 1, we do $$ \frac{ \Delta - truth}{appropriate s.d.} $$.***
+***Note to standardize a normal distribution to have a variance of 1, we do $$ \frac{ \Delta - truth}{\text{std dev}} $$.***
 
-### 4) title
-We then calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$ (link to step 4).
+### 4) P-value,Type I Error and Power,Type II Error
+We are now ready to then calculate the observed z-score: Z = $$ \frac{\Delta}{\sqrt{var(\Delta)}}$$.
+
+Under the additional assumption that the Null is true (i.e. mean = 0), the z-score now follows a standard normal distribution since we can rewrite it as $$ \frac{ \Delta - {\color{red}0}}{\sqrt{var(\Delta)}} $$. We now say that the Z score is a realization of the standard normal r.v. $$\zeta$$.
 
 
-Under the further assumption that the Null is true (i.e. mean = 0), the z-score now follows a standard normal distribution since we can rewrite it as $$ \frac{ \Delta - {\color{red}0}}{appropriate s.d.} $$ 
 
-We now say that the Z score is a realization of the standard normal r.b. $$\zeta$$.
 
 $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/2}) = \alpha = 5\% $$
+
+We introduce the following definitions:
 
 **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis** is true. 
 
@@ -46,8 +51,6 @@ $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |H_0) = P(| \zeta | \geq z_{\alpha/
 $$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
 
 **Type 2 error:** concluding there is no significant difference when there is one.
-
-## P-value/type 1 error vs Power/type 2 error
 
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
@@ -70,7 +73,7 @@ $$ \text{power} =  P(\text{p-value} < \alpha | H_A) $$
 
 
 
-In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of the critical value *. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of *. 
+In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of the critical value - $$*$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$*$$. 
 
 It's important to note that we can reduce the probability of a Type II error by shifting the decision boundary (i.e., the value of $$\alpha$$ to the right. However, doing so would increase the probability of a Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
