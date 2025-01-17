@@ -83,9 +83,7 @@ It's important to note that we can reduce the probability of a Type II error by 
 [Go to Power Graph](#null-graph)
 
 
-## What levers affect power
-
-From the above diagram we see that there are 3 levers that affect power:
+## 3 levers that affect power
 
 1) $$ \alpha $$: To increase power, we can increase our $$ \alpha $$, but again there is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
@@ -100,7 +98,7 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 
-### Hypothesis Testing Error Matrix
+### Summary: Hypothesis Testing Error Matrix
 
 |                       | $$H_0$$ is true                   | $$H_A$$ is true                   |
 |:-----------           |:------------:                     |:------------:                  |
@@ -115,10 +113,10 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 ### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and true alternative of $$ \delta_A >0 $$
 
 Consider the following setup:
-- The metric of interest is conversion, where the object either successfully converted or failed to convert
-- The sample variance for a Bernoulli variable would be $$ \sigma^2 = \frac{ \mu (1-\mu)} {N} $$
-- The true $$\Delta$$ under the alternative hypothesis is $$\delta_A$$ and is greater than 0
-- The Null and alternative distributions are parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$N_1$$ and $$N_2$$. 
+- The metric is conversion - where the object either successfully converted or failed to convert, and this follows a Bernoulli
+- The sample variance for a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
+- The true $$\Delta_A$$ is $$\delta_A$$ and is greater than 0
+- Let the Null and alternative distributions be parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$N_1$$ and $$N_2$$. 
 - $$\Delta$$ = $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2 \right)$$
 
 
@@ -130,17 +128,17 @@ $$
 $$
 
 
-### Note:
-1) The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
+
+**Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
    
-2) Under alternative $$ Var(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+**Note 2** Under alternative $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 
 $$
 \begin{aligned}
 1 - \beta &\leq P\left( \widehat{\mu}_1 - \widehat{\mu}_0 > z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
-          &= P\left( \frac{(\widehat{\mu}_1 - \widehat{\mu}_0) - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } \Big| \, \text{alternative} \right) \\
-          &= P\left( Z^* > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} } \Big| \, \text{alternative} \right) \\
+          &= P\left( \frac{(\widehat{\mu}_1 - \widehat{\mu}_0) - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
+          &= P\left( Z^* > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
 \end{aligned}
 $$
 
