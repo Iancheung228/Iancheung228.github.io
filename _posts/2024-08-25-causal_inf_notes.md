@@ -109,7 +109,7 @@ What we do know, however, is the minimum effect size 𝛿 that would be consider
 
 
 
-## Examplep of how to calculate the sample size needed for a desired power, given an alpha level and true alternative hypothesis of $$ \alpha = \delta_A >0 $$
+### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and true alternative of $$ \delta_A >0 $$
 
 Consider the following setup:
 - The metric of interest is conversion, where the object either successfully converted or failed to convert
@@ -129,6 +129,7 @@ $$
 
 ### Note:
 1) The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
+   
 2) Under alternative $$ Var(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 
