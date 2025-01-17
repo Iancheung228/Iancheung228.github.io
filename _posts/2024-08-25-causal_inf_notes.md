@@ -133,6 +133,7 @@ $$
    
 **Note 2** Under alternative $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
+Continuing ...
 
 $$
 \begin{aligned}
@@ -151,7 +152,7 @@ $$
 z_{1 - \beta} \leq \frac{
     z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
 }{ 
-    \frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n} 
+    \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}}
 } \quad \text{since} \quad Z^* \sim N(0, 1)
 $$
 
