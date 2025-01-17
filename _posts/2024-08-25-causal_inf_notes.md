@@ -214,7 +214,7 @@ $$
 
 If the power $$1- \beta$$ is low the denominator will be small and the entire fraction (FPR) will be high. This means when power is low the probability that the Null hypothesis is true is small (even when p-value is statistically significant)
 
-punch line: with low power even if you have very small p value the FPR is very high.
+We see that with low power even if you have a very small p-value, the FPR could be very high.
 
 
 
