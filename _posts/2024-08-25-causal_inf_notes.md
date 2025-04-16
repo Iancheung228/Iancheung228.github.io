@@ -79,9 +79,12 @@ $$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |\text{Null hyp is assumed to be tr
 
 $$ \text{power} =  P(\text{p-value} < \alpha | \text{Alternative hyp is assumed to be true}) $$
 
-if we were to calculate power, we would need to know precisely what HA is true means, clearly it means delta != 0 but we need a specific value of delta to plug into our calculation. Since we do not know the true value of delta, and yet we need to plug something in for it, the convention is to plug in the minimum detectable effect. This is the smallest value of delta that has any practical importance. In using this value for delta, we’ve assured ourselves that that calculated sample size is big enough to detect the smallest effect we care about (as well as anything bigger).
-
 **Type 2 error:** We fail to reject H0 when HA is indeed true
+
+
+Let's incorporate everything we have discussed into 2 visual diagrams. Where $$ * $$ is the threshold of our decision, $$\delta_{H_0}$$ and $$\delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
+
+
 
 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
 
@@ -101,12 +104,9 @@ if we were to calculate power, we would need to know precisely what HA is true m
 
 </div>
 
-
-
-
 In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of the critical value - $$*$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$*$$. 
 
-It's important to note that we can reduce the probability of a Type II error by shifting the decision boundary (i.e., the value of $$\alpha$$ to the right. However, doing so would increase the probability of a Type I error, since a larger critical region would make it easier to reject the null hypothesis.
+**Remark:** Observe that we can reduce the probability of a Type II error by shifting the decision boundary (i.e., the value of $$\alpha$$ to the right. However, doing so would increase the probability of a Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
 
 
@@ -121,14 +121,14 @@ It's important to note that we can reduce the probability of a Type II error by 
 
 2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions will become narrower in shape, leading to less overlap between the 2 distributions. 
 
-3) $$ \delta $$: If the true parameter is further away from the null hypothesis value, there will again be less overlap between the 2 distributions and power increases.
+3) $$ \delta $$: If the beliefed true parameter is further away from the null hypothesis value, there will again be less overlap between the 2 distributions and power increases.
 
-### Practically how do we pick what value of $$\delta$$ to use for the alternative hypothesis?
-Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the choice of the alternative hypothesis still presents a challenge, as we don't know the true effect size δ under the alternative hypothesis.
+### Practically how do we pick what value of $$\delta$$ to use for the alternative hypothesis in the calculation of power?
 
-What we do know, however, is the minimum effect size 𝛿 that would be considered meaningful in the context of the business or the specific problem at hand—often referred to as the **minimum detectable effect (MDE)**. This is the smallest effect size that is practically significant, and it is commonly used when calculating the required sample size.
+This corresponds to placing $$ \delta$$ in the diagram
+Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-
+A common choice to plug in is the **minimum detectable effect (MDE)**. This is the minimum effect size 𝛿 that would be considered meaningful for the business problem at hand.In using this value for delta, we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (as well as anything bigger).
 
 
 
