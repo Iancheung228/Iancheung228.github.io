@@ -53,10 +53,10 @@ In our one sided test however, we operate under the assumption that the Null hyp
 <img width="804" alt="Screenshot 2025-04-16 at 1 48 25 PM" src="https://github.com/user-attachments/assets/046f20b6-21ac-42c1-9f04-f1099bc67946" />
 
 - There are exactly 4 possible outcomes
-- 1 Given H0 is true and we correctly do not reject it
-- 2 Given H0 is true and we incorrectly reject it
-- 3 Given H0 is false and we incorrectly do not reject it
-- 4 Given H0 is false and we correctly reject it
+1 Given H0 is true and we correctly do not reject it
+2 Given H0 is true and we incorrectly reject it
+3 Given H0 is false and we incorrectly do not reject it
+4 Given H0 is false and we correctly reject it
 
 - 2 and 3 are respectively referred to as Type I Error and Type II error
 we control the type 1 and 2 error with the significance level and power of the test
