@@ -21,9 +21,17 @@ Of course, this isn’t possible in reality — we can’t run experiments on pa
 
 Since the business team is concerned with whether the new feature is an improvement, we need to use a one-sided test. 
 
-H0 and HA are always compliment of each other
+H0 and HA are always compliments to each other
 
-$$ H_{\theta}: \theta \le \theta_0 $$
+$$ H_{\theta}: \theta \le \theta_0 \text{vs} H_{A}: \theta > \theta_0$$
+
+
+$$
+\begin{aligned}
+H_0\!:\ & \theta \leq \theta_0 \quad \text{(null hypothesis)} \\
+H_A\!:\ & \theta > \theta_0 \quad \text{(alternative hypothesis)}
+\end{aligned}
+$$
 
 Our final goal is always the same; After collecting observed data, we will decide whether we reject H0 (and accept HA) OR do not reject H0 (and decline HA)
 - to do that,we define a test statistic T which is a RV
