@@ -194,11 +194,9 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 
-### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is that the p-value represents the probability that the null hypothesis ($$H_0$$) is true, given the observed data. I.e. a p-value of $$5\%$$ means the null hypothesis has $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
-Or something like: a p-value of $$5\%$$ means there is a $$5\%$$ chance of us making a false positive. 
-$$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$
+### Aside $$ \text{P-value} \neq P(H_0 | data) $$
+A common misconception is that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
 The above interpretations are wrong because the p-value doesn't tell us the probability of the Null being true.
 
@@ -224,9 +222,9 @@ In reality, the p-value is the probability of observing a result as or more extr
 $$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is true}) $$
 
 
-### What is so bad about low power, does it matter as long as the p-value is low? ###
+### Why is power a big deal? 
 
-Even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability of the Null hypothesis to be true.
+It is because experiments with low statistical power are NOT trustworthy. That is, even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability that the Null hypothesis is true.
 
 **False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
 
