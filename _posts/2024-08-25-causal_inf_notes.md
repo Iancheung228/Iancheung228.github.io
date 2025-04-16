@@ -29,6 +29,14 @@ H_A\!:\ & \theta_A > \theta_0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
+If we denote $$ \delta = \theta_0 - \theta_A $$
+$$
+\begin{aligned}
+H_0\!:\ & \delta \geq 0 \quad \text{(null hypothesis)} \\
+H_A\!:\ & \delta < 0 \quad \text{(alternative hypothesis)}
+\end{aligned}
+$$
+
 Our final goal is always the same: After collecting observed data, we will decide whether we **reject $$H_0$$** (and accept $$H_A$$) OR **do not reject $$H_0$$** (and decline $$H_A$$).
 
 Below are the high-level steps we need to perform
