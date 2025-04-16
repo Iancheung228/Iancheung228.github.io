@@ -11,36 +11,32 @@ practical
 connect with bayesian, what does trustworthy
 
 
-The business team comes up with a new idea for a feature and hypothesises that adding this feature will improve conversion to x%. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
+The business team comes up with a new idea for a feature and hypothesize that adding this feature will improve conversion $$ (\theta) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
-### Why are we dealing with distributions?
-In a perfect world, we could measure the true effect of a treatment by giving the entire population of Earth the control condition and recording the outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome as well. Comparing these two results would give us a definitive, black-and-white answer.
+In a perfect world, we could measure the true effect of a treatment by giving the entire population on Earth the control condition and recording the outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome as well. Comparing these two results would give us a definitive, black-and-white answer.
 
 Of course, this isn’t possible in reality — we can’t run experiments on parallel Earths. So instead, we randomly assign individuals within a sample population to either control or treatment groups. This randomness introduces variability in the results, which is why we use statistical distributions to model and analyze the uncertainty in our estimates.
 
 
-Since the business team is concerned with whether the new feature is an improvement, we need to use a one-sided test. 
+Since the business team is concerned with whether the new feature is an improvement, we need to use a **one-sided test**. 
 
 H0 and HA are always compliments to each other
 
-$$ H_{\theta}: \theta \le \theta_0 \text{vs} H_{A}: \theta > \theta_0$$
-
-
 $$
 \begin{aligned}
-H_0\!:\ & \theta \leq \theta_0 \quad \text{(null hypothesis)} \\
-H_A\!:\ & \theta > \theta_0 \quad \text{(alternative hypothesis)}
+H_0\!:\ & \theta_0 \leq \theta_A \quad \text{(null hypothesis)} \\
+H_A\!:\ & \theta_A > \theta_0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-Our final goal is always the same: After collecting observed data, we will decide whether we **reject H0** (and accept HA) OR **do not reject H0** (and decline HA).
+Our final goal is always the same: After collecting observed data, we will decide whether we **reject $$H_0$$** (and accept $$H_A$$) OR **do not reject $$H_0$$** (and decline $$H_A$$).
 
 Below are the high-level steps we need to perform
 - We define a test statistic T, which is a random variable (r.v.)
 - We conduct the one-sided test, **under the assumption that the NULL hypothesis is true**; consequently, the test statistic T follows a particular distribution that we call the **null distribution**
 - We calculate t, the observed value of the test statistic r.v.
 - We evaluate the extremity of t relative to the null distribution
-- If the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against H0, and if it passes a certain threshold (significance level), we will decide to reject the null hypothesis. The threshold we pick is denoted as $$ \alpha $$. Note that even when we reject the null hypothesis, it is possible that in reality, the observed outcome came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error which we will discuss later.
+- If the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against $$H_0$$, and if it passes a certain threshold (significance level), we will decide to reject the null hypothesis. The threshold we pick is denoted as $$ \alpha $$. Note that even when we reject the null hypothesis, it is possible that in reality, the observed outcome came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
 - Statistically, we formalise the extremity of t using the p-value. 
 
 
@@ -48,17 +44,17 @@ Before we define p-value formally, recall by design, either the Null hypothesis 
 
 <img width="760" alt="Screenshot 2025-04-16 at 1 55 38 PM" src="https://github.com/user-attachments/assets/cf9fac54-9451-45af-8de7-8b6bcbff7fba" />
 
-In our one sided test however, we operate under the assumption that the Null hypothesis is true, that is we condition on it, the grid now becomes 
+In our one sided test however, we operate under the assumption that the Null hypothesis is true, that is, we condition on it. And the grid now becomes 
 
 <img width="804" alt="Screenshot 2025-04-16 at 1 48 25 PM" src="https://github.com/user-attachments/assets/046f20b6-21ac-42c1-9f04-f1099bc67946" />
 
-- There are exactly 4 possible outcomes
-1 Given H0 is true and we correctly do not reject it
-2 Given H0 is true and we incorrectly reject it
-3 Given H0 is false and we incorrectly do not reject it
-4 Given H0 is false and we correctly reject it
+### There are exactly 4 possible outcomes 
+1. Given H₀ is true and we correctly do not reject it  
+2. Given H₀ is true and we incorrectly reject it (Type I error)
+3. Given H₀ is false and we incorrectly do not reject it  (Type II error)
+4. Given H₀ is false and we correctly reject it
 
-- 2 and 3 are respectively referred to as Type I Error and Type II error, both errors we do not want to happen often
+
 we control the type 1 and 2 error with the significance level and power of the test
 
 
