@@ -29,37 +29,44 @@ H_A\!:\ & \theta_A > \theta_0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-If we denote $$ \delta = \theta_0 - \theta_A $$
+We can denote the difference in the 2 conversion rate as: $$ \Delta = \theta_0 - \theta_A $$. Then the hypothesis become
+
+
 $$
 \begin{aligned}
-H_0\!:\ & \delta \geq 0 \quad \text{(null hypothesis)} \\
-H_A\!:\ & \delta < 0 \quad \text{(alternative hypothesis)}
+H_0\!:\ & \Delta \geq 0 \quad \text{(null hypothesis)} \\
+H_A\!:\ & \Delta < 0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-Our final goal is always the same: After collecting observed data, we will decide whether we **reject $$H_0$$** (and accept $$H_A$$) OR **do not reject $$H_0$$** (and decline $$H_A$$).
+Our final goal is always the same: After collecting data, we will decide whether we **reject $$H_0$$** (and implicitly accept $$H_A$$) OR **do not reject $$H_0$$** (and implicitly decline $$H_A$$).
 
 Below are the high-level steps we need to perform
 - We define a test statistic T, which is a random variable (r.v.)
 - We conduct the one-sided test, **under the assumption that the NULL hypothesis is true**; consequently, the test statistic T follows a particular distribution that we call the **null distribution**
-- We calculate t, the observed value of the test statistic r.v.
+- We calculate t, the observed value for the test statistic r.v.
 - We evaluate the extremity of t relative to the null distribution
-- If the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against $$H_0$$, and if it passes a certain threshold (significance level), we will decide to reject the null hypothesis. The threshold we pick is denoted as $$ \alpha $$. Note that even when we reject the null hypothesis, it is possible that in reality, the observed outcome came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
+- If the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against $$H_0$$, and if it passes a certain threshold ($$\alpha$$), we will decide to reject the null hypothesis.
+**Remark** even when we reject the null hypothesis, it is possible that, the observed outcome actually came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
 - Statistically, we formalise the extremity of t using the p-value. 
 
 
-Before we define p-value formally, recall by design, either the Null hypothesis (H0) is true or the alternative hypothesis (HA) is true. At the same time, we can decide to reject the Null or reject the Alternative. We can treat these as 2 random variables and visualize them in a grid.
+Before we define p-value formally, recall by design, 
+1) either the Null hypothesis ($$H_0$$) is true or the alternative hypothesis ($$H_A$$) is true.
+2) We can decide to reject the Null or reject the Alternative.
+
+We can treat these as 2 random variables and visualise them with a 2 by 2 grid.
 
 <img width="760" alt="Screenshot 2025-04-16 at 1 55 38 PM" src="https://github.com/user-attachments/assets/cf9fac54-9451-45af-8de7-8b6bcbff7fba" />
 
-In our one sided test however, we operate under the assumption that the Null hypothesis is true, that is, we condition on it. And the grid now becomes 
+In our one sided test however, we operate under the assumption that the Null hypothesis is true, that is, we condition on it. This corresponds to vertically summing the probabilities.
 
 <img width="804" alt="Screenshot 2025-04-16 at 1 48 25 PM" src="https://github.com/user-attachments/assets/046f20b6-21ac-42c1-9f04-f1099bc67946" />
 
 ### There are exactly 4 possible outcomes 
 1. Given H₀ is true and we correctly do not reject it  
-2. Given H₀ is true and we incorrectly reject it (Type I error)
-3. Given H₀ is false and we incorrectly do not reject it  (Type II error)
+2. Given H₀ is true and we incorrectly reject it (**Type I error**)
+3. Given H₀ is false and we incorrectly do not reject it  (**Type II error**)
 4. Given H₀ is false and we correctly reject it
 
 
@@ -69,20 +76,20 @@ we control the type 1 and 2 error with the significance level and power of the t
 
 We now formally define the following:
 
-**P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**. 
+1. **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**. 
 
-$$ \text{p-value} = P( |Z| \geq z_{\alpha/2} |\text{Null hyp is assumed to be true}) $$
+$$ \text{p-value} = P( |Z| \geq z_{\alpha} |\text{Null hyp is assumed to be true}) $$
 
-***Type 1 error ($$alpha$$):*** Incorrectly rejecting the Null hypothesis when it is indeed true.
+2. **Type 1 error ($$alpha$$):** Incorrectly rejecting the Null hypothesis when it is indeed true.
 
-***Power (1-beta):*** is defined as the probability of correctly rejecting the null hypothesis under the assumption that **Alternative hypothesis is true**. Equivalently, it is the prob of not making a Type II error.
+3. **Power (1-beta):** is defined as the probability of correctly rejecting the null hypothesis under the assumption that **Alternative hypothesis is true**. Equivalently, it is the prob of not making a Type II error.
 
 $$ \text{power} =  P(\text{p-value} < \alpha | \text{Alternative hyp is assumed to be true}) $$
 
-**Type 2 error:** We fail to reject H0 when HA is indeed true
+4. **Type 2 error:** We fail to reject H0 when HA is indeed true
 
 
-Let's incorporate everything we have discussed into 2 visual diagrams. Where $$ * $$ is the threshold of our decision, $$\delta_{H_0}$$ and $$\delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
+Let's incorporate everything we have discussed into 2 visual diagrams below. $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
 
 
 
