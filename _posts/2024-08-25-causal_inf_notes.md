@@ -76,20 +76,25 @@ we control the type 1 and 2 error with the significance level and power of the t
 
 We now formally define the following:
 
-1. **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**. 
+1. **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**.  
 
-$$ \text{p-value} = P( |Z| \geq z_{\alpha} |\text{Null hyp is assumed to be true}) $$
+   $$
+   \text{p-value} = P\left( |Z| \geq z_{\alpha} \mid \text{Null hyp is true} \right)
+   $$
 
-2. **Type 1 error ($$alpha$$):** Incorrectly rejecting the Null hypothesis when it is indeed true.
+2. **Type I error ($\alpha$):** Incorrectly rejecting the null hypothesis when it is indeed true.
 
-3. **Power (1-beta):** is defined as the probability of correctly rejecting the null hypothesis under the assumption that **Alternative hypothesis is true**. Equivalently, it is the prob of not making a Type II error.
+3. **Power (1−β):** The probability of correctly rejecting the null hypothesis under the assumption that the **alternative hypothesis is true**. Equivalently, it is the probability of **not** making a Type II error.  
 
-$$ \text{power} =  P(\text{p-value} < \alpha | \text{Alternative hyp is assumed to be true}) $$
+   $$
+   \text{Power} = P\left( \text{p-value} < \alpha \mid \text{Alternative hyp is true} \right)
+   $$
 
-4. **Type 2 error:** We fail to reject H0 when HA is indeed true
+4. **Type II error (β):** Failing to reject the null hypothesis when the alternative hypothesis is actually true.
 
 
-Let's incorporate everything we have discussed into 2 visual diagrams below. $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
+
+Let's incorporate everything we have discussed into the 2 visual diagrams below. $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
 
 
 
@@ -111,9 +116,9 @@ Let's incorporate everything we have discussed into 2 visual diagrams below. $$ 
 
 </div>
 
-In the figure on the left, an error is made if we decide to reject the Null, which occurs when our observation lies to the right of the critical value - $$*$$. While in the right figure, an error is made if we decide to not reject the Null, which occurs when our observation lies to the left of $$*$$. 
+In the left figure, an error is made if we decide to reject the Null hypothesis, which occurs when our observation lies to the right of our threshold - $$*$$. While in the right figure, an error is made if we decide to NOT reject the Null, which occurs when our observation lies to the left of our threshold $$*$$. 
 
-**Remark:** Observe that we can reduce the probability of a Type II error by shifting the decision boundary (i.e., the value of $$\alpha$$ to the right. However, doing so would increase the probability of a Type I error, since a larger critical region would make it easier to reject the null hypothesis.
+**Remark:** Observe that we can reduce the probability of Type II error by shifting the threshold / decision boundary to the right. However, doing so would increase the Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
 
 
@@ -124,18 +129,17 @@ In the figure on the left, an error is made if we decide to reject the Null, whi
 
 ## 3 levers that affect power
 
-1) $$ \alpha $$: To increase power, we can increase our $$ \alpha $$, but again there is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
+1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$, but again there is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
-2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions will become narrower in shape, leading to less overlap between the 2 distributions. 
+2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions. 
 
-3) $$ \delta $$: If the beliefed true parameter is further away from the null hypothesis value, there will again be less overlap between the 2 distributions and power increases.
+3) $$ \Delta $$: If the believed true parameter is further away from 0, the area to the left of the alternative distribution decreases, and as a result power increases.
 
-### Practically how do we pick what value of $$\delta$$ to use for the alternative hypothesis in the calculation of power?
+### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
-This corresponds to placing $$ \delta$$ in the diagram
-Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
+We have omitted the discussion of what $$\Delta_{H_A}$$ is thus far. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-A common choice to plug in is the **minimum detectable effect (MDE)**. This is the minimum effect size 𝛿 that would be considered meaningful for the business problem at hand.In using this value for delta, we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (as well as anything bigger).
+A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (as well as anything bigger).
 
 
 
