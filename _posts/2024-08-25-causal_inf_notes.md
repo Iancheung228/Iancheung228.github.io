@@ -194,15 +194,12 @@ Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 
+### Discussion on P(data | H_0) vs P(H_0 | data)
 
-### Aside $$ \text{P-value} \neq P(H_0 | data) $$
+#### Aside $$ \text{P-value} \neq P(H_0 | data) $$
 A common misconception is that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
-The above interpretations are wrong because the p-value doesn't tell us the probability of the Null being true.
-
-While this is an expression of great interest, it is important to note that we cannot directly calculate this probability without knowing the prior probability of $$H_0$$.
-
-$$P(H_0 \mid \text{data})$$ and the p-value are related by the Bayes' theorem:
+We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value are related through the use of Bayes' theorem:
 
 $$
 \begin{aligned}
@@ -213,20 +210,16 @@ $$
 
 $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
 
-It does align with our intuition: a lower p-value suggests that the null hypothesis is less likely to be true.
+It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
 
-
-
-In reality, the p-value is the probability of observing a result as or more extreme than what was observed, under the assumption that the null hypothesis is true.
-$$ \text{p-value} = P(\delta \text{ observed or more extreme} \mid H_0 \text{ is true}) $$
-
-
-### Why is power a big deal? 
+#### Why is power a big deal? 
 
 It is because experiments with low statistical power are NOT trustworthy. That is, even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability that the Null hypothesis is true.
 
-**False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(\text{Null is True} \mid \text{p-value} < 0.05) $$
+We will introduce the concept of False positive risk, and show how it relates to p-value.
+
+**False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(H_0 \mid \text{p-value} < 0.05) $$ Clearly, a higher risk is worse.
 
 
 Let
@@ -238,6 +231,7 @@ Let
 
 $$
 \begin{aligned}
+\text{FRP} &= \\
 P(H_0 \mid SS) &= P(SS \mid H_0) \cdot \frac{P(H_0)}{P(SS)} \\
 &= \frac{ P(SS \mid H_0) P(H_0)}{P(SS \mid H_0) P(H_0) + P(SS \mid H_1) P(H_1)} \\
 &= \frac{\alpha \cdot \pi}{\alpha \cdot \pi + (1-\beta)(1-\pi)}
@@ -245,9 +239,7 @@ P(H_0 \mid SS) &= P(SS \mid H_0) \cdot \frac{P(H_0)}{P(SS)} \\
 $$
 
 
-If the power $$1- \beta$$ is low the denominator will be small and the entire fraction (FPR) will be high. This means when power is low the probability that the Null hypothesis is true is small (even when p-value is statistically significant)
-
-We see that with low power even if you have a very small p-value, the FPR could be very high.
+If the power ($$1- \beta$$) is low, the denominator will be small and the entire fraction (FPR) will be big. This implies that when power is low, the probability that the Null hypothesis is true is small (even when p-value is statistically significant). Yes the p value is small enough where we will decide to reject the Null hypothesis, but this decision might not be trustworthy.
 
 
 
