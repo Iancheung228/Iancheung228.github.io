@@ -4,6 +4,55 @@ title: Causal Inference Notes
 date: 2024-08-25
 ---
 
+
+Plan:
+practical
+
+connect with bayesian, what does trustworthy
+
+
+The business team comes up with a new idea for a feature and hypothesises that adding this feature will improve conversion to x%. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
+
+### Why are we dealing with distributions?
+In a perfect world, we could measure the true effect of a treatment by giving the entire population of Earth the control condition and recording the outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome as well. Comparing these two results would give us a definitive, black-and-white answer.
+
+Of course, this isn’t possible in reality — we can’t run experiments on parallel Earths. So instead, we randomly assign individuals within a sample population to either control or treatment groups. This randomness introduces variability in the results, which is why we use statistical distributions to model and analyze the uncertainty in our estimates.
+
+
+Since the business team is concerned with whether the new feature is an improvement, we need to use a one-sided test. 
+
+H0 and HA are always compliment of each other
+
+$$ H_{\theta}: \theta \le \theta_0 $$
+
+Our final goal is always the same; After collecting observed data, we will decide whether we reject H0 (and accept HA) OR do not reject H0 (and decline HA)
+- to do that,we define a test statistic T which is a RV
+- we conduct the test assuming the NULL hypothesis is true, and the test statistic T follows a particular distribution that we call the null distribution
+- we then calculate t, the observed value of the test statistic
+- we evaluate the extremity of t relative to the null distribution
+- if the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against H0, and if it passes a certain threshold we will reject the null hypothesis
+
+- Statistically we formalise the extremity of t using the p-value
+
+- Recall by design, either H0 is true or HA is true.
+- There are exactly 4 possible outcomes
+- 1 H0 is true and we correctly do not reject it
+- 2 H0 is true and we incorrectly reject it
+- 3 H0 is false and we incorrectly do not reject it
+- 4 H0 is false and we correctly reject it
+
+- 2 and 3 are respectively referred to as Type I Error and Type II error
+we control the type 1 and 2 error with the significance level and power of the test
+
+
+
+
+
+
+
+
+
+
 In A/B testing, we compare two versions of a product: the control (the current version in production) and the treatment (the new version or variation being tested). The goal is to determine if there is a difference between the two versions with respect to a specific metric that matters to the business.
 
 Ideally, we would test both versions on the entire population, and the results would be definitive. However, in practice, testing on the entire population is not feasible so we instead test on a sample of the population. This introduces variability, and to account for this, we rely on statistical methods to assess whether any observed differences are meaningful or simply due to random chance.
