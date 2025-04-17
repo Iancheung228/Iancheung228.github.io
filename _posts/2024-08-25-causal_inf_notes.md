@@ -1,30 +1,24 @@
 ---
 layout: post
-title: Causal Inference Notes
-date: 2024-08-25
+title: AB Testing
+date: 2025-04-02
 ---
 
 
-Plan:
-practical
+Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (\theta) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
-connect with bayesian, what does trustworthy
-
-
-The business team comes up with a new idea for a feature and hypothesize that adding this feature will improve conversion $$ (\theta) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
-
-In a perfect world, we could measure the true effect of a treatment by giving the entire population on Earth the control condition and recording the outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome as well. Comparing these two results would give us a definitive, black-and-white answer.
+In a perfect world, we could measure the true effect of a treatment by giving the entire population on Earth the control condition and recording the eventual outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome one more time. Comparing these two results would give us a definitive, black-and-white answer.
 
 Of course, this isn’t possible in reality — we can’t run experiments on parallel Earths. So instead, we randomly assign individuals within a sample population to either control or treatment groups. This randomness introduces variability in the results, which is why we use statistical distributions to model and analyze the uncertainty in our estimates.
 
 
-Since the business team is concerned with whether the new feature is an improvement, we need to use a **one-sided test**. 
+Now, since the business team is concerned with whether the new feature is an improvement, we need to use a **one-sided test**. We first form the Null ($$H_0$$) and Alternative hypothesis ($$H_A$$), and note that $$H_0$$ and $$H_A$$ are always compliments to each other. That is if Null is false, Alternative must be true.
 
-H0 and HA are always compliments to each other
+
 
 $$
 \begin{aligned}
-H_0\!:\ & \theta_0 \leq \theta_A \quad \text{(null hypothesis)} \\
+H_0\!:\ & \theta_A \leq \theta_0 \quad \text{(null hypothesis)} \\
 H_A\!:\ & \theta_A > \theta_0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
