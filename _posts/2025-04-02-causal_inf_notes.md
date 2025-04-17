@@ -4,6 +4,7 @@ title: AB Testing
 date: 2025-04-02
 ---
 
+In this post, we will first go over the set up of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detechtable effect etc.
 
 Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (\theta) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
@@ -78,7 +79,7 @@ We now formally define the following:
    \text{p-value} = P\left( |T| \geq t_{\alpha} \mid \text{Null hyp is true} \right)
    $$
 
-2. **Type I error ($\alpha$):** Incorrectly rejecting the null hypothesis when it is indeed true.
+2. **Type I error ($$ \alpha $$):** Incorrectly rejecting the null hypothesis when it is indeed true.
 
 3. **Power (1−β):** The probability of correctly rejecting the null hypothesis under the assumption that the **alternative hypothesis is true**. Equivalently, it is the probability of **not** making a Type II error.  
 
