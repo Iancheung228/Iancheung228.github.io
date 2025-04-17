@@ -33,21 +33,23 @@ H_A\!:\ & \Delta < 0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-Our final goal is always the same: After collecting data, we will decide whether we **reject $$H_0$$** (and implicitly accept $$H_A$$) OR **do not reject $$H_0$$** (and implicitly decline $$H_A$$).
+Our final goal is always the same: After collecting data, we will decide whether we **\text{1)}  reject $$H_0$$** (and implicitly accept $$H_A$$) OR **\text{2)}  do not reject $$H_0$$** (and implicitly decline $$H_A$$).
 
-Below are the high-level steps we need to perform
+#### Below are the high-level steps we need to perform
 - We define a test statistic T, which is a random variable (r.v.)
-- We conduct the one-sided test, **under the assumption that the NULL hypothesis is true**; consequently, the test statistic T follows a particular distribution that we call the **null distribution**
+- We conduct the one-sided test, **under the assumption that the Null hypothesis is true**; consequently, the test statistic T follows a particular distribution that we call the **null distribution**
 - We calculate t, the observed value for the test statistic r.v.
 - We evaluate the extremity of t relative to the null distribution
 - If the observed t is unlikely to be generated from the null distribution, we have more evidence to believe against $$H_0$$, and if it passes a certain threshold ($$\alpha$$), we will decide to reject the null hypothesis.
-**Remark** even when we reject the null hypothesis, it is possible that, the observed outcome actually came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
+
+**Remark** even when we reject the null hypothesis, it is possible that the observed outcome actually came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
 - Statistically, we formalise the extremity of t using the p-value. 
 
 
-Before we define p-value formally, recall by design, 
+Before we define p-value formally, recall by design
+
 1) either the Null hypothesis ($$H_0$$) is true or the alternative hypothesis ($$H_A$$) is true.
-2) We can decide to reject the Null or reject the Alternative.
+2) We can either decide to reject the Null or reject the Alternative.
 
 We can treat these as 2 random variables and visualise them with a 2 by 2 grid.
 
@@ -63,17 +65,12 @@ In our one sided test however, we operate under the assumption that the Null hyp
 3. Given H₀ is false and we incorrectly do not reject it  (**Type II error**)
 4. Given H₀ is false and we correctly reject it
 
-
-we control the type 1 and 2 error with the significance level and power of the test
-
-
-
 We now formally define the following:
 
 1. **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**.  
 
    $$
-   \text{p-value} = P\left( |Z| \geq z_{\alpha} \mid \text{Null hyp is true} \right)
+   \text{p-value} = P\left( |T| \geq t_{\alpha} \mid \text{Null hyp is true} \right)
    $$
 
 2. **Type I error ($\alpha$):** Incorrectly rejecting the null hypothesis when it is indeed true.
@@ -88,7 +85,9 @@ We now formally define the following:
 
 
 
-Let's incorporate everything we have discussed into the 2 visual diagrams below. $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
+Let's incorporate everything we have discussed into the 2 visual diagrams below. 
+
+$$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
 
 
 
@@ -123,7 +122,7 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 ## 3 levers that affect power
 
-1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$, but again there is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
+1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$, but again, this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
 2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions. 
 
@@ -131,61 +130,11 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
-We have omitted the discussion of what $$\Delta_{H_A}$$ is thus far. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
+Thus far, we have omitted the discussion of what $$\Delta_{H_A}$$ is. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (as well as anything bigger).
+A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (and importantly, as well as anything bigger). That is, if the true $$\Delta_{H_A}$$ is smaller than the MDE we selected, our test design would not have sufficient power. In the other case where the true $$\Delta_{H_A}$$ is bigger than the MDE we selected, our test will have a surplus of power.
 
-
-
-### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and true alternative of $$ \delta_A >0 $$
-
-Consider the following setup:
-- The metric is conversion - where the object either successfully converted or failed to convert, and this follows a Bernoulli
-- The sample variance for a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
-- The true $$\Delta_A$$ is $$\delta_A$$ and is greater than 0
-- Let the Null and alternative distributions be parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$N_1$$ and $$N_2$$. 
-- $$\Delta$$ = $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2 \right)$$
-
-
-**Goal** We wish to obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
-
-$$
-1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
-= P\left( \frac{ \widehat{\mu_1} - \widehat{\mu_0} }{ \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right) } } > z_{\alpha} \, \Big| \, \text{alternative} \right)
-$$
-
-
-
-**Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
-   
-**Note 2** Under alternative $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
-
-Continuing ...
-
-$$
-\begin{aligned}
-1 - \beta &\leq P\left( \widehat{\mu}_1 - \widehat{\mu}_0 > z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
-          &= P\left( \frac{(\widehat{\mu}_1 - \widehat{\mu}_0) - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
-          &= P\left( Z^* > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
-\end{aligned}
-$$
-
-
-Now the quantity on the left of the inequality, $$Z^* \sim N(0, 1)$$ under the alternative hypothesis
-
-
-
-$$
-z_{1 - \beta} \leq \frac{
-    z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
-}{ 
-    \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}}
-} \quad \text{since} \quad Z^* \sim N(0, 1)
-$$
-
-Then, you can simply continue the algebraic manipulation and isolate for n.
-
-
+We will leave the sample size calculation in the appendix of this post for interested readers.
 
 
 ### Discussion on P(data | H_0) vs P(H_0 | data)
@@ -236,6 +185,54 @@ $$
 If the power ($$1- \beta$$) is low, the denominator will be small and the entire fraction (FPR) will be big. This implies that when power is low, the probability that the Null hypothesis is true is small (even when p-value is statistically significant). Yes the p value is small enough where we will decide to reject the Null hypothesis, but this decision might not be trustworthy.
 
 
+## Appendix:
+### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and true alternative of $$ \delta_A >0 $$
+
+Consider the following setup:
+- The metric is conversion - where the object either successfully converted or failed to convert, and this follows a Bernoulli
+- The sample variance for a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
+- The true $$\Delta_A$$ is $$\delta_A$$ and is greater than 0
+- Let the Null and alternative distributions be parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$N_1$$ and $$N_2$$. 
+- $$\Delta$$ = $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2 \right)$$
+
+
+**Goal** We wish to obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
+
+$$
+1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
+= P\left( \frac{ \widehat{\mu_1} - \widehat{\mu_0} }{ \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right) } } > z_{\alpha} \, \Big| \, \text{alternative} \right)
+$$
+
+
+
+**Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
+   
+**Note 2** Under alternative $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+
+Continuing ...
+
+$$
+\begin{aligned}
+1 - \beta &\leq P\left( \widehat{\mu}_1 - \widehat{\mu}_0 > z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} \Big| \, \text{alternative} \right) \\
+          &= P\left( \frac{(\widehat{\mu}_1 - \widehat{\mu}_0) - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
+          &= P\left( Z^* > \frac{z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A}{ \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}} } \Big| \, \text{alternative} \right) \\
+\end{aligned}
+$$
+
+
+Now the quantity on the left of the inequality, $$Z^* \sim N(0, 1)$$ under the alternative hypothesis
+
+
+
+$$
+z_{1 - \beta} \leq \frac{
+    z_{\alpha} \sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)} - \delta_A
+}{ 
+    \sqrt{\frac{\mu_1(1 - \mu_1)}{n} + \frac{\mu_0(1 - \mu_0)}{n}}
+} \quad \text{since} \quad Z^* \sim N(0, 1)
+$$
+
+Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
 
