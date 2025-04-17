@@ -91,7 +91,8 @@ We now formally define the following:
 
 
 &nbsp;
-Let's incorporate everything we have discussed into the 2 visual diagrams below. 
+&nbsp;
+#### Let's incorporate everything we have discussed into the 2 visual diagrams below. 
 
 $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
 
@@ -132,22 +133,22 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions. 
 
-3) $$ \Delta $$: If the believed true parameter is further away from 0, the area to the left of the alternative distribution decreases, and as a result power increases.
+3) $$ \Delta_{H_A} $$: If the believed true parameter is further away from 0, the area to the left of the alternative distribution decreases, and as a result power increases.
 
 &nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
 Thus far, we have omitted the discussion of what $$\Delta_{H_A}$$ is. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (and importantly, as well as anything bigger). That is, if the true $$\Delta_{H_A}$$ is smaller than the MDE we selected, our test design would not have sufficient power. In the other case where the true $$\Delta_{H_A}$$ is bigger than the MDE we selected, our test will have a surplus of power.
+A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (and importantly, as well as anything bigger). That is, if the true $$\Delta_{H_A}$$ is smaller than the MDE we selected, our test design would not have sufficient power. In the other case where the true $$\Delta_{H_A}$$ is bigger than the MDE we selected, our test will have a surplus of power.
 
 We will leave the sample size calculation in the appendix of this post for interested readers.
 
 &nbsp;
-### Discussion on P(data | H_0) vs P(H_0 | data)
+### Distinction of $$P(\text{data} | H_0)$$ vs $$P(H_0 | \text{data})$$
 
-#### Aside $$ \text{P-value} \neq P(H_0 | data) $$
-A common misconception is that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
+#### 1) $$ \text{P-value} \neq P(H_0 | data) $$
+It is a common misconception that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
 We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value are related through the use of Bayes' theorem:
 
@@ -163,7 +164,7 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
 &nbsp;
-#### Why is power a big deal? 
+#### 2) Why is power a big deal? 
 
 It is because experiments with low statistical power are NOT trustworthy. That is, even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability that the Null hypothesis is true.
 
