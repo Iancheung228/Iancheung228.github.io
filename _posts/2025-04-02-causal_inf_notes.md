@@ -133,7 +133,7 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions. 
 
-3) $$ \Delta_{H_A} $$: If the believed true parameter is further away from 0, the area to the left of the alternative distribution decreases, and as a result power increases.
+3) $$ \Delta_{H_A} $$: As $$ \Delta_{H_A} $$ is further away to the right from 0, the area to the left of the alternative distribution decreases, and power increases.
 
 &nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
@@ -142,7 +142,11 @@ Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ s
 
 In practice, we are often given a significance level α, and we are interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-A common choice is to use the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the minimum effect we care about (and vacously, any effect size that is bigger). For any effect size that are smaller than then MDE, we would have insufficient power when drawing our conclusions.
+A common choice is to use the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem. 
+So in our conversion improvement example, suppose the business team told you that 1% of conversion improvement is the breakeven point for profit (associated cost with implementing the new feature), our MDE would be $$1 %$$. Then we would calculate the sample size required, substituting the MDE as the value of $$\Delta$$. If the "true $$\Delta$$" is larger than this MDE, by property 3), our test will still have enough power to detect the effect size. If the "true $$\Delta$$" is smaller than this MDE, our test will NOT have enough power, but we do not care about this small improvement anyway.
+
+
+All that is to say: by using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the minimum effect we care about (and vacously, any effect size that is bigger). For any effect size that are smaller than then MDE, we would have insufficient power when drawing our conclusions.
 
 We will leave the sample size calculation in the appendix of this post for readers that are interested.
 
