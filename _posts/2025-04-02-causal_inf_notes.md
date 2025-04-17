@@ -11,7 +11,10 @@ In a perfect world, we could measure the true effect of a treatment by giving th
 
 Of course, this isn’t possible in reality — we can’t run experiments on parallel Earths. So instead, we randomly assign individuals within a sample population to either control or treatment groups. This randomness introduces variability in the results, which is why we use statistical distributions to model and analyze the uncertainty in our estimates.
 
-<p> Now, since the business team is concerned with whether the new feature is an improvement, we need to use a **one-sided test**. We first form the Null ($$H_0$$) and Alternative hypothesis ($$H_A$$), and note that $$H_0$$ and $$H_A$$ are always compliments to each other. That is if Null is false, Alternative must be true.</p>
+&nbsp;
+
+
+Now, since the business team is concerned with whether the new feature is an improvement, we need to use a **one-sided test**. We first form the Null ($$H_0$$) and Alternative hypothesis ($$H_A$$), and note that $$H_0$$ and $$H_A$$ are always compliments to each other. That is if Null is false, Alternative must be true.
 
 
 
