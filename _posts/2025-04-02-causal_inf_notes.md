@@ -138,11 +138,13 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 &nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
-Thus far, we have omitted the discussion of what $$\Delta_{H_A}$$ is. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
+Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ should be. 
 
-A common choice is to plug in the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem on hand. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the smallest effect we care about (and importantly, as well as anything bigger). That is, if the true $$\Delta_{H_A}$$ is smaller than the MDE we selected, our test design would not have sufficient power. In the other case where the true $$\Delta_{H_A}$$ is bigger than the MDE we selected, our test will have a surplus of power.
+In practice, we are often given a significance level α, and we are interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
-We will leave the sample size calculation in the appendix of this post for interested readers.
+A common choice is to use the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem. By using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the minimum effect we care about (and vacously, any effect size that is bigger). For any effect size that are smaller than then MDE, we would have insufficient power when drawing our conclusions.
+
+We will leave the sample size calculation in the appendix of this post for readers that are interested.
 
 &nbsp;
 ### Distinction of $$P(\text{data} | H_0)$$ vs $$P(H_0 | \text{data})$$
