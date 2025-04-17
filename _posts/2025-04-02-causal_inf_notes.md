@@ -35,8 +35,10 @@ H_A\!:\ & \Delta < 0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-Our final goal is always the same: After collecting data, we will decide whether we **\text{1)}  reject $$H_0$$** (and implicitly accept $$H_A$$) OR **\text{2)}  do not reject $$H_0$$** (and implicitly decline $$H_A$$).
+&nbsp;
+Our final goal is always the same: After collecting data, we will decide whether we **1)  reject $$H_0$$** (and implicitly accept $$H_A$$) OR **2)  do not reject $$H_0$$** (and implicitly decline $$H_A$$).
 
+&nbsp;
 #### Below are the high-level steps we need to perform
 - We define a test statistic T, which is a random variable (r.v.)
 - We conduct the one-sided test, **under the assumption that the Null hypothesis is true**; consequently, the test statistic T follows a particular distribution that we call the **null distribution**
@@ -47,6 +49,7 @@ Our final goal is always the same: After collecting data, we will decide whether
 **Remark** even when we reject the null hypothesis, it is possible that the observed outcome actually came from the Null distribution, in which case we have incorrectly rejected the null hypothesis; this is denoted as a Type I error, which we will discuss later.
 - Statistically, we formalise the extremity of t using the p-value. 
 
+&nbsp;
 
 Before we define p-value formally, recall by design
 
@@ -86,7 +89,7 @@ We now formally define the following:
 4. **Type II error (β):** Failing to reject the null hypothesis when the alternative hypothesis is actually true.
 
 
-
+&nbsp;
 Let's incorporate everything we have discussed into the 2 visual diagrams below. 
 
 $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
@@ -121,7 +124,7 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 
 
-
+&nbsp;
 ## 3 levers that affect power
 
 1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$, but again, this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
@@ -130,6 +133,7 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 3) $$ \Delta $$: If the believed true parameter is further away from 0, the area to the left of the alternative distribution decreases, and as a result power increases.
 
+&nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
 Thus far, we have omitted the discussion of what $$\Delta_{H_A}$$ is. Given a significance level α, we are typically interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
@@ -138,7 +142,7 @@ A common choice is to plug in the **minimum detectable effect (MDE)**. This is t
 
 We will leave the sample size calculation in the appendix of this post for interested readers.
 
-
+&nbsp;
 ### Discussion on P(data | H_0) vs P(H_0 | data)
 
 #### Aside $$ \text{P-value} \neq P(H_0 | data) $$
@@ -157,7 +161,7 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 
 It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
-
+&nbsp;
 #### Why is power a big deal? 
 
 It is because experiments with low statistical power are NOT trustworthy. That is, even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability that the Null hypothesis is true.
