@@ -54,9 +54,6 @@ Our final goal is always the same: After collecting data, we will decide whether
 
 Before we define p-value formally, recall by design
 
-1) either the Null hypothesis ($$H_0$$) is true or the alternative hypothesis ($$H_A$$) is true.
-2) We can either decide to reject the Null or reject the Alternative.
-
 1. Either the Null hypothesis $$H_0$$ is true or the Alternative hypothesis $$H_A$$ is true.
 
 2. We can either decide to reject the Null or reject the Alternative.
@@ -76,7 +73,7 @@ In our one sided test however, we operate under the assumption that the Null hyp
 3. Given H₀ is false and we incorrectly do not reject it  (**Type II error**)
 4. Given H₀ is false and we correctly reject it
 
-We now formally define the following:
+### We now formally define the following:
 
 1. **P-value** is defined as the probability of observing a more extreme test statistic, under the assumption that the **null hypothesis is true**.  
 
@@ -99,7 +96,9 @@ We now formally define the following:
 &nbsp;
 #### Let's incorporate everything we have discussed into the 2 visual diagrams below. 
 
-$$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$ is 0 and the true improvement (usually the minimum detectable effect in practice), respectively. 
+- $$ * $$ is the threshold for our decision
+- $$\Delta_{H_0}$$ is 0 
+- $$\Delta_{H_A}$$ is the "true improvement" (usually the minimum detectable effect in practice), respectively. 
 
 
 
@@ -121,12 +120,12 @@ $$ * $$ is the threshold for our decision, $$\Delta_{H_0}$$ and $$\Delta_{H_A}$$
 
 </div>
 
-In the left figure, an error is made if we decide to reject the Null hypothesis, which occurs when our observation lies to the right of our threshold - $$*$$. While in the right figure, an error is made if we decide to NOT reject the Null, which occurs when our observation lies to the left of our threshold $$*$$. 
+In the left figure, an error is made if we decide to reject the Null hypothesis, which occurs when our observation lies to the right of our threshold  $$*$$. While in the right figure, an error is made if we decide to NOT reject the Null, which occurs when our observation lies to the left of our threshold $$*$$. 
 
-**Remark:** Observe that we can reduce the probability of Type II error by shifting the threshold / decision boundary to the right. However, doing so would increase the Type I error, since a larger critical region would make it easier to reject the null hypothesis.
+**Remark:** Observe that we can reduce the probability of Type II error by shifting the threshold/decision boundary to the right. However, doing so would increase the Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
 
-
+In the remaining post, we will focus on understanding the properties and 
 
 
 
