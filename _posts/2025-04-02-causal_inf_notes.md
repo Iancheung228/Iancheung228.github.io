@@ -250,7 +250,7 @@ $$
 Then, you can simply continue the algebraic manipulation and isolate for n.
 
 
-$$n = \frac{ \left( Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)} \right)^2 }{(p_2 - p_1)^2} $$
+$$n = \frac{ \left( Z_{1 - \alpha/2} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \cdot \sqrt{\mu_1(1 - \mu_1) + \mu_2(1 - \mu_2)} \right)^2 }{(\mu_2 - \mu_1)^2} $$
 
 
 
