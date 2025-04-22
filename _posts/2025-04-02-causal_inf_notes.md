@@ -204,15 +204,14 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 
 Consider the following setup:
 - We are still interested in the conversion rate $$X_{1,2}$$ - the object either successfully converted or failed to convert, and this follows a Bernoulli
-- 
-- The sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
-- We subsitute the value of MDE for The true $$\Delta_A$$
-- $$ \bar{X}_1 \sim N(\mu_1, \sigma_1^2) $$ with sample size $$N_1$$
--  and $$\bar{X}_2 \sim  N(\mu_2, \sigma_2^2)$$ with sample size $$N_2$$. 
-- $$\Delta$$ = $$X_2$$- $$X_1$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{N_1}) - N(\mu_2, \frac{\sigma_2^2}{N_2}) = N\left(\mu_2 - \mu_1, \frac{\sigma_1^2}{N_1} + \frac{\sigma_2^2}{N_2} \right)$$
+- We substitute the value of MDE for the true $$\Delta_A$$
+- $$ \bar{X}_0 \sim N(\mu_0, \sigma_1^2) $$ with sample size $$N_0$$
+- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_2^2)$$ with sample size $$N_1$$. 
+- $$\Delta$$ = $$\bar{X}_1$$- $$\bar{X}_0$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{N_1}) - N(\mu_0, \frac{\sigma_0^2}{N_0}) = N\left(\mu_1 - \mu_0, \frac{\sigma_0^2}{N_0} + \frac{\sigma_1^2}{N_1} \right)$$
+- Recall the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
 
 
-**Goal** We wish to obtain a power of 1- $$\beta$$, we want to reject the null at least 100(1- $$\beta$$)% of the time assuming the alternative hypothesis is true.
+**Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
 
 $$
 1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
