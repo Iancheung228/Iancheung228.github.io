@@ -200,13 +200,15 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 
 
 ## Appendix:
-### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and true alternative of $$ \delta_A >0 $$
+### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and specific choice of $$ \delta_A >0 $$ a.k.a the MDE
 
 Consider the following setup:
-- The metric is conversion - where the object either successfully converted or failed to convert, and this follows a Bernoulli
+- We are still interested in the conversion rate $$X_{1,2}$$ - the object either successfully converted or failed to convert, and this follows a Bernoulli
+- 
 - The sample variance for a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
 - The true $$\Delta_A$$ is $$\delta_A$$ and is greater than 0
-- Let the Null and alternative distributions be parameterized by $$N(\mu_1, \sigma_1^2)$$ and $$N(\mu_2, \sigma_2^2)$$ with sample sizes $$N_1$$ and $$N_2$$. 
+- $$ \bar{X}_1 \sim \mathcal{N}(\mu_1, \sigma_1^2) $$ with sample size $$N_1$$
+-  and $$\bar{X}_1 \sim  N(\mu_2, \sigma_2^2)$$ with sample size $$N_2$$. 
 - $$\Delta$$ = $$N(\mu_1, \sigma_1^2) - N(\mu_2, \sigma_2^2) = N\left(\mu_2 - \mu_1, \sigma_1^2 + \sigma_2^2 \right)$$
 
 
