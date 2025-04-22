@@ -206,7 +206,8 @@ Consider the following setup:
 - We are still interested in the conversion rate $$X_0$$ , $$X_1$$ - the customer either successfully converted or failed to convert, and this follows a Bernoulli
 - We substitute the value of MDE for the true $$\Delta_A$$
 - $$ \bar{X}_0 \sim N(\mu_0, \sigma_0^2) $$ with sample size $$n_0$$
-- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_1^2)$$ with sample size $$n_1$$. 
+- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_1^2)$$ with sample size $$n_1$$.
+- In this example, we assume 50/50 split, so $$ n_0 =n_1 = n$$
 - $$\Delta$$ = $$\bar{X}_1$$- $$\bar{X}_0$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{n_1}) - N(\mu_0, \frac{\sigma_0^2}{n_0}) = N\left(\mu_1 - \mu_0, \frac{\sigma_0^2}{n_0} + \frac{\sigma_1^2}{n_1} \right)$$
 - Recall in general, the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{n} $$
 - $$\mu_0$$ is the baseline conversion
@@ -214,7 +215,7 @@ Consider the following setup:
 - $$\mu$$ = $$ \frac{\mu_0+\mu_1}{2} $$
 
 
-**Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is, we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
+**Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is, we want to reject the null at least 100(1- $$\beta$$)% of the time, under the assumption that the alternative hypothesis is true.
 
 $$
 1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
@@ -225,7 +226,7 @@ $$
 
 **Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
    
-**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)}$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n_1} +  \frac{\mu_0(1-\mu_0)}{n_0} $$. In this case $$n_1 = n_2 := n$$
+**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)}$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n_1} +  \frac{\mu_0(1-\mu_0)}{n_0} $$.
 
 Continuing ...
 
@@ -250,10 +251,10 @@ z_{1 - \beta} \leq \frac{
 } \quad \text{since} \quad Z^* \sim N(0, 1)
 $$
 
-Then, you can simply continue the algebraic manipulation and isolate for n.
+Afterwards, we continue the algebraic manipulation and isolate for n to arrive at the following final expression:
 
 
-$$n = \frac{ \left( Z_{1 - \alpha/2} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \cdot \sqrt{\mu_1(1 - \mu_1) + \mu_2(1 - \mu_2)} \right)^2 }{(\mu_2 - \mu_1)^2} $$
+$$n = \frac{ \left( Z_{1 - \alpha} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \cdot \sqrt{\mu_1(1 - \mu_1) + \mu_2(1 - \mu_2)} \right)^2 }{(\text{MDE})^2} $$
 
 
 
