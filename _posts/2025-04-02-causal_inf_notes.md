@@ -200,15 +200,18 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 
 
 ## Appendix:
-### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and a specific choice of $$ \delta_A >0 $$ which as discussed earlier would be the MDE
+### Derivation of sample size needed for a desired power, given $$\alpha$$ and a specific choice of $$ \delta_A >0 $$ (which as discussed earlier would be the MDE)
 
 Consider the following setup:
-- We are still interested in the conversion rate $$X_{1,2}$$ - the object either successfully converted or failed to convert, and this follows a Bernoulli
+- We are still interested in the conversion rate $$X_0$$ , $$X_1$$ - the customer either successfully converted or failed to convert, and this follows a Bernoulli
 - We substitute the value of MDE for the true $$\Delta_A$$
-- $$ \bar{X}_0 \sim N(\mu_0, \sigma_0^2) $$ with sample size $$N_0$$
-- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_1^2)$$ with sample size $$N_1$$. 
-- $$\Delta$$ = $$\bar{X}_1$$- $$\bar{X}_0$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{N_1}) - N(\mu_0, \frac{\sigma_0^2}{N_0}) = N\left(\mu_1 - \mu_0, \frac{\sigma_0^2}{N_0} + \frac{\sigma_1^2}{N_1} \right)$$
-- Recall in general, the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
+- $$ \bar{X}_0 \sim N(\mu_0, \sigma_0^2) $$ with sample size $$n_0$$
+- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_1^2)$$ with sample size $$n_1$$. 
+- $$\Delta$$ = $$\bar{X}_1$$- $$\bar{X}_0$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{n_1}) - N(\mu_0, \frac{\sigma_0^2}{n_0}) = N\left(\mu_1 - \mu_0, \frac{\sigma_0^2}{n_0} + \frac{\sigma_1^2}{n_1} \right)$$
+- Recall in general, the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{n} $$
+- $$\mu_0$$ is the baseline conversion
+- $$\mu_1$$ = $$\mu_0 + \text{absolute MDE}$$
+- $$\mu$$ = $$ \frac{\mu_0+\mu_1}{2} $$
 
 
 **Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is, we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
