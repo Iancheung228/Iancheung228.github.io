@@ -222,7 +222,7 @@ $$
 
 **Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
    
-**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)}$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)}$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n_1} +  \frac{\mu_0(1-\mu_0)}{n_0} $$. In this case $$n_1 = n_2 := n$$
 
 Continuing ...
 
@@ -249,6 +249,8 @@ $$
 
 Then, you can simply continue the algebraic manipulation and isolate for n.
 
+
+$$n = \frac{ \left( Z_{1 - \alpha/2} \cdot \sqrt{2p(1 - p)} + Z_{1 - \beta} \cdot \sqrt{p_1(1 - p_1) + p_2(1 - p_2)} \right)^2 }{(p_2 - p_1)^2} $$
 
 
 
