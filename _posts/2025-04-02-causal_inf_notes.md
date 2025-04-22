@@ -57,6 +57,11 @@ Before we define p-value formally, recall by design
 1) either the Null hypothesis ($$H_0$$) is true or the alternative hypothesis ($$H_A$$) is true.
 2) We can either decide to reject the Null or reject the Alternative.
 
+1. Either the Null hypothesis $$H_0$$ is true or the Alternative hypothesis $$H_A$$ is true.
+
+2. We can either decide to reject the Null or reject the Alternative.
+
+
 We can treat these as 2 random variables and visualise them with a 2 by 2 grid.
 
 <img width="760" alt="Screenshot 2025-04-16 at 1 55 38 PM" src="https://github.com/user-attachments/assets/cf9fac54-9451-45af-8de7-8b6bcbff7fba" />
