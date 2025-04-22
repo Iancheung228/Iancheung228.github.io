@@ -205,10 +205,10 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 Consider the following setup:
 - We are still interested in the conversion rate $$X_{1,2}$$ - the object either successfully converted or failed to convert, and this follows a Bernoulli
 - We substitute the value of MDE for the true $$\Delta_A$$
-- $$ \bar{X}_0 \sim N(\mu_0, \sigma_1^2) $$ with sample size $$N_0$$
-- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_2^2)$$ with sample size $$N_1$$. 
+- $$ \bar{X}_0 \sim N(\mu_0, \sigma_0^2) $$ with sample size $$N_0$$
+- $$ \bar{X}_1 \sim  N(\mu_1, \sigma_1^2)$$ with sample size $$N_1$$. 
 - $$\Delta$$ = $$\bar{X}_1$$- $$\bar{X}_0$$ $$\sim$$ $$N(\mu_1, \frac{\sigma_1^2}{N_1}) - N(\mu_0, \frac{\sigma_0^2}{N_0}) = N\left(\mu_1 - \mu_0, \frac{\sigma_0^2}{N_0} + \frac{\sigma_1^2}{N_1} \right)$$
-- Recall the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
+- Recall in general, the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
 
 
 **Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
@@ -222,7 +222,7 @@ $$
 
 **Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
    
-**Note 2** Under alternative $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 Continuing ...
 
