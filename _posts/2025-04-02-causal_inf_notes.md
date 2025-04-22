@@ -4,7 +4,7 @@ title: AB Testing
 date: 2025-04-02
 ---
 
-In this post, we will first go over the set up of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detechtable effect etc.
+In this post, we will first go over the set-up of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detectable effect, etc.
 
 Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (\theta) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
