@@ -6,7 +6,7 @@ date: 2025-04-02
 
 In this post, we will first go over the set-up of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detectable effect, etc.
 
-Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (\X) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
+Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (X) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
 In a perfect world, we could measure the true effect of a treatment by giving the entire population on Earth the control condition and recording the eventual outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome one more time. Comparing these two results would give us a definitive, black-and-white answer.
 
@@ -21,12 +21,12 @@ Now, since the business team is concerned with whether the new feature is an imp
 
 $$
 \begin{aligned}
-H_0\!:\ & \X_A \leq \X_0 \quad \text{(null hypothesis)} \\
-H_A\!:\ & \X_A > \X_0 \quad \text{(alternative hypothesis)}
+H_0\!:\ & X_A \leq X_0 \quad \text{(null hypothesis)} \\
+H_A\!:\ & X_A > X_0 \quad \text{(alternative hypothesis)}
 \end{aligned}
 $$
 
-We can denote the difference in the 2 conversion rate as: $$ \Delta = \X_0 - \X_A $$. Then the hypothesis becomes
+We can denote the difference in the 2 conversion rate as: $$ \Delta = X_0 - X_A $$. Then the hypothesis becomes
 
 
 $$
