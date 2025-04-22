@@ -200,7 +200,7 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 
 
 ## Appendix:
-### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and specific choice of $$ \delta_A >0 $$ a.k.a the MDE
+### Example of how to calculate the sample size needed for a desired power, given $$\alpha$$ and a specific choice of $$ \delta_A >0 $$ which as discussed earlier would be the MDE
 
 Consider the following setup:
 - We are still interested in the conversion rate $$X_{1,2}$$ - the object either successfully converted or failed to convert, and this follows a Bernoulli
@@ -211,7 +211,7 @@ Consider the following setup:
 - Recall in general, the sample variance for the mean of a Bernoulli variable would be $$ \sigma^2 =  \frac{\mu (1-\mu)}{N} $$
 
 
-**Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
+**Goal** Again, we wish to obtain a power of 1- $$\beta$$. That is, we want to reject the null at least 100(1- $$\beta$$)% of the time, assuming the alternative hypothesis is true.
 
 $$
 1 - \beta \leq P\left( Z > z_{\alpha} \, \Big| \, \text{alternative} \right) 
@@ -222,7 +222,7 @@ $$
 
 **Note 1** The z score follows a standard normal only under the Null hypothesis, and not under the alternative. We have to rearrange the above expression to obtain something normally distributed.
    
-**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
+**Note 2** Under the alternative hypothesis we can't use the pooled variance $$\sqrt{\mu(1 - \mu) \left( \frac{1}{n} + \frac{1}{n} \right)}$$  but instead $$ \text{Var}(\widehat{\mu_1} -  \widehat{\mu_0}) = \frac{\mu_1(1- \mu_1)}{n} +  \frac{\mu_0(1-\mu_0)}{n} $$
 
 Continuing ...
 
