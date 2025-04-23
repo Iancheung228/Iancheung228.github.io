@@ -144,12 +144,14 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 &nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
-Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ should be. All we know is that $$\Delta_{H_A}$$ should be greater than 0. But as we saw in the 2 diagrams above, we need a specific value to determin the power of the test
+Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ should be. All we know is that $$\Delta_{H_A}$$ should be greater than 0. But as we saw in the 2 diagrams above, we need a specific value to determine the power of the hypothesis test.
 
 In practice, what happens is we are given a significance level α, and we are interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
 A common choice is to use the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem. 
-So in our conversion improvement example, suppose the business team told you that 1% of conversion improvement (absolute) is the breakeven point for profit (due to associated cost with implementing any new features), our MDE would be $$1 %$$. Then we would calculate the sample size required, substituting the MDE as the value of $$\Delta$$. If the "true $$\Delta$$" is larger than this MDE, by property 3), our test will still have enough power to detect the effect size. If the "true $$\Delta$$" is smaller than this MDE, our test will NOT have enough power, but we do not care about this small improvement anyways.
+So in our conversion improvement example, suppose the business team told you that a 1% of conversion improvement (absolute) is needed to breakeven for the associated cost with implementing this new feature, our MDE would be 1%. Then we would calculate the sample size required, substituting the MDE as the value of $$\Delta_{H_A}$$. 
+
+If the "true $$\Delta$$" is larger than this MDE, by property 3), our test will still have enough power to detect the effect size. On the other hand, if the "true $$\Delta$$" is smaller than this MDE, our test will NOT have enough power, but we do not care about this small improvement anyways.
 
 
 All that is to say: by using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the minimum effect we care about (and vacously, any effect size that is bigger). For any effect size that are smaller than then MDE, we would have insufficient power when drawing our conclusions.
@@ -160,9 +162,9 @@ We will leave the sample size calculation in the appendix of this post for reade
 ### Distinction of $$P(\text{data} | H_0)$$ vs $$P(H_0 | \text{data})$$
 
 #### **1) $$ \text{P-value} \neq P(H_0 | data) $$**
-It is a common misconception that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
+It is a common misconception that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true. In mathematical terms: $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
-We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value are related through the use of Bayes' theorem:
+We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value are related through the use of Bayes' theorem. Importantly, we would need to know the prior probability of the null hypothesis being true.
 
 $$
 \begin{aligned}
@@ -171,9 +173,9 @@ P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text
 \end{aligned}
 $$
 
-$$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
+$$ P(H_0 |Data) &= \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
 
-It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
+**Note**: It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
 &nbsp;
 #### **2) Why is power a big deal?** 
@@ -182,7 +184,7 @@ It is because experiments with low statistical power are NOT trustworthy. That i
 
 We will introduce the concept of False positive risk, and show how it relates to p-value.
 
-**False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(H_0 \mid \text{p-value} < 0.05) $$ Clearly, a higher risk is worse.
+**False positive risk (FPR)** is the probability that the Null hypothesis is true while we decide to reject the null hypothesis (p-value < 5%). Mathematically it is represented by $$ P(H_0 \mid \text{p-value} < 0.05) $$. Clearly, a higher FPR is worse.
 
 
 Let
@@ -202,7 +204,9 @@ P(H_0 \mid SS) &= P(SS \mid H_0) \cdot \frac{P(H_0)}{P(SS)} \\
 $$
 
 
-If the power ($$1- \beta$$) is low, the denominator will be small and the entire fraction (FPR) will be big. This implies that when power is low, the probability that the Null hypothesis is true is small (even when p-value is statistically significant). Yes the p value is small enough where we will decide to reject the Null hypothesis, but this decision might not be trustworthy.
+If the power ($$1- \beta$$) is low, the denominator will be small and the entire fraction (FPR) will be big. This implies that when power is low, the probability that the Null hypothesis is true is small (even when p-value is statistically significant). 
+
+We see that the p-value could be extremely small where we do decide to reject the Null hypothesis, yet this decision might not be trustworthy.
 
 
 ## Appendix:
