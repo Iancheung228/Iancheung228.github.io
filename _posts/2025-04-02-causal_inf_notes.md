@@ -159,7 +159,7 @@ We will leave the sample size calculation in the appendix of this post for reade
 &nbsp;
 ### Distinction of $$P(\text{data} | H_0)$$ vs $$P(H_0 | \text{data})$$
 
-#### 1) $$ \text{P-value} \neq P(H_0 | data) $$
+#### **1) $$ \text{P-value} \neq P(H_0 | data) $$**
 It is a common misconception that a p-value of $$5\%$$ means the null hypothesis has a $$5\%$$ chance of being true $$ P(H_0 \mid \text{p-value} = 0.05) = 0.05 $$. 
 
 We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value are related through the use of Bayes' theorem:
@@ -176,7 +176,7 @@ $$ P(H_0 |Data) = \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1
 It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
 &nbsp;
-#### 2) Why is power a big deal? 
+#### **2) Why is power a big deal?** 
 
 It is because experiments with low statistical power are NOT trustworthy. That is, even if the p-value is statistically significant, if the experiment is low-powered to begin with there is still a high probability that the Null hypothesis is true.
 
