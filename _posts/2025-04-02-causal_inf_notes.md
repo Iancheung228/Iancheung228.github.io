@@ -267,12 +267,11 @@ $$n = \frac{ \left( Z_{1 - \alpha} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \c
 
 ## Reference 
 
-ref1 [A/B Testing intuition Busters] (https://openreview.net/pdf?id=tC3reuvALn)
+1. [A/B Testing intuition Busters](https://openreview.net/pdf?id=tC3reuvALn)
 
-ref2 [Hypothesis Testing Explained (How I Wish It Was Explained to Me)] (https://medium.com/data-science/hypothesis-testing-explained-how-i-wish-it-was-explained-to-me-14379f7a41c3)
+2. [Hypothesis Testing Explained (How I Wish It Was Explained to Me)](https://medium.com/data-science/hypothesis-testing-explained-how-i-wish-it-was-explained-to-me-14379f7a41c3)
 
 
-Learn more about A/B testing in this [awesome guide](https://www.optimizely.com/optimization-glossary/ab-testing/).
 
 
 
