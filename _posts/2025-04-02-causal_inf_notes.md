@@ -4,9 +4,9 @@ title: AB Testing
 date: 2025-04-02
 ---
 
-In this post, we will first go over the set-up of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detectable effect, etc.
+In this post, we will first go over the setup of a one-sided hypothesis test, then we will provide intuition and practical significance of concepts like Type I error, power, minimum detectable effect, etc.
 
-Imagine this: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (X) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
+**Imagine this**: the business team comes up with an idea for a new feature and hypothesises that adding this feature will improve the conversion rate $$ (X) $$. They come to you and ask for your help to collect sample data to empirically evaluate whether the hypothesis is reasonable.
 
 In a perfect world, we could measure the true effect of a treatment by giving the entire population on Earth the control condition and recording the eventual outcome. Then, on a perfect clone of Earth, we would give everyone the treatment and measure that outcome one more time. Comparing these two results would give us a definitive, black-and-white answer.
 
@@ -96,7 +96,7 @@ In our one sided test however, we operate under the assumption that the Null hyp
 &nbsp;
 #### Let's incorporate everything we have discussed into the 2 visual diagrams below. 
 
-- $$ * $$ is the threshold for our decision
+- $$ * $$ is the threshold for our decision to reject the null hypothesis or not
 - $$\Delta_{H_0}$$ is 0 
 - $$\Delta_{H_A}$$ is the "true improvement" (usually the minimum detectable effect in practice), respectively. 
 
@@ -124,8 +124,10 @@ In the left figure, an error is made if we decide to reject the Null hypothesis,
 
 **Remark:** Observe that we can reduce the probability of Type II error by shifting the threshold/decision boundary to the right. However, doing so would increase the Type I error, since a larger critical region would make it easier to reject the null hypothesis.
 
+&nbsp;
 
-In the remaining post, we will focus on understanding the properties and 
+
+#### In the remaining post, we will focus on understanding the properties of power, how to calculate sample size given a desired level of power, and why a low power would be worrisome for hypothesis testing.
 
 
 
@@ -133,21 +135,21 @@ In the remaining post, we will focus on understanding the properties and
 &nbsp;
 ## 3 levers that affect power
 
-1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$, but again, this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
+1) $$ \alpha $$: To increase power, we can increase $$ \alpha $$ (shift the decision boundary), but again, this is a trade-off between making a Type I error (false positive) and a Type II error (false negative).
 
-2) $$ n $$: You can increase the sample size. Both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions. 
+2) $$ n $$: You can increase the sample size. Geometrically, what this means is both the Null and Alternative distributions in the above diagram will become narrower in shape, leading to less overlap between the 2 distributions and greater power.
 
-3) $$ \Delta_{H_A} $$: As $$ \Delta_{H_A} $$ is further away to the right from 0, the area to the left of the alternative distribution decreases, and power increases.
+3) $$ \Delta_{H_A} $$: As $$ \Delta_{H_A} $$ gets further away to the right from 0, the area to the left of the alternative distribution decreases, and power increases.
 
 &nbsp;
 ### Practically, how do we pick what value of $$\Delta$$ to use for the alternative hypothesis in the calculation of power?
 
-Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ should be. 
+Thus far, we have omitted the discussion of what the value of $$\Delta_{H_A}$$ should be. All we know is that $$\Delta_{H_A}$$ should be greater than 0. But as we saw in the 2 diagrams above, we need a specific value to determin the power of the test
 
-In practice, we are often given a significance level α, and we are interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
+In practice, what happens is we are given a significance level α, and we are interested in determining the sample size required to achieve a desired statistical power. However, the specific value of the alternative hypothesis, which is needed in our power calculation, is unknown.
 
 A common choice is to use the **minimum detectable effect (MDE)**. This is the minimum effect size $$\Delta_{H_A}$$ that would be considered meaningful for the business problem. 
-So in our conversion improvement example, suppose the business team told you that 1% of conversion improvement is the breakeven point for profit (associated cost with implementing the new feature), our MDE would be $$1 %$$. Then we would calculate the sample size required, substituting the MDE as the value of $$\Delta$$. If the "true $$\Delta$$" is larger than this MDE, by property 3), our test will still have enough power to detect the effect size. If the "true $$\Delta$$" is smaller than this MDE, our test will NOT have enough power, but we do not care about this small improvement anyway.
+So in our conversion improvement example, suppose the business team told you that 1% of conversion improvement (absolute) is the breakeven point for profit (due to associated cost with implementing any new features), our MDE would be $$1 %$$. Then we would calculate the sample size required, substituting the MDE as the value of $$\Delta$$. If the "true $$\Delta$$" is larger than this MDE, by property 3), our test will still have enough power to detect the effect size. If the "true $$\Delta$$" is smaller than this MDE, our test will NOT have enough power, but we do not care about this small improvement anyways.
 
 
 All that is to say: by using this value for $$\Delta_{H_A}$$ , we’ve assured ourselves that the calculated sample size is big enough to detect the minimum effect we care about (and vacously, any effect size that is bigger). For any effect size that are smaller than then MDE, we would have insufficient power when drawing our conclusions.
@@ -265,11 +267,12 @@ $$n = \frac{ \left( Z_{1 - \alpha} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \c
 
 ## Reference 
 
-[A/B Testing intuition Busters] (https://openreview.net/pdf?id=tC3reuvALn)
+ref1 [A/B Testing intuition Busters] (https://openreview.net/pdf?id=tC3reuvALn)
 
-[Hypothesis Testing Explained (How I Wish It Was Explained to Me)] (https://medium.com/data-science/hypothesis-testing-explained-how-i-wish-it-was-explained-to-me-14379f7a41c3)
+ref2 [Hypothesis Testing Explained (How I Wish It Was Explained to Me)] (https://medium.com/data-science/hypothesis-testing-explained-how-i-wish-it-was-explained-to-me-14379f7a41c3)
 
 
+Learn more about A/B testing in this [awesome guide](https://www.optimizely.com/optimization-glossary/ab-testing/).
 
 
 
