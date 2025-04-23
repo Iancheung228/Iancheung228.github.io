@@ -177,6 +177,11 @@ $$ P(H_0 |Data) &= \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_
 
 **Note**: It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
+
+Geometrically, what we have done is sum the probabilities across the horizontal direction.
+
+<img width="805" alt="Screenshot 2025-04-23 at 11 23 58 AM" src="https://github.com/user-attachments/assets/ce485c3b-572d-4f11-8496-6f7127f97703" />
+
 &nbsp;
 #### **2) Why is power a big deal?** 
 
