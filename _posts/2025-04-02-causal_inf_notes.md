@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AB Testing : A step to a unified perspective
+title: AB Testing - A step to a unified perspective
 date: 2025-04-02
 ---
 
