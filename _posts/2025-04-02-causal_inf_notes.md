@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AB Testing - A step to a unified perspective
+title: Why Power Matters in A/B Testing: A Dive into Statistical Significance
 date: 2025-04-02
 ---
 
