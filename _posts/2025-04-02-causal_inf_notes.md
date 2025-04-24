@@ -213,7 +213,8 @@ If the power ($$1- \beta$$) is low, the denominator will be small and the entire
 
 We see that the p-value could be extremely small where we do decide to reject the Null hypothesis, yet this decision might not be trustworthy.
 
-
+&nbsp;
+&nbsp;
 ## Appendix:
 ### Derivation of sample size needed for a desired power, given $$\alpha$$ and a specific choice of $$ \delta_A >0 $$ (which as discussed earlier would be the MDE)
 
@@ -273,7 +274,7 @@ $$n = \frac{ \left( Z_{1 - \alpha} \cdot \sqrt{2\mu(1 - \mu)} + Z_{1 - \beta} \c
 
 
 
-
+&nbsp;
 ## Reference 
 
 1. [A/B Testing intuition Busters](https://openreview.net/pdf?id=tC3reuvALn)
