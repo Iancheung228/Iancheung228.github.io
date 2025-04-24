@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Why Power Matters in A/B Testing- A Dive into Statistical Significance
+title: Why Power Matters in AB Testing- A Dive into Statistical Significance
 date: 2025-04-02
 ---
 
