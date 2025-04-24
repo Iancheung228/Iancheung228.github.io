@@ -169,11 +169,11 @@ We will show how the 2 probabilities $$P(H_0 \mid \text{data})$$ and the p-value
 $$
 \begin{aligned}
 P(H_0 \mid \text{data}) &= \frac{ P(\text{data} \mid H_0) \times P(H_0)}{P(\text{data})} \\
-&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})}
+&= \text{p-value} \times \frac{P(H_0)}{P(\text{data})} \\
+P(H_0 |Data) &= \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)}
 \end{aligned}
 $$
 
-$$ P(H_0 |Data) &= \frac{ P(Data|H_0)P(H_0)}{P(Data|H_0)P(H_0) + P(Data|H_1)P(H_1)} $$
 
 **Note**: It does align with our intuition, though, that a lower p-value suggests that the null hypothesis is less likely to be true.
 
